@@ -1,0 +1,24 @@
+{
+  "content": [
+    {
+      "id": "d0151ebd-a7d6-450a-a67d-f2eb493d83ea",
+      "beerName": "Mango Bobs",
+      "beerStyle": "ALE",
+      "upc": "0631234200036",
+      "price": 23.57,
+      "quantityOnHand": 2802,
+      "createdDate": "2026-02-07T15:51:42.864Z",
+      "lastUpdatedDate": null
+    },
+    {
+      "id": "83a15cd8-f859-4c29-8d9c-fc8b0ab7986b",
+      "beerName": "Galaxy Cat",
+      "beerStyle": "PALE_ALE",
+      "upc": "9122089364369",
+      "price": 1.76,
+      "quantityOnHand": 3868,
+      "createdDate": "2026-02-07T15:51:42.864Z",
+      "lastUpdatedDate": null
+    }
+  ]
+}
