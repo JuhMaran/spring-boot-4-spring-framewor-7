@@ -20,7 +20,7 @@ import java.util.*;
 @Service
 public class BeerServiceImpl implements BeerService {
 
-  private final Map<UUID, Beer> beerMap;
+  private Map<UUID, Beer> beerMap;
 
   public BeerServiceImpl() {
     this.beerMap = new HashMap<>();
@@ -70,7 +70,7 @@ public class BeerServiceImpl implements BeerService {
   public void patchBeerById(UUID beerId, Beer beer) {
     Beer existing = beerMap.get(beerId);
 
-    if (StringUtils.hasText(beer.getBeerName())){
+    if (StringUtils.hasText(beer.getBeerName())) {
       existing.setBeerName(beer.getBeerName());
     }
 
@@ -82,7 +82,7 @@ public class BeerServiceImpl implements BeerService {
       existing.setPrice(beer.getPrice());
     }
 
-    if (beer.getQuantityOnHand() != null){
+    if (beer.getQuantityOnHand() != null) {
       existing.setQuantityOnHand(beer.getQuantityOnHand());
     }
 
@@ -111,11 +111,11 @@ public class BeerServiceImpl implements BeerService {
   }
 
   @Override
-  public Beer getBeerById(UUID id) {
+  public Optional<Beer> getBeerById(UUID id) {
 
-    log.debug("Get Beer by Id - in service. Id: " + id.toString());
+    log.debug("Get Beer by Id - in service. Id: {}", id.toString());
 
-    return beerMap.get(id);
+    return Optional.of(beerMap.get(id));
   }
 
   @Override
