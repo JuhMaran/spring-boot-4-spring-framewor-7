@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * spring-7-rest-mvc
+ * POJO <br>
+ * DTO - Data Transfer Objects
  *
  * @author Juliane Maran
  * @since 21/02/2026
