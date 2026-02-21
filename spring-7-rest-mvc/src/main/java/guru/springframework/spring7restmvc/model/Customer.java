@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 @Data
 @Builder
-@JsonDeserialize(builder = Beer.BeerBuilder.class)
+@JsonDeserialize(builder = Customer.CustomerBuilder.class)
 public class Customer {
 
   private UUID id;
