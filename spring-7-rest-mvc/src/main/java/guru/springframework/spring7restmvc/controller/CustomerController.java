@@ -20,7 +20,6 @@ import java.util.UUID;
  */
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/api/v1/customer")
 public class CustomerController {
 
   public static final String CUSTOMER_PATH = "/api/v1/customer";
@@ -51,21 +50,17 @@ public class CustomerController {
   @PostMapping(CUSTOMER_PATH)
   public ResponseEntity handlePost(@RequestBody Customer customer) {
     Customer savedCustomer = customerService.saveNewCustomer(customer);
-
     HttpHeaders headers = new HttpHeaders();
-    headers.add("Location", "/api/v1/customer/" + savedCustomer.getId().toString());
-
+    headers.add("Location", CUSTOMER_PATH + "/" + savedCustomer.getId().toString());
     return new ResponseEntity(headers, HttpStatus.CREATED);
   }
 
-  //  @RequestMapping(method = RequestMethod.GET)
   @GetMapping(CUSTOMER_PATH)
   public List<Customer> listAllCustomers() {
     return customerService.getAllCustomers();
   }
 
-  //  @RequestMapping(value = "{customerId}", method = RequestMethod.GET)
-  @GetMapping(CUSTOMER_PATH_ID)
+  @GetMapping(value = CUSTOMER_PATH_ID)
   public Customer getCustomerById(@PathVariable("customerId") UUID id) {
     return customerService.getCustomerById(id);
   }
