@@ -39,14 +39,14 @@ public class BeerController {
   }
 
   @PutMapping("{beerId}")
-  public ResponseEntity updateById(@PathVariable("beerId") UUID beerId, @RequestBody Beer beer) {
+  public ResponseEntity updateById(@PathVariable("beerId")UUID beerId, @RequestBody Beer beer){
     beerService.updateBeerById(beerId, beer);
     return new ResponseEntity(HttpStatus.NO_CONTENT);
   }
 
   @PostMapping
-//  @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity handlePost(@RequestBody Beer beer) {
+  //@RequestMapping(method = RequestMethod.POST)
+  public ResponseEntity handlePost(@RequestBody Beer beer){
     Beer savedBeer = beerService.saveNewBeer(beer);
     HttpHeaders headers = new HttpHeaders();
     headers.add("Location", "/api/v1/beer/" + savedBeer.getId().toString());
@@ -54,12 +54,12 @@ public class BeerController {
   }
 
   @RequestMapping(method = RequestMethod.GET)
-  public List<Beer> listBeers() {
+  public List<Beer> listBeers(){
     return beerService.listBeers();
   }
 
   @RequestMapping(method = RequestMethod.GET, value = "{beerId}")
-  public Beer getBeerById(@PathVariable("beerId") UUID beerId) {
+  public Beer getBeerById(@PathVariable("beerId") UUID beerId){
     log.debug("Get Beer by Id - in controller");
     return beerService.getBeerById(beerId);
   }
