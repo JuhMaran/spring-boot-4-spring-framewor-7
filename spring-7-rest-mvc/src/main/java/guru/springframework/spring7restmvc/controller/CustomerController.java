@@ -2,14 +2,15 @@ package guru.springframework.spring7restmvc.controller;
 
 import guru.springframework.spring7restmvc.model.Customer;
 import guru.springframework.spring7restmvc.services.CustomerService;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
 
 /**
  * spring-7-rest-mvc
@@ -18,18 +19,28 @@ import java.util.UUID;
  * @since 21/02/2026
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
   private final CustomerService customerService;
+
+  @PostMapping
+  public ResponseEntity handlePost(@RequestBody Customer customer) {
+    Customer savedCustomer = customerService.saveNewCustomer(customer);
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Location", "/api/v1/customer/" + savedCustomer.getId().toString());
+
+    return new ResponseEntity(headers, HttpStatus.CREATED);
+  }
 
   @RequestMapping(method = RequestMethod.GET)
   public List<Customer> listAllCustomers() {
     return customerService.getAllCustomers();
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "{customerId}")
+  @RequestMapping(value = "{customerId}", method = RequestMethod.GET)
   public Customer getCustomerById(@PathVariable("customerId") UUID id) {
     return customerService.getCustomerById(id);
   }

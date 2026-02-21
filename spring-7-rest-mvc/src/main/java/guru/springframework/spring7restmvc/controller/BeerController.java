@@ -2,7 +2,7 @@ package guru.springframework.spring7restmvc.controller;
 
 import guru.springframework.spring7restmvc.model.Beer;
 import guru.springframework.spring7restmvc.services.BeerService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 @Slf4j
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 public class BeerController {
 
@@ -28,22 +28,20 @@ public class BeerController {
 
   @PostMapping
 //  @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity handlePost(@RequestBody Beer beer) { // Raw use of parameterized class 'ResponseEntity'
+  public ResponseEntity handlePost(@RequestBody Beer beer) {
     Beer savedBeer = beerService.saveNewBeer(beer);
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("Location", "/api/v1/beer/" + savedBeer.getId().toString());
 
-    return new ResponseEntity(headers, HttpStatus.CREATED); // Raw use of parameterized class 'ResponseEntity' 
+    return new ResponseEntity(headers, HttpStatus.CREATED);
   }
 
-  // Replace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"
   @RequestMapping(method = RequestMethod.GET)
   public List<Beer> listBeers() {
     return beerService.listBeers();
   }
 
-  // Replace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"
   @RequestMapping(method = RequestMethod.GET, value = "{beerId}")
   public Beer getBeerById(@PathVariable("beerId") UUID beerId) {
     log.debug("Get Beer by Id - in controller");
