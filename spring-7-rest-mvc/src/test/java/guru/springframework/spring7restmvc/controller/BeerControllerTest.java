@@ -5,6 +5,10 @@ import guru.springframework.spring7restmvc.services.BeerService;
 import guru.springframework.spring7restmvc.services.BeerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -14,6 +18,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -21,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ExtendWith(MockitoExtension.class)
 @WebMvcTest(BeerController.class)
 class BeerControllerTest {
 
@@ -35,9 +41,26 @@ class BeerControllerTest {
 
   BeerServiceImpl beerServiceImpl;
 
+  @Captor
+  ArgumentCaptor<UUID> uuidArgumentCaptor;
+
   @BeforeEach
   void setUp() {
     beerServiceImpl = new BeerServiceImpl();
+  }
+
+  @Test
+  void testDeleteBeer() throws Exception {
+    Beer beer = beerServiceImpl.listBeers().getFirst();
+
+    mockMvc.perform(delete("/api/v1/beer/" + beer.getId())
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isNoContent());
+
+    verify(beerService).deleteById(uuidArgumentCaptor.capture());
+
+    assertThat(beer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+
   }
 
   @Test
