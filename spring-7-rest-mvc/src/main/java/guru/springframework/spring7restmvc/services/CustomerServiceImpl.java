@@ -1,0 +1,63 @@
+package guru.springframework.spring7restmvc.services;
+
+import guru.springframework.spring7restmvc.model.Customer;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+/**
+ * spring-7-rest-mvc
+ *
+ * @author Juliane Maran
+ * @since 21/02/2026
+ */
+@Service
+public class CustomerServiceImpl implements CustomerService {
+
+  private final Map<UUID, Customer> customerMap;
+
+  public CustomerServiceImpl() {
+    this.customerMap = new HashMap<>();
+
+    Customer customer1 = Customer.builder()
+      .id(UUID.randomUUID())
+      .name("Customer 1")
+      .version(1)
+      .createdDate(LocalDateTime.now())
+      .updateDate(LocalDateTime.now())
+      .build();
+
+    Customer customer2 = Customer.builder()
+      .id(UUID.randomUUID())
+      .name("Customer 2")
+      .version(1)
+      .createdDate(LocalDateTime.now())
+      .updateDate(LocalDateTime.now())
+      .build();
+
+    Customer customer3 = Customer.builder()
+      .id(UUID.randomUUID())
+      .name("Customer 3")
+      .version(1)
+      .createdDate(LocalDateTime.now())
+      .updateDate(LocalDateTime.now())
+      .build();
+
+    customerMap.put(customer1.getId(), customer1);
+    customerMap.put(customer2.getId(), customer2);
+    customerMap.put(customer3.getId(), customer3);
+
+  }
+
+  @Override
+  public Customer getCustomerById(UUID uuid) {
+    return customerMap.get(uuid);
+  }
+
+  @Override
+  public List<Customer> getAllCustomers() {
+    return new ArrayList<>(customerMap.values());
+  }
+
+}
