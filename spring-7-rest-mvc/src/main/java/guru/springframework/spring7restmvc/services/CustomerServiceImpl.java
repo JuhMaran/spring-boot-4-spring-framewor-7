@@ -19,8 +19,6 @@ public class CustomerServiceImpl implements CustomerService {
   private final Map<UUID, Customer> customerMap;
 
   public CustomerServiceImpl() {
-    this.customerMap = new HashMap<>();
-
     Customer customer1 = Customer.builder()
       .id(UUID.randomUUID())
       .name("Customer 1")
@@ -45,24 +43,35 @@ public class CustomerServiceImpl implements CustomerService {
       .updateDate(LocalDateTime.now())
       .build();
 
+    customerMap = new HashMap<>();
     customerMap.put(customer1.getId(), customer1);
     customerMap.put(customer2.getId(), customer2);
     customerMap.put(customer3.getId(), customer3);
-
   }
 
   @Override
-  public Customer getCustomerById(UUID uuid) {
-    return customerMap.get(uuid);
+  public void patchCustomerById(UUID customerId, Customer customer) {
+    Customer existing = customerMap.get(customerId);
+
+    if (StringUtils.hasText(customer.getName())) {
+      existing.setName(customer.getName());
+    }
   }
 
   @Override
-  public List<Customer> getAllCustomers() {
-    return new ArrayList<>(customerMap.values());
+  public void deleteCustomerById(UUID customerId) {
+    customerMap.remove(customerId);
+  }
+
+  @Override
+  public void updateCustomerById(UUID customerId, Customer customer) {
+    Customer existing = customerMap.get(customerId);
+    existing.setName(customer.getName());
   }
 
   @Override
   public Customer saveNewCustomer(Customer customer) {
+
     Customer savedCustomer = Customer.builder()
       .id(UUID.randomUUID())
       .version(1)
@@ -77,23 +86,13 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public void updateCustomerById(UUID customerId, Customer customer) {
-    Customer existing = customerMap.get(customerId);
-    existing.setName(customer.getName());
+  public Customer getCustomerById(UUID uuid) {
+    return customerMap.get(uuid);
   }
 
   @Override
-  public void deleteCustomerById(UUID customerId) {
-    customerMap.remove(customerId);
-  }
-
-  @Override
-  public void patchCustomerById(UUID customerId, Customer customer) {
-    Customer existing = customerMap.get(customerId);
-
-    if (StringUtils.hasText(customer.getName())) {
-      existing.setName(customer.getName());
-    }
+  public List<Customer> getAllCustomers() {
+    return new ArrayList<>(customerMap.values());
   }
 
 }
