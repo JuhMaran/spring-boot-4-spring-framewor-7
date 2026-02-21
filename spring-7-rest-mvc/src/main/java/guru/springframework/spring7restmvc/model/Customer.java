@@ -2,6 +2,7 @@ package guru.springframework.spring7restmvc.model;
 
 import lombok.Builder;
 import lombok.Data;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
  */
 @Data
 @Builder
+@JsonDeserialize(builder = Beer.BeerBuilder.class)
 public class Customer {
 
   private UUID id;
