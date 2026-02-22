@@ -10,14 +10,14 @@ Exemplos de requisições e respostas para 'Beer'.
 
 ```
 curl -X 'GET' \
-  'http://localhost:8080/api/v1/beer?pageNumber=1&pageSize=25&showInventoryOnHand=false' \
+  'http://localhost:8080/api/v1/beerDTO?pageNumber=1&pageSize=25&showInventoryOnHand=false' \
   -H 'accept: application/json'
 ```
 
 **Request URL**
 
 ```http request
-http://localhost:8080/api/v1/beer?pageNumber=1&pageSize=25&showInventoryOnHand=false
+http://localhost:8080/api/v1/beerDTO?pageNumber=1&pageSize=25&showInventoryOnHand=false
 ```
 
 **Response**
@@ -70,14 +70,14 @@ http://localhost:8080/api/v1/beer?pageNumber=1&pageSize=25&showInventoryOnHand=f
 
 ```
 curl -X 'GET' \
-  'http://localhost:8080/api/v1/beer/111af027-17a9-44f0-bdb5-984dd8ffd833?showInventoryOnHand=false' \
+  'http://localhost:8080/api/v1/beerDTO/111af027-17a9-44f0-bdb5-984dd8ffd833?showInventoryOnHand=false' \
   -H 'accept: application/json'
 ```
 
 **Request URL**
 
 ```http request
-http://localhost:8080/api/v1/beer/111af027-17a9-44f0-bdb5-984dd8ffd833?showInventoryOnHand=false
+http://localhost:8080/api/v1/beerDTO/111af027-17a9-44f0-bdb5-984dd8ffd833?showInventoryOnHand=false
 ```
 
 **Response**

@@ -5,20 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import tools.jackson.databind.annotation.JsonDeserialize;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * POJO
+ * POJO <br>
+ * DTO - Data Transfer Objects
  *
  * @author Juliane Maran
  * @since 21/02/2026
  */
 @Data
 @Builder
-@JsonDeserialize(builder = Beer.BeerBuilder.class)
-public class Beer {
+@JsonDeserialize(builder = CustomerDTO.CustomerDTOBuilder.class)
+public class CustomerDTO {
 
   @JsonProperty("id")
   private UUID id;
@@ -26,20 +26,8 @@ public class Beer {
   @JsonProperty("version")
   private Integer version;
 
-  @JsonProperty("beerName")
-  private String beerName;
-
-  @JsonProperty("beerStyle")
-  private BeerStyle beerStyle;
-
-  @JsonProperty("upc")
-  private String upc;
-
-  @JsonProperty("quantityOnHand")
-  private Integer quantityOnHand;
-
-  @JsonProperty("price")
-  private BigDecimal price;
+  @JsonProperty("name")
+  private String name;
 
   private LocalDateTime createdDate;
   private LocalDateTime updateDate;
