@@ -57,12 +57,12 @@ class BeerControllerTest {
 
   @Test
   void testPatchBeer() throws Exception {
-    BeerDTO beerDTO = beerServiceImpl.listBeers().getFirst();
+    BeerDTO beer = beerServiceImpl.listBeers().getFirst();
 
     Map<String, Object> beerMap = new HashMap<>();
     beerMap.put("beerName", "New Name");
 
-    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beerDTO.getId())
+    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(beerMap)))
@@ -70,7 +70,7 @@ class BeerControllerTest {
 
     verify(beerService).patchBeerById(uuidArgumentCaptor.capture(), beerArgumentCaptor.capture());
 
-    assertThat(beerDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+    assertThat(beer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     assertThat(beerMap.get("beerName")).isEqualTo(beerArgumentCaptor.getValue().getBeerName());
   }
 
