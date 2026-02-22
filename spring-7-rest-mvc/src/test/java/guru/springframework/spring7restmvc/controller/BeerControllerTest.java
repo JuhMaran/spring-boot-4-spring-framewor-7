@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(BeerController.class)
-class BeerDTOControllerTest {
+class BeerControllerTest {
 
   @Autowired
   MockMvc mockMvc;
@@ -57,12 +57,12 @@ class BeerDTOControllerTest {
 
   @Test
   void testPatchBeer() throws Exception {
-    BeerDTO beerDTO = beerServiceImpl.listBeers().getFirst();
+    BeerDTO beer = beerServiceImpl.listBeers().getFirst();
 
     Map<String, Object> beerMap = new HashMap<>();
     beerMap.put("beerName", "New Name");
 
-    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beerDTO.getId())
+    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(beerMap)))
@@ -70,13 +70,15 @@ class BeerDTOControllerTest {
 
     verify(beerService).patchBeerById(uuidArgumentCaptor.capture(), beerArgumentCaptor.capture());
 
-    assertThat(beerDTO.getId()).isEqualTo(uuidArgumentCaptor.getValue());
+    assertThat(beer.getId()).isEqualTo(uuidArgumentCaptor.getValue());
     assertThat(beerMap.get("beerName")).isEqualTo(beerArgumentCaptor.getValue().getBeerName());
   }
 
   @Test
   void testDeleteBeer() throws Exception {
     BeerDTO beerDTO = beerServiceImpl.listBeers().getFirst();
+
+    given(beerService.deleteById(any())).willReturn(true);
 
     mockMvc.perform(delete(BeerController.BEER_PATH_ID, beerDTO.getId())
         .accept(MediaType.APPLICATION_JSON))
@@ -91,6 +93,8 @@ class BeerDTOControllerTest {
   @Test
   void testUpdateBeer() throws Exception {
     BeerDTO beerDTO = beerServiceImpl.listBeers().getFirst();
+
+    given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beerDTO));
 
     mockMvc.perform(put(BeerController.BEER_PATH_ID, beerDTO.getId())
         .accept(MediaType.APPLICATION_JSON)

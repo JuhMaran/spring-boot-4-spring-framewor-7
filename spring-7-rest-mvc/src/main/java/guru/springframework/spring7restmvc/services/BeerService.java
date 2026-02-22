@@ -18,12 +18,12 @@ public interface BeerService {
 
   Optional<BeerDTO> getBeerById(UUID id);
 
-  BeerDTO saveNewBeer(BeerDTO beerDTO);
+  BeerDTO saveNewBeer(BeerDTO beer);
 
-  void updateBeerById(UUID beerId, BeerDTO beerDTO);
+  Optional<BeerDTO> updateBeerById(UUID beerId, BeerDTO beer);
 
-  void deleteById(UUID beerId);
+  Boolean deleteById(UUID beerId);
 
-  void patchBeerById(UUID beerId, BeerDTO beerDTO);
+  Optional<BeerDTO> patchBeerById(UUID beerId, BeerDTO beer);
 
 }
