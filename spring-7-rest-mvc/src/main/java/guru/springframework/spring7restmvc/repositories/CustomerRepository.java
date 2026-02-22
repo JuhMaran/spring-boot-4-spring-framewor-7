@@ -12,4 +12,5 @@ import java.util.UUID;
  * @since 21/02/2026
  */
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
+
 }
