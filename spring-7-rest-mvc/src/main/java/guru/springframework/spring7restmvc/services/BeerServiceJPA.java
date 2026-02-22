@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 /**
  * JPA Service
@@ -31,7 +32,7 @@ public class BeerServiceJPA implements BeerService {
     return beerRepository.findAll()
       .stream()
       .map(beerMapper::beerToBeerDto)
-      .toList();
+      .collect(Collectors.toList());
   }
 
   @Override
@@ -41,33 +42,39 @@ public class BeerServiceJPA implements BeerService {
   }
 
   @Override
-  public BeerDTO saveNewBeer(BeerDTO beerDTO) {
-    return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDTO)));
+  public BeerDTO saveNewBeer(BeerDTO beer) {
+    return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beer)));
   }
 
   @Override
-  public Optional<BeerDTO> updateBeerById(UUID beerId, BeerDTO beerDTO) {
+  public Optional<BeerDTO> updateBeerById(UUID beerId, BeerDTO beer) {
     AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
 
     beerRepository.findById(beerId).ifPresentOrElse(foundBeer -> {
-      foundBeer.setBeerName(beerDTO.getBeerName());
-      foundBeer.setBeerStyle(beerDTO.getBeerStyle());
-      foundBeer.setUpc(beerDTO.getUpc());
-      foundBeer.setPrice(beerDTO.getPrice());
+      foundBeer.setBeerName(beer.getBeerName());
+      foundBeer.setBeerStyle(beer.getBeerStyle());
+      foundBeer.setUpc(beer.getUpc());
+      foundBeer.setPrice(beer.getPrice());
       atomicReference.set(Optional.of(beerMapper
         .beerToBeerDto(beerRepository.save(foundBeer))));
-    }, () -> atomicReference.set(Optional.empty()));
+    }, () -> {
+      atomicReference.set(Optional.empty());
+    });
 
     return atomicReference.get();
   }
 
   @Override
-  public void deleteById(UUID beerId) {
-    beerRepository.deleteById(beerId);
+  public Boolean deleteById(UUID beerId) {
+    if (beerRepository.existsById(beerId)) {
+      beerRepository.deleteById(beerId);
+      return true;
+    }
+    return false;
   }
 
   @Override
-  public void patchBeerById(UUID beerId, BeerDTO beerDTO) {
+  public void patchBeerById(UUID beerId, BeerDTO beer) {
 
   }
 
