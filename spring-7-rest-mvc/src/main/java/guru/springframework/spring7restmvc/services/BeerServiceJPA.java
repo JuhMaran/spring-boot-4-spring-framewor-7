@@ -41,7 +41,7 @@ public class BeerServiceJPA implements BeerService {
 
   @Override
   public BeerDTO saveNewBeer(BeerDTO beerDTO) {
-    return null;
+    return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beerDTO)));
   }
 
   @Override
