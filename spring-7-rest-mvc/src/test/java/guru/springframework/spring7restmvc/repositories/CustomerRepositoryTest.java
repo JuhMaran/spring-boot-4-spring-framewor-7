@@ -20,5 +20,5 @@ class CustomerRepositoryTest {
       .build());
     assertThat(customer.getId()).isNotNull();
   }
-  
+
 }
