@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(CustomerController.class)
-class CustomerDTOControllerTest {
+class CustomerControllerTest {
 
   @Autowired
   MockMvc mockMvc;

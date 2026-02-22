@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(BeerController.class)
-class BeerDTOControllerTest {
+class BeerControllerTest {
 
   @Autowired
   MockMvc mockMvc;
@@ -91,6 +91,8 @@ class BeerDTOControllerTest {
   @Test
   void testUpdateBeer() throws Exception {
     BeerDTO beerDTO = beerServiceImpl.listBeers().getFirst();
+
+    given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beerDTO));
 
     mockMvc.perform(put(BeerController.BEER_PATH_ID, beerDTO.getId())
         .accept(MediaType.APPLICATION_JSON)
