@@ -1,6 +1,9 @@
 spring:
   application:
     name: spring-7-rest-mvc
+  # Desabilita Flyway
+  flyway:
+    enabled: false
 #  jpa:
 #    properties:
 #      jakarta:
@@ -11,6 +14,8 @@ spring:
 #              create-source: metadata
 #              drop-target: drop-and-create.sql
 #              create-target: drop-and-create.sql
+
 logging:
   level:
-    guru.springframework: debug
+    web: TRACE
+    guru.springframework: DEBUG

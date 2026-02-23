@@ -22,18 +22,21 @@ spring:
     open-in-view: true
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         # MySQLDialect does not need to be specified explicitly using 'hibernate.dialect'
         # (remove the property setting and it will be selected by default)
         # dialect: org.hibernate.dialect.MySQLDialect
         # Show SQL
-        show_sql: true
+        show-sql: true
         # Format SQL
         format_sql: true
+  # Habilita Flyway
+  flyway:
+    enabled: true
 
-# Show bind values
 logging:
   level:
-    org.hibernate.orm.jdbc.bind: trace
+    sql: TRACE
+    org.hibernate.orm.jdbc.bind: TRACE
