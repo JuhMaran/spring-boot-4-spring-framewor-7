@@ -4,13 +4,30 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: RestDB-Pool
+      maximum-pool-size: 5
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
   jpa:
+    open-in-view: true
     database: mysql
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        # MySQLDialect does not need to be specified explicitly using 'hibernate.dialect'
+        # (remove the property setting and it will be selected by default)
+        # dialect: org.hibernate.dialect.MySQLDialect
         # Show SQL
         show_sql: true
         # Format SQL
