@@ -11,6 +11,7 @@
 * [SFG Brewery API](https://sfg-beerDTO-works.github.io/brewery-api/)
 * [JSON Path](https://github.com/json-path/JsonPath)
 * [MapStruct Documentation](https://mapstruct.org/documentation/reference-guide/)
+* [Spring Docs - Testcontainers](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html)
 
 ---
 
