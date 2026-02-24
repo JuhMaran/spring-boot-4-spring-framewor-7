@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("localmysql")
-class MySqlTest {
+public class MySqlIT {
 
   // Remove this use of "MySQLContainer"; it is deprecated.
   @Container
@@ -32,16 +32,6 @@ class MySqlTest {
 
   @Autowired
   BeerRepository beerRepository;
-
-//  @Autowired
-//  DataSource dataSource;
-
-//  @DynamicPropertySource
-//  static void mySqlProperties(DynamicPropertyRegistry registry) {
-//    registry.add("spring.datasource.username", mySQLContainer::getUsername);
-//    registry.add("spring.datasource.password", mySQLContainer::getPassword);
-//    registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
-//  }
 
   @Test
   void testListBeers() {

@@ -12,6 +12,8 @@
 * [JSON Path](https://github.com/json-path/JsonPath)
 * [MapStruct Documentation](https://mapstruct.org/documentation/reference-guide/)
 * [Spring Docs - Testcontainers](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html)
+* [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)
+* [surefire:test](https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html)
 
 ---
 
@@ -69,3 +71,11 @@ Após testar a conexão com sucesso, o ambiente estará pronto para integração
 
 - `sudo apt install -y git`: Instalando o Git
 - `sudo apt install -y maven`: Instalando o Maven
+
+---
+
+## Maven Failsafe plugin
+
+1. `mvn clean`
+2. `mvn test`
+3. `mvn verify`
