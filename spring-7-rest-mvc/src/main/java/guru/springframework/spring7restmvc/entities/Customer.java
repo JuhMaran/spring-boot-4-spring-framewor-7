@@ -25,15 +25,17 @@ public class Customer {
 
   @Id
   @UuidGenerator
+  @JdbcTypeCode(SqlTypes.CHAR)
   @GeneratedValue(generator = "UUID")
   @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
-  @JdbcTypeCode(SqlTypes.CHAR)
   private UUID id;
+  private String name;
+
+  @Column(length = 255)
+  private String email;
 
   @Version
   private Integer version;
-
-  private String name;
   private LocalDateTime createdDate;
   private LocalDateTime updateDate;
 
