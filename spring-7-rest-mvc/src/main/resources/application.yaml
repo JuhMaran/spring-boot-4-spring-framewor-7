@@ -4,6 +4,9 @@ spring:
   # Desabilita Flyway em H2
   flyway:
     enabled: false
+  docker:
+    compose:
+      enabled: false
 #  jpa:
 #    properties:
 #      jakarta:
