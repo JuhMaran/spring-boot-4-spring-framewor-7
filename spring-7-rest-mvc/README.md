@@ -35,3 +35,36 @@ Após testar a conexão com sucesso, o ambiente estará pronto para integração
   senhas fortes e políticas adequadas de segurança.
 
 ---
+
+## Executar Testes
+
+| Objetivo      | Comando                                                |
+|:--------------|:-------------------------------------------------------|
+| Testar Classe | `mvn test -Dtest=NomeClasse`                           |
+| Testar Método | `mvn test -Dtest=NomeClasse#nomeMetodo`                |
+| Debug         | `mvn -Dmaven.surefire.debug test -Dtest=Classe#Metodo` |
+
+## Docker
+
+- `docker ps`
+- `docker ps -a`
+- `docker start`: Inicializar o Docker
+- `docker stop`: Finalizar o Docker
+- `docker run hello-world`
+- `docker --version`: Verificar a versão do Docker
+
+## Linux
+
+- `sudo apt update`: Atualizar
+- `sudo apt install -y`: Instalar
+- `sudo apt remove -y`: Remover
+- `sudo apt update && sudo apt upgrade -y`
+- `sudo service docker start`: Inicializar o Docker
+- `sudo service docker restart`: Reinicializar o Docker
+- `sudo service docker stop`: Para o Docker
+- `clear`: Limpar console (CLI)
+
+### Exemplo de Instalação
+
+- `sudo apt install -y git`: Instalando o Git
+- `sudo apt install -y maven`: Instalando o Maven
