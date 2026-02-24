@@ -1,7 +1,7 @@
 spring:
   application:
     name: spring-7-rest-mvc
-  # Desabilita Flyway
+  # Desabilita Flyway em H2
   flyway:
     enabled: false
 #  jpa:
