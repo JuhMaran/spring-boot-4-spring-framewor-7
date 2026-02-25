@@ -9,6 +9,7 @@ import guru.springframework.spring7restmvc.repositories.CustomerRepository;
 import guru.springframework.spring7restmvc.services.BeerCsvService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +36,7 @@ public class BootstrapData implements CommandLineRunner {
 
   @Transactional
   @Override
-  public void run(String... args) throws Exception {
+  public void run(String @NonNull ... args) throws Exception {
     loadBeerData();
     loadCsvData();
     loadCustomerData();

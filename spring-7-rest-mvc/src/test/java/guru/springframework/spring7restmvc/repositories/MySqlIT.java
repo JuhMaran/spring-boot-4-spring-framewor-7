@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("localmysql")
-public class MySqlIT {
+class MySqlIT {
 
   // Remove this use of "MySQLContainer"; it is deprecated.
   @Container

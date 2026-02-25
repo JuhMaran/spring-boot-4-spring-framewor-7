@@ -1,10 +1,11 @@
+# compose.yaml
 services:
   mysql:
     image: 'mysql:latest'
     environment:
       - 'MYSQL_DATABASE=restdb'
-      - 'MYSQL_PASSWORD=root'
       - 'MYSQL_ROOT_PASSWORD=root'
-      - 'MYSQL_USER=root'
+#      - 'MYSQL_PASSWORD=root'
+#      - 'MYSQL_USER=root'
     ports:
-      - '3306'
+      - '3306:3306'
