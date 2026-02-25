@@ -1,7 +1,6 @@
 spring:
   application:
     name: spring-7-rest-mvc
-  # Desabilita Flyway em H2
   flyway:
     enabled: false
   docker:

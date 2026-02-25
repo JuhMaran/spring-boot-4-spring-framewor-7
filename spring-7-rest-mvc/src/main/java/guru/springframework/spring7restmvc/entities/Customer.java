@@ -24,10 +24,10 @@ import java.util.UUID;
 public class Customer {
 
   @Id
-  @UuidGenerator
-  @JdbcTypeCode(SqlTypes.CHAR)
   @GeneratedValue(generator = "UUID")
+  @UuidGenerator
   @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+  @JdbcTypeCode(SqlTypes.CHAR)
   private UUID id;
   private String name;
 

@@ -29,8 +29,8 @@ import java.util.UUID;
 public class Beer {
 
   @Id
-  @UuidGenerator
   @GeneratedValue(generator = "UUID")
+  @UuidGenerator
   @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
   @JdbcTypeCode(SqlTypes.CHAR)
   private UUID id;
@@ -52,13 +52,10 @@ public class Beer {
   @NotBlank
   @Size(max = 255)
   private String upc;
-
   private Integer quantityOnHand;
 
   @NotNull
   private BigDecimal price;
-
   private LocalDateTime createdDate;
   private LocalDateTime updateDate;
-
 }

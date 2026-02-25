@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -21,10 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Populate database with test data <br>
- * DO NOT SET ID and Version <br>
- * Initialize data for both Beer and Customer entities
- *
  * @author Juliane Maran
  * @since 22/02/2026
  */
@@ -36,11 +33,12 @@ public class BootstrapData implements CommandLineRunner {
   private final CustomerRepository customerRepository;
   private final BeerCsvService beerCsvService;
 
+  @Transactional
   @Override
   public void run(String... args) throws Exception {
     loadBeerData();
-    loadCustomerData();
     loadCsvData();
+    loadCustomerData();
   }
 
   private void loadCsvData() throws FileNotFoundException {
