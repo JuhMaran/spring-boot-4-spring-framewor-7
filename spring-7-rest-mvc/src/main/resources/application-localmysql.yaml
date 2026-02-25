@@ -1,9 +1,8 @@
+# application-localmysql.yaml
 spring:
-  docker:
-    compose:
-      enabled: true
   datasource:
-    url: "jdbc:mysql://localhost:3306/restdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+    # 127.0.0.1 or localhost
+    url: "jdbc:mysql://127.0.0.1:3306/restdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -28,16 +27,15 @@ spring:
       ddl-auto: validate
     properties:
       hibernate:
-        # MySQLDialect does not need to be specified explicitly using 'hibernate.dialect'
-        # (remove the property setting and it will be selected by default)
-        # dialect: org.hibernate.dialect.MySQLDialect
         # Show SQL
         show-sql: true
         # Format SQL
         format_sql: true
-  # Habilita Flyway
   flyway:
     enabled: true
+  docker:
+    compose:
+      enabled: true
 
 logging:
   level:

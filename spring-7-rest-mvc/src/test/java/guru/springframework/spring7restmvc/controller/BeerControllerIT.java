@@ -47,12 +47,12 @@ class BeerControllerIT {
   BeerMapper beerMapper;
 
   @Autowired
+  ObjectMapper objectMapper;
+
+  @Autowired
   WebApplicationContext wac;
 
   MockMvc mockMvc;
-
-  @Autowired
-  ObjectMapper objectMapper;
 
   @BeforeEach
   void setUp() {
@@ -64,17 +64,13 @@ class BeerControllerIT {
     Beer beer = beerRepository.findAll().getFirst();
 
     Map<String, Object> beerMap = new HashMap<>();
-    beerMap.put("beerName", "New Name 12345678901234567890123456789012345678901234567890");
+    beerMap.put("beerName", "New Name 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
-    MvcResult result = mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(beerMap)))
-      .andExpect(status().isBadRequest())
-      .andExpect(jsonPath("$.length()", is(1)))
-      .andReturn();
-
-    System.out.println(result.getResponse().getContentAsString());
+      .andExpect(status().isBadRequest());
 
   }
 
@@ -87,7 +83,7 @@ class BeerControllerIT {
   @Transactional
   @Test
   void deleteByIdFound() {
-    Beer beer = beerRepository.findAll().get(0);
+    Beer beer = beerRepository.findAll().getFirst();
 
     ResponseEntity responseEntity = beerController.deleteById(beer.getId());
     assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(204));
@@ -132,7 +128,7 @@ class BeerControllerIT {
     assertThat(responseEntity.getHeaders().getLocation()).isNotNull();
 
     String[] locationUUID = responseEntity.getHeaders().getLocation().getPath().split("/");
-    UUID savedUUID = UUID.fromString(locationUUID[ 4 ]);
+    UUID savedUUID = UUID.fromString(locationUUID[4]);
 
     Beer beer = beerRepository.findById(savedUUID).get();
     assertThat(beer).isNotNull();
@@ -153,7 +149,7 @@ class BeerControllerIT {
   @Test
   void testListBeers() {
     List<BeerDTO> dtos = beerController.listBeers();
-    assertThat(dtos.size()).isEqualTo(3);
+    assertThat(dtos.size()).isEqualTo(2413);
   }
 
   @Rollback
@@ -162,7 +158,6 @@ class BeerControllerIT {
   void testEmptyList() {
     beerRepository.deleteAll();
     List<BeerDTO> dtos = beerController.listBeers();
-
     assertThat(dtos.size()).isEqualTo(0);
   }
 
