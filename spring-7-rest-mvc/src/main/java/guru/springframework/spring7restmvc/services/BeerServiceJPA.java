@@ -3,6 +3,7 @@ package guru.springframework.spring7restmvc.services;
 import guru.springframework.spring7restmvc.entities.Beer;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
+import guru.springframework.spring7restmvc.model.BeerStyle;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -30,12 +31,14 @@ public class BeerServiceJPA implements BeerService {
   private final BeerRepository beerRepository;
 
   @Override
-  public List<BeerDTO> listBeers(String beerName) {
+  public List<BeerDTO> listBeers(String beerName, BeerStyle beerStyle) {
 
     List<Beer> beerList;
 
-    if (StringUtils.hasText(beerName)) {
+    if (StringUtils.hasText(beerName) && beerStyle == null) {
       beerList = listBeersByName(beerName);
+    } else if (!StringUtils.hasText(beerName) && beerStyle != null) {
+      beerList = listBeersByStyle(beerStyle);
     } else {
       beerList = beerRepository.findAll();
     }
@@ -43,6 +46,10 @@ public class BeerServiceJPA implements BeerService {
     return beerList.stream()
       .map(beerMapper::beerToBeerDto)
       .collect(Collectors.toList());
+  }
+
+  public List<Beer> listBeersByStyle(BeerStyle beerStyle) {
+    return beerRepository.findAllByBeerStyle(beerStyle);
   }
 
   public List<Beer> listBeersByName(String beerName) {

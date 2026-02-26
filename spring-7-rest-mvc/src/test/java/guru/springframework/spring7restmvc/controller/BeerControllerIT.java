@@ -3,6 +3,7 @@ package guru.springframework.spring7restmvc.controller;
 import guru.springframework.spring7restmvc.entities.Beer;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
+import guru.springframework.spring7restmvc.model.BeerStyle;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,12 +62,19 @@ class BeerControllerIT {
   }
 
   @Test
-  void testListBeersByName() throws Exception {
+  void tesListBeersByStyle() throws Exception {
+    mockMvc.perform(get(BeerController.BEER_PATH)
+        .queryParam("beerStyle", BeerStyle.IPA.name()))
+      .andExpect(status().isOk())
+      .andExpect(jsonPath("$.size()", is(548)));
+  }
+
+  @Test
+  void tesListBeersByName() throws Exception {
     mockMvc.perform(get(BeerController.BEER_PATH)
         .queryParam("beerName", "IPA"))
       .andExpect(status().isOk())
       .andExpect(jsonPath("$.size()", is(336)));
-
   }
 
   @Test
@@ -162,7 +170,7 @@ class BeerControllerIT {
 
   @Test
   void testListBeers() {
-    List<BeerDTO> dtos = beerController.listBeers(null);
+    List<BeerDTO> dtos = beerController.listBeers(null, null);
     assertThat(dtos.size()).isEqualTo(2413);
   }
 
@@ -171,7 +179,7 @@ class BeerControllerIT {
   @Test
   void testEmptyList() {
     beerRepository.deleteAll();
-    List<BeerDTO> dtos = beerController.listBeers(null);
+    List<BeerDTO> dtos = beerController.listBeers(null, null);
     assertThat(dtos.size()).isEqualTo(0);
   }
 
