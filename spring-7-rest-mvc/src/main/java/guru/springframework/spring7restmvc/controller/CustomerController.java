@@ -65,7 +65,7 @@ public class CustomerController {
     return new ResponseEntity(headers, HttpStatus.CREATED);
   }
 
-  @GetMapping(CUSTOMER_PATH)
+  @GetMapping(value = CUSTOMER_PATH)
   public List<CustomerDTO> listAllCustomers() {
     return customerService.getAllCustomers();
   }
