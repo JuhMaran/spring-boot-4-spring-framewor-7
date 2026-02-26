@@ -10,14 +10,13 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 /**
  * JPA Service
@@ -44,11 +43,11 @@ public class BeerServiceJPA implements BeerService {
 
     Page<Beer> beerPage;
 
-    if(StringUtils.hasText(beerName) && beerStyle == null) {
+    if (StringUtils.hasText(beerName) && beerStyle == null) {
       beerPage = listBeersByName(beerName, pageRequest);
-    } else if (!StringUtils.hasText(beerName) && beerStyle != null){
+    } else if (!StringUtils.hasText(beerName) && beerStyle != null) {
       beerPage = listBeersByStyle(beerStyle, pageRequest);
-    } else if (StringUtils.hasText(beerName) && beerStyle != null){
+    } else if (StringUtils.hasText(beerName) && beerStyle != null) {
       beerPage = listBeersByNameAndStyle(beerName, beerStyle, pageRequest);
     } else {
       beerPage = beerRepository.findAll(pageRequest);
@@ -82,7 +81,9 @@ public class BeerServiceJPA implements BeerService {
       }
     }
 
-    return PageRequest.of(queryPageNumber, queryPageSize);
+    Sort sort = Sort.by(Sort.Order.asc("beerName"));
+
+    return PageRequest.of(queryPageNumber, queryPageSize, sort);
 
   }
 
