@@ -1,7 +1,10 @@
 package guru.springframework.spring7restmvc.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,7 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * spring-7-rest-mvc
+ * Entity
  *
  * @author Juliane Maran
  * @since 26/02/2026
@@ -23,8 +26,17 @@ import java.util.UUID;
 @Builder
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class BeerOrder {
+
+  public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerRef, Customer customer, Set<BeerOrderLine> beerOrderLines) {
+    this.id = id;
+    this.version = version;
+    this.createdDate = createdDate;
+    this.lastModifiedDate = lastModifiedDate;
+    this.customerRef = customerRef;
+    this.setCustomer(customer);
+    this.beerOrderLines = beerOrderLines;
+  }
 
   @Id
   @GeneratedValue(generator = "UUID")
@@ -51,6 +63,11 @@ public class BeerOrder {
 
   @ManyToOne
   private Customer customer;
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+    customer.getBeerOrders().add(this);
+  }
 
   @OneToMany(mappedBy = "beerOrder")
   private Set<BeerOrderLine> beerOrderLines;
