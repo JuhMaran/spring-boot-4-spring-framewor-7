@@ -10,7 +10,7 @@ CREATE TABLE `beer_order`
     version            bigint       DEFAULT NULL,
     customer_id        varchar(36)  DEFAULT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT FOREIGN KEY (customer_id) REFERENCES customer (id)
+    CONSTRAINT FOREIGN KEY (customer_id) REFERENCES restdb.customer (id)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `beer_order_line`
@@ -25,5 +25,5 @@ CREATE TABLE `beer_order_line`
     beer_order_id      varchar(36) DEFAULT NULL,
     PRIMARY KEY (id),
     CONSTRAINT FOREIGN KEY (beer_order_id) REFERENCES beer_order (id),
-    CONSTRAINT FOREIGN KEY (beer_id) REFERENCES beer (id)
+    CONSTRAINT FOREIGN KEY (beer_id) REFERENCES restdb.beer (id)
 ) ENGINE = InnoDB;
