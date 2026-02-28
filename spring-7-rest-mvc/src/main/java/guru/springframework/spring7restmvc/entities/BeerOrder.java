@@ -37,14 +37,14 @@ public class BeerOrder {
     this.customerRef = customerRef;
     this.setCustomer(customer);
     this.beerOrderLines = beerOrderLines;
-    this.beerOrderShipment = beerOrderShipment;
+    this.setBeerOrderShipment(beerOrderShipment);
   }
 
   @Id
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
   @JdbcTypeCode(SqlTypes.CHAR)
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
+  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
   private UUID id;
 
   @Version
@@ -71,10 +71,16 @@ public class BeerOrder {
     customer.getBeerOrders().add(this);
   }
 
+  public void setBeerOrderShipment(BeerOrderShipment beerOrderShipment) {
+    this.beerOrderShipment = beerOrderShipment;
+    beerOrderShipment.setBeerOrder(this);
+  }
+
   @OneToMany(mappedBy = "beerOrder")
   private Set<BeerOrderLine> beerOrderLines;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.PERSIST)
   private BeerOrderShipment beerOrderShipment;
+
 
 }
