@@ -1,0 +1,15 @@
+package guru.springframework.spring7restmvc.repositories;
+
+import guru.springframework.spring7restmvc.entities.BeerOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+/**
+ * spring-7-rest-mvc
+ *
+ * @author Juliane Maran
+ * @since 26/02/2026
+ */
+public interface BeerOrderRepository extends JpaRepository<BeerOrder, UUID> {
+}
