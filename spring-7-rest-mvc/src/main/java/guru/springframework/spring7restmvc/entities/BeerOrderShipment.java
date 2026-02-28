@@ -12,18 +12,18 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
- * spring-7-rest-mvc
+ * Entity
  *
  * @author Juliane Maran
- * @since 26/02/2026
+ * @since 27/02/2026
  */
 @Getter
 @Setter
-@Builder
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BeerOrderLine {
+public class BeerOrderShipment {
 
   @Id
   @GeneratedValue(generator = "UUID")
@@ -35,24 +35,21 @@ public class BeerOrderLine {
   @Version
   private Long version;
 
+  @OneToOne
+  private BeerOrder beerOrder;
+
+  private String trackingNumber;
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
   @CreationTimestamp
   @Column(updatable = false)
   private Timestamp createdDate;
 
   @UpdateTimestamp
   private Timestamp lastModifiedDate;
-
-  public boolean isNew() {
-    return this.id == null;
-  }
-
-  @ManyToOne
-  private BeerOrder beerOrder;
-
-  @ManyToOne
-  private Beer beer;
-
-  private Integer orderQuantity = 0;
-  private Integer quantityAllocated = 0;
 
 }
