@@ -44,7 +44,7 @@ public class BeerOrder {
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
   @JdbcTypeCode(SqlTypes.CHAR)
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
   private UUID id;
 
   @Version
@@ -81,6 +81,5 @@ public class BeerOrder {
 
   @OneToOne(cascade = CascadeType.PERSIST)
   private BeerOrderShipment beerOrderShipment;
-
 
 }

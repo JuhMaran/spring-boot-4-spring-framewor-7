@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
- * spring-7-rest-mvc
+ * Entity
  *
  * @author Juliane Maran
  * @since 26/02/2026
