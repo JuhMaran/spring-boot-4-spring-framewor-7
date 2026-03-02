@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: sdjpa-springdatarest
+  data:
+    rest:
+      base-path: /api/v1
