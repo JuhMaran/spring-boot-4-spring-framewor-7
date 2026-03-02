@@ -51,7 +51,7 @@
 		</dependency>
 		<!-- Spring Actuator -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
+			<goupId>org.springframework.boot</goupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<!-- Spring Data JPA -->
