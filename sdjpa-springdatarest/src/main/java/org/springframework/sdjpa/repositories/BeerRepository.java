@@ -3,6 +3,7 @@ package org.springframework.sdjpa.repositories;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.sdjpa.domain.Beer;
 import org.springframework.sdjpa.domain.BeerStyleEnum;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
  * @author Juliane Maran
  * @since 01/03/2026
  */
+@RepositoryRestResource(path = "beer", collectionResourceRel = "beer")
 public interface BeerRepository extends JpaRepository<Beer, UUID> {
 
   Page<Beer> findAllByBeerName(String beerName, Pageable pageable);
