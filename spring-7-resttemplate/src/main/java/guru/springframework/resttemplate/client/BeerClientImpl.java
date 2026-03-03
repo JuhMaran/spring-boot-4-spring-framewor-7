@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import tools.jackson.databind.JsonNode;
 
 import java.util.Map;
 
@@ -34,6 +35,27 @@ public class BeerClientImpl implements BeerClient {
 
     ResponseEntity<Map> mapResponse =
       restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, Map.class);
+
+    ResponseEntity<JsonNode> jsonResponse =
+      restTemplate.getForEntity(BASE_URL + GET_BEER_PATH, JsonNode.class);
+
+    // Antes
+//    jsonResponse.getBody().findPath("content")
+//      .elements().forEachRemaining(node -> {
+//        System.out.println(node.get("beerName").asText());
+//      });
+
+    // Jackson 3.x Atualizado
+    if (jsonResponse.getBody() != null) {
+      // Na Jackson 3, use .path() para segurança e .forEach() direto no nó
+      // ou .values() se quiser ser explícito.
+      jsonResponse.getBody().path("content")
+        .forEach(node -> {
+          // .path() é preferível a .get() pois nunca retorna null (evita NPE)
+          // .asString() é o novo padrão para Jackson 3.x
+          System.out.println(node.path("beerName").asString());
+        });
+    }
 
     System.out.println(stringResponse.getBody());
 

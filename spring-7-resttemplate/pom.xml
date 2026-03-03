@@ -60,11 +60,16 @@
             <artifactId>spring-data-commons</artifactId>
         </dependency>
         <!-- Vulnerabilities -->
-        <dependency>
-            <groupId>tools.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>tools.jackson.core</groupId>-->
+<!--            <artifactId>jackson-core</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--            <version>2.21.1</version>-->
+<!--        </dependency>-->
         <!-- Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
