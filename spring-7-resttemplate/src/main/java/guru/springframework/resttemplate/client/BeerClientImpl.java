@@ -30,6 +30,12 @@ public class BeerClientImpl implements BeerClient {
   private static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
   @Override
+  public void deleteBeer(UUID beerId) {
+    RestTemplate restTemplate = restTemplateBuilder.build();
+    restTemplate.delete(GET_BEER_BY_ID_PATH, beerId);
+  }
+
+  @Override
   public BeerDTO updateBeer(BeerDTO beerDto) {
     RestTemplate restTemplate = restTemplateBuilder.build();
     restTemplate.put(GET_BEER_BY_ID_PATH, beerDto, beerDto.getId());
@@ -40,7 +46,6 @@ public class BeerClientImpl implements BeerClient {
   public BeerDTO createBeer(BeerDTO newDto) {
     RestTemplate restTemplate = restTemplateBuilder.build();
     URI uri = restTemplate.postForLocation(GET_BEER_PATH, newDto);
-    // A "NullPointerException" could be thrown; "uri" is nullable here
     return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
   }
 
@@ -82,11 +87,9 @@ public class BeerClientImpl implements BeerClient {
       uriComponentsBuilder.queryParam("pageSize", beerStyle);
     }
 
-    ResponseEntity<BeerDTOPageImpl> response = // Raw use of parameterized class 'BeerDTOPageImpl'
+    ResponseEntity<BeerDTOPageImpl> response =
       restTemplate.getForEntity(uriComponentsBuilder.toUriString(), BeerDTOPageImpl.class);
 
-    // Unchecked assignment: 'guru.springframework.resttemplate.model.BeerDTOPageImpl'
-    // to 'org.springframework.data.domain.Page<guru.springframework.resttemplate.model.BeerDTO>'
     return response.getBody();
   }
 
