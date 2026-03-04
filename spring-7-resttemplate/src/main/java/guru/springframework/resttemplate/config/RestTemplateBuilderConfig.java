@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 /**
- * spring-7-resttemplate
+ * Configuration RestTemplate
  *
  * @author Juliane Maran
  * @since 03/03/2026
