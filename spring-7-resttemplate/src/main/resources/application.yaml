@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-7-resttemplate
+
+rest:
+  template:
+    rootUrl: http://localhost:8080
