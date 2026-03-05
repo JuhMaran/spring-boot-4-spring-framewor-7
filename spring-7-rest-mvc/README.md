@@ -80,3 +80,91 @@ Após testar a conexão com sucesso, o ambiente estará pronto para integração
 1. `mvn clean`
 2. `mvn test`
 3. `mvn verify`
+
+---
+
+## Atualizações realizadas neste projeto
+
+Comparando o **código do instrutor** com a **implementação deste projeto**, foram aplicadas diversas melhorias
+importantes:
+
+| Componente       | Instrutor        | Sua versão  | Situação   |
+|------------------|------------------|-------------|------------|
+| Spring Boot      | 3.4.0            | 4.0.3       | Atualizado |
+| Spring Framework | 6.x              | 7.0.5       | Atualizado |
+| Java             | 21               | 25 LTS      | Atualizado |
+| MapStruct        | 1.5.5.Final      | 1.6.3       | Atualizado |
+| OpenCSV          | 5.9 (vulnerável) | 5.12.0      | Corrigido  |
+| Flyway           | 11.x             | 12.0.3      | Atualizado |
+| Testcontainers   | versões antigas  | atualizadas | Melhorado  |
+
+Este projeto já está **tecnicamente mais moderno e seguro que o do curso**.
+
+---
+
+## Vulnerabilidade identificada: Jackson
+
+### Dependência vulnerável detectada
+
+```
+tools.jackson.core:jackson-core:3.0.4
+```
+
+Relacionada ao advisory:
+
+```
+GHSA-72hv-8253-57qq
+```
+
+Situação:
+
+| Biblioteca   | Versão | Status     |
+|--------------|--------|------------|
+| jackson-core | 3.0.4  | Vulnerável |
+| jackson-core | 3.1.0  | Corrigida  |
+
+Essa dependência entra **transitivamente via**:
+
+```text
+spring-boot-docker-compose
+```
+
+Cadeia de dependência:
+
+```
+spring-boot-docker-compose
+   → tools.jackson.core:jackson-databind
+       → tools.jackson.core:jackson-core 3.0.4
+```
+
+---
+
+# Correção recomendada
+
+Forçar versão segura no `pom.xml`.
+
+Adicionar:
+
+```xml
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+Ou explicitamente:
+
+```xml
+
+<dependency>
+    <groupId>tools.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>3.1.0</version>
+</dependency>
+```
