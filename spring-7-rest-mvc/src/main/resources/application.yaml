@@ -25,5 +25,6 @@ spring:
 
 logging:
   level:
-    web: DEBUG
-    guru.springframework: DEBUG
+    web: debug
+    guru.springframework: debug
+#    org.springframework.security: trace
