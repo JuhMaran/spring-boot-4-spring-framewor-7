@@ -43,7 +43,7 @@ public class BeerClientImpl implements BeerClient {
   }
 
   @Override
-  public BeerDTO createBeer(BeerDTO newDto) {
+  public BeerDTO createBeer(BeerDTO newDto) { // line 43
     RestTemplate restTemplate = restTemplateBuilder.build();
     URI uri = restTemplate.postForLocation(GET_BEER_PATH, newDto);
     return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
