@@ -59,6 +59,18 @@ class BeerClientMockTest {
   BeerDTO dto;
   String dtoJson;
 
+  @Test
+  void testDeleteBeer() {
+    server.expect(method(HttpMethod.DELETE))
+      .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID_PATH,
+        dto.getId()))
+      .andRespond(withNoContent());
+
+    beerClient.deleteBeer(dto.getId());
+
+    server.verify();
+  }
+
   @BeforeEach
   void setUp() {
     MockitoAnnotations.openMocks(this);
