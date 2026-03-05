@@ -20,6 +20,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
@@ -71,6 +72,26 @@ class BeerClientMockTest {
     beerClient = new BeerClientImpl(mockRestTemplateBuilder);
     dto = getBeerDto();
     dtoJson = objectMapper.writeValueAsString(dto);
+  }
+
+  @Test
+  void testListBeersWithQueryParam() throws JacksonException {
+    String response = objectMapper.writeValueAsString(getPage());
+
+    URI uri = UriComponentsBuilder.fromUriString(URL + BeerClientImpl.GET_BEER_PATH)
+      .queryParam("beerName", "ALE")
+      .build().toUri();
+
+    server.expect(method(HttpMethod.GET))
+      .andExpect(requestTo(uri))
+      .andExpect(queryParam("beerName", "ALE"))
+      .andRespond(withSuccess(response, MediaType.APPLICATION_JSON));
+
+    Page<BeerDTO> responsePage = beerClient
+      .listBeers("ALE", null, null, null, null);
+
+    assertThat(responsePage.getContent().size()).isEqualTo(1);
+
   }
 
   @Test
