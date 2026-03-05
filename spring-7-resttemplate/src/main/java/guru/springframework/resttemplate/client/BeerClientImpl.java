@@ -26,8 +26,8 @@ public class BeerClientImpl implements BeerClient {
 
   private final RestTemplateBuilder restTemplateBuilder;
 
-  private static final String GET_BEER_PATH = "/api/v1/beer";
-  private static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
+  public static final String GET_BEER_PATH = "/api/v1/beer";
+  public static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
   @Override
   public void deleteBeer(UUID beerId) {
@@ -43,7 +43,7 @@ public class BeerClientImpl implements BeerClient {
   }
 
   @Override
-  public BeerDTO createBeer(BeerDTO newDto) {
+  public BeerDTO createBeer(BeerDTO newDto) { // line 43
     RestTemplate restTemplate = restTemplateBuilder.build();
     URI uri = restTemplate.postForLocation(GET_BEER_PATH, newDto);
     return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
@@ -76,15 +76,15 @@ public class BeerClientImpl implements BeerClient {
     }
 
     if (showInventory != null) {
-      uriComponentsBuilder.queryParam("showInventory", beerStyle);
+      uriComponentsBuilder.queryParam("showInventory", showInventory);
     }
 
     if (pageNumber != null) {
-      uriComponentsBuilder.queryParam("pageNumber", beerStyle);
+      uriComponentsBuilder.queryParam("pageNumber", pageNumber);
     }
 
     if (pageSize != null) {
-      uriComponentsBuilder.queryParam("pageSize", beerStyle);
+      uriComponentsBuilder.queryParam("pageSize", pageSize);
     }
 
     ResponseEntity<BeerDTOPageImpl> response =
