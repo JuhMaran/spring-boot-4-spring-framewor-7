@@ -19,7 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
@@ -58,6 +57,9 @@ class BeerClientMockTest {
   @Mock
   RestTemplateBuilder mockRestTemplateBuilder = new RestTemplateBuilder(new MockServerRestTemplateCustomizer());
 
+  BeerDTO dto;
+  String dtoJson;
+
   @BeforeEach
   void setUp() {
     MockitoAnnotations.openMocks(this);
@@ -66,12 +68,12 @@ class BeerClientMockTest {
     server = MockRestServiceServer.bindTo(restTemplate).build();
     when(mockRestTemplateBuilder.build()).thenReturn(restTemplate);
     beerClient = new BeerClientImpl(mockRestTemplateBuilder);
+    dto = getBeerDto();
+    dtoJson = objectMapper.writeValueAsString(dto);
   }
 
   @Test
-  void testCreateBeer() throws JacksonException {
-    BeerDTO dto = getBeerDto();
-    String response = objectMapper.writeValueAsString(dto);
+  void testCreateBeer() {
     URI uri = UriComponentsBuilder.fromPath(BeerClientImpl.GET_BEER_BY_ID_PATH)
       .build(dto.getId());
 
@@ -82,21 +84,17 @@ class BeerClientMockTest {
     server.expect(method(HttpMethod.GET))
       .andExpect(requestToUriTemplate(URL +
         BeerClientImpl.GET_BEER_BY_ID_PATH, dto.getId()))
-      .andRespond(withSuccess(response, MediaType.APPLICATION_JSON));
+      .andRespond(withSuccess(dtoJson, MediaType.APPLICATION_JSON));
 
     BeerDTO responseDto = beerClient.createBeer(dto);
     assertThat(responseDto.getId()).isEqualTo(dto.getId());
   }
 
   @Test
-  void testGetById() throws JacksonException { // JsonProcessingException
-    BeerDTO dto = getBeerDto();
-
-    String response = objectMapper.writeValueAsString(dto);
-
+  void testGetById() {
     server.expect(method(HttpMethod.GET))
       .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID_PATH, dto.getId()))
-      .andRespond(withSuccess(response, MediaType.APPLICATION_JSON));
+      .andRespond(withSuccess(dtoJson, MediaType.APPLICATION_JSON));
 
     BeerDTO responseDto = beerClient.getBeerById(dto.getId());
     assertThat(responseDto.getId()).isEqualTo(dto.getId());
@@ -104,7 +102,7 @@ class BeerClientMockTest {
   }
 
   @Test
-  void testListBeers() throws JacksonException {
+  void testListBeers() {
     String payload = objectMapper.writeValueAsString(getPage());
 
     server.expect(method(HttpMethod.GET))
