@@ -53,3 +53,10 @@ O alinhamento com as práticas recomendadas pelo ecossistema Spring garante maio
 futuras do framework.
 
 ---
+
+## Informações completa sobre:
+
+- [JsonNode](./docs/JsonNode.md)
+- [Mockito](./docs/Mockito.md)
+
+---
