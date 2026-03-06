@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Juliane Maran
  * @since 24/02/2026
  */
+//@Disabled
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("localmysql")

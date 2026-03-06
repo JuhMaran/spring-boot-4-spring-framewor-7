@@ -94,11 +94,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-flyway</artifactId>
         </dependency>
+        <!-- Provides transitive vulnerable dependency maven:com.fasterxml.jackson.core:jackson-core:2.20.2 GHSA-72hv-8253-57qq 7.5 Insufficient Information Results powered by Mend.io -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
+            <version>12.0.3</version>
         </dependency>
         <!-- Docker Compose Support -->
+        <!-- Provides transitive vulnerable dependency maven:com.fasterxml.jackson.core:jackson-core:3.0.4 GHSA-72hv-8253-57qq 7.5 Insufficient Information Results powered by Mend.io -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-docker-compose</artifactId>
@@ -110,6 +113,11 @@
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>5.12.0</version>
+        </dependency>
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- Tests -->
         <dependency>
@@ -132,6 +140,11 @@
             <artifactId>spring-boot-starter-flyway-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- Testcontainers -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -149,7 +162,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
