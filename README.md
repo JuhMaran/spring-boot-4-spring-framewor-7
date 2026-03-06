@@ -33,6 +33,7 @@ Spring 7, Spring Boot 4, Spring MVC, JPA/Hibernate, Mongo, Spring Security, OAut
 20. Spring RestTemplate
 21. Testing Spring RestTemplate
 22. Spring Security HTTP Basic Auth
+23. Spring Authorization Server
 
 ---
 
