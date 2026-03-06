@@ -6,7 +6,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
@@ -20,7 +24,7 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 @Configuration
 public class SecurityConfig {
 
-  @Bean
+  @Bean // 1
   @Order(1)
   public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
     throws Exception {
@@ -56,7 +60,7 @@ public class SecurityConfig {
     return http.build();
   }
 
-  @Bean
+  @Bean // 2
   @Order(2)
   public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
     throws Exception {
@@ -69,6 +73,17 @@ public class SecurityConfig {
       .formLogin(Customizer.withDefaults());
 
     return http.build();
+  }
+
+  @Bean // 3
+  public UserDetailsService userDetailsService() {
+    UserDetails userDetails = User.withDefaultPasswordEncoder() // 'withDefaultPasswordEncoder()' is deprecated
+      .username("user")
+      .password("password")
+      .roles("USER")
+      .build();
+
+    return new InMemoryUserDetailsManager(userDetails);
   }
 
 }
