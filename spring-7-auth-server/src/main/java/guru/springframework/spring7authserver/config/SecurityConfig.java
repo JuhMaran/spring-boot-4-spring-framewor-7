@@ -80,25 +80,6 @@ public class SecurityConfig {
 
     return http.build();
   }
-//  @Bean
-//  @Order(1)
-//  public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-//    http
-//      .securityMatcher("/oauth2/**", "/.well-known/**")
-//      .authorizeHttpRequests(authorize -> authorize
-//        .anyRequest().authenticated()
-//      )
-//      .exceptionHandling(exceptions -> exceptions
-//        .defaultAuthenticationEntryPointFor(
-//          new LoginUrlAuthenticationEntryPoint("/login"),
-//          new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-//        )
-//      )
-//      .oauth2ResourceServer(resourceServer ->
-//        resourceServer.jwt(Customizer.withDefaults())
-//      );
-//    return http.build();
-//  }
 
   /**
    * Default security for login
