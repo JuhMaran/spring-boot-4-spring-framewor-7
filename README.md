@@ -9,6 +9,14 @@ Spring 7, Spring Boot 4, Spring MVC, JPA/Hibernate, Mongo, Spring Security, OAut
 - **Java SE 25 (LTS)** — lançado pela **Oracle** em **16 de setembro de 2025**
 - **Jackson 3.x** — nova geração da biblioteca de serialização JSON utilizada pelo ecossistema Spring
 
+## Tecnologias Utilizadas
+
+[![My Skills](https://skillicons.dev/icons?i=java,spring&theme=light)](https://skillicons.dev)
+
+[![My Skills](https://skillicons.dev/icons?i=mysql,hibernate,mongodb&theme=light)](https://skillicons.dev)
+
+[![My Skills](https://skillicons.dev/icons?i=idea,docker,maven,git,github,md&theme=light)](https://skillicons.dev)
+
 ## Conteúdo do Curso Concluído
 
 1. Introduction
