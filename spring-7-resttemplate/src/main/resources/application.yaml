@@ -28,5 +28,3 @@ spring:
 rest:
   template:
     rootUrl: http://localhost:8080
-#    username: user1
-#    password: password
