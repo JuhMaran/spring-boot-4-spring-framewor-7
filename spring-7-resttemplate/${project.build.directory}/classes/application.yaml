@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-7-resttemplate
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090
+
+rest:
+  template:
+    rootUrl: http://localhost:8080
+    username: user1
+    password: password
