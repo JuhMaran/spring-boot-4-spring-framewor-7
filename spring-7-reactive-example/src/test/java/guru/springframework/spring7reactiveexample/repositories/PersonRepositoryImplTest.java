@@ -1,6 +1,6 @@
-package guru.springframework.spring7reactive.repositories;
+package guru.springframework.spring7reactiveexample.repositories;
 
-import guru.springframework.spring7reactive.domain.Person;
+import guru.springframework.spring7reactiveexample.domain.Person;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
