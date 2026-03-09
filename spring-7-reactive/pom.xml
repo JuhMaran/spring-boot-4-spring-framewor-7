@@ -13,18 +13,26 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-7-reactive</name>
 	<description>Spring 7 - Reactive</description>
-	<url/>
+	<url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
 	<licenses>
-		<license/>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>JuhMaran</id>
+			<name>Juh Maran</name>
+			<url>https://github.com/JuhMaran</url>
+		</developer>
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:git://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git</connection>
+		<developerConnection>scm:git:ssh://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
 	</scm>
 	<properties>
 		<java.version>25</java.version>
@@ -77,8 +85,22 @@
 			<artifactId>spring-boot-starter-webflux-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<version>3.8.3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>tools.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>3.1.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
