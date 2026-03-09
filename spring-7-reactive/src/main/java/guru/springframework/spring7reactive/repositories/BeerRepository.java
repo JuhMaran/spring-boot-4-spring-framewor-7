@@ -10,4 +10,5 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
  * @since 09/03/2026
  */
 public interface BeerRepository extends ReactiveCrudRepository<Beer, Integer> {
+
 }
