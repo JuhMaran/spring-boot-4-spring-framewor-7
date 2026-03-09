@@ -1,4 +1,4 @@
-package guru.springframework.spring7reactive.domain;
+package guru.springframework.spring7reactiveexample.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

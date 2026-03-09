@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>guru.springframework</groupId>
-	<artifactId>spring-7-reactive</artifactId>
+	<artifactId>spring-7-reactive-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-7-reactive</name>
 	<description>Spring 7 - Reactive Examples</description>
