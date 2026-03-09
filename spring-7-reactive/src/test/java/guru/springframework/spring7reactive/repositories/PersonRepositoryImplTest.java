@@ -11,7 +11,6 @@ class PersonRepositoryImplTest {
 
   PersonRepository personRepository = new PersonRepositoryImpl();
 
-  // Operação Bloqueante - não recomendada em programação reativa
   @Test
   void testMonoByIdBlock() {
     Mono<Person> personMono = personRepository.getById(1);
@@ -22,7 +21,6 @@ class PersonRepositoryImplTest {
     System.out.println(person);
   }
 
-  // Uso de subscriber - forma não bloqueante e recomendada
   @Test
   void testGetByIdSubscriber() {
     Mono<Person> personMono = personRepository.getById(1);
@@ -30,7 +28,6 @@ class PersonRepositoryImplTest {
     personMono.subscribe(System.out::println);
   }
 
-  // Operação 'map' - Transforma o fluxo 'Mono<Person>' para 'Mono<String>'
   @Test
   void testMapOperation() {
     Mono<Person> personMono = personRepository.getById(1);
@@ -38,8 +35,6 @@ class PersonRepositoryImplTest {
     personMono.map(Person::getFirstName).subscribe(System.out::println);
   }
 
-  // Operação bloqueante
-  // Retorna apenas o primeiro elemento e bloqueia a execução.
   @Test
   void testFluxBlockFirst() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -50,7 +45,6 @@ class PersonRepositoryImplTest {
     System.out.println(person);
   }
 
-  // Processa todos os elementos do Flux de forma assíncrona e não bloqueante.
   @Test
   void testFluxSubscriber() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -58,7 +52,6 @@ class PersonRepositoryImplTest {
     personFlux.subscribe(System.out::println);
   }
 
-  // Transformação com 'map' - Flux<Person> → Flux<String>
   @Test
   void testFluxMap() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -66,7 +59,6 @@ class PersonRepositoryImplTest {
     personFlux.map(Person::getFirstName).subscribe(System.out::println);
   }
 
-  // Conversão para Lista - Flux<Person> → Mono<List<Person>>
   @Test
   void testFluxToList() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -91,6 +83,25 @@ class PersonRepositoryImplTest {
       .next();
 
     fionaMono.subscribe(person -> System.out.println(person.getFirstName()));
+  }
+
+  @Test
+  void testFindPersonByIdNotFound() {
+    Flux<Person> personFlux = personRepository.findAll();
+
+    final Integer id = 8;
+
+    Mono<Person> personMono = personFlux.filter(person -> person.getId() == id).single()
+      .doOnError(throwable -> {
+        System.out.println("Error occurred in flux");
+        System.out.println(throwable.toString());
+      });
+
+    personMono.subscribe(person -> System.out.println(person.toString()), throwable -> {
+      System.out.println("Error occurred in the mono");
+      System.out.println(throwable.toString());
+    });
+
   }
 
 }
