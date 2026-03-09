@@ -38,6 +38,8 @@ class PersonRepositoryImplTest {
     personMono.map(Person::getFirstName).subscribe(System.out::println);
   }
 
+  // Operação bloqueante
+  // Retorna apenas o primeiro elemento e bloqueia a execução.
   @Test
   void testFluxBlockFirst() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -48,6 +50,7 @@ class PersonRepositoryImplTest {
     System.out.println(person);
   }
 
+  // Processa todos os elementos do Flux de forma assíncrona e não bloqueante.
   @Test
   void testFluxSubscriber() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -55,6 +58,7 @@ class PersonRepositoryImplTest {
     personFlux.subscribe(System.out::println);
   }
 
+  // Transformação com 'map' - Flux<Person> → Flux<String>
   @Test
   void testFluxMap() {
     Flux<Person> personFlux = personRepository.findAll();
@@ -62,13 +66,31 @@ class PersonRepositoryImplTest {
     personFlux.map(Person::getFirstName).subscribe(System.out::println);
   }
 
+  // Conversão para Lista - Flux<Person> → Mono<List<Person>>
   @Test
   void testFluxToList() {
     Flux<Person> personFlux = personRepository.findAll();
 
     Mono<List<Person>> listMono = personFlux.collectList();
 
-    listMono.subscribe(list -> list.forEach(person -> System.out.println(person.getFirstName())));
+    listMono.subscribe(list -> list
+      .forEach(person -> System.out.println(person.getFirstName())));
+  }
+
+  @Test
+  void testFilterOnName() {
+    personRepository.findAll()
+      .filter(person -> person.getFirstName().equals("Fiona"))
+      .subscribe(person -> System.out.println(person.getLastName()));
+  }
+
+  @Test
+  void testGetById() {
+    Mono<Person> fionaMono = personRepository.findAll()
+      .filter(person -> person.getFirstName().equals("Fiona"))
+      .next();
+
+    fionaMono.subscribe(person -> System.out.println(person.getFirstName()));
   }
 
 }
