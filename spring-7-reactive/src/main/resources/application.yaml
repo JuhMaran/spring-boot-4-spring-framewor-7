@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-7-reactive
+
+logging:
+  level:
+    org.springframework.r2dbc: trace
