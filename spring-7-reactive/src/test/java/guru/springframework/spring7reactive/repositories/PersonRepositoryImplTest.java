@@ -8,33 +8,31 @@ class PersonRepositoryImplTest {
 
   PersonRepository personRepository = new PersonRepositoryImpl();
 
+  // Operação Bloqueante - não recomendada em programação reativa
   @Test
   void testMonoByIdBlock() {
     Mono<Person> personMono = personRepository.getById(1);
 
     Person person = personMono.block();
 
-    System.out.println(person.toString());
+    assert person != null;
+    System.out.println(person);
   }
 
+  // Uso de subscriber - forma não bloqueante e recomendada
   @Test
   void testGetByIdSubscriber() {
     Mono<Person> personMono = personRepository.getById(1);
 
-    personMono.subscribe(person -> {
-      System.out.println(person.toString());
-    });
+    personMono.subscribe(System.out::println);
   }
 
+  // Operação 'map' - Transforma o fluxo 'Mono<Person>' para 'Mono<String>'
   @Test
   void testMapOperation() {
     Mono<Person> personMono = personRepository.getById(1);
 
-    personMono.map(person -> {
-      return person.getFirstName();
-    }).subscribe(firstName -> {
-      System.out.println(firstName);
-    });
+    personMono.map(Person::getFirstName).subscribe(System.out::println);
 
   }
 
