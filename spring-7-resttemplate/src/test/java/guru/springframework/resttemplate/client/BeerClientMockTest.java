@@ -63,7 +63,7 @@ class BeerClientMockTest {
   String dtoJson;
 
   @BeforeEach
-  void setUp() {
+  void setUp() throws JacksonException {
     MockitoAnnotations.openMocks(this);
 
     RestTemplate restTemplate = restTemplateBuilderConfigured.build();

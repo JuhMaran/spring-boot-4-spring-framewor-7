@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   application:
     name: spring-7-resttemplate
@@ -28,3 +30,5 @@ spring:
 rest:
   template:
     rootUrl: http://localhost:8080
+
+debug: true

@@ -1,6 +1,5 @@
 package guru.springframework.resttemplate.config;
 
-import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
@@ -13,10 +12,12 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 import static java.util.Objects.isNull;
 
@@ -26,25 +27,25 @@ import static java.util.Objects.isNull;
  * @author Juliane Maran
  * @since 08/03/2026
  */
-@RequiredArgsConstructor
+@Component
 public class OAuthClientInterceptor implements ClientHttpRequestInterceptor {
 
   private final OAuth2AuthorizedClientManager manager;
   private final Authentication principal;
   private final ClientRegistration clientRegistration;
 
-  /**
-   *
-   * @param request   the request, containing method, URI, and headers
-   * @param body      the body of the request
-   * @param execution the request execution
-   * @return
-   * @throws IOException
-   */
+  public OAuthClientInterceptor(OAuth2AuthorizedClientManager manager,
+                                ClientRegistrationRepository clientRegistrationRepository) {
+    this.manager = manager;
+    this.principal = createPrincipal();
+    this.clientRegistration = clientRegistrationRepository.findByRegistrationId("spring-oauth");
+  }
+
   @Override
-  public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+  public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+    throws IOException {
     var oAuth2AuthorizeRequest = OAuth2AuthorizeRequest
-      .withClientRegistrationId(clientRegistration.getClientId())
+      .withClientRegistrationId(clientRegistration.getRegistrationId())
       .principal(createPrincipal())
       .build();
 
@@ -55,7 +56,7 @@ public class OAuthClientInterceptor implements ClientHttpRequestInterceptor {
     }
 
     request.getHeaders().add(HttpHeaders.AUTHORIZATION,
-      "Bearer " + client.getAccessToken());
+      "Bearer " + client.getAccessToken().getTokenValue());
 
     return execution.execute(request, body);
 
@@ -66,7 +67,7 @@ public class OAuthClientInterceptor implements ClientHttpRequestInterceptor {
 
       @Override
       public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return Collections.emptySet();
       }
 
       @Override
@@ -81,7 +82,7 @@ public class OAuthClientInterceptor implements ClientHttpRequestInterceptor {
 
       @Override
       public @Nullable Object getPrincipal() {
-        return null;
+        return this;
       }
 
       @Override
@@ -96,7 +97,7 @@ public class OAuthClientInterceptor implements ClientHttpRequestInterceptor {
 
       @Override
       public String getName() {
-        return "";
+        return clientRegistration.getClientId();
       }
 
     };
