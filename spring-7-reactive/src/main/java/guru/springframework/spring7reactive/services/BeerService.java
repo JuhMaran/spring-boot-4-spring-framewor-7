@@ -2,6 +2,7 @@ package guru.springframework.spring7reactive.services;
 
 import guru.springframework.spring7reactive.model.BeerDTO;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * spring-7-reactive
@@ -12,5 +13,7 @@ import reactor.core.publisher.Flux;
 public interface BeerService {
 
   Flux<BeerDTO> listBeers();
+
+  Mono<BeerDTO> getBeerById(Integer beerId);
 
 }
