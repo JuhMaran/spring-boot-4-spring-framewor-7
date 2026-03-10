@@ -88,3 +88,9 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
 30. Exception Handling with Spring WebFlux
 
 ---
+
+[![My Skills](https://skillicons.dev/icons?i=java,spring&theme=light)](https://skillicons.dev)
+
+[![My Skills](https://skillicons.dev/icons?i=mysql,hibernate,mongodb&theme=light)](https://skillicons.dev)
+
+[![My Skills](https://skillicons.dev/icons?i=idea,docker,maven,git,github,md&theme=light)](https://skillicons.dev)
