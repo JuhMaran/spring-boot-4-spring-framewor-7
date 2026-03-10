@@ -1,0 +1,28 @@
+package guru.springframework.spring7reactive.services;
+
+import guru.springframework.spring7reactive.mappers.BeerMapper;
+import guru.springframework.spring7reactive.model.BeerDTO;
+import guru.springframework.spring7reactive.repositories.BeerRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+
+/**
+ * spring-7-reactive
+ *
+ * @author Juliane Maran
+ * @since 10/03/2026
+ */
+@Service
+@RequiredArgsConstructor
+public class BeerServiceImpl implements BeerService {
+
+  private final BeerRepository beerRepository;
+  private final BeerMapper beerMapper;
+
+  @Override
+  public Flux<BeerDTO> listBeers() {
+    return beerRepository.findAll().map(beerMapper::beerToBeerDto);
+  }
+
+}
