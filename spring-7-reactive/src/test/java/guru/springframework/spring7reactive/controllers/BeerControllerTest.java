@@ -1,11 +1,13 @@
 package guru.springframework.spring7reactive.controllers;
 
 import guru.springframework.spring7reactive.model.BeerDTO;
+import guru.springframework.spring7reactive.repositories.BeerRepositoryTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
@@ -13,6 +15,16 @@ class BeerControllerTest {
 
   @Autowired
   WebTestClient webTestClient;
+
+  @Test
+  void testCreateBeer() {
+    webTestClient.post().uri(BeerController.BEER_PATH)
+      .body(Mono.just(BeerRepositoryTest.getTestBeer()), BeerDTO.class)
+      .header("Content-Type", "application/json")
+      .exchange()
+      .expectStatus().isCreated()
+      .expectHeader().location("http://localhost:8080/api/v2/beer/4");
+  }
 
   @Test
   void testGetById() {
