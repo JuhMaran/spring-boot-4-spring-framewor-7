@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.r2dbc.test.autoconfigure.DataR2dbcTest;
 import org.springframework.context.annotation.Import;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
 
@@ -15,6 +17,12 @@ class BeerRepositoryTest {
 
   @Autowired
   BeerRepository beerRepository;
+
+  @Test
+  void testCreateJson() throws JacksonException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    System.out.println(objectMapper.writeValueAsString(getTestBeer()));
+  }
 
   @Test
   void saveNewBeer() {

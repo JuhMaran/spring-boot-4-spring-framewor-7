@@ -10,7 +10,9 @@ Todos os projetos desenvolvidos neste repositório utilizam as seguintes stacks:
 - **Spring Boot 4** — lançado em **novembro de 2025**
 - **Java SE 25 (LTS)** — lançado pela **Oracle** em **16 de setembro de 2025**
 
-## Dependências
+## Maven
+
+### Dependências
 
 Todas as dependências listadas abaixo, estão sendo utilizadas nos projetos.  
 Cada projeto irá conter pelo menos duas das dependências abaixo.
@@ -39,9 +41,18 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
     - Spring Security
 - **Testing**
     - Testcontainers
+        - JUnit Jupiter
+        - MySQL
 - **Others**
-    - MapStruct 1.6.3** (Nov/2024)
-    - **Jackson 3.x** — nova geração da biblioteca de serialização JSON utilizada pelo ecossistema Spring
+    - MapStruct 1.6.3 (Nov/2024)
+    - Jackson 3.x — nova geração da biblioteca de serialização JSON utilizada pelo ecossistema Spring
+    - Open CSV
+
+### Plugins
+
+- Maven Compiler Plugin (3.14.1)
+- Maven Failsafe Plugin: Integration Test (3.5.2)
+- Lombok MapStruct Binding (0.2.0)
 
 ## Projetos
 
