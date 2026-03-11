@@ -50,7 +50,7 @@ public class CustomerController {
   Mono<ResponseEntity<Void>> createNewCustomer(@Validated @RequestBody CustomerDTO customerDTO){
     return customerService.saveNewCustomer(customerDTO)
       .map(savedDto -> ResponseEntity.created(UriComponentsBuilder
-          .fromPath("http://localhost:8080/" + CUSTOMER_PATH
+          .fromUriString("http://localhost:8080/" + CUSTOMER_PATH
             + "/" + savedDto.getId())
           .build().toUri())
         .build());

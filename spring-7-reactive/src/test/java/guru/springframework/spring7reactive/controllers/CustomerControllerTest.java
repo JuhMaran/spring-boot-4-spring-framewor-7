@@ -47,7 +47,7 @@ class CustomerControllerTest {
       .header("Content-Type", "application/json")
       .exchange()
       .expectStatus().isCreated()
-      .expectHeader().location("http:/localhost:8080/api/v2/customer/4");
+      .expectHeader().location("http://localhost:8080/api/v2/customer/4");
   }
 
   @Test
