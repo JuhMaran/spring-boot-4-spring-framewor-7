@@ -1,5 +1,6 @@
 package guru.springframework.spring7reactive.controllers;
 
+import guru.springframework.spring7reactive.model.BeerDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,11 +15,23 @@ class BeerControllerTest {
   WebTestClient webTestClient;
 
   @Test
+  void testGetById() {
+    webTestClient.get()
+      .uri(BeerController.BEER_PATH_ID, 1)
+      .exchange()
+      .expectStatus().isOk()
+      .expectHeader().valueEquals("Content-Type", "application/json")
+      .expectBody(BeerDTO.class);
+  }
+
+  @Test
   void testListBeers() {
     webTestClient.get()
-      .uri(BeerController.BEER_PATH).exchange()
+      .uri(BeerController.BEER_PATH)
+      .exchange()
       .expectStatus().isOk()
       .expectHeader().valueEquals("Content-Type", "application/json")
       .expectBody().jsonPath("$.size()").isEqualTo(3);
   }
+
 }
