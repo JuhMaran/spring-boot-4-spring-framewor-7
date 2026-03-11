@@ -1,0 +1,1162 @@
+{
+  "info": {
+    "_postman_id": "dc24422f-a2a7-4453-89e5-e075807c73c3",
+    "name": "Spring 7 - Spring Reactive WebFlux",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13771815",
+    "_collection_link": "https://go.postman.co/collection/13771815-dc24422f-a2a7-4453-89e5-e075807c73c3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Beer",
+      "item": [
+        {
+          "name": "List Beers",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "tokenName",
+                  "value": "new-token",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "http://localhost:9000/oauth2/token",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "message.read message.write",
+                  "type": "string"
+                },
+                {
+                  "key": "clientSecret",
+                  "value": "secret",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "oidc-client",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v2/beer",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "beer"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "transfer-encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 1,\n        \"beerName\": null,\n        \"beerStyle\": null,\n        \"upc\": null,\n        \"quantityOnHand\": null,\n        \"price\": null,\n        \"createdDate\": null,\n        \"lastModifiedDate\": null\n    },\n    {\n        \"id\": 2,\n        \"beerName\": null,\n        \"beerStyle\": null,\n        \"upc\": null,\n        \"quantityOnHand\": null,\n        \"price\": null,\n        \"createdDate\": null,\n        \"lastModifiedDate\": null\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get Beer By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v2/beer/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "beer",
+                "4"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "192"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"beerName\": \"Galaxy Cat\",\n    \"beerStyle\": \"Pale Ale\",\n    \"upc\": \"12356\",\n    \"quantityOnHand\": 122,\n    \"price\": 13,\n    \"createdDate\": \"2026-03-10T11:33:57.902375\",\n    \"lastModifiedDate\": \"2026-03-10T11:33:57.902375\"\n}"
+            },
+            {
+              "name": "200 OK - ID 1 Atualização Total - PUT",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "202"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"beerName\": \"Very Cool Galaxy Cat\",\n    \"beerStyle\": \"Pale Ale\",\n    \"upc\": \"12356\",\n    \"quantityOnHand\": 122,\n    \"price\": 13,\n    \"createdDate\": \"2026-03-10T15:40:34.972463\",\n    \"lastModifiedDate\": \"2026-03-10T15:41:01.902063\"\n}"
+            },
+            {
+              "name": "200 OK - ID 1 Atualização Parcial - PATCH",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "194"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"beerName\": \"Strong Galaxy Cat\",\n    \"beerStyle\": \"IPA\",\n    \"upc\": \"12356\",\n    \"quantityOnHand\": 122,\n    \"price\": 13,\n    \"createdDate\": \"2026-03-10T16:37:13.405913\",\n    \"lastModifiedDate\": \"2026-03-10T16:40:37.709831\"\n}"
+            },
+            {
+              "name": "200 OK - Create New Beer - POST",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "187"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"beerName\": \"Space Dust\",\n    \"beerStyle\": \"IPA\",\n    \"upc\": \"123213\",\n    \"quantityOnHand\": 12,\n    \"price\": 10,\n    \"createdDate\": \"2026-03-10T16:43:53.801513\",\n    \"lastModifiedDate\": \"2026-03-10T16:43:53.801513\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Beer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"beerName\": \"Very Cool Galaxy Cat\",\r\n    \"beerStyle\": \"Pale Ale\",\r\n    \"upc\": \"12356\",\r\n    \"quantityOnHand\": 122,\r\n    \"price\": 13\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v2/beer/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "beer",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"beerName\": \"Very Cool Galaxy Cat\",\r\n    \"beerStyle\": \"Pale Ale\",\r\n    \"upc\": \"12356\",\r\n    \"quantityOnHand\": 122,\r\n    \"price\": 13\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Create New Beer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"beerName\": \"A\",\r\n    \"beerStyle\": \"IPA\",\r\n    \"upc\": \"12345\",\r\n    \"quantityOnHand\": 12,\r\n    \"price\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v2/beer",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "beer"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"beerName\": \"Space Dust\",\r\n    \"beerStyle\": \"IPA\",\r\n    \"upc\": \"123213\",\r\n    \"quantityOnHand\": 12,\r\n    \"price\": 10\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Location",
+                  "value": "http://localhost:8080/api/v2/beer/4"
+                },
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "400 Bad Request - Campos Inválidos",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"beerName\": \"A\",\r\n    \"beerStyle\": \"\",\r\n    \"upc\": \"123456789012345678901234567890\",\r\n    \"quantityOnHand\": 12,\r\n    \"price\": 10\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "122"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"timestamp\": \"2026-03-10T23:43:23.151Z\",\n    \"path\": \"/api/v2/beer\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"requestId\": \"9d120515-1\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Patch Existing Beer",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"beerName\": \"Strong Galaxy Cat\",\r\n    \"beerStyle\": \"IPA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v2/beer/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "beer",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"beerName\": \"Strong Galaxy Cat\",\r\n    \"beerStyle\": \"IPA\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Delete Beer By ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v2/beer/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "beer",
+                "4"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/beer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "beer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "List Customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v2/customer",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "customer"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "transfer-encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 1,\n        \"customerName\": \"Customer 1\",\n        \"createdDate\": \"2026-03-10T21:06:03.948147\",\n        \"lastModifiedDate\": \"2026-03-10T21:06:03.948147\"\n    },\n    {\n        \"id\": 2,\n        \"customerName\": \"Customer 2\",\n        \"createdDate\": \"2026-03-10T21:06:03.966696\",\n        \"lastModifiedDate\": \"2026-03-10T21:06:03.966696\"\n    },\n    {\n        \"id\": 3,\n        \"customerName\": \"Customer 3\",\n        \"createdDate\": \"2026-03-10T21:06:03.966696\",\n        \"lastModifiedDate\": \"2026-03-10T21:06:03.966696\"\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get Customer By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v2/customer/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "customer",
+                "4"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "127"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 1,\n    \"customerName\": \"Customer 1\",\n    \"createdDate\": \"2026-03-10T21:06:03.948147\",\n    \"lastModifiedDate\": \"2026-03-10T21:06:03.948147\"\n}"
+            },
+            {
+              "name": "200 OK - Create New Customer - POST",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "121"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"customerName\": \"Rian\",\n    \"createdDate\": \"2026-03-10T21:08:41.295351\",\n    \"lastModifiedDate\": \"2026-03-10T21:08:41.295351\"\n}"
+            },
+            {
+              "name": "200 OK - Update Existing Customer - PUT",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "135"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 4,\n    \"customerName\": \"Rian, o gato preto\",\n    \"createdDate\": \"2026-03-10T21:08:41.295351\",\n    \"lastModifiedDate\": \"2026-03-10T21:11:04.921803\"\n}"
+            },
+            {
+              "name": "200 OK - Patch Existing Customer - PATCH",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "2"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "121"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 2,\n    \"customerName\": \"Suzi\",\n    \"createdDate\": \"2026-03-10T21:06:03.966696\",\n    \"lastModifiedDate\": \"2026-03-10T21:13:37.451242\"\n}"
+            },
+            {
+              "name": "200 OK - Delete By ID - DELETE",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Create New Customer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerName\": \"Rian\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v2/customer",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "customer"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"customerName\": \"Rian\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Location",
+                  "value": "http://localhost:8080/api/v2/customer/4"
+                },
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Customer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerName\": \"Rian, o gato preto\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v2/customer/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "customer",
+                "4"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"customerName\": \"Rian, o gato preto\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Patch Existing Customer",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"customerName\": \"Suzi\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v2/customer/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "customer",
+                "2"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"customerName\": \"Suzi\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "2"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Delete By ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v2/customer/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v2",
+                "customer",
+                "4"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v2/customer/4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v2",
+                    "customer",
+                    "4"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "content-length",
+                  "value": "0"
+                }
+              ],
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
