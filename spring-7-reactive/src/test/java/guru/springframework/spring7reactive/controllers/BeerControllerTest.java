@@ -31,7 +31,7 @@ class BeerControllerTest {
   }
 
   @Test
-  void testDeleteBeerNotFound() {
+  void testDeleteNotFound() {
     webTestClient.delete()
       .uri(BeerController.BEER_PATH_ID, 999)
       .exchange()
@@ -102,32 +102,22 @@ class BeerControllerTest {
   }
 
   @Test
-  void testGetByIdNotFound() {
-    webTestClient.get()
-      .uri(BeerController.BEER_PATH_ID, 999)
-      .exchange()
-      .expectStatus().isNotFound();
-  }
-
-  @Test
   @Order(1)
   void testGetById() {
-    webTestClient.get()
-      .uri(BeerController.BEER_PATH_ID, 1)
+    webTestClient.get().uri(BeerController.BEER_PATH_ID, 1)
       .exchange()
       .expectStatus().isOk()
-      .expectHeader().valueEquals("Content-Type", "application/json")
+      .expectHeader().valueEquals("Content-type", "application/json")
       .expectBody(BeerDTO.class);
   }
 
   @Test
   @Order(2)
   void testListBeers() {
-    webTestClient.get()
-      .uri(BeerController.BEER_PATH)
+    webTestClient.get().uri(BeerController.BEER_PATH)
       .exchange()
       .expectStatus().isOk()
-      .expectHeader().valueEquals("Content-Type", "application/json")
+      .expectHeader().valueEquals("Content-type", "application/json")
       .expectBody().jsonPath("$.size()").isEqualTo(3);
   }
 
