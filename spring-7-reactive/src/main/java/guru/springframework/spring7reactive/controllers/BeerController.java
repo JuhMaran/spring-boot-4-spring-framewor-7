@@ -3,9 +3,11 @@ package guru.springframework.spring7reactive.controllers;
 import guru.springframework.spring7reactive.model.BeerDTO;
 import guru.springframework.spring7reactive.services.BeerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -56,7 +58,8 @@ public class BeerController {
 
   @GetMapping(BEER_PATH_ID)
   Mono<BeerDTO> getBeerById(@PathVariable("beerId") Integer beerId) {
-    return beerService.getBeerById(beerId);
+    return beerService.getBeerById(beerId)
+      .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)));
   }
 
   @GetMapping(BEER_PATH)
