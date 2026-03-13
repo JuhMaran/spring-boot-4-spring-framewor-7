@@ -2,6 +2,10 @@ spring:
   application:
     name: spring-7-reactive-mongo
   mongodb:
-    # protocol://username:password@host:port/database?authentication-database
-    uri: mongodb://root:root@localhost:27017/sfg?authSource=spring-reactive-mongo&directConnection=true
+    host: localhost
+    port: 27017
+    username: root
+    password: root
+    database: sfg
+    authentication-database: admin
 debug: true
