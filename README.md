@@ -20,7 +20,7 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
 - **Developer Tools**
     - Lombok
     - Spring Boot DevTools
-    - Docker Compose Support
+    - Spring Docker Compose
 - **Web**
     - Spring Web MVC
     - Spring Reactive Web (WebFlux)
@@ -32,6 +32,8 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
     - H2 Database
     - MySQL Driver
     - Flyway Migration
+- **NoSQL**
+    - Spring Data Reactive MongoDB
 - **I/O**
     - Validation
 - **Security**
@@ -43,10 +45,12 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
     - Testcontainers
         - JUnit Jupiter
         - MySQL
+		- MongoDB
 - **Others**
     - MapStruct 1.6.3 (Nov/2024)
     - Jackson 3.x — nova geração da biblioteca de serialização JSON utilizada pelo ecossistema Spring
     - Open CSV
+	- Awaitility (Test)
 
 ### Plugins
 
