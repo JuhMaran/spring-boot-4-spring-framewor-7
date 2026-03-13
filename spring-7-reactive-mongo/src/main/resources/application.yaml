@@ -8,4 +8,3 @@ spring:
     password: root
     database: sfg
     authentication-database: admin
-debug: true

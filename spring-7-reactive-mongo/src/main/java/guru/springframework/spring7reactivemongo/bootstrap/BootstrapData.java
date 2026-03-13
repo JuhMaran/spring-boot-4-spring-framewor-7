@@ -35,7 +35,7 @@ public class BootstrapData implements CommandLineRunner {
         Beer beer1 = Beer.builder()
           .beerName("Galaxy Cat")
           .beerStyle("Pale Ale")
-          .upc("12356")
+          .upc("1234")
           .price(new BigDecimal("12.99"))
           .quantityOnHand(122)
           .createdDate(LocalDateTime.now())
@@ -45,7 +45,7 @@ public class BootstrapData implements CommandLineRunner {
         Beer beer2 = Beer.builder()
           .beerName("Crank")
           .beerStyle("Pale Ale")
-          .upc("12356222")
+          .upc("5678")
           .price(new BigDecimal("11.99"))
           .quantityOnHand(392)
           .createdDate(LocalDateTime.now())
@@ -55,16 +55,24 @@ public class BootstrapData implements CommandLineRunner {
         Beer beer3 = Beer.builder()
           .beerName("Sunshine City")
           .beerStyle("IPA")
-          .upc("12356")
+          .upc("9012")
           .price(new BigDecimal("13.99"))
           .quantityOnHand(144)
           .createdDate(LocalDateTime.now())
           .lastModifiedDate(LocalDateTime.now())
           .build();
 
-        beerRepository.save(beer1).subscribe();
-        beerRepository.save(beer2).subscribe();
-        beerRepository.save(beer3).subscribe();
+        beerRepository.save(beer1).subscribe(beer -> {
+          System.out.println(beer.toString());
+        });
+        beerRepository.save(beer2).subscribe(beer -> {
+          System.out.println(beer.toString());
+        });
+        beerRepository.save(beer3).subscribe(beer -> {
+          System.out.println(beer.toString());
+        });
+
+        System.out.println("Loaded Beers: " + beerRepository.count().block());
       }
     });
   }
