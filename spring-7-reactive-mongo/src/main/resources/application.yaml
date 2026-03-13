@@ -1,3 +1,6 @@
 spring:
   application:
     name: spring-7-reactive-mongo
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/sfg?authSource=spring-reactive-mongo

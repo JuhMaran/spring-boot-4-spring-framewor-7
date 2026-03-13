@@ -22,23 +22,24 @@ public class MongoConfig extends AbstractReactiveMongoConfiguration {
 
   @Bean
   public MongoClient mongoClient() {
-    return MongoClients.create();
+    MongoClientSettings settings = MongoClientSettings.builder()
+      .credential(
+        MongoCredential.createCredential(
+          "root",
+          "spring-reactive-mongo",
+          "root".toCharArray()))
+      .applyToClusterSettings(builder ->
+        builder.hosts(Collections.singletonList(
+          new ServerAddress("127.0.0.1", 27017)
+        )))
+      .build();
+
+    return MongoClients.create(settings);
   }
 
   @Override
   protected String getDatabaseName() {
     return "sfg";
-  }
-
-  @Override
-  protected void configureClientSettings(MongoClientSettings.Builder builder) {
-    builder
-      .credential(MongoCredential.createCredential("root", "admin", "example".toCharArray()))
-      .applyToClusterSettings(settings -> {
-        settings.hosts((Collections.singletonList(
-          new ServerAddress("127.0.0.1", 27017)
-        )));
-      });
   }
 
 }

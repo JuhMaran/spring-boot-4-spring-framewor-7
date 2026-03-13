@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CustomerDTO {
 
-  private Integer id;
+  private String id;
 
   @NotBlank
   @Size(max = 255)
