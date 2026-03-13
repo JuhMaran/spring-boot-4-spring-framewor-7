@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-7-reactive-mongo
+  mongodb:
+    host: localhost
+    port: 27017
+    username: root
+    password: root
+    database: sfg
+    authentication-database: admin
