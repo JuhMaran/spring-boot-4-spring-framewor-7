@@ -39,7 +39,23 @@ class BeerServiceImplTest {
   }
 
   @Test
-  void findFirstByBeerNameTest() {
+  void testFindByBeerStyle() {
+    BeerDTO beerDTO = getSavedBeerDto();
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
+    beerService.findByBeerStyle(beerDTO.getBeerStyle())
+      .subscribe(dto -> {
+        System.out.println(dto.toString());
+        atomicBoolean.set(true);
+      });
+
+    await().untilTrue(atomicBoolean);
+
+  }
+
+  @Test
+  void testFirstByBeerNameTest() {
     BeerDTO beerDTO = getSavedBeerDto();
 
     AtomicBoolean atomicBoolean = new AtomicBoolean(false);
@@ -56,7 +72,7 @@ class BeerServiceImplTest {
 
   @Test
   @DisplayName("Test Save Beer Using Subscriber")
-  void saveBeerUseSubscriber() {
+  void testSaveBeerUseSubscriber() {
 
     AtomicBoolean atomicBoolean = new AtomicBoolean(false);
     AtomicReference<BeerDTO> atomicDto = new AtomicReference<>();
@@ -145,7 +161,7 @@ class BeerServiceImplTest {
       .beerStyle("IPA")
       .price(BigDecimal.TEN)
       .quantityOnHand(12)
-      .upc("123213")
+      .upc("312")
       .build();
   }
 

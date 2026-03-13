@@ -1,5 +1,6 @@
 package guru.springframework.spring7reactivemongo.services;
 
+import guru.springframework.spring7reactivemongo.domain.Beer;
 import guru.springframework.spring7reactivemongo.model.BeerDTO;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,6 +14,8 @@ import reactor.core.publisher.Mono;
 public interface BeerService {
 
   Mono<BeerDTO> findFirstByBeerName(String beerName);
+
+  Flux<BeerDTO> findByBeerStyle(String beerStyle);
 
   Flux<BeerDTO> listBeers();
 

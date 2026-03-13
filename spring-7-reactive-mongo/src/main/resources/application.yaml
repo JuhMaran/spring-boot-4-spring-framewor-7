@@ -4,3 +4,4 @@ spring:
   mongodb:
     # protocol://username:password@host:port/database?authentication-database
     uri: mongodb://root:root@localhost:27017/sfg?authSource=spring-reactive-mongo&directConnection=true
+debug: true
