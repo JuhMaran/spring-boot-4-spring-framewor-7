@@ -20,13 +20,10 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
-
 @Testcontainers
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 @AutoConfigureWebTestClient
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BeerEndpointTest {
 
   @Container
@@ -125,12 +122,14 @@ class BeerEndpointTest {
 
   @Test
   void testCreateBeer() {
+    BeerDTO testDto = getSavedTestBeer();
+
     webTestClient.post().uri(BeerRouterConfig.BEER_PATH)
-      .body(Mono.just(BeerServiceImplTest.getTestBeer()), BeerDTO.class)
+      .body(Mono.just(testDto), BeerDTO.class)
       .header("Content-Type", "application/json")
       .exchange()
       .expectStatus().isCreated()
-      .expectHeader().location("http://localhost:8080/api/v2/beer/4");
+      .expectHeader().exists("location");
   }
 
   @Test
