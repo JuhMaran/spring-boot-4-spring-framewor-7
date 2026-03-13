@@ -39,8 +39,25 @@ class BeerServiceImplTest {
   }
 
   @Test
+  void findFirstByBeerNameTest() {
+    BeerDTO beerDTO = getSavedBeerDto();
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+    Mono<BeerDTO> foundDto = beerService.findFirstByBeerName(beerDTO.getBeerName());
+
+    foundDto.subscribe(dto -> {
+      System.out.println(dto.toString());
+      atomicBoolean.set(true);
+    });
+
+    await().untilTrue(atomicBoolean);
+
+  }
+
+  @Test
   @DisplayName("Test Save Beer Using Subscriber")
   void saveBeerUseSubscriber() {
+
     AtomicBoolean atomicBoolean = new AtomicBoolean(false);
     AtomicReference<BeerDTO> atomicDto = new AtomicReference<>();
 
@@ -63,7 +80,6 @@ class BeerServiceImplTest {
   @DisplayName("Test Save Beer Using Block")
   void testSaveBeerUseBlock() {
     BeerDTO savedDto = beerService.saveBeer(Mono.just(getTestBeerDto())).block();
-
     assertThat(savedDto).isNotNull();
     assertThat(savedDto.getId()).isNotNull();
   }
@@ -71,21 +87,21 @@ class BeerServiceImplTest {
   @Test
   @DisplayName("Test Update Beer Using Block")
   void testUpdateBlocking() {
-    final String newName = "New Beer Name"; // use final so cannot mutate
+    final String newName = "New Beer Name";  // use final so cannot mutate
     BeerDTO savedBeerDto = getSavedBeerDto();
     savedBeerDto.setBeerName(newName);
 
-    BeerDTO updateDto = beerService.saveBeer(Mono.just(savedBeerDto)).block();
+    BeerDTO updatedDto = beerService.saveBeer(Mono.just(savedBeerDto)).block();
 
-    // verify exists in db
-    BeerDTO fetchedDto = beerService.getById(updateDto.getId()).block();
+    //verify exists in db
+    BeerDTO fetchedDto = beerService.getById(updatedDto.getId()).block();
     assertThat(fetchedDto.getBeerName()).isEqualTo(newName);
   }
 
   @Test
-  @DisplayName("Test Update Using Rective Streams")
+  @DisplayName("Test Update Using Reactive Streams")
   void testUpdateStreaming() {
-    final String newName = "New Beer Name"; // use final so cannot mutate
+    final String newName = "New Beer Name";  // use final so cannot mutate
 
     AtomicReference<BeerDTO> atomicDto = new AtomicReference<>();
 
