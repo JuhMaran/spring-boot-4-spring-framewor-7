@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebInputException;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -29,13 +30,12 @@ public class BeerHandler {
   private final Validator validator;
 
   private void validate(BeerDTO beerDTO) {
-    Errors errors = new BeanPropertyBindingResult(beerDTO, "beerDTO");
+    Errors errors = new BeanPropertyBindingResult(beerDTO, "beerDto");
     validator.validate(beerDTO, errors);
 
     if (errors.hasErrors()) {
       throw new ServerWebInputException(errors.toString());
     }
-
   }
 
   public Mono<ServerResponse> deleteBeerById(ServerRequest request) {
@@ -64,8 +64,7 @@ public class BeerHandler {
   }
 
   public Mono<ServerResponse> createNewBeer(ServerRequest request) {
-    return beerService.saveBeer(request.bodyToMono(BeerDTO.class)
-        .doOnNext(this::validate))
+    return beerService.saveBeer(request.bodyToMono(BeerDTO.class).doOnNext(this::validate))
       .flatMap(beerDTO -> ServerResponse
         .created(UriComponentsBuilder
           .fromPath(BeerRouterConfig.BEER_PATH_ID)
@@ -82,8 +81,16 @@ public class BeerHandler {
   }
 
   public Mono<ServerResponse> listBeers(ServerRequest request) {
+    Flux<BeerDTO> flux;
+
+    if (request.queryParam("beerStyle").isPresent()) {
+      flux = beerService.findByBeerStyle(request.queryParam("beerStyle").get());
+    } else {
+      flux = beerService.listBeers();
+    }
+
     return ServerResponse.ok()
-      .body(beerService.listBeers(), BeerDTO.class);
+      .body(flux, BeerDTO.class);
   }
 
 }
