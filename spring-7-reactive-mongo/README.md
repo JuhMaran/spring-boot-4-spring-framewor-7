@@ -16,14 +16,14 @@
 
 ## Endpoints
 
-| Method | URL                   | Status Code - Success | Status Code - Error |
-|:-------|:----------------------|:----------------------|:--------------------|
-| GET    | /api/v3/beer          | 200 OK                | -                   |
-| GET    | /api/v3/beer/{beerId} | 200 OK                | 404 Not Found       |
-| POST   | /api/v3/beer          | 201 Created           | -                   |
-| PUT    | /api/v3/beer/{beerId} | 204 No Content        | 404 Not Found       |
-| PATCH  | /api/v3/beer/{beerId} | 204 No Content        | 404 Not Found       |
-| DELETE | /api/v3/beer/{beerId} | 204 No Content        | 404 Not Found       |
+| Method | URL                   | Status Code - Success | Status Code - Error                |
+|:-------|:----------------------|:----------------------|:-----------------------------------|
+| GET    | /api/v3/beer          | 200 OK                | -                                  |
+| GET    | /api/v3/beer/{beerId} | 200 OK                | 404 Not Found                      |
+| POST   | /api/v3/beer          | 201 Created           | 400 Bad Request                    |
+| PUT    | /api/v3/beer/{beerId} | 204 No Content        | 400 Bad Request <br> 404 Not Found |
+| PATCH  | /api/v3/beer/{beerId} | 204 No Content        | 400 Bad Request <br> 404 Not Found |
+| DELETE | /api/v3/beer/{beerId} | 204 No Content        | 404 Not Found                      |
 
 ---
 
