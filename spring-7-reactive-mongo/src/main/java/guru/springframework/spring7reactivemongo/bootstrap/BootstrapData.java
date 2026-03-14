@@ -1,7 +1,9 @@
 package guru.springframework.spring7reactivemongo.bootstrap;
 
 import guru.springframework.spring7reactivemongo.domain.Beer;
+import guru.springframework.spring7reactivemongo.domain.Customer;
 import guru.springframework.spring7reactivemongo.repositories.BeerRepository;
+import guru.springframework.spring7reactivemongo.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -20,13 +22,17 @@ import java.time.LocalDateTime;
 public class BootstrapData implements CommandLineRunner {
 
   private final BeerRepository beerRepository;
+  private final CustomerRepository customerRepository;
 
   @Override
   public void run(String... args) throws Exception {
     beerRepository.deleteAll()
-      .doOnSuccess(success -> {
-        loadBeerData();
-      }).subscribe();
+      .doOnSuccess(success -> loadBeerData())
+      .subscribe();
+
+    customerRepository.deleteAll()
+      .doOnSuccess(success -> loadCustomerData())
+      .subscribe();
   }
 
   private void loadBeerData() {
@@ -73,6 +79,31 @@ public class BootstrapData implements CommandLineRunner {
         });
 
         System.out.println("Loaded Beers: " + beerRepository.count().block());
+      }
+    });
+  }
+
+  private void loadCustomerData() {
+    customerRepository.count().subscribe(count -> {
+      if (count == 0) {
+        customerRepository.save(Customer.builder()
+            .customerName("Customer 1")
+            .createdDate(LocalDateTime.now())
+            .lastModifiedDate(LocalDateTime.now())
+            .build())
+          .subscribe();
+        customerRepository.save(Customer.builder()
+            .customerName("Customer 2")
+            .createdDate(LocalDateTime.now())
+            .lastModifiedDate(LocalDateTime.now())
+            .build())
+          .subscribe();
+        customerRepository.save(Customer.builder()
+            .customerName("Customer 3")
+            .createdDate(LocalDateTime.now())
+            .lastModifiedDate(LocalDateTime.now())
+            .build())
+          .subscribe();
       }
     });
   }
