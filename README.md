@@ -69,6 +69,7 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
 7. [Spring 7 - Reactive Examples](./spring-7-reactive-example)
 8. [Spring 7 - Reactive](./spring-7-reactive)
 9. [Spring 7 - Reactive MongoDB](./spring-7-reactive-mongo)
+10. [Spring 7 - WebClient]()
 
 ## Conteúdo do Curso Concluído
 
@@ -103,6 +104,7 @@ Cada projeto irá conter pelo menos duas das dependências abaixo.
 29. Spring WebFlux WebTestClient
 30. Exception Handling with Spring WebFlux
 31. Spring Data MongoDB
+32. Introduction and Spring WebFlux.fn Rest Services
 
 ---
 
