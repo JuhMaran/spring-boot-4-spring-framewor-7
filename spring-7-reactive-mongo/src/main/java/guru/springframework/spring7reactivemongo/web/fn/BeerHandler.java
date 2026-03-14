@@ -17,7 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * spring-7-reactive-mongo
+ * WebFlux Handler
  *
  * @author Juliane Maran
  * @since 13/03/2026

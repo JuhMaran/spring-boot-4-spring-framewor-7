@@ -11,7 +11,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 /**
- * spring-7-reactive-mongo
+// * WebFlux Router
  *
  * @author Juliane Maran
  * @since 13/03/2026

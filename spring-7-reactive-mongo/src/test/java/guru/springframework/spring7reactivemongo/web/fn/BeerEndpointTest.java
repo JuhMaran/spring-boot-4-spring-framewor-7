@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.Matchers.*;
 
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -173,7 +173,7 @@ class BeerEndpointTest {
       .exchange()
       .expectStatus().isOk()
       .expectHeader().valueEquals("Content-type", "application/json")
-      .expectBody().jsonPath("$.size()").isEqualTo(1);
+      .expectBody().jsonPath("$.size()").value(equalTo(1));
   }
 
   @Test
@@ -183,8 +183,7 @@ class BeerEndpointTest {
       .exchange()
       .expectStatus().isOk()
       .expectHeader().valueEquals("Content-type", "application/json")
-      .expectBodyList(BeerDTO.class)
-      .value(list -> assertTrue(list.size() > 1));
+      .expectBody().jsonPath("$.size()").value(greaterThan(1));
   }
 
   public BeerDTO getSavedTestBeer() {
