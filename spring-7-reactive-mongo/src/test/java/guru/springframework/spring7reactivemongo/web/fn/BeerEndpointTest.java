@@ -50,7 +50,7 @@ class BeerEndpointTest {
       .uri(BeerRouterConfig.BEER_PATH_ID, beerDTO.getId())
       .body(Mono.just(beerDTO), BeerDTO.class)
       .exchange()
-      .expectStatus().isNotFound();
+      .expectStatus().isNoContent();
   }
 
   @Test
@@ -98,7 +98,6 @@ class BeerEndpointTest {
   @Test
   @Order(3)
   void testUpdateBeer() {
-
     BeerDTO beerDTO = getSavedTestBeer();
 
     webTestClient.put()

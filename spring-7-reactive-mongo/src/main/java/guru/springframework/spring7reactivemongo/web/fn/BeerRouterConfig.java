@@ -26,12 +26,13 @@ public class BeerRouterConfig {
   private final BeerHandler handler;
 
   @Bean
-  public RouterFunction<ServerResponse> beerRoutes(){
+  public RouterFunction<ServerResponse> beerRoutes() {
     return route()
       .GET(BEER_PATH, accept(APPLICATION_JSON), handler::listBeers)
       .GET(BEER_PATH_ID, accept(APPLICATION_JSON), handler::getBeerById)
       .POST(BEER_PATH, accept(APPLICATION_JSON), handler::createNewBeer)
       .PUT(BEER_PATH_ID, accept(APPLICATION_JSON), handler::updateBeerById)
+      .PATCH(BEER_PATH_ID, accept(APPLICATION_JSON), handler::patchBeerById)
       .build();
   }
 
