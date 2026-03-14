@@ -2,6 +2,8 @@ package guru.springframework.spring7webclient.client;
 
 import reactor.core.publisher.Flux;
 
+import java.util.Map;
+
 /**
  * Beer Client
  *
@@ -11,5 +13,7 @@ import reactor.core.publisher.Flux;
 public interface BeerClient {
 
   Flux<String> listBeer();
+
+  Flux<Map> listBeerMap();
 
 }

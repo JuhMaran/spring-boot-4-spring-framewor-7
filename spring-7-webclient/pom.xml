@@ -37,6 +37,7 @@
 	<properties>
 		<java.version>25</java.version>
 		<jackson-core.version>3.1.0</jackson-core.version>
+		<org.awaitility.version>4.3.0</org.awaitility.version>
 	</properties>
 	<dependencies>
 		<!-- Spring Reactive Web - WebFlux (Web) -->
@@ -54,6 +55,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- awaitility -->
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<version>${org.awaitility.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
