@@ -3,6 +3,7 @@ package guru.springframework.spring7webclient.client;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import tools.jackson.databind.JsonNode;
 
 import java.util.Map;
 
@@ -17,12 +18,19 @@ public class BeerClientImpl implements BeerClient {
 
   private final WebClient webClient;
   public static final String BEER_PATH = "/api/v3/beer";
-  public static final String BEER_PATH_ID = BEER_PATH + "/api/v3/beer";
 
   public BeerClientImpl(WebClient.Builder builder) {
     this.webClient = builder
       .baseUrl("http://localhost:8080")
       .build();
+  }
+
+  @Override
+  public Flux<JsonNode> listBeersJsonNode() {
+    return webClient.get()
+      .uri(BEER_PATH, JsonNode.class)
+      .retrieve()
+      .bodyToFlux(JsonNode.class);
   }
 
   @Override

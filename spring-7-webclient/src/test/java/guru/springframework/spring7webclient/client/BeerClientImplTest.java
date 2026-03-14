@@ -23,39 +23,33 @@ class BeerClientImplTest {
   }
 
   @Test
-  void testListBeersMap() {
-//    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+  void testGetBeerJson() {
+    client.listBeersJsonNode().subscribe(jsonNode -> {
+      System.out.println(jsonNode.toPrettyString());
+      atomicBoolean.set(true);
+    });
 
+    await().untilTrue(atomicBoolean);
+  }
+
+  @Test
+  void testListBeerMap() {
     client.listBeerMap().subscribe(response -> {
       System.out.println(response);
       atomicBoolean.set(true);
     });
 
     await().untilTrue(atomicBoolean);
-
-//    try {
-//      Thread.sleep(1000L);
-//    } catch (InterruptedException e) {
-//      throw new RuntimeException(e);
-//    }
-
   }
 
   @Test
-  void testListBeers() {
-//    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-
+  void testListBeer() {
     client.listBeer().subscribe(response -> {
       System.out.println(response);
       atomicBoolean.set(true);
     });
 
     await().untilTrue(atomicBoolean);
-//    try {
-//      Thread.sleep(1000L);
-//    } catch (InterruptedException e) {
-//      throw new RuntimeException(e);
-//    }
   }
 
 }
