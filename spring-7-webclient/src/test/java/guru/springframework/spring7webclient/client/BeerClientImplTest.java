@@ -24,6 +24,26 @@ class BeerClientImplTest {
     atomicBoolean = new AtomicBoolean(false);
   }
 
+  // todo: add DELETE operation
+
+  @Test
+  void testPatchBeer() {
+    final String NAME = "New Name";
+
+    client.listBeerDtos()
+      .next()
+      .map(beerDTO -> BeerDTO.builder().beerName(NAME)
+        .id(beerDTO.getId()).build())
+      .flatMap(client::patchBeer)
+      .subscribe(byIdDto -> {
+        System.out.println(byIdDto.toString());
+        atomicBoolean.set(true);
+      });
+
+    await().untilTrue(atomicBoolean);
+
+  }
+
   @Test
   void testUpdate() {
     final String NAME = "New Name";

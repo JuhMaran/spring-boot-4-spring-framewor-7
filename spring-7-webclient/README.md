@@ -22,3 +22,16 @@ No ambiente atualizado (**Spring Boot 4 / Spring Framework 7 / WebFlux 4**), foi
 Isso permite que o `WebClient.Builder` seja **injetado corretamente no serviço `BeerClientImpl`** através do construtor.
 
 ---
+
+## Endpoints 
+
+Principais operações CRUD utilizando o `WebClient` dentro de uma aplicação Spring WebFlux
+
+| Operação           | Método HTTP | Método no Cliente  |
+|--------------------|-------------|--------------------|
+| Listar             | GET         | `listBeerDtos()`   |
+| Buscar por ID      | GET         | `getBeerById()`    |
+| Criar              | POST        | `createBeer()`     |
+| Atualizar completo | PUT         | `updateBeer()`     |
+| Atualizar parcial  | PATCH       | `patchBeer()`      |
+| Remover            | DELETE      | `deleteBeerById()` |
