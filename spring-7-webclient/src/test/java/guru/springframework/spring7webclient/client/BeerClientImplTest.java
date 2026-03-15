@@ -23,6 +23,16 @@ class BeerClientImplTest {
   }
 
   @Test
+  void testGetBeerDto() {
+    client.listBeerDtos().subscribe(dto -> {
+      System.out.println(dto.getBeerName());
+      atomicBoolean.set(true);
+    });
+
+    await().untilTrue(atomicBoolean);
+  }
+
+  @Test
   void testGetBeerJson() {
     client.listBeersJsonNode().subscribe(jsonNode -> {
       System.out.println(jsonNode.toPrettyString());
