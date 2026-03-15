@@ -20,6 +20,8 @@ public class BeerClientImpl implements BeerClient {
   private final WebClient webClient;
   public static final String BEER_PATH = "/api/v3/beer";
 
+  // Spring Boot auto-configures a WebClient.Builder instance with nice defaults and customizations.
+  // We can use it to create a dedicated WebClient for our component.
   public BeerClientImpl(WebClient.Builder builder) {
     this.webClient = builder
       .baseUrl("http://localhost:8080")
