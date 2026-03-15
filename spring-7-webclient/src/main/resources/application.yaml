@@ -1,3 +1,6 @@
 spring:
   application:
     name: spring-7-webclient
+
+webclient:
+  rootUrl: http://localhost:8080
