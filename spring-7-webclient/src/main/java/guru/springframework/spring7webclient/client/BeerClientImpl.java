@@ -30,7 +30,14 @@ public class BeerClientImpl implements BeerClient {
       .build();
   }
 
-  // todo: add DELETE operation
+  @Override
+  public Mono<Void> deleteBeerById(BeerDTO dto) {
+    return webClient.delete()
+      .uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(dto.getId()))
+      .retrieve()
+      .toBodilessEntity()
+      .then();
+  }
 
   @Override
   public Mono<BeerDTO> patchBeer(BeerDTO beerDTO) {

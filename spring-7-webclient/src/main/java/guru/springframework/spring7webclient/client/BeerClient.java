@@ -33,6 +33,6 @@ public interface BeerClient {
 
   Mono<BeerDTO> patchBeer(BeerDTO beerDTO);
 
-  // todo: add DELETE operation
+  Mono<Void> deleteBeerById(BeerDTO dto);
 
 }
