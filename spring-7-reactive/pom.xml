@@ -79,6 +79,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
+        <!-- OAuth2 Resource Server (Security) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-oauth2-resource-server</artifactId>
+        </dependency>
         <!-- Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -92,6 +97,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-oauth2-resource-server-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -99,6 +109,16 @@
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <version>3.8.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
