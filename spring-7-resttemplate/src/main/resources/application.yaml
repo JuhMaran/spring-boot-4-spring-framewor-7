@@ -13,8 +13,8 @@ spring:
       client:
         # Define os clientes OAuth2 da aplicação
         registration:
-          spring-oauth:
-            provider: spring-oauth
+          springauth:
+            provider: springauth
             client-id: oidc-client
             client-secret: secret
             authorization-grant-type: client_credentials
@@ -23,7 +23,7 @@ spring:
               - message.write
         # Define os detalhes do provedor OAuth2
         provider:
-          spring-oauth:
+          springauth:
             authorization-uri: http://localhost:9000/auth2/authorize
             token-uri: http://localhost:9000/oauth2/token
 

@@ -19,13 +19,15 @@ public class SecurityConfig {
     ReactiveClientRegistrationRepository clientRegistrationRepository,
     ReactiveOAuth2AuthorizedClientService authorizedClientService) {
 
-    ReactiveOAuth2AuthorizedClientProvider authorizedClientProvider = ReactiveOAuth2AuthorizedClientProviderBuilder
-      .builder()
-      .clientCredentials()
-      .build();
+    ReactiveOAuth2AuthorizedClientProvider authorizedClientProvider =
+      ReactiveOAuth2AuthorizedClientProviderBuilder.builder()
+        .clientCredentials()
+        .build();
 
-    var authorizedClientManager = new AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager(
-      clientRegistrationRepository, authorizedClientService);
+    var authorizedClientManager =
+      new AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager(
+        clientRegistrationRepository,
+        authorizedClientService);
 
     authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
 

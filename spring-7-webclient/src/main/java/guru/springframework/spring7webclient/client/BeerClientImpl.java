@@ -22,31 +22,27 @@ public class BeerClientImpl implements BeerClient {
   public static final String BEER_PATH = "/api/v3/beer";
   public static final String BEER_PATH_ID = BEER_PATH + "/{beerId}";
 
-  // Spring Boot auto-configures a WebClient.Builder instance with nice defaults and customizations.
-  // We can use it to create a dedicated WebClient for our component.
   public BeerClientImpl(WebClient.Builder builder) {
-    this.webClient = builder
-      .baseUrl("http://localhost:8080")
-      .build();
+    this.webClient = builder.build();
   }
 
   @Override
-  public Mono<Void> deleteBeerById(BeerDTO dto) {
+  public Mono<BeerDTO> patchBeer(BeerDTO dto) {
+    return webClient.patch()
+      .uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(dto.getId()))
+      .body(Mono.just(dto), BeerDTO.class)
+      .retrieve()
+      .toBodilessEntity()
+      .flatMap(voidResponseEntity -> getBeerById(dto.getId()));
+  }
+
+  @Override
+  public Mono<Void> deleteBeer(BeerDTO dto) {
     return webClient.delete()
       .uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(dto.getId()))
       .retrieve()
       .toBodilessEntity()
       .then();
-  }
-
-  @Override
-  public Mono<BeerDTO> patchBeer(BeerDTO beerDTO) {
-    return webClient.patch()
-      .uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID).build(beerDTO.getId()))
-      .body(Mono.just(beerDTO), BeerDTO.class)
-      .retrieve()
-      .toBodilessEntity()
-      .flatMap(voidResponseEntity -> getBeerById(beerDTO.getId()));
   }
 
   @Override
@@ -74,11 +70,9 @@ public class BeerClientImpl implements BeerClient {
 
   @Override
   public Flux<BeerDTO> getBeerByBeerStyle(String beerStyle) {
-    return webClient.get()
-      .uri(uriBuilder -> uriBuilder
+    return webClient.get().uri(uriBuilder -> uriBuilder
         .path(BEER_PATH)
-        .queryParam("beerStyle", beerStyle)
-        .build())
+        .queryParam("beerStyle", beerStyle).build())
       .retrieve()
       .bodyToFlux(BeerDTO.class);
   }
@@ -94,34 +88,26 @@ public class BeerClientImpl implements BeerClient {
 
   @Override
   public Flux<BeerDTO> listBeerDtos() {
-    return webClient.get()
-      .uri(BEER_PATH)
-      .retrieve()
-      .bodyToFlux(BeerDTO.class);
+    return webClient.get().uri(BEER_PATH)
+      .retrieve().bodyToFlux(BeerDTO.class);
   }
 
   @Override
   public Flux<JsonNode> listBeersJsonNode() {
-    return webClient.get()
-      .uri(BEER_PATH)
-      .retrieve()
-      .bodyToFlux(JsonNode.class);
+    return webClient.get().uri(BEER_PATH)
+      .retrieve().bodyToFlux(JsonNode.class);
   }
 
   @Override
   public Flux<Map> listBeerMap() {
-    return webClient.get()
-      .uri(BEER_PATH)
-      .retrieve()
-      .bodyToFlux(Map.class);
+    return webClient.get().uri(BEER_PATH)
+      .retrieve().bodyToFlux(Map.class);
   }
 
   @Override
   public Flux<String> listBeer() {
-    return webClient.get()
-      .uri(BEER_PATH)
-      .retrieve()
-      .bodyToFlux(String.class);
+    return webClient.get().uri(BEER_PATH)
+      .retrieve().bodyToFlux(String.class);
   }
 
 }

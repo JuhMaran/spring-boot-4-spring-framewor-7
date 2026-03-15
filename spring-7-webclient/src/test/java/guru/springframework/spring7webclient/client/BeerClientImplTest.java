@@ -1,7 +1,6 @@
 package guru.springframework.spring7webclient.client;
 
 import guru.springframework.spring7webclient.model.BeerDTO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,45 +16,44 @@ class BeerClientImplTest {
   @Autowired
   BeerClient client;
 
-  AtomicBoolean atomicBoolean;
-
-  @BeforeEach
-  void setUp() {
-    atomicBoolean = new AtomicBoolean(false);
-  }
-
   @Test
-  void testDeleteBeer() {
+  void testDelete() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.listBeerDtos()
       .next()
-      .flatMap(dto -> client.deleteBeerById(dto))
-      .doOnSuccess(response -> atomicBoolean.set(true))
+      .flatMap(dto -> client.deleteBeer(dto))
+      .doOnSuccess(mt -> atomicBoolean.set(true))
       .subscribe();
 
     await().untilTrue(atomicBoolean);
   }
 
   @Test
-  void testPatchBeer() {
+  void testPatch() {
     final String NAME = "New Name";
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
 
     client.listBeerDtos()
       .next()
-      .map(beerDTO -> BeerDTO.builder().beerName(NAME)
-        .id(beerDTO.getId()).build())
-      .flatMap(client::patchBeer)
+      .map(beerDTO -> BeerDTO.builder().beerName(NAME).id(beerDTO.getId()).build())
+      .flatMap(dto -> client.patchBeer(dto))
       .subscribe(byIdDto -> {
         System.out.println(byIdDto.toString());
         atomicBoolean.set(true);
       });
 
     await().untilTrue(atomicBoolean);
-
   }
 
   @Test
   void testUpdate() {
+
     final String NAME = "New Name";
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
 
     client.listBeerDtos()
       .next()
@@ -67,11 +65,13 @@ class BeerClientImplTest {
       });
 
     await().untilTrue(atomicBoolean);
-
   }
 
   @Test
   void testCreateBeer() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     BeerDTO newDto = BeerDTO.builder()
       .price(new BigDecimal("10.99"))
       .beerName("Mango Bobs")
@@ -87,11 +87,13 @@ class BeerClientImplTest {
       });
 
     await().untilTrue(atomicBoolean);
-
   }
 
   @Test
   void testGetBeerByBeerStyle() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.getBeerByBeerStyle("Pale Ale")
       .subscribe(dto -> {
         System.out.println(dto.toString());
@@ -103,6 +105,9 @@ class BeerClientImplTest {
 
   @Test
   void testGetBeerById() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.listBeerDtos()
       .flatMap(dto -> client.getBeerById(dto.getId()))
       .subscribe(byIdDto -> {
@@ -115,6 +120,9 @@ class BeerClientImplTest {
 
   @Test
   void testGetBeerDto() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.listBeerDtos().subscribe(dto -> {
       System.out.println(dto.getBeerName());
       atomicBoolean.set(true);
@@ -125,7 +133,11 @@ class BeerClientImplTest {
 
   @Test
   void testGetBeerJson() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.listBeersJsonNode().subscribe(jsonNode -> {
+
       System.out.println(jsonNode.toPrettyString());
       atomicBoolean.set(true);
     });
@@ -134,7 +146,9 @@ class BeerClientImplTest {
   }
 
   @Test
-  void testListBeerMap() {
+  void testGetMap() {
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.listBeerMap().subscribe(response -> {
       System.out.println(response);
       atomicBoolean.set(true);
@@ -144,7 +158,10 @@ class BeerClientImplTest {
   }
 
   @Test
-  void testListBeer() {
+  void listBeer() {
+
+    AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
     client.listBeer().subscribe(response -> {
       System.out.println(response);
       atomicBoolean.set(true);

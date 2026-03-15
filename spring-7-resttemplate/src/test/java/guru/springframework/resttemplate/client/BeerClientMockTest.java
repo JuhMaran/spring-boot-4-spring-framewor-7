@@ -87,7 +87,7 @@ class BeerClientMockTest {
     @Bean
     ClientRegistrationRepository clientRegistrationRepository() {
       return new InMemoryClientRegistrationRepository(ClientRegistration
-        .withRegistrationId("spring-oauth")
+        .withRegistrationId("springauth")
         .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
         .clientId("test")
         .tokenUri("test")
@@ -114,7 +114,7 @@ class BeerClientMockTest {
     MockitoAnnotations.openMocks(this);
 
     ClientRegistration clientRegistration = clientRegistrationRepository
-      .findByRegistrationId("spring-oauth");
+      .findByRegistrationId("springauth");
 
     OAuth2AccessToken token = new OAuth2AccessToken(OAuth2AccessToken
       .TokenType.BEARER, "test", Instant.MIN, Instant.MAX);
