@@ -2,15 +2,16 @@
 
 ## Tecnologias
 
-| Tecnologia                     | Versão  | Lançamento          |
-|:-------------------------------|:--------|:--------------------|
-| Spring Framework               | 7.x     | nov/2025            |
-| Spring Boot                    | 4.0.3   | nov/2025            |
-| Java SE                        | 25 LTS  | Oracle — 16/09/2025 |
-| Jackson (`tools.jackson.core`) | 3.1.0   | fev/2026            |
-| Spring Reactive Web (WebFlux)  | 4.0.3   |                     |
-| Project Lombok                 | 1.18.42 |                     |
-| Awaitility                     | 4.3.0   |                     | 
+| Tecnologia                       | Versão  | Lançamento          |
+|:---------------------------------|:--------|:--------------------|
+| Spring Framework                 | 7.x     | nov/2025            |
+| Spring Boot                      | 4.0.3   | nov/2025            |
+| Java SE                          | 25 LTS  | Oracle — 16/09/2025 |
+| Jackson (`tools.jackson.core`)   | 3.1.0   | fev/2026            |
+| Spring Reactive Web (WebFlux)    | 4.0.3   |                     |
+| OAuth2 Client (Security)         | 4.0.3   |                     |
+| Project Lombok (Developer Tools) | 1.18.42 |                     |
+| Awaitility                       | 4.3.0   |                     | 
 
 ---
 
@@ -23,7 +24,7 @@ Isso permite que o `WebClient.Builder` seja **injetado corretamente no serviço 
 
 ---
 
-## Endpoints 
+## Endpoints
 
 Principais operações CRUD utilizando o `WebClient` dentro de uma aplicação Spring WebFlux
 
