@@ -75,6 +75,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
+        <!-- OAuth2 Resource Server (Security) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-oauth2-resource-server</artifactId>
+        </dependency>
         <!-- Testcontainers (Testing) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
