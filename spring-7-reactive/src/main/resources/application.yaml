@@ -1,7 +1,14 @@
 spring:
   application:
     name: spring-7-reactive
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090
 
-logging:
-  level:
-    org.springframework.r2dbc: trace
+#logging:
+#  level:
+#    org.springframework.r2dbc: trace
+
+debug: true
