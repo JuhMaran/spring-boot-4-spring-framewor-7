@@ -8,4 +8,9 @@ spring:
     password: root
     database: sfg
     authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
 debug: true
