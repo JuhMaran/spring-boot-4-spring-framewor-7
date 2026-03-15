@@ -16,3 +16,12 @@
 - Project Reactor 3.8.3
 
 ---
+
+| Operação | URL                   |
+|:---------|:----------------------|
+| GET      | /api/v2/beer          |
+| GET      | /api/v2/beer/{beerId} |
+| POST     | /api/v2/beer          |
+| PUT      | /api/v2/beer/{beerId} |
+| PATCH    | /api/v2/beer/{beerId} |
+| DELETE   | /api/v2/beer/{beerId} |
