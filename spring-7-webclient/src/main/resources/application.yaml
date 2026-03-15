@@ -1,6 +1,23 @@
 spring:
   application:
     name: spring-7-webclient
+  security:
+    oauth2:
+      client:
+        # Define os detalhes do provedor OAuth2
+        provider:
+          spring-auth:
+            token-uri: http://localhost:9000/oauth2/token
+        # Define os clientes OAuth2 da aplicação
+        registration:
+          spring-oauth:
+            provider: spring-oauth
+            client-id: oidc-client
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope:
+              - message.read
+              - message.write
 
 webclient:
   rootUrl: http://localhost:8080
