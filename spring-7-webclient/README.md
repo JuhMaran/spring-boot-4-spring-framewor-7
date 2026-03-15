@@ -16,7 +16,9 @@
 
 ## Nota de atualização de versão
 
-No ambiente atualizado (**Spring Boot 4 / Spring Framework 7 / WebFlux 4**), foi necessário declarar explicitamente um 
+No ambiente atualizado (**Spring Boot 4 / Spring Framework 7 / WebFlux 4**), foi necessário declarar explicitamente um
 **Bean de `WebClient.Builder`** através de uma classe de configuração, por exemplo `WebClientConfig`.
 
 Isso permite que o `WebClient.Builder` seja **injetado corretamente no serviço `BeerClientImpl`** através do construtor.
+
+---
