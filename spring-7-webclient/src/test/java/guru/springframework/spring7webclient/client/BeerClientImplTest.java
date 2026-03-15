@@ -23,6 +23,17 @@ class BeerClientImplTest {
   }
 
   @Test
+  void testGetBeerByBeerStyle() {
+    client.getBeerByBeerStyle("Pale Ale")
+      .subscribe(dto -> {
+        System.out.println(dto.toString());
+        atomicBoolean.set(true);
+      });
+
+    await().untilTrue(atomicBoolean);
+  }
+
+  @Test
   void testGetBeerById() {
     client.listBeerDtos()
       .flatMap(dto -> client.getBeerById(dto.getId()))

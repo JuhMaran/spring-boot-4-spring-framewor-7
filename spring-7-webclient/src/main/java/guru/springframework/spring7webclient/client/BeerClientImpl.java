@@ -31,35 +31,55 @@ public class BeerClientImpl implements BeerClient {
   }
 
   @Override
+  public Flux<BeerDTO> getBeerByBeerStyle(String beerStyle) {
+    return webClient.get()
+      .uri(uriBuilder -> uriBuilder
+        .path(BEER_PATH)
+        .queryParam("beerStyle", beerStyle)
+        .build())
+      .retrieve()
+      .bodyToFlux(BeerDTO.class);
+  }
+
+  @Override
   public Mono<BeerDTO> getBeerById(String id) {
     return webClient.get()
       .uri(uriBuilder -> uriBuilder.path(BEER_PATH_ID)
         .build(id))
-      .retrieve().bodyToMono(BeerDTO.class);
+      .retrieve()
+      .bodyToMono(BeerDTO.class);
   }
 
   @Override
   public Flux<BeerDTO> listBeerDtos() {
-    return webClient.get().uri(BEER_PATH)
-      .retrieve().bodyToFlux(BeerDTO.class);
+    return webClient.get()
+      .uri(BEER_PATH)
+      .retrieve()
+      .bodyToFlux(BeerDTO.class);
   }
 
   @Override
   public Flux<JsonNode> listBeersJsonNode() {
-    return webClient.get().uri(BEER_PATH)
-      .retrieve().bodyToFlux(JsonNode.class);
+    return webClient.get()
+      .uri(BEER_PATH)
+      .retrieve()
+      .bodyToFlux(JsonNode.class);
   }
 
   @Override
   public Flux<Map> listBeerMap() {
-    return webClient.get().uri(BEER_PATH)
-      .retrieve().bodyToFlux(Map.class);
+    return webClient.get()
+      .uri(BEER_PATH)
+      .retrieve()
+      .bodyToFlux(Map.class);
   }
 
   @Override
   public Flux<String> listBeer() {
-    return webClient.get().uri(BEER_PATH)
-      .retrieve().bodyToFlux(String.class);
+    return webClient.get()
+      .uri(BEER_PATH)
+      .retrieve()
+      .bodyToFlux(String.class);
   }
 
 }
