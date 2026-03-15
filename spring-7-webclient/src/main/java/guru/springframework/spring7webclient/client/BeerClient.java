@@ -2,6 +2,7 @@ package guru.springframework.spring7webclient.client;
 
 import guru.springframework.spring7webclient.model.BeerDTO;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import tools.jackson.databind.JsonNode;
 
 import java.util.Map;
@@ -21,5 +22,7 @@ public interface BeerClient {
   Flux<JsonNode> listBeersJsonNode();
 
   Flux<BeerDTO> listBeerDtos();
+
+  Mono<BeerDTO> getBeerById(String id);
 
 }
