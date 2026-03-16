@@ -1,4 +1,6 @@
 # application-localmysql.yaml
+server:
+  port: 8081
 spring:
   datasource:
     # 127.0.0.1 or localhost

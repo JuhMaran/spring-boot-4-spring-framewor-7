@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>guru.springframework</groupId>
+    <artifactId>spring-7-gateway</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-7-gateway</name>
+    <description>Spring 7 - API Gateway</description>
+    <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>JuhMaran</id>
+            <name>Juh Maran</name>
+            <url>https://github.com/JuhMaran</url>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git</connection>
+        <developerConnection>scm:git:ssh://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
+    </scm>
+    <properties>
+        <java.version>25</java.version>
+        <spring-cloud.version>2025.1.0</spring-cloud.version>
+    </properties>
+    <dependencies>
+        <!-- Reactive Gateway (Spring Cloud Routing) -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
+        </dependency>
+        <!-- OAuth2 Resource Server (Security) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-oauth2-resource-server</artifactId>
+        </dependency>
+        <!-- Tests -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security-oauth2-resource-server-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>tools.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
