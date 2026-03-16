@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-7-gateway-gradle
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: spring-7-rest-mvc
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/*
+            - id: spring-7-reactive
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v2/*
+            - id: spring-7-reactive-mongo
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/v3/*
