@@ -39,6 +39,7 @@
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <spring-boot.run.profiles>localmysql</spring-boot.run.profiles>
         <jwt-uri>http://localhost:9000</jwt-uri>
+        <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
     </properties>
     <dependencies>
         <!-- Spring Web MVC -->
@@ -124,6 +125,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security-oauth2-resource-server</artifactId>
+        </dependency>
+        <!-- springdoc openapi -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-common</artifactId>
+            <version>${springdoc-openapi.version}</version>
         </dependency>
         <!-- Tests -->
         <dependency>
