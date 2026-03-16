@@ -53,7 +53,8 @@ As aplicações exploram diferentes partes do ecossistema Spring:
 | [spring-7-reactive](./spring-7-reactive)                  | 8082 | H2 In Memory | Spring WebFlux                                | `/api/v2/beer` and `/api/v2/beer/{beerId}`<br>`/api/v2/customer` and `/api/v2/customer/{customerId}`                                                                       |
 | [spring-7-reactive-mongo](./spring-7-reactive-mongo)      | 8083 | MongoDB      | Spring WebFlux.fn                             | `/api/v3/beer` and `/api/v3/beer/{beerId}`<br>`/api/v3/customer` and `/api/v3/customer/{customerId}`                                                                       |
 | [spring-7-webclient](./spring-7-webclient)                | 8080 | N/A          | REST Client (WebClient)                       | `/api/v3/beer` and `/api/v3/beer/{beerId}`<br>`/api/v3/customer` and `/api/v3/customer/{customerId}`                                                                       |
-| API Gateway                                               | 8080 | N/A          | Spring Cloud Gateway                          | Root: `/` (roteamento para `/api/v1`, `/api/v2`, `/api/v3`)                                                                                                                |
+| [spring-7-gateway](./spring-7-gateway)                    | 8080 | N/A          | Spring Cloud Gateway and Maven                | Root: `/` (roteamento para `/api/v1`, `/api/v2`, `/api/v3`)                                                                                                                |
+| [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | 8080 | N/A          | Spring Cloud Gateway and Gradle               | Root: `/` (roteamento para `/api/v1`, `/api/v2`, `/api/v3`)                                                                                                                |
 
 ---
 
@@ -306,3 +307,9 @@ Este repositório tem como objetivo:
 # Licença
 
 Este projeto é destinado para **fins educacionais**.
+
+---
+
+# Documentação
+
+- [Wiki](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/wiki)
