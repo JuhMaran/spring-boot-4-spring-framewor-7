@@ -40,6 +40,8 @@
         <spring-boot.run.profiles>localmysql</spring-boot.run.profiles>
         <jwt-uri>http://localhost:9000</jwt-uri>
         <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
+        <rest-assured.version>5.5.6</rest-assured.version>
+        <atlassian-swagger-request-validator.version>2.46.0</atlassian-swagger-request-validator.version>
     </properties>
     <dependencies>
         <!-- Spring Web MVC -->
@@ -182,6 +184,19 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers-mysql</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Atlassian Swagger Request Validator -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.oai</groupId>
+            <artifactId>swagger-request-validator-restassured</artifactId>
+            <version>${atlassian-swagger-request-validator.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
