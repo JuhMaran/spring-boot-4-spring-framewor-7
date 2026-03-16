@@ -1,3 +1,14 @@
 spring:
   application:
     name: spring-7-gateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: spring-7-rest-mvc
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/*
+# Key 'id' is not expected here.
+# Property 'spring.cloud.gateway.server.webmvc.routes' has an invalid value, here should be a yaml scalar of type 'RouteProperties'
