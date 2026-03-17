@@ -2,6 +2,7 @@ package guru.springframework.spring7restmvc.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -12,11 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author Juliane Maran
  * @since 05/03/2026
  */
+@Profile("!test")
 @Configuration
 public class SpringSecConfig {
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) {
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(authorize -> {
         authorize
           .requestMatchers("/v3/api-docs**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
