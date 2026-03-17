@@ -1,139 +1,30 @@
-# Spring Boot 4 & Spring Framework 7
+# Spring 7 Playground - Arquiteturas e Tecnologias
 
-Repositório contendo os projetos desenvolvidos durante o curso **Spring Boot 4 e Spring Framework 7**, explorando desde
-os fundamentos do ecossistema Spring até arquiteturas modernas com **microservices, segurança OAuth2, programação
-reativa e bancos SQL/NoSQL**.
+Este repositório reúne diversos projetos independentes com o objetivo de explorar, demonstrar e consolidar conhecimentos
+no ecossistema **Spring 7 + Spring Boot 4**, utilizando **Java 25 (LTS)**.
 
-O objetivo deste repositório é apresentar **exemplos práticos e progressivos**, abordando desenvolvimento backend
-moderno utilizando as versões mais recentes da plataforma Java e do ecossistema Spring.
+Os projetos fazem parte do curso **"Spring Boot 4, Spring Framework 7: Beginner to Guru" (Udemy)** e evoluem
+progressivamente conforme o avanço no conteúdo.
 
----
+Atualmente, o progresso acompanha todo o roadmap do curso, com módulos sendo implementados gradualmente.
 
-## Tecnologias Utilizadas
-
-Todos os projetos deste repositório utilizam tecnologias atualizadas do ecossistema Java:
-
-* **Spring Framework 7** — lançado em **Novembro de 2025**
-* **Spring Boot 4** — lançado em **Novembro de 2025**
-* **Java SE 25 (LTS)** — lançado pela **Oracle** em **16 de Setembro de 2025**
-
----
-
-## Stack Tecnológica
-
-As aplicações exploram diferentes partes do ecossistema Spring:
-
-* Spring MVC
-* Spring WebFlux
-* Spring Data JPA
-* Spring Data JDBC
-* Spring Data MongoDB
-* Spring Security
-* OAuth2 Authorization Server
-* OAuth2 Resource Server
-* REST APIs
-* Reactive Programming
-* MySQL
-* Docker
-* Microservices
-
----
-
-## Projetos
-
-| Project                                                   | Port | Database     | Stack                                         | URL                                                                                                                                                                        |
-|-----------------------------------------------------------|------|--------------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [spring-7-webapp](./spring-7-webapp)                      | 8080 | N/A          | Spring MVC                                    | `/books` and `/authors`                                                                                                                                                    |
-| [spring-7-di](./spring-7-di)                              | 8080 | N/A          | Spring Core                                   | `/`                                                                                                                                                                        |
-| [spring-7-rest-mvc](./spring-7-rest-mvc)                  | 8081 | MySQL        | Spring MVC                                    | `/api/v1/beer` and `/api/v1/beer/{beerId}`<br>`/api/v1/customer` and `/api/v1/customer/{customerId}`                                                                       |
-| [sdjpa-spring-data-rest](./sdjpa-springdatarest)          | 8080 | H2           | Spring Data REST                              | `/api/v1`                                                                                                                                                                  |
-| [spring-7-resttemplate](./spring-7-resttemplate)          | 8080 | N/A          | REST Client (RestTemplate)                    | `/api/v1/beer` and `/api/v1/beer/{beerId}`                                                                                                                                 |
-| [spring-7-auth-server](./spring-7-auth-server)            | 9000 | N/A          | Spring Security / OAuth2 Authorization Server | Redirect URI:<br>`http://127.0.0.1:8080/login/oauth2/code/oidc-client`<br>`http://127.0.0.1:8080/authorized`<br>Logout:<br>`http://127.0.0.1:8080/`<br>Login URL: `/login` |
-| [spring-7-reactive-examples](./spring-7-reactive-example) | 8080 | N/A          | Spring WebFlux                                | `/`                                                                                                                                                                        |
-| [spring-7-reactive](./spring-7-reactive)                  | 8082 | H2 In Memory | Spring WebFlux                                | `/api/v2/beer` and `/api/v2/beer/{beerId}`<br>`/api/v2/customer` and `/api/v2/customer/{customerId}`                                                                       |
-| [spring-7-reactive-mongo](./spring-7-reactive-mongo)      | 8083 | MongoDB      | Spring WebFlux.fn                             | `/api/v3/beer` and `/api/v3/beer/{beerId}`<br>`/api/v3/customer` and `/api/v3/customer/{customerId}`                                                                       |
-| [spring-7-webclient](./spring-7-webclient)                | 8080 | N/A          | REST Client (WebClient)                       | `/api/v3/beer` and `/api/v3/beer/{beerId}`<br>`/api/v3/customer` and `/api/v3/customer/{customerId}`                                                                       |
-| [spring-7-gateway](./spring-7-gateway)                    | 8080 | N/A          | Spring Cloud Gateway and Maven                | Root: `/` (roteamento para `/api/v1`, `/api/v2`, `/api/v3`)                                                                                                                |
-| [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | 8080 | N/A          | Spring Cloud Gateway and Gradle               | Root: `/` (roteamento para `/api/v1`, `/api/v2`, `/api/v3`)                                                                                                                |
-
----
-
-## Diagrama de Arquitetura
-
-```mermaid
-flowchart LR
-    Client[Client]
-    Gateway[Spring Cloud Gateway - 8080]
-    Auth[Spring Auth Server - 9000]
-    MVC[Spring MVC Service - 8081]
-    MySQL[(MySQL)]
-    WebFlux[Spring WebFlux Service - 8082]
-    H2[(H2 In Memory)]
-    WebFluxFN[Spring WebFlux.fn Service - 8083]
-    Mongo[(MongoDB)]
-    Client --> Gateway
-    Gateway --> Auth
-    Gateway --> MVC
-    Gateway --> WebFlux
-    Gateway --> WebFluxFN
-    MVC --> MySQL
-    WebFlux --> H2
-    WebFluxFN --> Mongo
-```
-
----
-
-## Maven
-
-Todos os projetos são construídos utilizando **Apache Maven**.
-
-Cada projeto utiliza **pelo menos duas das dependências abaixo**.
-
----
-
-## Dependências
-
-| Categoria           | Dependências                                                                              |
-|---------------------|-------------------------------------------------------------------------------------------|
-| **Developer Tools** | Lombok<br>Spring Boot DevTools<br>Spring Docker Compose                                   |
-| **Web**             | Spring Web MVC<br>Spring Reactive Web (WebFlux)                                           |
-| **Operations**      | Spring Boot Actuator                                                                      |
-| **SQL**             | Spring Data JPA<br>Spring Data JDBC<br>H2 Database<br>MySQL Driver<br>Flyway Migration    |
-| **NoSQL**           | Spring Data Reactive MongoDB                                                              |
-| **I/O**             | Validation                                                                                |
-| **Security**        | Spring Security<br>OAuth2 Client<br>OAuth2 Resource Server<br>OAuth2 Authorization Server |
-| **Testing**         | Testcontainers (JUnit Jupiter, MySQL, MongoDB)                                            |
-
----
-
-## Bibliotecas Adicionais
-
-| Biblioteca          | Descrição                                                             |
-|---------------------|-----------------------------------------------------------------------|
-| **MapStruct 1.6.3** | Code generator para mapeamento de DTOs                                |
-| **Jackson 3.x**     | Nova geração da biblioteca de serialização JSON do ecossistema Spring |
-| **OpenCSV**         | Processamento de arquivos CSV                                         |
-| **Awaitility**      | Testes assíncronos                                                    |
-
----
-
-## Plugins Maven
-
-| Plugin                   | Versão     |
-|--------------------------|------------|
-| Maven Compiler Plugin    | **3.14.1** |
-| Maven Failsafe Plugin    | **3.5.2**  |
-| Lombok MapStruct Binding | **0.2.0**  |
+Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abrangendo aplicações tradicionais, reativas,
+segurança, integração e API Gateway.
 
 ---
 
 ## Conteúdo do Curso
 
-O curso cobre os seguintes tópicos:
+### Fundamentos
 
 1. Introduction
 2. Building a Spring Boot Web App
 3. Performing Dependency Injection with Spring
+
+---
+
+### Web e APIs REST (Spring MVC)
+
 4. Introduction to RESTful Web Services
 5. Using Project Lombok with Spring Boot
 6. Spring MVC Rest Services
@@ -149,13 +40,28 @@ O curso cobre os seguintes tópicos:
 16. Paging and Sorting with Spring MVC
 17. JPA Database Relationship Mapping
 18. Database Transactions, Locking and Spring
+
+---
+
+### Integração e Clientes HTTP
+
 19. Introduction to Spring Data REST
 20. Spring RestTemplate
 21. Testing Spring RestTemplate
+
+---
+
+### Segurança
+
 22. Spring Security HTTP Basic Auth
 23. Spring Authorization Server
 24. Spring MVC OAuth2 Resource Server
 25. Spring RestTemplate with OAuth2
+
+---
+
+### Programação Reativa (WebFlux)
+
 26. Introduction to Reactive Programming with Spring
 27. Spring Data R2DBC
 28. Spring WebFlux Rest Services
@@ -167,26 +73,61 @@ O curso cobre os seguintes tópicos:
 34. Spring WebFlux Resource Server
 35. Spring WebFlux.fn Resource Server
 36. Using OAuth 2.0 with Spring WebClient
+
+---
+
+### Cloud e Gateway
+
 37. Spring Cloud Gateway
+
+---
+
+### Build e Documentação
+
 38. Spring Boot Maven Plugin
 39. Spring Boot Gradle Plugin
 40. OpenAPI with Spring Boot
 41. OpenAPI Validation with RestAssured
+
+---
+
+### Tópicos Avançados
+
 42. Introduction to Spring AI
 43. Spring RestClient
 44. Spring Boot Actuator
 45. Request Logging
-46. Caching Data with Spring Framewokr
+46. Caching Data with Spring Framework
 47. Spring Application Events for Auditing
 48. Using your Spring Boot Skills
+
+---
+
+### Containers e Orquestração
+
 49. Docker with Spring Boot
 50. Docker Compose with Spring Boot
 51. Kubernetes with Spring Boot
+
+---
+
+### Microservices
+
 52. Introduction to Spring Boot Microservices
 53. Spring Boot Microservices with Apache Kafka
+
+---
+
+### Certificação e Boas Práticas
+
 54. Spring Professional Certification Practice Test
 55. New Spring Boot 3.4.0 Features
 56. Spring Boot Engineering Best Practices
+
+---
+
+### Extras
+
 57. Appendix A: Using GitHub
 58. Extra - Introduction to Junie and JetBrains AI
 59. Extra - Interviews
@@ -196,120 +137,175 @@ O curso cobre os seguintes tópicos:
 
 ---
 
-## OAuth2 Configuration
+## Projetos
 
-### Root URL
-
-| Property | Value                   |
-|----------|-------------------------|
-| Root URL | `http://localhost:8080` |
-
----
-
-### OAuth2 Client Provider
-
-(`spring.security.client.provider`)
-
-| Property          | Value                                    |
-|-------------------|------------------------------------------|
-| Authorization URI | `http://localhost:9000/oauth2/authorize` |
-| Token URI         | `http://localhost:9000/oauth2/token`     |
+| Projeto                                                   | Descrição                                                    | Tecnologias Principais                        |
+|-----------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------|
+| [spring-7-webapp](./spring-7-webapp)                      | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                |
+| [spring-7-di](./spring-7-di)                              | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                   |
+| [spring-7-rest-mvc](./spring-7-rest-mvc)                  | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI    |
+| [sdjpa-spring-data-rest](./sdjpa-springdatarest)          | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                     |
+| [spring-7-resttemplate](./spring-7-resttemplate)          | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client       |
+| [spring-7-auth-server](./spring-7-auth-server)            | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC   |
+| [spring-7-reactive-examples](./spring-7-reactive-example) | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                      |
+| [spring-7-reactive](./spring-7-reactive)                  | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                            |
+| [spring-7-reactive-mongo](./spring-7-reactive-mongo)      | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                     |
+| [spring-7-webclient](./spring-7-webclient)                | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                      |
+| [spring-7-gateway](./spring-7-gateway)                    | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server  |
+| [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2 |
 
 ---
 
-### OAuth2 Resource Server
-
-(`spring.security.oauth2.resourceserver`)
-
-| Property       | Value                   |
-|----------------|-------------------------|
-| JWT Issuer URI | `http://localhost:9000` |
-
----
-
-### Client Registration
-
-(`spring.security.client.registration`)
-
-| Property                 | Value                        |
-|--------------------------|------------------------------|
-| Provider                 | `springauth`                 |
-| Client ID                | `oidc-client`                |
-| Client Secret            | `secret`                     |
-| Authorization Grant Type | `client_credentials`         |
-| Scope                    | `message.read message.write` |
-
----
-
-# Skills e Tecnologias
+## Tecnologias Utilizadas
 
 ### Core
 
-![Java](https://img.shields.io/badge/Java-25_LTS-orange)
-![Spring](https://img.shields.io/badge/Spring_Framework_7-6DB33F)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot_4-6DB33F)
-![Spring MVC](https://img.shields.io/badge/Spring-MVC-6DB33F)
-![Spring WebFlux](https://img.shields.io/badge/Spring-WebFlux-6DB33F)
-![Spring Security](https://img.shields.io/badge/Spring-Security-6DB33F)
-
-### APIs & Architecture
-
-![REST](https://img.shields.io/badge/API-REST-blue)
-![Reactive](https://img.shields.io/badge/Reactive-Programming-blue)
-![Microservices](https://img.shields.io/badge/Microservices-Architecture-blue)
-![Spring Cloud Gateway](https://img.shields.io/badge/Spring_Cloud-Gateway-blue)
-![OAuth2](https://img.shields.io/badge/OAuth2-Authorization_Server-red)
-![OAuth2 Resource Server](https://img.shields.io/badge/OAuth2-Resource_Server-red)
-
-### Data
-
-![Spring Data JPA](https://img.shields.io/badge/Spring_Data-JPA-6DB33F)
-![Spring Data JDBC](https://img.shields.io/badge/Spring_Data-JDBC-6DB33F)
-![Spring Data MongoDB](https://img.shields.io/badge/Spring_Data-MongoDB-6DB33F)
-![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248)
-![H2](https://img.shields.io/badge/H2-Database-09476B)
-
-### Build, DevOps & Tools
-
-[![Tools](https://skillicons.dev/icons?i=maven,docker,idea,git,github,md)](https://skillicons.dev)
-
-![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5)
-![Flyway](https://img.shields.io/badge/Flyway-Database_Migration-CC0200)
-
-### Testing
-
-![JUnit](https://img.shields.io/badge/JUnit-Jupiter-green)
-![Testcontainers](https://img.shields.io/badge/Testcontainers-Docker-green)
-![Awaitility](https://img.shields.io/badge/Awaitility-Async_Testing-green)
-
-### Libraries
-
-![MapStruct](https://img.shields.io/badge/MapStruct-1.6.3-blue)
-![Jackson](https://img.shields.io/badge/Jackson-3.x-blue)
-![OpenCSV](https://img.shields.io/badge/OpenCSV-CSV-blue)
+* Java 25 (LTS)
+* Spring Framework 7
+* Spring Boot 4
 
 ---
 
-# Objetivo do Repositório
+### Web
 
-Este repositório tem como objetivo:
-
-* Demonstrar **boas práticas no desenvolvimento com Spring**
-* Explorar **novas features do Spring Framework 7**
-* Apresentar **Spring Boot 4 com Java 25**
-* Servir como **material de referência para estudos**
-* Fornecer **exemplos práticos de APIs modernas**
+* Spring MVC (modelo tradicional baseado em servlet)
+* Spring WebFlux (programação reativa não-bloqueante)
+* Thymeleaf (renderização server-side)
 
 ---
 
-# Licença
+### Segurança
+
+* Spring Security
+* OAuth2 Client
+* OAuth2 Resource Server
+* OAuth2 Authorization Server
+
+---
+
+### Persistência
+
+#### SQL
+
+* Spring Data JPA
+* Spring Data JDBC
+* Spring Data R2DBC
+* H2 Database
+* MySQL
+* Flyway (versionamento de banco de dados)
+
+#### NoSQL
+
+* MongoDB Reactive (Spring Data MongoDB)
+
+---
+
+### Integração e Comunicação
+
+* RestTemplate (legado)
+* RestClient (abordagem moderna)
+* WebClient (cliente reativo)
+
+---
+
+### Cloud & Gateway
+
+* Spring Cloud Gateway
+* Spring Cloud Dependencies
+
+---
+
+### Observabilidade
+
+* Spring Boot Actuator
+
+---
+
+### Documentação de APIs
+
+* Springdoc OpenAPI (Swagger)
+
+---
+
+### Testes
+
+* JUnit Jupiter
+* Mockito
+* AssertJ
+* Testcontainers
+* Reactor Test
+* Awaitility
+* Rest Assured
+* Swagger Request Validator
+
+---
+
+### Ferramentas e Produtividade
+
+* Lombok
+* MapStruct
+* Docker Compose Support
+
+---
+
+## Padrões e Abordagens
+
+Este repositório explora diferentes estilos arquiteturais e práticas comuns no desenvolvimento com Spring:
+
+* Arquitetura em camadas (Layered Architecture)
+* Construção de APIs RESTful
+* Programação reativa (Reactive Streams)
+* Integração com bancos SQL e NoSQL
+* Segurança baseada em OAuth2 e JWT
+* API Gateway e roteamento
+* Consumo de APIs síncrono vs reativo
+
+---
+
+## Como executar os projetos
+
+Cada projeto é independente. Para executar:
+
+```bash
+cd nome-do-projeto
+./mvnw spring-boot:run
+```
+
+Ou:
+
+```bash
+mvn spring-boot:run
+```
+
+---
+
+## Suporte a Docker
+
+Alguns projetos incluem suporte a:
+
+* Docker Compose
+* Testcontainers (para testes de integração)
+
+---
+
+## Observações
+
+* Este repositório possui caráter **educacional e evolutivo**
+* Os projetos acompanham a progressão do curso e podem sofrer alterações ao longo do tempo
+* Algumas implementações apresentam **diferentes abordagens para o mesmo problema** (ex: WebMVC vs WebFlux)
+* Inclui tanto **tecnologias modernas** quanto **abordagens ainda utilizadas no mercado**
+
+---
+
+## Autora
+
+**Juh Maran**
+🔗 https://github.com/JuhMaran
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a **Apache License 2.0**.
 
 Este projeto é destinado para **fins educacionais**.
-
----
-
-# Documentação
-
-- [Wiki](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/wiki)
