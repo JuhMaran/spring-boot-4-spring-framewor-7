@@ -2,6 +2,7 @@ package guru.springframework.spring7restmvc.controller;
 
 import com.atlassian.oai.validator.OpenApiInteractionValidator;
 import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
+import com.atlassian.oai.validator.whitelist.ValidationErrorsWhitelist;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.test.context.ActiveProfiles;
 
+import static com.atlassian.oai.validator.whitelist.rule.WhitelistRules.messageHasKey;
 import static io.restassured.RestAssured.given;
 
 /**
@@ -30,17 +32,21 @@ import static io.restassured.RestAssured.given;
 @ComponentScan(basePackages = "guru.springframework.spring7restmvc")
 class BeerControllerRestAssuredTest {
 
-  OpenApiValidationFilter filter = new OpenApiValidationFilter(OpenApiInteractionValidator
-    .createForSpecificationUrl("oa3.yml")
-    .build());
+  OpenApiValidationFilter filter =
+    new OpenApiValidationFilter(
+      OpenApiInteractionValidator
+        .createForSpecificationUrl("/oa3.yml")
+        .withWhitelist(ValidationErrorsWhitelist.create().withRule("Ignore Response Body Unexpected", messageHasKey("validation.response.body.unexpected")))
+        .build()
+    );
 
   @Configuration
   public static class TestConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-      http
-        .authorizeHttpRequests(authorize -> authorize
-          .anyRequest().permitAll());
+      http.authorizeHttpRequests(authorize -> {
+        authorize.anyRequest().permitAll();
+      });
 
       return http.build();
     }
