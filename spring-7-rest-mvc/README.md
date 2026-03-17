@@ -174,7 +174,7 @@ Ou explicitamente:
 ## Nota Técnica — Compatibilidade entre Java 25 e Groovy em testes com RestAssured
 
 Durante a atualização do projeto para tecnologias mais recentes, especificamente **Java SE 25 LTS** e **Spring Boot 4**,
-foi identificado um problema de compatibilidade envolvendo o **Groovy**, utilizado internamente pela biblioteca 
+foi identificado um problema de compatibilidade envolvendo o **Groovy**, utilizado internamente pela biblioteca
 **RestAssured**.
 
 ### Contexto da atualização
