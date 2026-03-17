@@ -168,3 +168,77 @@ Ou explicitamente:
     <version>3.1.0</version>
 </dependency>
 ```
+
+---
+
+## Nota Técnica — Compatibilidade entre Java 25 e Groovy em testes com RestAssured
+
+Durante a atualização do projeto para tecnologias mais recentes, especificamente **Java SE 25 LTS** e **Spring Boot 4**,
+foi identificado um problema de compatibilidade envolvendo o **Groovy**, utilizado internamente pela biblioteca 
+**RestAssured**.
+
+### Contexto da atualização
+
+O projeto original da aula foi desenvolvido utilizando o seguinte stack:
+
+* Java 21
+* Spring Boot 3.4
+* RestAssured 5.x
+* Groovy (dependência transitiva do RestAssured)
+
+Na atualização do ambiente para versões mais recentes:
+
+* Java 25 LTS
+* Spring Boot 4.0.3
+* RestAssured 5.5.6
+
+passou a ocorrer uma falha durante a execução dos testes automatizados.
+
+### Erro observado
+
+Durante a execução do teste de integração com RestAssured, ocorreu a seguinte exceção:
+
+```
+java.lang.NullPointerException: Cannot invoke "Object.hashCode()" because "key" is null
+```
+
+O stacktrace aponta para classes internas do **Groovy runtime**, especificamente durante a execução do método
+responsável por aplicar configurações de proxy (`applyProxySettings`) dentro do RestAssured.
+
+### Causa
+
+O **RestAssured utiliza Groovy internamente para a construção dinâmica das requisições HTTP**. Em ambientes mais
+recentes, como **Java 25**, algumas mudanças na inicialização de propriedades do sistema relacionadas a rede e proxy
+podem resultar em valores `null`. Versões específicas do Groovy não tratam corretamente esses casos, ocasionando uma
+exceção dentro de estruturas internas como `ConcurrentHashMap`.
+
+Portanto, o problema não está relacionado ao **Spring Boot**, **Spring Security** ou à implementação do controller
+testado, mas sim à **compatibilidade entre o Groovy utilizado pelo RestAssured e o Java 25**.
+
+### Solução adotada
+
+Para resolver o problema, foi necessário **forçar uma versão mais recente do Groovy**, compatível com as mudanças
+presentes no Java 25.
+
+Exemplo de dependência adicionada ao projeto:
+
+```xml
+
+<dependency>
+    <groupId>org.apache.groovy</groupId>
+    <artifactId>groovy</artifactId>
+    <version>4.0.29</version>
+    <scope>test</scope>
+</dependency>
+```
+
+Essa atualização garante que o runtime do Groovy utilizado nos testes seja compatível com a versão mais recente do Java.
+
+### Conclusão
+
+A atualização para **Java 25 LTS** pode introduzir incompatibilidades em bibliotecas que dependem de **metaprogramação
+ou reflexão avançada**, como é o caso do Groovy. Ao utilizar ferramentas como **RestAssured**, é importante garantir que
+a versão do Groovy transitivamente utilizada esteja atualizada e compatível com a versão do Java adotada no projeto.
+
+Esse tipo de ajuste é comum durante migrações para versões recentes da plataforma Java e faz parte do processo de
+adaptação do ecossistema de bibliotecas à nova versão da JVM.
