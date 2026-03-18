@@ -2,17 +2,17 @@ package guru.springframework.spring7aiintro.services;
 
 import guru.springframework.spring7aiintro.model.Answer;
 import guru.springframework.spring7aiintro.model.GetCapitalRequest;
+import guru.springframework.spring7aiintro.model.GetCapitalResponse;
 import guru.springframework.spring7aiintro.model.Question;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import tools.jackson.core.JacksonException;
-import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.Map;
@@ -52,22 +52,35 @@ public class OpenAIServiceImpl implements OpenAIService {
   }
 
   @Override
-  public Answer getCapital(GetCapitalRequest getCapitalRequest) {
+  public GetCapitalResponse getCapital(GetCapitalRequest getCapitalRequest) {
+
+    // No curso utiliza o BeanOutputParser, mas na nova versão do Spring AI passou a ser deprecated
+    // BeanOutputParser<GetCapitalRequest> parser = BeanOutputParser<>(GetCapitalRequest.class);
+
+    BeanOutputConverter<GetCapitalResponse> converter = new BeanOutputConverter<>(GetCapitalResponse.class);
+    String format = converter.getFormat();
+    System.out.println("Format: \n" + format);
+
     PromptTemplate promptTemplate = new PromptTemplate(getCapitalPrompt);
-    Prompt prompt = promptTemplate.create(Map.of("stateOrCountry", getCapitalRequest.stateOrCountry()));
+    Prompt prompt = promptTemplate.create(Map.of(
+      "stateOrCountry", getCapitalRequest.stateOrCountry(),
+      "format", format));
     ChatResponse response = chatModel.call(prompt);
 
     System.out.println(Objects.requireNonNull(response.getResult()).getOutput().getText());
-    String responseString;
 
-    try {
-      JsonNode jsonNode = objectMapper.readTree(response.getResult().getOutput().getText());
-      responseString = jsonNode.get("answer").asString();
-    } catch (JacksonException e) {
-      throw new RuntimeException(e);
-    }
+//    String responseString;
+//
+//    try {
+//      JsonNode jsonNode = objectMapper.readTree(response.getResult().getOutput().getText());
+//      responseString = jsonNode.get("answer").asString();
+//    } catch (JacksonException e) {
+//      throw new RuntimeException(e);
+//    }
 
-    return new Answer(responseString);
+    return converter.convert(Objects.requireNonNull(response.getResult().getOutput().getText()));
+
+//    return new GetCapitalResponse(responseString);
     //return new Answer(response.getResult().getOutput().getText());
   }
 
