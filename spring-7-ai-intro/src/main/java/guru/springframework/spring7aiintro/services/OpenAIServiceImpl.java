@@ -1,9 +1,6 @@
 package guru.springframework.spring7aiintro.services;
 
-import guru.springframework.spring7aiintro.model.Answer;
-import guru.springframework.spring7aiintro.model.GetCapitalRequest;
-import guru.springframework.spring7aiintro.model.GetCapitalResponse;
-import guru.springframework.spring7aiintro.model.Question;
+import guru.springframework.spring7aiintro.model.*;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -38,12 +35,17 @@ public class OpenAIServiceImpl implements OpenAIService {
   }
 
   @Override
-  public Answer getCapitalWithInfo(GetCapitalRequest getCapitalRequest) {
+  public GetCapitalWithInfoResponse getCapitalWithInfo(GetCapitalRequest getCapitalRequest) {
+    BeanOutputConverter<GetCapitalWithInfoResponse> converter = new BeanOutputConverter<>(GetCapitalWithInfoResponse.class);
+    String format = converter.getFormat();
+
     PromptTemplate promptTemplate = new PromptTemplate(getCapitalPromptWithInfo);
-    Prompt prompt = promptTemplate.create(Map.of("stateOrCountry", getCapitalRequest.stateOrCountry()));
+    Prompt prompt = promptTemplate.create(Map.of(
+      "stateOrCountry", getCapitalRequest.stateOrCountry(),
+      "format", format));
     ChatResponse response = chatModel.call(prompt);
 
-    return new Answer(Objects.requireNonNull(response.getResult()).getOutput().getText());
+    return converter.convert(Objects.requireNonNull(Objects.requireNonNull(response.getResult()).getOutput().getText()));
   }
 
   @Override

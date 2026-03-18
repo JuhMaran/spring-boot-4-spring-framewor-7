@@ -1,9 +1,6 @@
 package guru.springframework.spring7aiintro.services;
 
-import guru.springframework.spring7aiintro.model.Answer;
-import guru.springframework.spring7aiintro.model.GetCapitalRequest;
-import guru.springframework.spring7aiintro.model.GetCapitalResponse;
-import guru.springframework.spring7aiintro.model.Question;
+import guru.springframework.spring7aiintro.model.*;
 
 /**
  * spring-7-ai-intro
@@ -13,7 +10,7 @@ import guru.springframework.spring7aiintro.model.Question;
  */
 public interface OpenAIService {
 
-  Answer getCapitalWithInfo(GetCapitalRequest getCapitalRequest);
+  GetCapitalWithInfoResponse getCapitalWithInfo(GetCapitalRequest getCapitalRequest);
 
   GetCapitalResponse getCapital(GetCapitalRequest getCapitalRequest);
 
