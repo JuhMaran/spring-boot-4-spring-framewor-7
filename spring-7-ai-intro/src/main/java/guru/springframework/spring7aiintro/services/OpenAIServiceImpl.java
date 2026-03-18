@@ -1,8 +1,5 @@
 package guru.springframework.spring7aiintro.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.spring7aiintro.model.Answer;
 import guru.springframework.spring7aiintro.model.GetCapitalRequest;
 import guru.springframework.spring7aiintro.model.Question;
@@ -14,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 import java.util.Objects;
@@ -62,8 +62,8 @@ public class OpenAIServiceImpl implements OpenAIService {
 
     try {
       JsonNode jsonNode = objectMapper.readTree(response.getResult().getOutput().getText());
-      responseString = jsonNode.get("answer").asText();
-    } catch (JsonProcessingException e) {
+      responseString = jsonNode.get("answer").asString();
+    } catch (JacksonException e) {
       throw new RuntimeException(e);
     }
 
