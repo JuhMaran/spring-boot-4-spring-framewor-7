@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * spring-7-ai-intro
+ * Question Controller
  *
  * @author Juliane Maran
  * @since 17/03/2026
@@ -21,7 +21,7 @@ public class QuestionController {
     this.openAIService = openAIService;
   }
 
-  @PostMapping
+  @PostMapping("/ask")
   public Answer askQuestion(Question question) {
     return openAIService.getAnswer(question);
   }
