@@ -153,6 +153,7 @@ segurança, integração e API Gateway.
 | [spring-7-webclient](./spring-7-webclient)                | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                      |
 | [spring-7-gateway](./spring-7-gateway)                    | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server  |
 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2 |
+| [spring-7-ai-intro](./spring-7-ai-intro)                  | Spring AI                                                    | Spring AI, Spring Web MVC                     |
 
 ---
 
