@@ -56,10 +56,19 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!-- Spring AI BOM -->
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
                 <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- FORÇAR JACKSON 2.x -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>2.17.2</version> <!-- ou mais recente estável -->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
