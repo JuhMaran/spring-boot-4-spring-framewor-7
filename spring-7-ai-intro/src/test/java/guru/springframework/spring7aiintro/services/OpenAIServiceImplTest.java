@@ -12,8 +12,8 @@ class OpenAIServiceImplTest {
 
   @Test
   void getAnswer() {
-    String answer = openAIService.getAnswer("Tell me a dad joke.");
-    System.out.println("Got the answer");
+    String answer = openAIService.getAnswer("Inserir uma pergunta");
+    System.out.println("Resposta obtida.");
     System.out.println(answer);
   }
 

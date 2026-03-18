@@ -12,7 +12,7 @@
     <artifactId>spring-7-ai-intro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-7-ai-intro</name>
-    <description>Sprint AI - Introduction</description>
+    <description>Sprint AI with OpenAI Introduction</description>
     <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
     <licenses>
         <license>
