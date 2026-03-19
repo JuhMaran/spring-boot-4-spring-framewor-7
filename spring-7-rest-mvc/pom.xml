@@ -38,7 +38,7 @@
         <java.version>25</java.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <spring-boot.run.profiles>localmysql</spring-boot.run.profiles>
-        <jwt-uri>http://localhost:9090</jwt-uri>
+        <jwt-uri>http://localhost:9000</jwt-uri>
         <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
         <rest-assured.version>5.5.6</rest-assured.version>
         <atlassian-swagger-request-validator.version>2.46.0</atlassian-swagger-request-validator.version>
