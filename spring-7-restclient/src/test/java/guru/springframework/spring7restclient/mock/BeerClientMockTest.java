@@ -132,9 +132,6 @@ public class BeerClientMockTest {
     when(manager.authorize(any()))
       .thenReturn(new OAuth2AuthorizedClient(clientRegistration, "test", token));
 
-//    RestTemplate restTemplate = restTemplateBuilderConfigured.build();
-//    server = MockRestServiceServer.bindTo(restTemplate).build();
-
     // NOTE: RestClient is built using the Spring-provided builder (correct approach)
     beerClient = new BeerClientImpl(restClientBuilder);
 
@@ -228,7 +225,6 @@ public class BeerClientMockTest {
 
   @Test
   void testGetById() {
-
     mockGetOperation();
 
     BeerDTO responseDto = beerClient.getBeerById(dto.getId());

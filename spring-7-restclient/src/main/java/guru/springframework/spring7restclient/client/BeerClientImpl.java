@@ -29,7 +29,7 @@ public class BeerClientImpl implements BeerClient {
 
   @Override
   public Page<BeerDTO> listBeers() {
-    return null;
+    return listBeers(null, null, null, null, null);
   }
 
   @Override
