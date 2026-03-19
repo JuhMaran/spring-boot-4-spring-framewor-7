@@ -74,9 +74,7 @@ class BeerClientImplTest {
   void getBeerById() {
     Page<BeerDTO> beerDTOS = beerClient.listBeers();
 
-    // java.lang.NullPointerException: Cannot invoke "org.springframework.data.domain.Page.getContent()" because "beerDTOS" is null
-    // at guru.springframework.spring7restclient.client.BeerClientImplTest.getBeerById(BeerClientImplTest.java:77)
-    BeerDTO dto = beerDTOS.getContent().getFirst(); // line 77
+    BeerDTO dto = beerDTOS.getContent().getFirst();
     BeerDTO byId = beerClient.getBeerById(dto.getId());
 
     assertNotNull(byId);
