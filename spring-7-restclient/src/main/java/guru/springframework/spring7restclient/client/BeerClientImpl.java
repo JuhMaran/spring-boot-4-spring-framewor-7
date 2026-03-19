@@ -40,7 +40,9 @@ public class BeerClientImpl implements BeerClient {
     RestClient restClient = restClientBuilder.build();
 
     return restClient.get()
-      .uri(uriBuilder -> uriBuilder.path(GET_BEER_PATH).build(beerId))
+      .uri(uriBuilder -> uriBuilder
+        .path(GET_BEER_BY_ID_PATH)
+        .build(beerId))
       .retrieve()
       .body(BeerDTO.class);
   }
@@ -60,12 +62,22 @@ public class BeerClientImpl implements BeerClient {
     return restClient.get()
       .uri(location)
       .retrieve()
-      .body(BeerDTO.class); // line 58
+      .body(BeerDTO.class);
   }
 
   @Override
   public BeerDTO updateBeer(BeerDTO beerDto) {
-    return null;
+    RestClient restClient = restClientBuilder.build();
+
+    restClient.put()
+      .uri(uriBuilder -> uriBuilder
+        .path(GET_BEER_BY_ID_PATH)
+        .build(beerDto.getId()))
+      .body(beerDto)
+      .retrieve()
+      .toBodilessEntity();
+
+    return getBeerById(beerDto.getId());
   }
 
   @Override

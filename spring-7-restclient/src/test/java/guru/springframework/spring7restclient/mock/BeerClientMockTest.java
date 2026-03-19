@@ -9,7 +9,9 @@ import guru.springframework.spring7restclient.model.BeerDTOPageImpl;
 import guru.springframework.spring7restclient.model.BeerStyle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.boot.restclient.test.MockServerRestTemplateCustomizer;
@@ -57,7 +59,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * @author Juliane Maran
  * @since 18/03/2026
  */
-@RestClientTest
+@RestClientTest(BeerClientImpl.class)
+@Import(RestTemplateBuilderConfig.class)
 public class BeerClientMockTest {
 
   static final String URL = "http://localhost:8080";
@@ -65,6 +68,7 @@ public class BeerClientMockTest {
 
   BeerClient beerClient;
 
+  @Autowired
   MockRestServiceServer server;
 
   @Autowired
@@ -76,14 +80,11 @@ public class BeerClientMockTest {
   @Autowired
   ObjectMapper objectMapper;
 
-  @Mock
-  RestTemplateBuilder mockRestTemplateBuilder = new RestTemplateBuilder(new MockServerRestTemplateCustomizer());
+  BeerDTO dto;
+  String dtoJson;
 
   @MockitoBean
   OAuth2AuthorizedClientManager manager;
-
-  BeerDTO dto;
-  String dtoJson;
 
   @TestConfiguration
   @Import(RestTemplateBuilderConfig.class)
@@ -100,13 +101,15 @@ public class BeerClientMockTest {
     }
 
     @Bean
-    OAuth2AuthorizedClientService auth2AuthorizedClientService(ClientRegistrationRepository clientRegistrationRepository) {
+    OAuth2AuthorizedClientService auth2AuthorizedClientService(
+      ClientRegistrationRepository clientRegistrationRepository) {
       return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository);
     }
 
     @Bean
-    OAuthClientInterceptor oAuthClientInterceptor(OAuth2AuthorizedClientManager manager,
-                                                  ClientRegistrationRepository clientRegistrationRepository) {
+    OAuthClientInterceptor oAuthClientInterceptor(
+      OAuth2AuthorizedClientManager manager,
+      ClientRegistrationRepository clientRegistrationRepository) {
       return new OAuthClientInterceptor(manager, clientRegistrationRepository);
     }
   }
@@ -116,21 +119,26 @@ public class BeerClientMockTest {
 
   @BeforeEach
   void setUp() throws JacksonException {
-    ClientRegistration clientRegistration = clientRegistrationRepository
-      .findByRegistrationId("springauth");
 
-    OAuth2AccessToken token = new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER,
-      "test", Instant.MIN, Instant.MAX);
+    ClientRegistration clientRegistration =
+      clientRegistrationRepository.findByRegistrationId("springauth");
 
-    when(manager.authorize(any())).thenReturn(new OAuth2AuthorizedClient(clientRegistration,
-      "test", token));
+    OAuth2AccessToken token = new OAuth2AccessToken(
+      OAuth2AccessToken.TokenType.BEARER,
+      "test",
+      Instant.MIN,
+      Instant.MAX
+    );
 
-    RestTemplate restTemplate = restTemplateBuilderConfigured.build();
-    server = MockRestServiceServer.bindTo(restTemplate).build();
-    when(mockRestTemplateBuilder.build()).thenReturn(restTemplate);
+    when(manager.authorize(any()))
+      .thenReturn(new OAuth2AuthorizedClient(clientRegistration, "test", token));
 
-    //NOTE: RestClient is built using the mockRestTemplateBuilder.
-    beerClient = new BeerClientImpl(RestClient.builder(mockRestTemplateBuilder.build()));
+//    RestTemplate restTemplate = restTemplateBuilderConfigured.build();
+//    server = MockRestServiceServer.bindTo(restTemplate).build();
+
+    // NOTE: RestClient is built using the Spring-provided builder (correct approach)
+    beerClient = new BeerClientImpl(restClientBuilder);
+
     dto = getBeerDto();
     dtoJson = objectMapper.writeValueAsString(dto);
   }
@@ -186,24 +194,30 @@ public class BeerClientMockTest {
   @Test
   void testUpdateBeer() {
     server.expect(method(HttpMethod.PUT))
-      .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID_PATH,
-        dto.getId()))
+      .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID_PATH, dto.getId()))
       .andExpect(header("Authorization", BEARER_TEST))
+      .andExpect(content().json(dtoJson)) // valida payload enviado
       .andRespond(withNoContent());
 
     mockGetOperation();
 
     BeerDTO responseDto = beerClient.updateBeer(dto);
+
+    assertThat(responseDto).isNotNull();
     assertThat(responseDto.getId()).isEqualTo(dto.getId());
+    assertThat(responseDto.getBeerName()).isEqualTo(dto.getBeerName());
+
+    server.verify();
   }
 
   @Test
   void testCreateBeer() {
-    URI uri = UriComponentsBuilder.fromPath("http://localhost:8080/api/v1/beer/{beerId}")
+    URI uri = UriComponentsBuilder.fromPath(BeerClientImpl.GET_BEER_BY_ID_PATH)
       .build(dto.getId());
 
     server.expect(method(HttpMethod.POST))
-      .andExpect(requestTo("http://localhost:8080/api/v1/beer"))
+      .andExpect(requestTo(URL +
+        BeerClientImpl.GET_BEER_PATH))
       .andExpect(header("Authorization", BEARER_TEST))
       .andRespond(withAccepted().location(uri));
 
