@@ -1,3 +1,5 @@
+server:
+  port: 8888
 spring:
   application:
     name: spring-7-restclient
@@ -24,3 +26,5 @@ spring:
 rest:
   template:
     rootUrl: http://localhost:8080
+
+debug: true

@@ -199,12 +199,11 @@ public class BeerClientMockTest {
 
   @Test
   void testCreateBeer() {
-    URI uri = UriComponentsBuilder.fromPath(BeerClientImpl.GET_BEER_BY_ID_PATH)
+    URI uri = UriComponentsBuilder.fromPath("http://localhost:8080/api/v1/beer/{beerId}")
       .build(dto.getId());
 
     server.expect(method(HttpMethod.POST))
-      .andExpect(requestTo(URL +
-        BeerClientImpl.GET_BEER_PATH))
+      .andExpect(requestTo("http://localhost:8080/api/v1/beer"))
       .andExpect(header("Authorization", BEARER_TEST))
       .andRespond(withAccepted().location(uri));
 

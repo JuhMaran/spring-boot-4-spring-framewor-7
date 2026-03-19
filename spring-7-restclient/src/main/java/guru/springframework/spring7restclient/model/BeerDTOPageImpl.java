@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * spring-7-restclient
+ * Page Implementation
  *
  * @author Juliane Maran
  * @since 18/03/2026

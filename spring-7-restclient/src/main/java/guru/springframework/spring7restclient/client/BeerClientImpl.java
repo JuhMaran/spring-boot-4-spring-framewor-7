@@ -3,6 +3,7 @@ package guru.springframework.spring7restclient.client;
 import guru.springframework.spring7restclient.model.BeerDTO;
 import guru.springframework.spring7restclient.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -41,7 +42,20 @@ public class BeerClientImpl implements BeerClient {
 
   @Override
   public BeerDTO createBeer(BeerDTO newDto) {
-    return null;
+    RestClient restClient = restClientBuilder.build();
+
+    val location = restClient.post()
+      .uri(uriBuilder -> uriBuilder.path(GET_BEER_PATH).build())
+      .body(newDto)
+      .retrieve()
+      .toBodilessEntity()
+      .getHeaders()
+      .getLocation();
+
+    return restClient.get()
+      .uri(location)
+      .retrieve()
+      .body(BeerDTO.class); // line 58
   }
 
   @Override

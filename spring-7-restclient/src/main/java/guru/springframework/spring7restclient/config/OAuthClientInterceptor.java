@@ -1,6 +1,5 @@
 package guru.springframework.spring7restclient.config;
 
-import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import static java.util.Objects.isNull;
 
 /**
- * spring-7-restclient
+ * OAuth Client Interceptor
  *
  * @author Juliane Maran
  * @since 18/03/2026
@@ -35,8 +34,7 @@ public class OAuthClientInterceptor implements ClientHttpRequestInterceptor {
   }
 
   @Override
-  public ClientHttpResponse intercept(@NonNull HttpRequest request, byte @NonNull [] body,
-                                      @NonNull ClientHttpRequestExecution execution) throws IOException {
+  public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
     OAuth2AuthorizeRequest oAuth2AuthorizeRequest = OAuth2AuthorizeRequest
       .withClientRegistrationId(clientRegistration.getRegistrationId())
       .principal(clientRegistration.getClientId())

@@ -32,7 +32,7 @@ class BeerClientImplTest {
   void getBeerById() {
     Page<BeerDTO> beerDTOS = beerClient.listBeers();
 
-    BeerDTO dto = beerDTOS.getContent().getFirst();
+    BeerDTO dto = beerDTOS.getContent().getFirst(); // line 35
 
     BeerDTO byId = beerClient.getBeerById(dto.getId());
 
@@ -46,7 +46,7 @@ class BeerClientImplTest {
       .beerName("Mango Bobs")
       .beerStyle(BeerStyle.IPA)
       .quantityOnHand(500)
-      .upc("123245")
+      .upc("12345")
       .build();
 
     BeerDTO savedDto = beerClient.createBeer(newDto);
