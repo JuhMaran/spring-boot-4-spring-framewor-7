@@ -19,42 +19,26 @@ class BeerClientImplTest {
   BeerClientImpl beerClient;
 
   @Test
-  void listBeers() {
-    beerClient.listBeers("ALE", null, null, null, null);
-  }
-
-  @Test
-  void testListBeers() {
-    beerClient.listBeers(null, null, null, null, null);
-  }
-
-  @Test
-  void getBeerById() {
-    Page<BeerDTO> beerDTOS = beerClient.listBeers();
-
-    BeerDTO dto = beerDTOS.getContent().getFirst(); // line 35
-
-    BeerDTO byId = beerClient.getBeerById(dto.getId());
-
-    assertNotNull(byId);
-  }
-
-  @Test
-  void createBeer() {
+  void testDeleteBeer() {
     BeerDTO newDto = BeerDTO.builder()
       .price(new BigDecimal("10.99"))
-      .beerName("Mango Bobs")
+      .beerName("Mango Bobs 2")
       .beerStyle(BeerStyle.IPA)
       .quantityOnHand(500)
-      .upc("12345")
+      .upc("123245")
       .build();
 
-    BeerDTO savedDto = beerClient.createBeer(newDto);
-    assertNotNull(savedDto);
+    BeerDTO beerDto = beerClient.createBeer(newDto);
+    beerClient.deleteBeer(beerDto.getId());
+
+    assertThrows(HttpClientErrorException.class, () -> {
+      //should error
+      beerClient.getBeerById(beerDto.getId());
+    });
   }
 
   @Test
-  void updateBeer() {
+  void testUpdateBeer() {
     BeerDTO newDto = BeerDTO.builder()
       .price(new BigDecimal("10.99"))
       .beerName("Mango Bobs 2")
@@ -73,23 +57,37 @@ class BeerClientImplTest {
   }
 
   @Test
-  void deleteBeer() {
+  void testCreateBeer() {
     BeerDTO newDto = BeerDTO.builder()
       .price(new BigDecimal("10.99"))
-      .beerName("Mango Bobs 2")
+      .beerName("Mango Bobs")
       .beerStyle(BeerStyle.IPA)
       .quantityOnHand(500)
       .upc("123245")
       .build();
 
-    BeerDTO beerDto = beerClient.createBeer(newDto);
+    BeerDTO savedDto = beerClient.createBeer(newDto);
+    assertNotNull(savedDto);
+  }
 
-    beerClient.deleteBeer(beerDto.getId());
+  @Test
+  void getBeerById() {
+    Page<BeerDTO> beerDTOS = beerClient.listBeers();
 
-    assertThrows(HttpClientErrorException.class, () -> {
-      //should error
-      beerClient.getBeerById(beerDto.getId());
-    });
+    BeerDTO dto = beerDTOS.getContent().getFirst();
+    BeerDTO byId = beerClient.getBeerById(dto.getId());
+
+    assertNotNull(byId);
+  }
+
+  @Test
+  void listBeersNoBeerName() {
+    beerClient.listBeers(null, null, null, null, null);
+  }
+
+  @Test
+  void listBeers() {
+    beerClient.listBeers("ALE", null, null, null, null);
   }
 
 }
