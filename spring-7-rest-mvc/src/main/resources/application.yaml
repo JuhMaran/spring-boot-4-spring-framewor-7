@@ -15,6 +15,10 @@ spring:
     user:
       name: user1
       password: password
+  # Java Virtual Threads
+#  threads:
+#    virtual:
+#      enabled: false
 
 #  jpa:
 #    properties:
@@ -29,6 +33,6 @@ spring:
 
 logging:
   level:
-    web: debug
-    guru.springframework: debug
-#    org.springframework.security: trace
+    web: trace
+    guru.springframework.security: trace
+#    org.springframework: debug

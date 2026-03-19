@@ -242,3 +242,92 @@ a versão do Groovy transitivamente utilizada esteja atualizada e compatível co
 
 Esse tipo de ajuste é comum durante migrações para versões recentes da plataforma Java e faz parte do processo de
 adaptação do ecossistema de bibliotecas à nova versão da JVM.
+
+---
+
+## Java Virtual Threads com Windows
+
+Para verificar o consumo de memória pode utilizar o PowerShell
+
+1. Execute a aplicação
+2. Verifique o PID exibido no log da aplicação (ou na IDE)
+3. Execute o comando abaixo no PowerShell:
+   ```shell
+   Get-Process java | Select-Object Id, ProcessName, WorkingSet
+   ```
+   Ou se preferir, com conversão para MB:
+   ```shell
+   Get-Process java | Select-Object Id, ProcessName, @{Name="MemoriaMB";Expression={[math]::round($_.WorkingSet/1MB,2)}}
+   ```
+
+### Teste com Threads Habilitada
+
+**Exemplo de como encontrar o PID no log da aplicação**
+
+```shell
+Starting Spring7RestMvcApplication using Java 25.0.2 with PID 28568
+```
+
+**Exemplo de saída sem conversão**
+
+```shell
+   Id ProcessName WorkingSet
+   -- ----------- ----------
+14596 java         151474176
+28568 java         312487936
+31940 java         829603840
+```
+
+PID da aplicação -> 28568
+Mémoria -> 312487936
+
+**Exemplo de saída com conversão para MB**
+
+```shell
+   Id ProcessName MemoriaMB
+   -- ----------- ---------
+22684 java           144,84
+28568 java           298,12
+31940 java           781,75
+```
+
+PID da aplicação -> 28568
+Mémoria em MB -> 298,12
+
+### Teste com Threads Desabilitada
+
+**Exemplo de como encontrar o PID no log da aplicação**
+
+```shell
+Starting Spring7RestMvcApplication using Java 25.0.2 with PID 26412
+```
+
+**Exemplo de saída sem conversão**
+
+```shell
+   Id ProcessName WorkingSet
+   -- ----------- ----------
+21604 java         151465984
+26412 java         426307584
+31940 java         821194752
+```
+
+PID da aplicação -> 26412
+Mémoria -> 151465984
+
+**Exemplo de saída com conversão para MB**
+
+```shell
+   Id ProcessName MemoriaMB
+   -- ----------- ---------
+21604 java           144,48
+26412 java            408,4
+31940 java           790,38
+```
+
+PID da aplicação -> 26412
+Mémoria em MB -> 408,4
+
+| with virtual threads | without virtual threads |
+|:---------------------|:------------------------|
+| 298,12MB             | 408,4MB                 |
