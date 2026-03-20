@@ -5,9 +5,19 @@ spring:
   application:
     name: spring-7-auth-server
 
-logging:
-  level:
-    org.springframework.security: trace
-    org.springframework.security.oauth2: trace
+# Actuator Kubernetes Integration
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
 
-debug: true
+#logging:
+#  level:
+#    org.springframework.security: trace
+#    org.springframework.security.oauth2: trace

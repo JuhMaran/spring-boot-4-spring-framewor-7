@@ -11,10 +11,14 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9090
+          issuer-uri: http://localhost:9000
     user:
       name: user1
       password: password
+  # Java Virtual Threads
+  threads:
+    virtual:
+      enabled: true
 
 #  jpa:
 #    properties:
@@ -27,8 +31,21 @@ spring:
 #              drop-target: drop-and-create.sql
 #              create-target: drop-and-create.sql
 
+# Actuator Kubernetes Integration
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+
+
 logging:
   level:
-    web: debug
-    guru.springframework: debug
-#    org.springframework.security: trace
+    web: trace
+    guru.springframework.security: trace
+#    org.springframework: debug

@@ -1,3 +1,30 @@
+server:
+  port: 8888
 spring:
   application:
     name: spring-7-restclient
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
+      client:
+        registration:
+          springauth:
+            provider: springauth
+            client-id: oidc-client
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope:
+              - message.read
+              - message.write
+        provider:
+          springauth:
+            authorization-uri: http://localhost:9000/auth2/authorize
+            token-uri: http://localhost:9000/oauth2/token
+
+rest:
+  template:
+    rootUrl: http://localhost:8080
+
+debug: true

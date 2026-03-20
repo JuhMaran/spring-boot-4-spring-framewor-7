@@ -1,5 +1,67 @@
 # Spring 7 - REST MVC
 
+## Tecnologias
+
+* Java 25 LTS
+* Spring Boot 4.0.3
+* Spring Framework
+* REST MVC
+
+### Dependências
+
+* **I/O**
+    * Validation (I/O) 4.0.3
+* **OPS**
+    * Spring Boot Actuator 4.0.3
+* **WEB**
+    * Spring Web MVC (Web) 4.0.3
+* **Developer Tools**
+    * Project Lombok 1.18.42
+    * Spring Boot DevTools 4.0.3
+    * Docker Compose Support
+* **SQL**
+    * Spring Data JPA 4.0.3
+    * MySQL Driver 9.6.0
+    * H2 Database 4.0.3
+    * Flyway Migration 4.0.3
+        * Flyway MySQL 12.0.3
+* **Security**
+    * Spring Security 4.0.3
+    * OAuth2 Resource Server 4.0.3
+* **Testing**
+    * Testcontainers 4.0.3
+      * JUnit Jupiter 2.0.3
+      * MySQL 2.0.3
+* **Others**
+    * MapStruct 1.6.3
+    * Open CSV 5.12.0
+    * Springdoc OpenAPI
+        * Web MVC UI 3.0.0
+        * Common 3.0.0
+    * Atlassian Swagger Request Validator 2.46.0
+    * Groovy 4.0.29
+    * Jackson Core 3.1.0
+    * Rest Assured 5.5.6
+* **Spring Boot Starter Tests**
+    * Data JPA
+    * Validation
+    * WebMVC
+    * Flyway
+    * OAuth2 Resource Server
+    * Security
+    * Actuator
+
+### Plugins
+
+* Spring Boot Maven
+    * Project Lombok 1.18.42
+* Springdoc OpenAPI Maven 1.5
+* Apache Maven Compiler
+    * MapStruct Processor 1.6.3
+    * Project Lombok 1.18.42
+    * Lombok MapStruct Binding 0.2.0
+* Maven Failsafe 3.5.2
+
 ## Documentations
 
 * [OpenAPI](./openapi/openapi.json)
@@ -242,3 +304,92 @@ a versão do Groovy transitivamente utilizada esteja atualizada e compatível co
 
 Esse tipo de ajuste é comum durante migrações para versões recentes da plataforma Java e faz parte do processo de
 adaptação do ecossistema de bibliotecas à nova versão da JVM.
+
+---
+
+## Java Virtual Threads com Windows
+
+Para verificar o consumo de memória pode utilizar o PowerShell
+
+1. Execute a aplicação
+2. Verifique o PID exibido no log da aplicação (ou na IDE)
+3. Execute o comando abaixo no PowerShell:
+   ```shell
+   Get-Process java | Select-Object Id, ProcessName, WorkingSet
+   ```
+   Ou se preferir, com conversão para MB:
+   ```shell
+   Get-Process java | Select-Object Id, ProcessName, @{Name="MemoriaMB";Expression={[math]::round($_.WorkingSet/1MB,2)}}
+   ```
+
+### Teste com Threads Habilitada
+
+**Exemplo de como encontrar o PID no log da aplicação**
+
+```shell
+Starting Spring7RestMvcApplication using Java 25.0.2 with PID 28568
+```
+
+**Exemplo de saída sem conversão**
+
+```shell
+   Id ProcessName WorkingSet
+   -- ----------- ----------
+14596 java         151474176
+28568 java         312487936
+31940 java         829603840
+```
+
+PID da aplicação -> 28568
+Mémoria -> 312487936
+
+**Exemplo de saída com conversão para MB**
+
+```shell
+   Id ProcessName MemoriaMB
+   -- ----------- ---------
+22684 java           144,84
+28568 java           298,12
+31940 java           781,75
+```
+
+PID da aplicação -> 28568
+Mémoria em MB -> 298,12
+
+### Teste com Threads Desabilitada
+
+**Exemplo de como encontrar o PID no log da aplicação**
+
+```shell
+Starting Spring7RestMvcApplication using Java 25.0.2 with PID 26412
+```
+
+**Exemplo de saída sem conversão**
+
+```shell
+   Id ProcessName WorkingSet
+   -- ----------- ----------
+21604 java         151465984
+26412 java         426307584
+31940 java         821194752
+```
+
+PID da aplicação -> 26412
+Mémoria -> 151465984
+
+**Exemplo de saída com conversão para MB**
+
+```shell
+   Id ProcessName MemoriaMB
+   -- ----------- ---------
+21604 java           144,48
+26412 java            408,4
+31940 java           790,38
+```
+
+PID da aplicação -> 26412
+Mémoria em MB -> 408,4
+
+| with virtual threads | without virtual threads |
+|:---------------------|:------------------------|
+| 298,12MB             | 408,4MB                 |
