@@ -15,4 +15,15 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:9000
-debug: true
+
+# Actuator Kubernetes Integration
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
