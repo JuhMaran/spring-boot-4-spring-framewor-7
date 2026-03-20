@@ -1,5 +1,67 @@
 # Spring 7 - REST MVC
 
+## Tecnologias
+
+* Java 25 LTS
+* Spring Boot 4.0.3
+* Spring Framework
+* REST MVC
+
+### Dependências
+
+* **I/O**
+    * Validation (I/O) 4.0.3
+* **OPS**
+    * Spring Boot Actuator 4.0.3
+* **WEB**
+    * Spring Web MVC (Web) 4.0.3
+* **Developer Tools**
+    * Project Lombok 1.18.42
+    * Spring Boot DevTools 4.0.3
+    * Docker Compose Support
+* **SQL**
+    * Spring Data JPA 4.0.3
+    * MySQL Driver 9.6.0
+    * H2 Database 4.0.3
+    * Flyway Migration 4.0.3
+        * Flyway MySQL 12.0.3
+* **Security**
+    * Spring Security 4.0.3
+    * OAuth2 Resource Server 4.0.3
+* **Testing**
+    * Testcontainers 4.0.3
+      * JUnit Jupiter 2.0.3
+      * MySQL 2.0.3
+* **Others**
+    * MapStruct 1.6.3
+    * Open CSV 5.12.0
+    * Springdoc OpenAPI
+        * Web MVC UI 3.0.0
+        * Common 3.0.0
+    * Atlassian Swagger Request Validator 2.46.0
+    * Groovy 4.0.29
+    * Jackson Core 3.1.0
+    * Rest Assured 5.5.6
+* **Spring Boot Starter Tests**
+    * Data JPA
+    * Validation
+    * WebMVC
+    * Flyway
+    * OAuth2 Resource Server
+    * Security
+    * Actuator
+
+### Plugins
+
+* Spring Boot Maven
+    * Project Lombok 1.18.42
+* Springdoc OpenAPI Maven 1.5
+* Apache Maven Compiler
+    * MapStruct Processor 1.6.3
+    * Project Lombok 1.18.42
+    * Lombok MapStruct Binding 0.2.0
+* Maven Failsafe 3.5.2
+
 ## Documentations
 
 * [OpenAPI](./openapi/openapi.json)
