@@ -22,26 +22,24 @@ public class SpringSecConfig {
   @Bean
   @Order(1)
   public SecurityFilterChain actuatorSecurityFilterChain(HttpSecurity http) throws Exception {
-    http.securityMatcher(EndpointRequest.toAnyEndpoint())
-      .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
-
-    return http.build();
+    return http
+      .securityMatcher(EndpointRequest.toAnyEndpoint())
+      .authorizeHttpRequests(authorize ->
+        authorize.anyRequest().permitAll())
+      .build();
   }
 
   @Bean
   @Order(2)
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(authorize -> {
-        authorize
-          .requestMatchers("/actuator", "/actuator/**").permitAll()
-          .requestMatchers("/v3/api-docs**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-          .anyRequest().authenticated();
-      })
-      .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer -> {
-        httpSecurityOAuth2ResourceServerConfigurer.jwt(Customizer.withDefaults());
-      });
-
-    return http.build();
+    return http
+      .authorizeHttpRequests(authorize -> authorize
+        .requestMatchers("/actuator", "/actuator/**").permitAll()
+        .requestMatchers("/v3/api-docs**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+        .anyRequest().authenticated())
+      .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer ->
+        httpSecurityOAuth2ResourceServerConfigurer.jwt(Customizer.withDefaults()))
+      .build();
   }
 
 }
