@@ -56,6 +56,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security-oauth2-client</artifactId>
 		</dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>logbook-spring-webflux</artifactId>
+			<version>${logbook.version}</version>
+		</dependency>
 		<!-- Tests -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
