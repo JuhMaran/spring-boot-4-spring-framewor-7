@@ -27,3 +27,10 @@ management:
       enabled: true
     livenessstate:
       enabled: true
+logbook:
+  write:
+    max-body-size: -1
+
+logging:
+  level:
+    org.zalando.logbook: trace

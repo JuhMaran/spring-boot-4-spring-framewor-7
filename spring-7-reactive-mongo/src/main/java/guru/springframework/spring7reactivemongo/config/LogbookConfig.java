@@ -1,4 +1,4 @@
-package guru.springframework.spring7reactive.config;
+package guru.springframework.spring7reactivemongo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,5 +21,6 @@ public class LogbookConfig {
     HttpLogFormatter formatter = new JsonHttpLogFormatter();
     return new LogstashLogbackSink(formatter);
   }
+
 
 }
