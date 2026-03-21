@@ -36,6 +36,14 @@ management:
     livenessstate:
       enabled: true
 
+logbook:
+  write:
+    max-body-size: -1
+
+logging:
+  level:
+    org.zalando.logbook: trace
+
 # ENABLE BELOW FOR TROUBLESHOOTING
 #      httpserver:
 #        wiretap: true
