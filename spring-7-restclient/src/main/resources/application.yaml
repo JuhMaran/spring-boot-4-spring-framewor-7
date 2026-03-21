@@ -27,4 +27,6 @@ rest:
   template:
     rootUrl: http://localhost:8080
 
-debug: true
+logging:
+  level:
+    org.zalando.logbook: debug

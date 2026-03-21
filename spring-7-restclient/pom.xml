@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.3</version>
+        <version>4.0.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>guru.springframework</groupId>
@@ -36,6 +36,7 @@
     </scm>
     <properties>
         <java.version>25</java.version>
+        <logbook.version>4.0.3</logbook.version>
     </properties>
     <dependencies>
         <!-- OAuth2 Client (Security) -->
@@ -64,6 +65,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-restclient</artifactId>
         </dependency>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>logbook-spring</artifactId>
+            <version>${logbook.version}</version>
+        </dependency>
+        <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security-oauth2-client-test</artifactId>

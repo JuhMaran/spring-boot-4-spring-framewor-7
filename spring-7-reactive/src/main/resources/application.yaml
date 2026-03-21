@@ -21,8 +21,11 @@ management:
     livenessstate:
       enabled: true
 
-#logging:
-#  level:
-#    org.springframework.r2dbc: trace
+logbook:
+    write:
+      max-body-size: -1
 
-debug: true
+logging:
+  level:
+    org.zalando.logbook: trace
+#    org.springframework.r2dbc: trace
