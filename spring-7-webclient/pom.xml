@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.3</version>
+		<version>4.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>guru.springframework</groupId>
@@ -36,8 +36,8 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
-		<jackson-core.version>3.1.0</jackson-core.version>
 		<org.awaitility.version>4.3.0</org.awaitility.version>
+		<logbook.version>3.8.0</logbook.version>
 	</properties>
 	<dependencies>
 		<!-- Spring Reactive Web - WebFlux (Web) -->
@@ -80,15 +80,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>tools.jackson.core</groupId>
-				<artifactId>jackson-core</artifactId>
-				<version>${jackson-core.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
