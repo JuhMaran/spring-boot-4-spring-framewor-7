@@ -43,9 +43,7 @@ management:
     livenessstate:
       enabled: true
 
-
 logging:
   level:
-    web: trace
-    guru.springframework.security: trace
-#    org.springframework: debug
+    org.zalando.logbook: trace
+    org.springframework: debug

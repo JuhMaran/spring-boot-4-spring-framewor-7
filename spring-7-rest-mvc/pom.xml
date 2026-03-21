@@ -36,12 +36,14 @@
     </scm>
     <properties>
         <java.version>25</java.version>
+        <logbook.version>4.0.3</logbook.version>
+        <rest-assured.version>5.5.6</rest-assured.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
+        <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
+        <atlassian-swagger-request-validator.version>2.46.0</atlassian-swagger-request-validator.version>
+
         <spring-boot.run.profiles>localmysql</spring-boot.run.profiles>
         <jwt-uri>http://localhost:9000</jwt-uri>
-        <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
-        <rest-assured.version>5.5.6</rest-assured.version>
-        <atlassian-swagger-request-validator.version>2.46.0</atlassian-swagger-request-validator.version>
     </properties>
     <dependencies>
         <!-- Spring Web MVC -->
@@ -143,6 +145,15 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--
+        Logbook Spring Boot Starter
+        Spring Boot Auto Configuration for Logbook and most of its libraries/adapters
+        -->
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>logbook-spring-boot-starter</artifactId>
+            <version>${logbook.version}</version>
         </dependency>
         <!-- Tests -->
         <dependency>
