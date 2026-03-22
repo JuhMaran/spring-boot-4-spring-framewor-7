@@ -393,3 +393,55 @@ Mémoria em MB -> 408,4
 | with virtual threads | without virtual threads |
 |:---------------------|:------------------------|
 | 298,12MB             | 408,4MB                 |
+
+---
+
+## Spring Events
+
+### Observer Pattern
+
+```mermaid
+classDiagram
+    class Subject {
+        +registerObserver()
+        +removeObserver()
+        +notifyObservers()
+    }
+
+    class Observer {
+        +update()
+    }
+
+    class ConcreteSubject {
+        -observers : List
+        -state
+    }
+
+    class ConcreteObserverA {
+        +update()
+    }
+
+    class ConcreteObserverB {
+        +update()
+    }
+
+    Subject <|-- ConcreteSubject
+    Observer <|-- ConcreteObserverA
+    Observer <|-- ConcreteObserverB
+
+    ConcreteSubject --> Observer : notifies
+```
+
+---
+
+### Exemplo Conceitual (Estação Meteorológica)
+
+```mermaid
+flowchart LR
+    WeatherStation --> PhoneDisplay
+    WeatherStation --> TVDisplay
+
+    WeatherStation["WeatherStation (Subject)"]
+    PhoneDisplay["PhoneDisplay (Observer)"]
+    TVDisplay["TVDisplay (Observer)"]
+```
