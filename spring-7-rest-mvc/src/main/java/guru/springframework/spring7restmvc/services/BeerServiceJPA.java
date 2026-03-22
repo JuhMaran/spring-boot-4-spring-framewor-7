@@ -8,7 +8,9 @@ import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -143,7 +145,7 @@ public class BeerServiceJPA implements BeerService {
     return atomicReference.get();
   }
 
-  //  @Caching(evict = {
+//  @Caching(evict = {
 //    @CacheEvict(cacheNames = "beerCache", key = "#beerId"),
 //    @CacheEvict(cacheNames = "beerListCache")
 //  })
