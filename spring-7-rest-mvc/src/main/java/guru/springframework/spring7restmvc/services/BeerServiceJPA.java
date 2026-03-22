@@ -1,21 +1,24 @@
 package guru.springframework.spring7restmvc.services;
 
 import guru.springframework.spring7restmvc.entities.Beer;
+import guru.springframework.spring7restmvc.events.BeerCreatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -37,7 +40,9 @@ public class BeerServiceJPA implements BeerService {
 
   private final BeerMapper beerMapper;
   private final BeerRepository beerRepository;
+
   private final CacheManager cacheManager;
+  private final ApplicationEventPublisher applicationEventPublisher;
 
   private static final int DEFAULT_PAGE = 0;
   private static final int DEFAULT_PAGE_SIZE = 25;
@@ -119,7 +124,17 @@ public class BeerServiceJPA implements BeerService {
 
   @Override
   public BeerDTO saveNewBeer(BeerDTO beer) {
-    return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beer)));
+    if (cacheManager.getCache("beerListCache") != null) {
+      cacheManager.getCache("beerListCache").clear();
+    }
+
+    val savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beer));
+
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+    applicationEventPublisher.publishEvent(new BeerCreatedEvent(savedBeer, auth));
+
+    return beerMapper.beerToBeerDto(savedBeer);
   }
 
   @Override
@@ -145,7 +160,7 @@ public class BeerServiceJPA implements BeerService {
     return atomicReference.get();
   }
 
-//  @Caching(evict = {
+  //  @Caching(evict = {
 //    @CacheEvict(cacheNames = "beerCache", key = "#beerId"),
 //    @CacheEvict(cacheNames = "beerListCache")
 //  })
