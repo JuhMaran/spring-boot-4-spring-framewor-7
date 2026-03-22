@@ -130,6 +130,9 @@ public class BeerServiceJPA implements BeerService {
 
     val savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beer));
 
+    System.out.println("Current Thread Name: " + Thread.currentThread().getName());
+    System.out.println("Current Thread ID: " + Thread.currentThread().getId());
+
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
     applicationEventPublisher.publishEvent(new BeerCreatedEvent(savedBeer, auth));
@@ -177,8 +180,12 @@ public class BeerServiceJPA implements BeerService {
   }
 
   private void clearCache(UUID beerId) {
-    cacheManager.getCache("beerCache").evict(beerId);
-    cacheManager.getCache("beerListCache").clear();
+    if (cacheManager.getCache("beerCache") != null ){
+      cacheManager.getCache("beerCache").evict(beerId);
+    }
+    if (cacheManager.getCache("beerListCache") != null) {
+      cacheManager.getCache("beerListCache").clear();
+    }
   }
 
   @Override
