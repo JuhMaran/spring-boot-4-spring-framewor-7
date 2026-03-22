@@ -24,6 +24,8 @@ spring:
     cache-names:
       - beerCache
       - beerListCache
+      - customerCache
+      - customerListCache
 
 #  jpa:
 #    properties:
