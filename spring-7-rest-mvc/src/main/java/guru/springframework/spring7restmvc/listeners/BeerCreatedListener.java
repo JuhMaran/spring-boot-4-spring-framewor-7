@@ -23,7 +23,7 @@ public class BeerCreatedListener {
     System.out.println("Current Thread Name: " + Thread.currentThread().getName());
     System.out.println("Current Thread ID: " + Thread.currentThread().getId());
 
-    // todo impl - add real implementation to persist audit record
+    //todo impl - add real implementation to persist audit record
   }
 
 }
