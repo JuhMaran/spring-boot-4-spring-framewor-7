@@ -6,6 +6,9 @@ import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +29,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @Primary
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class BeerServiceJPA implements BeerService {
 
@@ -99,8 +103,10 @@ public class BeerServiceJPA implements BeerService {
     return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%", pageable);
   }
 
+  @Cacheable(cacheNames = "beerCache", key = "#id")
   @Override
   public Optional<BeerDTO> getBeerById(UUID id) {
+    log.info("Get Beer by ID - in service");
     return Optional.ofNullable(beerMapper.beerToBeerDto(beerRepository.findById(id)
       .orElse(null)));
   }

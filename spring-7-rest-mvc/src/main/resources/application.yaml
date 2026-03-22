@@ -19,6 +19,11 @@ spring:
   threads:
     virtual:
       enabled: true
+  # caching
+  cache:
+    cache-names:
+      - beerCache
+      - beerListCache
 
 #  jpa:
 #    properties:
