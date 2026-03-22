@@ -52,5 +52,7 @@ management:
 
 logging:
   level:
-    org.zalando.logbook: trace
+    root: info # em produção
+    sql: warn # em produção
+    org.zalando.logbook: trace  # em produção trocar para INFO
     org.springframework: debug
