@@ -1,12 +1,14 @@
 package guru.springframework.spring7restmvc.controller;
 
 import guru.springframework.spring7restmvc.entities.Beer;
+import guru.springframework.spring7restmvc.events.BeerCreatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.val;
 import org.hamcrest.core.IsNull;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.event.ApplicationEvents;
+import org.springframework.test.context.event.RecordApplicationEvents;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -41,7 +45,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Desenvolvimento Orientado a Testes (Test Driven Development - TDD)
  */
 @SpringBootTest
+@RecordApplicationEvents
 class BeerControllerIT {
+
+  @Autowired
+  ApplicationEvents applicationEvents;
 
   @Autowired
   BeerController beerController;
@@ -84,6 +92,10 @@ class BeerControllerIT {
         .content(objectMapper.writeValueAsString(beerDTO)))
       .andExpect(status().isCreated())
       .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerCreatedEvent.class)
+      .count());
 
   }
 
