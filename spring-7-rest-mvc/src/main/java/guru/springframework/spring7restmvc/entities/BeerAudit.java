@@ -31,9 +31,9 @@ import java.util.UUID;
 public class BeerAudit {
 
   @Id
-  @JdbcTypeCode(SqlTypes.CHAR)
   @GeneratedValue(generator = "UUID")
   @UuidGenerator(style = UuidGenerator.Style.TIME)
+  @JdbcTypeCode(SqlTypes.CHAR)
   @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
   private UUID auditId;
 
@@ -47,6 +47,7 @@ public class BeerAudit {
   @Column(length = 50)
   private String beerName;
 
+  @Column(columnDefinition = "smallint")
   private BeerStyle beerStyle;
 
   @Size(max = 255)

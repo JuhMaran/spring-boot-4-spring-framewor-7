@@ -2,6 +2,9 @@ package guru.springframework.spring7restmvc.controller;
 
 import guru.springframework.spring7restmvc.entities.Beer;
 import guru.springframework.spring7restmvc.events.BeerCreatedEvent;
+import guru.springframework.spring7restmvc.events.BeerDeletedEvent;
+import guru.springframework.spring7restmvc.events.BeerPatchedEvent;
+import guru.springframework.spring7restmvc.events.BeerUpdatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
@@ -66,7 +69,7 @@ class BeerControllerIT {
   @Autowired
   WebApplicationContext wac;
 
-  private MockMvc mockMvc;
+  MockMvc mockMvc;
 
   @BeforeEach
   void setUp() {
@@ -96,7 +99,63 @@ class BeerControllerIT {
     Assertions.assertEquals(1, applicationEvents
       .stream(BeerCreatedEvent.class)
       .count());
+  }
 
+  @Test
+  void testUpdateBeer() throws Exception {
+    Beer beer = beerRepository.findAll().get(0);
+
+    BeerDTO beerDTO = beerMapper.beerToBeerDto(beer);
+
+    beerDTO.setBeerName("Updated Name");
+
+    mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
+        .with(BeerControllerTest.jwtRequestPostProcessor)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(beerDTO)))
+      .andExpect(status().isNoContent())
+      .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerUpdatedEvent.class)
+      .count());
+  }
+
+  @Test
+  void testPatchBeerMvc() throws Exception {
+    Beer beer = beerRepository.findAll().get(0);
+
+    Map<String, Object> beerMap = new HashMap<>();
+    beerMap.put("beerName", "New Name");
+
+    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+        .with(BeerControllerTest.jwtRequestPostProcessor)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(beerMap)))
+      .andExpect(status().isNoContent())
+      .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerPatchedEvent.class)
+      .count());
+  }
+
+  @Test
+  void deleteByIdFoundMVC() throws Exception {
+    Beer beer = beerRepository.findAll().get(0);
+
+    mockMvc.perform(delete(BeerController.BEER_PATH_ID, beer.getId())
+        .with(BeerControllerTest.jwtRequestPostProcessor)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isNoContent())
+      .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerDeletedEvent.class)
+      .count());
   }
 
   @Disabled // just for demo purposes
@@ -109,7 +168,6 @@ class BeerControllerIT {
     beerDTO.setBeerName("Updated Name");
 
     MvcResult result = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
-        .with(BeerControllerTest.jwtRequestPostProcessor)
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(beerDTO)))
@@ -121,7 +179,6 @@ class BeerControllerIT {
     beerDTO.setBeerName("Updated Name 2");
 
     MvcResult result2 = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
-        .with(BeerControllerTest.jwtRequestPostProcessor)
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(beerDTO)))
@@ -183,6 +240,16 @@ class BeerControllerIT {
   }
 
   @Test
+  void testNoAuth() throws Exception {
+    //Test No Auth
+    mockMvc.perform(get(BeerController.BEER_PATH)
+        .queryParam("beerStyle", BeerStyle.IPA.name())
+        .queryParam("pageSize", "800"))
+      .andExpect(status().isUnauthorized());
+
+  }
+
+  @Test
   void tesListBeersByStyle() throws Exception {
     mockMvc.perform(get(BeerController.BEER_PATH)
         .with(BeerControllerTest.jwtRequestPostProcessor)
@@ -207,15 +274,17 @@ class BeerControllerIT {
     Beer beer = beerRepository.findAll().get(0);
 
     Map<String, Object> beerMap = new HashMap<>();
-    beerMap.put("beerName", "New Name 123456789012345678901234567890123456789012345678901234567890123456789012345670");
+    beerMap.put("beerName", "New Name 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
 
-    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+    MvcResult result = mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
         .with(BeerControllerTest.jwtRequestPostProcessor)
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(beerMap)))
-      .andExpect(status().isBadRequest());
+      .andExpect(status().isBadRequest())
+      .andReturn();
 
+    System.out.println(result.getResponse().getContentAsString());
   }
 
   @Test
@@ -276,7 +345,7 @@ class BeerControllerIT {
     assertThat(responseEntity.getHeaders().getLocation()).isNotNull();
 
     String[] locationUUID = responseEntity.getHeaders().getLocation().getPath().split("/");
-    UUID savedUUID = UUID.fromString(locationUUID[ 4 ]);
+    UUID savedUUID = UUID.fromString(locationUUID[4]);
 
     Beer beer = beerRepository.findById(savedUUID).get();
     assertThat(beer).isNotNull();
@@ -292,16 +361,13 @@ class BeerControllerIT {
   @Test
   void testGetById() {
     Beer beer = beerRepository.findAll().get(0);
-
     BeerDTO dto = beerController.getBeerById(beer.getId());
-
     assertThat(dto).isNotNull();
   }
 
   @Test
   void testListBeers() {
     Page<BeerDTO> dtos = beerController.listBeers(null, null, false, 1, 2413);
-
     assertThat(dtos.getContent().size()).isEqualTo(1000);
   }
 

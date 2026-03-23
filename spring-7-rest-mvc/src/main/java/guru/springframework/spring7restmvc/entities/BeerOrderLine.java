@@ -54,7 +54,6 @@ public class BeerOrderLine {
 
   private Integer orderQuantity = 0;
 
-  @Builder.Default
   private Integer quantityAllocated = 0;
 
 }

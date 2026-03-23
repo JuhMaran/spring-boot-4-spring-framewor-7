@@ -35,7 +35,7 @@ public class Beer {
   @Id
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+  @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
   @JdbcTypeCode(SqlTypes.CHAR)
   private UUID id;
 
@@ -71,12 +71,12 @@ public class Beer {
     inverseJoinColumns = @JoinColumn(name = "category_id"))
   private Set<Category> categories = new HashSet<>();
 
-  public void addCategory(Category category){
+  public void addCategory(Category category) {
     this.categories.add(category);
     category.getBeers().add(this);
   }
 
-  public void removeCategory(Category category){
+  public void removeCategory(Category category) {
     this.categories.remove(category);
     category.getBeers().remove(category);
   }

@@ -11,7 +11,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
@@ -31,14 +35,13 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(MockitoExtension.class)
 @WebMvcTest(BeerController.class)
 @Import(SpringSecConfig.class)
+@ExtendWith(MockitoExtension.class)
 class BeerControllerTest {
 
   @Autowired
@@ -58,13 +61,18 @@ class BeerControllerTest {
   @Captor
   ArgumentCaptor<BeerDTO> beerArgumentCaptor;
 
+  @TestConfiguration
+  static class TestConfig {
+    @Bean
+    public CacheManager cacheManager() {
+      return new ConcurrentMapCacheManager();
+    }
+  }
+
   @BeforeEach
   void setUp() {
     beerServiceImpl = new BeerServiceImpl();
   }
-
-  static final String USERNAME = "user1";
-  static final String PASSWORD = "password";
 
   public static final SecurityMockMvcRequestPostProcessors.JwtRequestPostProcessor jwtRequestPostProcessor =
     jwt().jwt(jwt -> {
@@ -72,14 +80,13 @@ class BeerControllerTest {
           claims.put("scope", "message-read");
           claims.put("scope", "message-write");
         })
-        .subject("oidc-client") // client ID
+        .subject("messaging-client")
         .notBefore(Instant.now().minusSeconds(5l));
     });
 
   @Test
   void testPatchBeer() throws Exception {
-    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25)
-      .getContent().get(0);
+    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
 
     Map<String, Object> beerMap = new HashMap<>();
     beerMap.put("beerName", "New Name");
@@ -99,8 +106,7 @@ class BeerControllerTest {
 
   @Test
   void testDeleteBeer() throws Exception {
-    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25)
-      .getContent().get(0);
+    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
 
     given(beerService.deleteById(any())).willReturn(true);
 
@@ -116,9 +122,7 @@ class BeerControllerTest {
 
   @Test
   void testUpdateBeer() throws Exception {
-    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25)
-
-      .getContent().get(0);
+    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
 
     given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beer));
 
@@ -134,8 +138,7 @@ class BeerControllerTest {
 
   @Test
   void testUpdateBeerBlankName() throws Exception {
-    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25)
-      .getContent().get(0);
+    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
     beer.setBeerName("");
     given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beer));
 
@@ -151,13 +154,11 @@ class BeerControllerTest {
 
   @Test
   void testCreateNewBeer() throws Exception {
-    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25)
-      .getContent().get(0);
+    BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
     beer.setVersion(null);
     beer.setId(null);
 
-    given(beerService.saveNewBeer(any(BeerDTO.class))).willReturn(beerServiceImpl
-      .listBeers(null, null, false, 1, 25).getContent().get(1));
+    given(beerService.saveNewBeer(any(BeerDTO.class))).willReturn(beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(1));
 
     mockMvc.perform(post(BeerController.BEER_PATH)
         .with(jwtRequestPostProcessor)
@@ -170,10 +171,10 @@ class BeerControllerTest {
 
   @Test
   void testCreateBeerNullBeerName() throws Exception {
+
     BeerDTO beerDTO = BeerDTO.builder().build();
 
-    given(beerService.saveNewBeer(any(BeerDTO.class))).willReturn(beerServiceImpl
-      .listBeers(null, null, false, 1, 25).getContent().get(1));
+    given(beerService.saveNewBeer(any(BeerDTO.class))).willReturn(beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(1));
 
     MvcResult mvcResult = mockMvc.perform(post(BeerController.BEER_PATH)
         .with(jwtRequestPostProcessor)
@@ -189,7 +190,7 @@ class BeerControllerTest {
 
   @Test
   void testListBeers() throws Exception {
-    given(beerService.listBeers(any(), any(), any(), any(), any()))
+    given(beerService.listBeers(any(), any() , any(), any(), any()))
       .willReturn(beerServiceImpl.listBeers(null, null, false, null, null));
 
     mockMvc.perform(get(BeerController.BEER_PATH)
@@ -202,6 +203,7 @@ class BeerControllerTest {
 
   @Test
   void getBeerByIdNotFound() throws Exception {
+
     given(beerService.getBeerById(any(UUID.class))).willReturn(Optional.empty());
 
     mockMvc.perform(get(BeerController.BEER_PATH_ID, UUID.randomUUID())

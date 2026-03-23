@@ -8,6 +8,10 @@ import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 
@@ -24,6 +28,14 @@ class BeerRepositoryTest {
   @Autowired
   BeerRepository beerRepository;
 
+  @TestConfiguration
+  static class TestConfig {
+    @Bean
+    public CacheManager cacheManager() {
+      return new ConcurrentMapCacheManager();
+    }
+  }
+
   @Test
   void testGetBeerListByName() {
     Page<Beer> list = beerRepository.findAllByBeerNameIsLikeIgnoreCase("%IPA%", null);
@@ -35,15 +47,14 @@ class BeerRepositoryTest {
 
     assertThrows(ConstraintViolationException.class, () -> {
       Beer savedBeer = beerRepository.save(Beer.builder()
-        .beerName("My Beer 01234567890123456789012345678901234567890123456789")
+        .beerName("My Beer 0123345678901233456789012334567890123345678901233456789012334567890123345678901233456789")
         .beerStyle(BeerStyle.PALE_ALE)
-        .upc("123456789")
+        .upc("234234234234")
         .price(new BigDecimal("11.99"))
         .build());
 
       beerRepository.flush();
     });
-
   }
 
   @Test
@@ -51,7 +62,7 @@ class BeerRepositoryTest {
     Beer savedBeer = beerRepository.save(Beer.builder()
       .beerName("My Beer")
       .beerStyle(BeerStyle.PALE_ALE)
-      .upc("123456789")
+      .upc("234234234234")
       .price(new BigDecimal("11.99"))
       .build());
 

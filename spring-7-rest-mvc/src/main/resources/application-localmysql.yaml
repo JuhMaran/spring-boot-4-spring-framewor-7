@@ -26,7 +26,7 @@ spring:
     open-in-view: true
     database: mysql
     hibernate:
-      ddl-auto: update #validate
+      ddl-auto: update
     properties:
       hibernate:
         # Show SQL

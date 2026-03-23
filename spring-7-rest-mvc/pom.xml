@@ -43,7 +43,7 @@
         <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
         <atlassian-swagger-request-validator.version>2.46.0</atlassian-swagger-request-validator.version>
         <spring-boot.run.profiles>localmysql</spring-boot.run.profiles>
-        <jwt-uri>http://exemplo:9000</jwt-uri>
+        <jwt-uri>http://localhost:9000</jwt-uri>
     </properties>
     <dependencies>
         <!-- Spring Web MVC -->
@@ -256,18 +256,23 @@
     </dependencyManagement>
     <build>
         <plugins>
-            <!-- Spring Boot Maven -->
+            <!-- Spring Boot Maven com Start/Stop Habilitado -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
-                    <execution>
-                        <id>springdoc</id>
+<!--                    <execution>-->
+<!--                        <id>pre-integration-test</id>-->
 <!--                        <goals>-->
 <!--                            <goal>start</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>post-integration-test</id>-->
+<!--                        <goals>-->
 <!--                            <goal>stop</goal>-->
 <!--                        </goals>-->
-                    </execution>
+<!--                    </execution>-->
                     <execution>
                         <id>build-info</id>
                         <goals>
@@ -276,7 +281,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
+                    <jvmArguments>
+                        -Dspring.application.admin.enabled=true
+                        -Dspring.profiles.active=localmysql
+                    </jvmArguments>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -285,7 +293,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Springdoc OpenAPI -->
+            <!-- Springdoc OpenAPI - Ligado ao lifecycle -->
             <plugin>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-maven-plugin</artifactId>
@@ -296,7 +304,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <id>generate-openapi-docs</id>
+                        <phase>integration-test</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
