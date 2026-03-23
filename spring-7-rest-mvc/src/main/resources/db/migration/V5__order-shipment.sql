@@ -1,6 +1,6 @@
-drop table if exists beer_order_shipment;
+drop table if exists restdb.beer_order_shipment;
 
-CREATE TABLE beer_order_shipment
+CREATE TABLE restdb.beer_order_shipment
 (
     id                 VARCHAR(36) NOT NULL PRIMARY KEY,
     beer_order_id      VARCHAR(36) UNIQUE,
@@ -16,4 +16,4 @@ ALTER TABLE restdb.beer_order
 
 ALTER TABLE restdb.beer_order
     ADD CONSTRAINT bos_shipment_fk
-        FOREIGN KEY (beer_order_shipment_id) REFERENCES beer_order_shipment (id);
+        FOREIGN KEY (beer_order_shipment_id) REFERENCES restdb.beer_order_shipment (id);

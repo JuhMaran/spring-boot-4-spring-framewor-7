@@ -1,4 +1,4 @@
-create table beer_audit
+create table restdb.beer_audit
 (
     audit_id           varchar(36)    not null,
     id                 varchar(36)    not null,

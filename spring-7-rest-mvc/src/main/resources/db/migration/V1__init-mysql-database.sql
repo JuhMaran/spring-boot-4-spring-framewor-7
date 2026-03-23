@@ -1,8 +1,8 @@
-drop table if exists beer;
+drop table if exists restdb.beer;
 
-drop table if exists customer;
+drop table if exists restdb.customer;
 
-create table beer
+create table restdb.beer
 (
     id               varchar(36)    not null,
     beer_name        varchar(50)    not null,
@@ -16,7 +16,7 @@ create table beer
     primary key (id)
 ) engine = InnoDB;
 
-create table customer
+create table restdb.customer
 (
     id           varchar(36) not null,
     created_date datetime(6),

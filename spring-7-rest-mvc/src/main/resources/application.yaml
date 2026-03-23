@@ -3,7 +3,7 @@ spring:
   application:
     name: spring-7-rest-mvc
   flyway:
-    enabled: false
+    enabled: true
   docker:
     compose:
       enabled: false
