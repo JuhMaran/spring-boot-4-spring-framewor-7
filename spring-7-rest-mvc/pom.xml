@@ -43,7 +43,7 @@
         <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
         <atlassian-swagger-request-validator.version>2.46.0</atlassian-swagger-request-validator.version>
         <spring-boot.run.profiles>localmysql</spring-boot.run.profiles>
-        <jwt-uri>http://localhost:9000</jwt-uri>
+        <jwt-uri>http://exemplo:9090</jwt-uri>
     </properties>
     <dependencies>
         <!-- Spring Web MVC -->
