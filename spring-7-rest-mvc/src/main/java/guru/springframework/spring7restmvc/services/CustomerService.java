@@ -18,12 +18,12 @@ public interface CustomerService {
 
   List<CustomerDTO> getAllCustomers();
 
-  CustomerDTO saveNewCustomer(CustomerDTO customerDTO);
+  CustomerDTO saveNewCustomer(CustomerDTO customer);
 
-  Optional<CustomerDTO> updateCustomerById(UUID customerId, CustomerDTO customerDTO);
+  Optional<CustomerDTO> updateCustomerById(UUID customerId, CustomerDTO customer);
 
   Boolean deleteCustomerById(UUID customerId);
 
-  Optional<CustomerDTO> patchCustomerById(UUID customerId, CustomerDTO customerDTO);
+  Optional<CustomerDTO> patchCustomerById(UUID customerId, CustomerDTO customer);
 
 }

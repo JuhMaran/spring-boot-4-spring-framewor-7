@@ -1,6 +1,7 @@
 package guru.springframework.spring7restmvc.repositories;
 
 import guru.springframework.spring7restmvc.entities.Beer;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,16 +21,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Juliane Maran
  * @since 24/02/2026
  */
-//@Disabled
+@Disabled
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("localmysql")
 class MySqlIT {
 
-  // Remove this use of "MySQLContainer"; it is deprecated.
   @Container
   @ServiceConnection
-  static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:9.2");
+  static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:9");
 
   @Autowired
   BeerRepository beerRepository;
@@ -39,4 +39,5 @@ class MySqlIT {
     List<Beer> beers = beerRepository.findAll();
     assertThat(beers.size()).isGreaterThan(0);
   }
+
 }

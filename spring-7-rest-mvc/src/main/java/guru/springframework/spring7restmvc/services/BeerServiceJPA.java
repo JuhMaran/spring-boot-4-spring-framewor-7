@@ -41,8 +41,8 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiredArgsConstructor
 public class BeerServiceJPA implements BeerService {
 
-  private final BeerMapper beerMapper;
   private final BeerRepository beerRepository;
+  private final BeerMapper beerMapper;
 
   private final CacheManager cacheManager;
   private final ApplicationEventPublisher applicationEventPublisher;
@@ -59,11 +59,11 @@ public class BeerServiceJPA implements BeerService {
     PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
     Page<Beer> beerPage;
 
-    if (StringUtils.hasText(beerName) && beerStyle == null) {
+    if(StringUtils.hasText(beerName) && beerStyle == null) {
       beerPage = listBeersByName(beerName, pageRequest);
-    } else if (!StringUtils.hasText(beerName) && beerStyle != null) {
+    } else if (!StringUtils.hasText(beerName) && beerStyle != null){
       beerPage = listBeersByStyle(beerStyle, pageRequest);
-    } else if (StringUtils.hasText(beerName) && beerStyle != null) {
+    } else if (StringUtils.hasText(beerName) && beerStyle != null){
       beerPage = listBeersByNameAndStyle(beerName, beerStyle, pageRequest);
     } else {
       beerPage = beerRepository.findAll(pageRequest);
@@ -75,6 +75,44 @@ public class BeerServiceJPA implements BeerService {
 
     return beerPage.map(beerMapper::beerToBeerDto);
 
+  }
+
+  public PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+    int queryPageNumber;
+    int queryPageSize;
+
+    if (pageNumber != null && pageNumber > 0) {
+      queryPageNumber = pageNumber - 1;
+    } else {
+      queryPageNumber = DEFAULT_PAGE;
+    }
+
+    if (pageSize == null) {
+      queryPageSize = DEFAULT_PAGE_SIZE;
+    } else {
+      if (pageSize > 1000) {
+        queryPageSize = 1000;
+      } else {
+        queryPageSize = pageSize;
+      }
+    }
+
+    Sort sort = Sort.by(Sort.Order.asc("beerName"));
+
+    return PageRequest.of(queryPageNumber, queryPageSize, sort);
+  }
+
+  private Page<Beer> listBeersByNameAndStyle(String beerName, BeerStyle beerStyle, Pageable pageable) {
+    return beerRepository.findAllByBeerNameIsLikeIgnoreCaseAndBeerStyle("%" + beerName + "%",
+      beerStyle, pageable);
+  }
+
+  public Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable) {
+    return beerRepository.findAllByBeerStyle(beerStyle, pageable);
+  }
+
+  public Page<Beer> listBeersByName(String beerName, Pageable pageable){
+    return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%", pageable);
   }
 
   @Cacheable(cacheNames = "beerCache", key = "#id")
@@ -138,6 +176,16 @@ public class BeerServiceJPA implements BeerService {
     return false;
   }
 
+  private void clearCache(UUID beerId) {
+    if (cacheManager.getCache("beerCache") != null ){
+      cacheManager.getCache("beerCache").evict(beerId);
+    }
+
+    if (cacheManager.getCache("beerListCache") != null) {
+      cacheManager.getCache("beerListCache").clear();
+    }
+  }
+
   @Override
   public Optional<BeerDTO> patchBeerById(UUID beerId, BeerDTO beer) {
     clearCache(beerId);
@@ -145,19 +193,19 @@ public class BeerServiceJPA implements BeerService {
     AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
 
     beerRepository.findById(beerId).ifPresentOrElse(foundBeer -> {
-      if (StringUtils.hasText(beer.getBeerName())) {
+      if (StringUtils.hasText(beer.getBeerName())){
         foundBeer.setBeerName(beer.getBeerName());
       }
-      if (beer.getBeerStyle() != null) {
+      if (beer.getBeerStyle() != null){
         foundBeer.setBeerStyle(beer.getBeerStyle());
       }
-      if (StringUtils.hasText(beer.getUpc())) {
+      if (StringUtils.hasText(beer.getUpc())){
         foundBeer.setUpc(beer.getUpc());
       }
-      if (beer.getPrice() != null) {
+      if (beer.getPrice() != null){
         foundBeer.setPrice(beer.getPrice());
       }
-      if (beer.getQuantityOnHand() != null) {
+      if (beer.getQuantityOnHand() != null){
         foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
       }
 
@@ -171,56 +219,6 @@ public class BeerServiceJPA implements BeerService {
     }, () -> atomicReference.set(Optional.empty()));
 
     return atomicReference.get();
-  }
-
-  // MÉTODOS AUXILIARES
-
-  private void clearCache(UUID beerId) {
-    if (cacheManager.getCache("beerCache") != null) {
-      cacheManager.getCache("beerCache").evict(beerId);
-    }
-
-    if (cacheManager.getCache("beerListCache") != null) {
-      cacheManager.getCache("beerListCache").clear();
-    }
-  }
-
-  private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
-    int queryPageNumber;
-    int queryPageSize;
-
-    if (pageNumber != null && pageNumber > 0) {
-      queryPageNumber = pageNumber - 1;
-    } else {
-      queryPageNumber = DEFAULT_PAGE;
-    }
-
-    if (pageSize == null) {
-      queryPageSize = DEFAULT_PAGE_SIZE;
-    } else {
-      if (pageSize > 1000) {
-        queryPageSize = 1000;
-      } else {
-        queryPageSize = pageSize;
-      }
-    }
-
-    Sort sort = Sort.by(Sort.Order.asc("beerName"));
-
-    return PageRequest.of(queryPageNumber, queryPageSize, sort);
-  }
-
-  private Page<Beer> listBeersByNameAndStyle(String beerName, BeerStyle beerStyle, Pageable pageable) {
-    return beerRepository.findAllByBeerNameIsLikeIgnoreCaseAndBeerStyle("%" + beerName + "%",
-      beerStyle, pageable);
-  }
-
-  private Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable) {
-    return beerRepository.findAllByBeerStyle(beerStyle, pageable);
-  }
-
-  private Page<Beer> listBeersByName(String beerName, Pageable pageable) {
-    return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%", pageable);
   }
 
 }

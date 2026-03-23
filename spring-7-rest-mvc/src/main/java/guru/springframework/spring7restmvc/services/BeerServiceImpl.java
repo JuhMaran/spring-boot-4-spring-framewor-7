@@ -22,12 +22,12 @@ import java.util.*;
 @Service
 public class BeerServiceImpl implements BeerService {
 
-  private final Map<UUID, BeerDTO> beerMap;
+  private Map<UUID, BeerDTO> beerMap;
 
   public BeerServiceImpl() {
     this.beerMap = new HashMap<>();
 
-    BeerDTO beerDTO1 = BeerDTO.builder()
+    BeerDTO beer1 = BeerDTO.builder()
       .id(UUID.randomUUID())
       .version(1)
       .beerName("Galaxy Cat")
@@ -39,7 +39,7 @@ public class BeerServiceImpl implements BeerService {
       .updateDate(LocalDateTime.now())
       .build();
 
-    BeerDTO beerDTO2 = BeerDTO.builder()
+    BeerDTO beer2 = BeerDTO.builder()
       .id(UUID.randomUUID())
       .version(1)
       .beerName("Crank")
@@ -51,7 +51,7 @@ public class BeerServiceImpl implements BeerService {
       .updateDate(LocalDateTime.now())
       .build();
 
-    BeerDTO beerDTO3 = BeerDTO.builder()
+    BeerDTO beer3 = BeerDTO.builder()
       .id(UUID.randomUUID())
       .version(1)
       .beerName("Sunshine City")
@@ -63,10 +63,9 @@ public class BeerServiceImpl implements BeerService {
       .updateDate(LocalDateTime.now())
       .build();
 
-    beerMap.put(beerDTO1.getId(), beerDTO1);
-    beerMap.put(beerDTO2.getId(), beerDTO2);
-    beerMap.put(beerDTO3.getId(), beerDTO3);
-
+    beerMap.put(beer1.getId(), beer1);
+    beerMap.put(beer2.getId(), beer2);
+    beerMap.put(beer3.getId(), beer3);
   }
 
   @Override

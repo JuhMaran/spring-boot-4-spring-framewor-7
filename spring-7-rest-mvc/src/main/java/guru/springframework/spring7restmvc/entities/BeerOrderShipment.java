@@ -29,7 +29,7 @@ public class BeerOrderShipment {
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
   @JdbcTypeCode(SqlTypes.CHAR)
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
+  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
   private UUID id;
 
   @Version
@@ -51,5 +51,4 @@ public class BeerOrderShipment {
 
   @UpdateTimestamp
   private Timestamp lastModifiedDate;
-
 }

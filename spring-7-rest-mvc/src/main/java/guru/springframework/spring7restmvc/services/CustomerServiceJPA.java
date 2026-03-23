@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 /**
  * JPA Service
@@ -30,71 +31,47 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequiredArgsConstructor
 public class CustomerServiceJPA implements CustomerService {
 
-  private final CustomerMapper customerMapper;
   private final CustomerRepository customerRepository;
+  private final CustomerMapper customerMapper;
   private final CacheManager cacheManager;
 
-  @Cacheable(cacheNames = "customerCache", key = "#id")
+  @Cacheable(cacheNames = "customerCache")
   @Override
-  public Optional<CustomerDTO> getCustomerById(UUID id) {
-    log.info("Get Customer by ID - in service");
-    return Optional.ofNullable(customerMapper.customerToCustomerDto(customerRepository.findById(id)
-      .orElse(null)));
+  public Optional<CustomerDTO> getCustomerById(UUID uuid) {
+    log.info("Get Customer by id - in service");
+
+    return Optional.ofNullable(customerMapper
+      .customerToCustomerDto(customerRepository.findById(uuid).orElse(null)));
   }
 
   @Cacheable(cacheNames = "customerListCache")
   @Override
   public List<CustomerDTO> getAllCustomers() {
-    log.info("List Customers - in service");
-    return customerRepository.findAll()
-      .stream()
+    log.info("Get All Customers - in service");
+
+    return customerRepository.findAll().stream()
       .map(customerMapper::customerToCustomerDto)
-      .toList();
+      .collect(Collectors.toList());
   }
 
   @Override
-  public CustomerDTO saveNewCustomer(CustomerDTO customerDTO) {
-    return customerMapper.customerToCustomerDto(customerRepository
-      .save(customerMapper.customerDtoToCustomer(customerDTO)));
-  }
-
-  @Override
-  public Optional<CustomerDTO> updateCustomerById(UUID customerId, CustomerDTO customerDTO) {
-    clearCache(customerId);
-    AtomicReference<Optional<CustomerDTO>> atomicReference = new AtomicReference<>();
-
-    customerRepository.findById(customerId).ifPresentOrElse(foundCustomer -> {
-      foundCustomer.setName(customerDTO.getName());
-      atomicReference.set(Optional.of(customerMapper
-        .customerToCustomerDto(customerRepository.save(foundCustomer))));
-    }, () -> atomicReference.set(Optional.empty()));
-
-    return atomicReference.get();
-  }
-
-//  @Caching(evict = {
-//    @CacheEvict(cacheNames = "customerCache", key = "#customerId"),
-//    @CacheEvict(cacheNames = "customerListCache")
-//  })
-  @Override
-  public Boolean deleteCustomerById(UUID customerId) {
-    clearCache(customerId);
-    if (customerRepository.existsById(customerId)) {
-      customerRepository.deleteById(customerId);
-      return true;
+  public CustomerDTO saveNewCustomer(CustomerDTO customer) {
+    if (cacheManager.getCache("customerListCache") != null){
+      cacheManager.getCache("customerListCache").clear();
     }
-    return false;
+
+    return customerMapper.customerToCustomerDto(customerRepository
+      .save(customerMapper.customerDtoToCustomer(customer)));
   }
 
   @Override
-  public Optional<CustomerDTO> patchCustomerById(UUID customerId, CustomerDTO customerDTO) {
+  public Optional<CustomerDTO> updateCustomerById(UUID customerId, CustomerDTO customer) {
     clearCache(customerId);
+
     AtomicReference<Optional<CustomerDTO>> atomicReference = new AtomicReference<>();
 
     customerRepository.findById(customerId).ifPresentOrElse(foundCustomer -> {
-      if (StringUtils.hasText(customerDTO.getName())) {
-        foundCustomer.setName(customerDTO.getName());
-      }
+      foundCustomer.setName(customer.getName());
       atomicReference.set(Optional.of(customerMapper
         .customerToCustomerDto(customerRepository.save(foundCustomer))));
     }, () -> atomicReference.set(Optional.empty()));
@@ -103,8 +80,42 @@ public class CustomerServiceJPA implements CustomerService {
   }
 
   private void clearCache(UUID customerId) {
-    cacheManager.getCache("customerCache").evict(customerId);
-    cacheManager.getCache("customerListCache").clear();
+    if (cacheManager.getCache("customerListCache") != null){
+      cacheManager.getCache("customerListCache").clear();
+    }
+    if (cacheManager.getCache("customerCache") != null){
+      cacheManager.getCache("customerCache").evict(customerId);
+    }
+  }
+
+  @Override
+  public Boolean deleteCustomerById(UUID customerId) {
+
+    clearCache(customerId);
+
+    if(customerRepository.existsById(customerId)){
+      customerRepository.deleteById(customerId);
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public Optional<CustomerDTO> patchCustomerById(UUID customerId, CustomerDTO customer) {
+
+    clearCache(customerId);
+
+    AtomicReference<Optional<CustomerDTO>> atomicReference = new AtomicReference<>();
+
+    customerRepository.findById(customerId).ifPresentOrElse(foundCustomer -> {
+      if (StringUtils.hasText(customer.getName())){
+        foundCustomer.setName(customer.getName());
+      }
+      atomicReference.set(Optional.of(customerMapper
+        .customerToCustomerDto(customerRepository.save(foundCustomer))));
+    }, () -> atomicReference.set(Optional.empty()));
+
+    return atomicReference.get();
   }
 
 }

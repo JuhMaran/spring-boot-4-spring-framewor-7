@@ -6,10 +6,16 @@ import guru.springframework.spring7restmvc.services.BeerService;
 import guru.springframework.spring7restmvc.services.BeerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
@@ -35,6 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(BeerController.class)
 @Import(SpringSecConfig.class)
+@ExtendWith(MockitoExtension.class)
 class BeerControllerTest {
 
   @Autowired
@@ -53,6 +60,14 @@ class BeerControllerTest {
 
   @Captor
   ArgumentCaptor<BeerDTO> beerArgumentCaptor;
+
+  @TestConfiguration
+  static class TestConfig {
+    @Bean
+    public CacheManager cacheManager() {
+      return new ConcurrentMapCacheManager();
+    }
+  }
 
   @BeforeEach
   void setUp() {
@@ -175,7 +190,7 @@ class BeerControllerTest {
 
   @Test
   void testListBeers() throws Exception {
-    given(beerService.listBeers(any(), any(), any(), any(), any()))
+    given(beerService.listBeers(any(), any() , any(), any(), any()))
       .willReturn(beerServiceImpl.listBeers(null, null, false, null, null));
 
     mockMvc.perform(get(BeerController.BEER_PATH)

@@ -263,10 +263,10 @@
                 <executions>
                     <execution>
                         <id>springdoc</id>
-<!--                        <goals>-->
-<!--                            <goal>start</goal>-->
-<!--                            <goal>stop</goal>-->
-<!--                        </goals>-->
+                        <goals>
+                            <goal>start</goal>
+                            <goal>stop</goal>
+                        </goals>
                     </execution>
                     <execution>
                         <id>build-info</id>
