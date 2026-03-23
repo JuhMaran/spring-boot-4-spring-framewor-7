@@ -8,6 +8,43 @@ seguras.
 
 ---
 
+## Actuator
+
+### Request
+
+* **cURL**
+* GET `/actuator`
+
+```
+curl --location 'http://localhost:9000/actuator'
+```
+
+### Response
+
+* **Status Code:** 200 OK
+* **Response Body**
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:9000/actuator",
+      "templated": false
+    },
+    "health": {
+      "href": "http://localhost:9000/actuator/health",
+      "templated": false
+    },
+    "health-path": {
+      "href": "http://localhost:9000/actuator/health/{*path}",
+      "templated": true
+    }
+  }
+}
+```
+
+---
+
 ## OAuth 2
 
 ### O que é OAuth 2

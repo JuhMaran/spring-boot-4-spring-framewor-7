@@ -35,23 +35,15 @@ management:
       enabled: true
     livenessstate:
       enabled: true
-
-logbook:
-  write:
-    max-body-size: -1
-
-logging:
-  level:
-    org.zalando.logbook: trace
-
 # ENABLE BELOW FOR TROUBLESHOOTING
 #      httpserver:
 #        wiretap: true
 #      httpclient:
 #        wiretap: true
-#logging:
-#  level:
-#    root: error
+
+logging:
+  level:
+    org.zalando.logbook: trace
 #    reactor.netty: trace
 #    org.springframework.cloud.gateway: trace
 #    org.springframework.http.server.reactive: trace

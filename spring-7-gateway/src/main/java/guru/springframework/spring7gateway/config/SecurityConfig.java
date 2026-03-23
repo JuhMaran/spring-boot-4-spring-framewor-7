@@ -10,7 +10,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 /**
- * spring-7-gateway
+ * Security Configuration
  *
  * @author Juliane Maran
  * @since 15/03/2026
@@ -21,22 +21,25 @@ public class SecurityConfig {
 
   @Bean
   @Order(1)
-  public SecurityWebFilterChain actuatorSecurityFilterChain(ServerHttpSecurity http) throws Exception {
-    http.securityMatcher(EndpointRequest.toAnyEndpoint())
-      .authorizeExchange(authorize -> authorize.anyExchange().permitAll());
-
-    return http.build();
+  public SecurityWebFilterChain actuatorSecurityFilterChain(ServerHttpSecurity http)
+    throws Exception {
+    return http
+      .securityMatcher(EndpointRequest.toAnyEndpoint())
+      .authorizeExchange(authorize ->
+        authorize.anyExchange().permitAll())
+      .build();
   }
 
   @Bean
   @Order(2)
   public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
-
-    http.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().authenticated())
-      .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec.jwt(Customizer.withDefaults()))
-      .csrf(ServerHttpSecurity.CsrfSpec::disable);
-
-    return http.build();
+    return http
+      .authorizeExchange(authorizeExchangeSpec ->
+        authorizeExchangeSpec.anyExchange().authenticated())
+      .oauth2ResourceServer(oAuth2ResourceServerSpec ->
+        oAuth2ResourceServerSpec.jwt(Customizer.withDefaults()))
+      .csrf(ServerHttpSecurity.CsrfSpec::disable)
+      .build();
   }
 
 }
