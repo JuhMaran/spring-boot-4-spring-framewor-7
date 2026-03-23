@@ -1,21 +1,24 @@
 package guru.springframework.spring7restmvc.services;
 
 import guru.springframework.spring7restmvc.entities.Beer;
+import guru.springframework.spring7restmvc.events.BeerCreatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -37,7 +40,9 @@ public class BeerServiceJPA implements BeerService {
 
   private final BeerMapper beerMapper;
   private final BeerRepository beerRepository;
+
   private final CacheManager cacheManager;
+  private final ApplicationEventPublisher applicationEventPublisher;
 
   private static final int DEFAULT_PAGE = 0;
   private static final int DEFAULT_PAGE_SIZE = 25;
@@ -71,64 +76,33 @@ public class BeerServiceJPA implements BeerService {
 
   }
 
-  private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
-    int queryPageNumber;
-    int queryPageSize;
-
-    if (pageNumber != null && pageNumber > 0) {
-      queryPageNumber = pageNumber - 1;
-    } else {
-      queryPageNumber = DEFAULT_PAGE;
-    }
-
-    if (pageSize == null) {
-      queryPageSize = DEFAULT_PAGE_SIZE;
-    } else {
-      if (pageSize > 1000) {
-        queryPageSize = 1000;
-      } else {
-        queryPageSize = pageSize;
-      }
-    }
-
-    Sort sort = Sort.by(Sort.Order.asc("beerName"));
-
-    return PageRequest.of(queryPageNumber, queryPageSize, sort);
-
-  }
-
-  private Page<Beer> listBeersByNameAndStyle(String beerName, BeerStyle beerStyle, Pageable pageable) {
-    return beerRepository.findAllByBeerNameIsLikeIgnoreCaseAndBeerStyle("%" + beerName + "%", beerStyle, pageable);
-  }
-
-  private Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable) {
-    return beerRepository.findAllByBeerStyle(beerStyle, pageable);
-  }
-
-  private Page<Beer> listBeersByName(String beerName, Pageable pageable) {
-    return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%", pageable);
-  }
-
   @Cacheable(cacheNames = "beerCache", key = "#id")
   @Override
   public Optional<BeerDTO> getBeerById(UUID id) {
-    log.info("Get Beer by ID - in service");
+    log.info("Get Beer by Id - in service");
+
     return Optional.ofNullable(beerMapper.beerToBeerDto(beerRepository.findById(id)
       .orElse(null)));
   }
 
   @Override
   public BeerDTO saveNewBeer(BeerDTO beer) {
-    return beerMapper.beerToBeerDto(beerRepository.save(beerMapper.beerDtoToBeer(beer)));
+    if (cacheManager.getCache("beerListCache") != null) {
+      cacheManager.getCache("beerListCache").clear();
+    }
+
+    val savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beer));
+
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+    applicationEventPublisher.publishEvent(new BeerCreatedEvent(savedBeer, auth));
+
+    return beerMapper.beerToBeerDto(savedBeer);
   }
 
   @Override
   public Optional<BeerDTO> updateBeerById(UUID beerId, BeerDTO beer) {
     clearCache(beerId);
-
-//    return Optional.of(beerMapper.beerToBeerDto(
-//      beerRepository.save(beerMapper.beerDtoToBeer(beer))
-//    ));
 
     AtomicReference<Optional<BeerDTO>> atomicReference = new AtomicReference<>();
 
@@ -137,7 +111,7 @@ public class BeerServiceJPA implements BeerService {
       foundBeer.setBeerStyle(beer.getBeerStyle());
       foundBeer.setUpc(beer.getUpc());
       foundBeer.setPrice(beer.getPrice());
-      foundBeer.setVersion(beer.getVersion());
+      foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
       atomicReference.set(Optional.of(beerMapper
         .beerToBeerDto(beerRepository.save(foundBeer))));
     }, () -> atomicReference.set(Optional.empty()));
@@ -145,13 +119,8 @@ public class BeerServiceJPA implements BeerService {
     return atomicReference.get();
   }
 
-//  @Caching(evict = {
-//    @CacheEvict(cacheNames = "beerCache", key = "#beerId"),
-//    @CacheEvict(cacheNames = "beerListCache")
-//  })
   @Override
   public Boolean deleteById(UUID beerId) {
-
     clearCache(beerId);
 
     if (beerRepository.existsById(beerId)) {
@@ -159,11 +128,6 @@ public class BeerServiceJPA implements BeerService {
       return true;
     }
     return false;
-  }
-
-  private void clearCache(UUID beerId) {
-    cacheManager.getCache("beerCache").evict(beerId);
-    cacheManager.getCache("beerListCache").clear();
   }
 
   @Override
@@ -193,6 +157,56 @@ public class BeerServiceJPA implements BeerService {
     }, () -> atomicReference.set(Optional.empty()));
 
     return atomicReference.get();
+  }
+
+  // MÉTODOS AUXILIARES
+
+  private void clearCache(UUID beerId) {
+    if (cacheManager.getCache("beerCache") != null) {
+      cacheManager.getCache("beerCache").evict(beerId);
+    }
+
+    if (cacheManager.getCache("beerListCache") != null) {
+      cacheManager.getCache("beerListCache").clear();
+    }
+  }
+
+  public PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+    int queryPageNumber;
+    int queryPageSize;
+
+    if (pageNumber != null && pageNumber > 0) {
+      queryPageNumber = pageNumber - 1;
+    } else {
+      queryPageNumber = DEFAULT_PAGE;
+    }
+
+    if (pageSize == null) {
+      queryPageSize = DEFAULT_PAGE_SIZE;
+    } else {
+      if (pageSize > 1000) {
+        queryPageSize = 1000;
+      } else {
+        queryPageSize = pageSize;
+      }
+    }
+
+    Sort sort = Sort.by(Sort.Order.asc("beerName"));
+
+    return PageRequest.of(queryPageNumber, queryPageSize, sort);
+  }
+
+  private Page<Beer> listBeersByNameAndStyle(String beerName, BeerStyle beerStyle, Pageable pageable) {
+    return beerRepository.findAllByBeerNameIsLikeIgnoreCaseAndBeerStyle("%" + beerName + "%",
+      beerStyle, pageable);
+  }
+
+  public Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable) {
+    return beerRepository.findAllByBeerStyle(beerStyle, pageable);
+  }
+
+  public Page<Beer> listBeersByName(String beerName, Pageable pageable) {
+    return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%", pageable);
   }
 
 }
