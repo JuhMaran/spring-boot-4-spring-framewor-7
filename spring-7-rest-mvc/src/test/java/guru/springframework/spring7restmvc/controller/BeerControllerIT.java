@@ -2,6 +2,9 @@ package guru.springframework.spring7restmvc.controller;
 
 import guru.springframework.spring7restmvc.entities.Beer;
 import guru.springframework.spring7restmvc.events.BeerCreatedEvent;
+import guru.springframework.spring7restmvc.events.BeerDeletedEvent;
+import guru.springframework.spring7restmvc.events.BeerPatchedEvent;
+import guru.springframework.spring7restmvc.events.BeerUpdatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
@@ -97,6 +100,63 @@ class BeerControllerIT {
       .stream(BeerCreatedEvent.class)
       .count());
 
+  }
+
+  @Test
+  void testUpdateBeer() throws Exception {
+    Beer beer = beerRepository.findAll().get(0);
+
+    BeerDTO beerDTO = beerMapper.beerToBeerDto(beer);
+
+    beerDTO.setBeerName("Updated Name");
+
+    mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
+        .with(BeerControllerTest.jwtRequestPostProcessor)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(beerDTO)))
+      .andExpect(status().isNoContent())
+      .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerUpdatedEvent.class)
+      .count());
+  }
+
+  @Test
+  void testPatchBeerMvc() throws Exception {
+    Beer beer = beerRepository.findAll().get(0);
+
+    Map<String, Object> beerMap = new HashMap<>();
+    beerMap.put("beerName", "New Name");
+
+    mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+        .with(BeerControllerTest.jwtRequestPostProcessor)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(beerMap)))
+      .andExpect(status().isNoContent())
+      .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerPatchedEvent.class)
+      .count());
+  }
+
+  @Test
+  void deleteByIdFoundMVC() throws Exception {
+    Beer beer = beerRepository.findAll().get(0);
+
+    mockMvc.perform(delete(BeerController.BEER_PATH_ID, beer.getId())
+        .with(BeerControllerTest.jwtRequestPostProcessor)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isNoContent())
+      .andReturn();
+
+    Assertions.assertEquals(1, applicationEvents
+      .stream(BeerDeletedEvent.class)
+      .count());
   }
 
   @Disabled // just for demo purposes

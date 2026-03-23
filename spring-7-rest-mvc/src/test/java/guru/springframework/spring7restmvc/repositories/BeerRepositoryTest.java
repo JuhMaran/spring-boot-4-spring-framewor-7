@@ -35,15 +35,14 @@ class BeerRepositoryTest {
 
     assertThrows(ConstraintViolationException.class, () -> {
       Beer savedBeer = beerRepository.save(Beer.builder()
-        .beerName("My Beer 01234567890123456789012345678901234567890123456789")
+        .beerName("My Beer 0123345678901233456789012334567890123345678901233456789012334567890123345678901233456789")
         .beerStyle(BeerStyle.PALE_ALE)
-        .upc("123456789")
+        .upc("234234234234")
         .price(new BigDecimal("11.99"))
         .build());
 
       beerRepository.flush();
     });
-
   }
 
   @Test
@@ -51,7 +50,7 @@ class BeerRepositoryTest {
     Beer savedBeer = beerRepository.save(Beer.builder()
       .beerName("My Beer")
       .beerStyle(BeerStyle.PALE_ALE)
-      .upc("123456789")
+      .upc("234234234234")
       .price(new BigDecimal("11.99"))
       .build());
 

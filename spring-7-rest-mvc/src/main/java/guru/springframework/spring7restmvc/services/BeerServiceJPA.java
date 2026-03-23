@@ -2,6 +2,9 @@ package guru.springframework.spring7restmvc.services;
 
 import guru.springframework.spring7restmvc.entities.Beer;
 import guru.springframework.spring7restmvc.events.BeerCreatedEvent;
+import guru.springframework.spring7restmvc.events.BeerDeletedEvent;
+import guru.springframework.spring7restmvc.events.BeerPatchedEvent;
+import guru.springframework.spring7restmvc.events.BeerUpdatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
@@ -53,9 +56,7 @@ public class BeerServiceJPA implements BeerService {
                                  Integer pageNumber, Integer pageSize) {
 
     log.info("List Beers - in service");
-
     PageRequest pageRequest = buildPageRequest(pageNumber, pageSize);
-
     Page<Beer> beerPage;
 
     if (StringUtils.hasText(beerName) && beerStyle == null) {
@@ -92,11 +93,9 @@ public class BeerServiceJPA implements BeerService {
     }
 
     val savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beer));
-
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
     applicationEventPublisher.publishEvent(new BeerCreatedEvent(savedBeer, auth));
-
     return beerMapper.beerToBeerDto(savedBeer);
   }
 
@@ -112,18 +111,27 @@ public class BeerServiceJPA implements BeerService {
       foundBeer.setUpc(beer.getUpc());
       foundBeer.setPrice(beer.getPrice());
       foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
+
+      val savedBeer = beerRepository.save(foundBeer);
+      val auth = SecurityContextHolder.getContext().getAuthentication();
+
+      applicationEventPublisher.publishEvent(new BeerUpdatedEvent(savedBeer, auth));
+
       atomicReference.set(Optional.of(beerMapper
-        .beerToBeerDto(beerRepository.save(foundBeer))));
+        .beerToBeerDto(savedBeer)));
     }, () -> atomicReference.set(Optional.empty()));
 
     return atomicReference.get();
   }
+
 
   @Override
   public Boolean deleteById(UUID beerId) {
     clearCache(beerId);
 
     if (beerRepository.existsById(beerId)) {
+      val auth = SecurityContextHolder.getContext().getAuthentication();
+      applicationEventPublisher.publishEvent(new BeerDeletedEvent(Beer.builder().id(beerId).build(), auth));
       beerRepository.deleteById(beerId);
       return true;
     }
@@ -152,8 +160,14 @@ public class BeerServiceJPA implements BeerService {
       if (beer.getQuantityOnHand() != null) {
         foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
       }
+
+      val savedBeer = beerRepository.save(foundBeer);
+      val auth = SecurityContextHolder.getContext().getAuthentication();
+
+      applicationEventPublisher.publishEvent(new BeerPatchedEvent(savedBeer, auth));
+
       atomicReference.set(Optional.of(beerMapper
-        .beerToBeerDto(beerRepository.save(foundBeer))));
+        .beerToBeerDto(savedBeer)));
     }, () -> atomicReference.set(Optional.empty()));
 
     return atomicReference.get();
@@ -171,7 +185,7 @@ public class BeerServiceJPA implements BeerService {
     }
   }
 
-  public PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
+  private PageRequest buildPageRequest(Integer pageNumber, Integer pageSize) {
     int queryPageNumber;
     int queryPageSize;
 
@@ -201,11 +215,11 @@ public class BeerServiceJPA implements BeerService {
       beerStyle, pageable);
   }
 
-  public Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable) {
+  private Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable) {
     return beerRepository.findAllByBeerStyle(beerStyle, pageable);
   }
 
-  public Page<Beer> listBeersByName(String beerName, Pageable pageable) {
+  private Page<Beer> listBeersByName(String beerName, Pageable pageable) {
     return beerRepository.findAllByBeerNameIsLikeIgnoreCase("%" + beerName + "%", pageable);
   }
 
