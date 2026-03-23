@@ -289,6 +289,17 @@ Alguns projetos incluem suporte a:
 
 ---
 
+## Diagramas
+
+![Descrição](docs/Diagrams/restdb.png)
+
+## Documentações
+
+* [Diagramas](docs/Diagrams)
+* [Postman Collections](docs/postman_collection)
+
+---
+
 ## Observações
 
 * Este repositório possui caráter **educacional e evolutivo**
