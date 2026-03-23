@@ -289,14 +289,224 @@ Alguns projetos incluem suporte a:
 
 ---
 
-## Diagramas
+## Diagrama de Classe
 
 ![Descrição](docs/Diagrams/restdb.png)
+
+```mermaid
+classDiagram
+    class Beer {
+        String id
+        String beer_name
+        int beer_style
+        datetime created_date
+        decimal price
+        int quantity_on_hand
+        String upc
+        datetime update_date
+        int version
+    }
+
+    class Category {
+        String id
+        String description
+        datetime created_date
+        datetime last_modified_date
+        long version
+    }
+
+    class BeerCategory {
+        String beer_id
+        String category_id
+    }
+
+    class Customer {
+        String id
+        String name
+        String email
+        datetime created_date
+        datetime update_date
+        int version
+    }
+
+    class BeerOrder {
+        String id
+        datetime created_date
+        String customer_ref
+        datetime last_modified_date
+        long version
+        String customer_id
+        String beer_order_shipment_id
+    }
+
+    class BeerOrderLine {
+        String id
+        String beer_id
+        datetime created_date
+        datetime last_modified_date
+        int order_quantity
+        int quantity_allocated
+        long version
+        String beer_order_id
+    }
+
+    class BeerOrderShipment {
+        String id
+        String beer_order_id
+        String tracking_number
+        datetime created_date
+        datetime last_modified_date
+        long version
+    }
+
+    class BeerAudit {
+        String audit_id
+        String id
+        String beer_name
+        int beer_style
+        datetime created_date
+        decimal price
+        int quantity_on_hand
+        String upc
+        datetime update_date
+        int version
+        datetime created_date_audit
+        String principal_name
+        String audit_event_type
+    }
+
+%% Relacionamentos
+    Beer "1" --> "0..*" BeerOrderLine: appears in
+    BeerOrder "1" --> "1..*" BeerOrderLine: contains
+    Customer "1" --> "0..*" BeerOrder: places
+    BeerOrder "1" --> "0..1" BeerOrderShipment: shipment
+    Beer "1" --> "0..*" BeerAudit: audited
+    Beer "1" --> "0..*" BeerCategory
+    Category "1" --> "0..*" BeerCategory
+```
+
+## Descrição do Fluxo
+
+### Fluxo do Sistema
+
+Esse modelo representa um sistema de pedidos de cerveja com auditoria e controle de estoque.
+
+**Fluxo Principal**
+
+1. Cadastro de Cerveja (`beer`)
+    * Uma cerveja é criada com nome, estilo, preço, estoque, etc.
+    * Pode estar associada a categorias
+2. Classificação (`category` + `beer_category`)
+    * Uma cerveja pode ter várias categorias (ex: Lager, IPA).
+    * Relação muitos-para-muitos via `beer_category`.
+3. Cliente (`customer`)
+    * Cliente é cadastrado com nome e email.
+4. Pedido (`beer_order`)
+    * Um cliente cria um pedido.
+    * O pedido pode ter vários itens (`beer_order_line`).
+5. Itens do Pedido (`beer_order_line`)
+    * Cada item representa uma cerveja no pedido.
+    * Contém quantidade pedida e alocada.
+6. Envio (`beer_order_shipment`)
+    * Pedido pode ter envio com tracking number.
+7. Auditoria (`beer_audit`)
+    * Toda mudança em `beer` gera um registro de auditoria.
+8. Controle de versão
+    * Quase todas as entidades têm `version` (controle otimista).
+
+### Relacionamentos
+
+**Principais Relações**
+
+* Beer ↔ Category
+    * Muitos para muitos (`beer_category`)
+* Beer ↔ BeerOrderLine
+    * 1:N → uma cerveja pode aparecer em vários itens do pedido
+* BeerOrder ↔ BeerOrderLine
+    * 1:N → um pedido tem vários itens
+* BeerOrder ↔ Customer
+    * N:1 → vários pedidos para um cliente
+* BeerOrder ↔ BeerOrderShipment
+    * 1:1 → um para um, mas pode ser 1:N, um para muitos.
+    * Cada pedido gera um ou mais pagamentos
+* Beer ↔ BeerAudit
+    * 1:N → cada alteração gera um audit log
+
+### Observação Importante
+
+* O uso de `version` indica **controle de concorrência otimista (JPA `@Version`)**.
+* `beer_audit` sugere uso de:
+    * **Hibernate Envers** ou
+    * Auditoria manual/event-driven
+* `beer_order_line.quantity_allocated` indica suporte a:
+    * separação de estoque (reserva antes do envio)
 
 ## Documentações
 
 * [Diagramas](docs/Diagrams)
 * [Postman Collections](docs/postman_collection)
+
+## Diagrama de Sequência
+
+### Fluxo considerado
+
+1. Cliente cria pedido
+2. Sistema cria `BeerOrder`
+3. Adiciona itens (`BeerOrderLine`)
+4. Valida estoque (`Beer`)
+5. Aloca quantidade
+6. Atualiza estoque
+7. Gera auditoria (`BeerAudit`)
+8. Cria envio (`BeerOrderShipment`)
+
+```mermaid
+sequenceDiagram
+    actor Cliente
+    participant API
+    participant BeerOrder
+    participant BeerOrderLine
+    participant Beer
+    participant BeerAudit
+    participant Shipment as BeerOrderShipment
+    participant Customer
+    Cliente ->> API: Criar Pedido
+    API ->> Customer: Buscar cliente
+    Customer -->> API: Dados do cliente
+    API ->> BeerOrder: Criar novo pedido
+    BeerOrder -->> API: Pedido criado
+
+    loop Para cada item do pedido
+        API ->> Beer: Buscar cerveja
+        Beer -->> API: Dados da cerveja
+        API ->> Beer: Verificar estoque
+        Beer -->> API: Quantidade disponível
+
+        alt Estoque disponível
+            API ->> BeerOrderLine: Criar item do pedido
+            BeerOrderLine -->> API: Item criado
+            API ->> Beer: Atualizar quantity_on_hand
+            Beer -->> API: Estoque atualizado
+            API ->> BeerAudit: Registrar UPDATE
+            BeerAudit -->> API: Auditoria registrada
+        else Sem estoque
+            API -->> Cliente: Erro de estoque insuficiente
+        end
+    end
+
+    API ->> Shipment: Criar envio
+    Shipment -->> API: Tracking gerado
+    API -->> Cliente: Pedido confirmado
+```
+
+### Descrição do Fluxo
+
+* 👤 **Cliente**: Inicia o fluxo
+* 🌐 **API (Controller/Service)**: Orquestra tudo (camada de serviço no Spring)
+* 📦 **BeerOrder**: Representa o pedido principal
+* 📄 **BeerOrderLine**: Itens do pedido (cada cerveja)
+* 🍺 **Beer**: Fonte de verdade do estoque
+* 🧾 **BeerAudit**: Registra alterações (importante para rastreabilidade)
+* 🚚 **BeerOrderShipment**: Responsável pelo envio/logística
 
 ---
 
