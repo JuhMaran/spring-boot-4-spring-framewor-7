@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-class BeerOrderControllerTest {
+class BeerOrderControllerTestIT {
 
   @Autowired
   WebApplicationContext wac;
@@ -47,10 +47,10 @@ class BeerOrderControllerTest {
   @Test
   void testGetBeerOrderById() throws Exception {
     val beerOrder = beerOrderRepository.findAll().get(0);
-
     mockMvc.perform(get(BeerOrderController.BEER_ORDER_PATH_ID, beerOrder.getId())
         .with(jwtRequestPostProcessor))
       .andExpect(status().isOk())
       .andExpect(jsonPath("$.id", is(beerOrder.getId().toString())));
   }
+
 }
