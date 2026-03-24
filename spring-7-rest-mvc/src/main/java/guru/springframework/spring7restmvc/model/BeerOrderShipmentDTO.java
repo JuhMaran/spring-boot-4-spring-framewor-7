@@ -1,29 +1,32 @@
 package guru.springframework.spring7restmvc.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
  * DTO - Data Transfer Objects
  *
  * @author Juliane Maran
- * @since 21/02/2026
+ * @since 27/02/2026
  */
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDTO {
+@AllArgsConstructor
+public class BeerOrderShipmentDTO {
 
   private UUID id;
-  private String name;
-  private Integer version;
-  private LocalDateTime createdDate;
-  private LocalDateTime updateDate;
+  private Long version;
+
+  @NotBlank
+  private String trackingNumber;
+  private Timestamp createdDate;
+  private Timestamp lastModifiedDate;
 
 }

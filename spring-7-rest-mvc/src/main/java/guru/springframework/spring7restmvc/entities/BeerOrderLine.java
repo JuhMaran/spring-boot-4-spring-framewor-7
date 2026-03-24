@@ -1,6 +1,7 @@
 package guru.springframework.spring7restmvc.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -29,7 +30,7 @@ public class BeerOrderLine {
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
   @JdbcTypeCode(SqlTypes.CHAR)
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
+  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
   private UUID id;
 
   @Version
@@ -47,12 +48,15 @@ public class BeerOrderLine {
   }
 
   @ManyToOne
+  @JoinColumn(name = "beer_order_id")
   private BeerOrder beerOrder;
 
   @ManyToOne
+  @JoinColumn(name = "beer_id")
   private Beer beer;
 
-  private Integer orderQuantity = 0;
+  @Min(value = 1, message = "Quantity On Hand must be greater than 0")
+  private Integer orderQuantity = 1;
 
   private Integer quantityAllocated = 0;
 

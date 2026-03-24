@@ -1,13 +1,17 @@
 package guru.springframework.spring7restmvc.bootstrap;
 
 import guru.springframework.spring7restmvc.entities.Beer;
+import guru.springframework.spring7restmvc.entities.BeerOrder;
+import guru.springframework.spring7restmvc.entities.BeerOrderLine;
 import guru.springframework.spring7restmvc.entities.Customer;
 import guru.springframework.spring7restmvc.model.BeerCSVRecord;
 import guru.springframework.spring7restmvc.model.BeerStyle;
+import guru.springframework.spring7restmvc.repositories.BeerOrderRepository;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import guru.springframework.spring7restmvc.repositories.CustomerRepository;
 import guru.springframework.spring7restmvc.services.BeerCsvService;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +25,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Juliane Maran
@@ -33,17 +38,60 @@ public class BootstrapData implements CommandLineRunner {
   private final BeerRepository beerRepository;
   private final CustomerRepository customerRepository;
   private final BeerCsvService beerCsvService;
+  private final BeerOrderRepository beerOrderRepository;
 
   @Transactional
   @Override
-  public void run(String @NonNull ... args) throws Exception {
+  public void run(String... args) throws Exception {
     loadBeerData();
     loadCsvData();
     loadCustomerData();
+    loadOrderData();
+  }
+
+  private void loadOrderData() {
+    if (beerOrderRepository.count() == 0) {
+      val customers = customerRepository.findAll();
+      val beers = beerRepository.findAll();
+
+      val beerIterator = beers.iterator();
+
+      customers.forEach(customer -> {
+
+        beerOrderRepository.save(BeerOrder.builder()
+          .customer(customer)
+          .beerOrderLines(Set.of(
+            BeerOrderLine.builder()
+              .beer(beerIterator.next())
+              .orderQuantity(1)
+              .build(),
+            BeerOrderLine.builder()
+              .beer(beerIterator.next())
+              .orderQuantity(2)
+              .build()
+          )).build());
+
+        beerOrderRepository.save(BeerOrder.builder()
+          .customer(customer)
+          .beerOrderLines(Set.of(
+            BeerOrderLine.builder()
+              .beer(beerIterator.next())
+              .orderQuantity(1)
+              .build(),
+            BeerOrderLine.builder()
+              .beer(beerIterator.next())
+              .orderQuantity(2)
+              .build()
+          )).build());
+      });
+
+      val orders = beerOrderRepository.findAll();
+    }
+
   }
 
   private void loadCsvData() throws FileNotFoundException {
-    if (beerRepository.count() < 10) {
+    if (beerRepository.count() < 10){
       File file = ResourceUtils.getFile("classpath:csvdata/beers.csv");
 
       List<BeerCSVRecord> recs = beerCsvService.convertCSV(file);
@@ -74,7 +122,7 @@ public class BootstrapData implements CommandLineRunner {
   }
 
   private void loadBeerData() {
-    if (beerRepository.count() == 0) {
+    if (beerRepository.count() == 0){
       Beer beer1 = Beer.builder()
         .beerName("Galaxy Cat")
         .beerStyle(BeerStyle.PALE_ALE)

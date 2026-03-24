@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * POJO <br>
  * DTO - Data Transfer Objects
  *
  * @author Juliane Maran

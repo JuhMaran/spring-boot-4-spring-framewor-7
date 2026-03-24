@@ -30,8 +30,8 @@
     * OAuth2 Resource Server 4.0.3
 * **Testing**
     * Testcontainers 4.0.3
-      * JUnit Jupiter 2.0.3
-      * MySQL 2.0.3
+        * JUnit Jupiter 2.0.3
+        * MySQL 2.0.3
 * **Others**
     * MapStruct 1.6.3
     * Open CSV 5.12.0
@@ -103,6 +103,10 @@ Após testar a conexão com sucesso, o ambiente estará pronto para integração
 ---
 
 ## Executar Testes
+
+* 58 Tests Passed
+* 2 ignored
+* 60 tests total
 
 | Objetivo      | Comando                                                |
 |:--------------|:-------------------------------------------------------|
@@ -413,7 +417,7 @@ classDiagram
     }
 
     class ConcreteSubject {
-        -observers : List
+        -observers: List
         -state
     }
 
@@ -428,8 +432,7 @@ classDiagram
     Subject <|-- ConcreteSubject
     Observer <|-- ConcreteObserverA
     Observer <|-- ConcreteObserverB
-
-    ConcreteSubject --> Observer : notifies
+    ConcreteSubject --> Observer: notifies
 ```
 
 ---
@@ -440,7 +443,6 @@ classDiagram
 flowchart LR
     WeatherStation --> PhoneDisplay
     WeatherStation --> TVDisplay
-
     WeatherStation["WeatherStation (Subject)"]
     PhoneDisplay["PhoneDisplay (Observer)"]
     TVDisplay["TVDisplay (Observer)"]

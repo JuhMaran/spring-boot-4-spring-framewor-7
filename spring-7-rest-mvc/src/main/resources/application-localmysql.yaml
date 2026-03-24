@@ -26,7 +26,7 @@ spring:
     open-in-view: true
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         # Show SQL
@@ -35,6 +35,7 @@ spring:
         format_sql: true
   flyway:
     enabled: true
+    locations: classpath:db/migration
   docker:
     compose:
       enabled: false
@@ -42,4 +43,5 @@ spring:
 logging:
   level:
     sql: TRACE
+    #Show bind values
     org.hibernate.orm.jdbc.bind: TRACE

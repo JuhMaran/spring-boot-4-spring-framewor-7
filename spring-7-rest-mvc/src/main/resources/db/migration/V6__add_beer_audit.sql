@@ -1,4 +1,5 @@
-create table restdb.beer_audit
+# V6__add_beer_audit.sql
+create table beer_audit
 (
     audit_id           varchar(36)    not null,
     id                 varchar(36)    not null,

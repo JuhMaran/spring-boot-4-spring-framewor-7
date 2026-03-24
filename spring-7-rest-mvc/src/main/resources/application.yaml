@@ -3,7 +3,7 @@ spring:
   application:
     name: spring-7-rest-mvc
   flyway:
-    enabled: true
+    enabled: false
   docker:
     compose:
       enabled: false
@@ -16,9 +16,9 @@ spring:
       name: user1
       password: password
   # Java Virtual Threads
-  threads:
-    virtual:
-      enabled: true
+#  threads:
+#    virtual:
+#      enabled: true
   # caching
   cache:
     cache-names:
@@ -56,3 +56,4 @@ logging:
     sql: warn # em produção
     org.zalando.logbook: trace  # em produção trocar para INFO
     org.springframework: debug
+#    org.springframework.security: trace
