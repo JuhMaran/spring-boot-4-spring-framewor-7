@@ -1,3 +1,4 @@
+# V3__add-order-table.sql
 drop table if exists beer_order_line;
 drop table if exists beer_order;
 

@@ -42,7 +42,17 @@ public class Customer {
   private LocalDateTime updateDate;
 
   @Builder.Default
-  @OneToMany(mappedBy = "customer")
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, orphanRemoval = true)
   private Set<BeerOrder> beerOrders = new HashSet<>();
+
+  public void removeOrder(BeerOrder order) {
+    beerOrders.remove(order);
+    order.setCustomer(null);
+  }
+
+  public void addOrder(BeerOrder order) {
+    beerOrders.add(order);
+    order.setCustomer(this);
+  }
 
 }

@@ -66,13 +66,12 @@ public class BeerOrder {
   @ManyToOne
   private Customer customer;
 
-  public void setCustomer(Customer customer) {
-    if (customer != null) {
-      this.customer = customer;
-      customer.getBeerOrders().add(this);
-    }
-
-  }
+//  public void setCustomer(Customer customer) {
+//    if (customer != null) {
+//      this.customer = customer;
+//      customer.getBeerOrders().add(this);
+//    }
+//  }
 
   public void setBeerOrderShipment(BeerOrderShipment beerOrderShipment) {
     if (beerOrderShipment != null) {

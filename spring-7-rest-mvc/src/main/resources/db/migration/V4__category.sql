@@ -1,3 +1,4 @@
+# V4__category.sql
 drop table if exists category;
 drop table if exists beer_category;
 

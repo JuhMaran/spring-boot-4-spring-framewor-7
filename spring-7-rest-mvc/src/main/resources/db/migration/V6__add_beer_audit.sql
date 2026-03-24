@@ -1,3 +1,4 @@
+# V6__add_beer_audit.sql
 create table beer_audit
 (
     audit_id           varchar(36)    not null,

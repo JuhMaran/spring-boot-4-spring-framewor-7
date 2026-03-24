@@ -61,8 +61,11 @@ public class Beer {
   @NotNull
   private BigDecimal price;
 
-  @OneToMany(mappedBy = "beer")
-  private Set<BeerOrderLine> beerOrderLines;
+  @Builder.Default
+  @OneToMany(mappedBy = "beer",
+    cascade = CascadeType.REMOVE, // Deleta filhos automaticamente = Se excluir Beer, apaga histórico de pedidos
+    orphanRemoval = true) // remove órfãos
+  private Set<BeerOrderLine> beerOrderLines = new HashSet<>();
 
   @Builder.Default
   @ManyToMany
@@ -71,6 +74,23 @@ public class Beer {
     inverseJoinColumns = @JoinColumn(name = "category_id"))
   private Set<Category> categories = new HashSet<>();
 
+  @CreationTimestamp
+  private LocalDateTime createdDate;
+
+  @UpdateTimestamp
+  private LocalDateTime updateDate;
+
+  // helpers bidirecionais (Manter consistência)
+  public void addOrderLine(BeerOrderLine line) {
+    beerOrderLines.add(line);
+    line.setBeer(this);
+  }
+
+  public void removeOrderLine(BeerOrderLine line) {
+    beerOrderLines.remove(line);
+    line.setBeer(null);
+  }
+
   public void addCategory(Category category) {
     this.categories.add(category);
     category.getBeers().add(this);
@@ -78,13 +98,7 @@ public class Beer {
 
   public void removeCategory(Category category) {
     this.categories.remove(category);
-    category.getBeers().remove(category);
+    category.getBeers().remove(this);
   }
-
-  @CreationTimestamp
-  private LocalDateTime createdDate;
-
-  @UpdateTimestamp
-  private LocalDateTime updateDate;
 
 }

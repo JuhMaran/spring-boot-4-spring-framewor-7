@@ -30,7 +30,7 @@ public class BeerOrderLine {
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
   @JdbcTypeCode(SqlTypes.CHAR)
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
+  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
   private UUID id;
 
   @Version
@@ -48,9 +48,11 @@ public class BeerOrderLine {
   }
 
   @ManyToOne
+  @JoinColumn(name = "beer_order_id")
   private BeerOrder beerOrder;
 
   @ManyToOne
+  @JoinColumn(name = "beer_id")
   private Beer beer;
 
   @Min(value = 1, message = "Quantity On Hand must be greater than 0")
