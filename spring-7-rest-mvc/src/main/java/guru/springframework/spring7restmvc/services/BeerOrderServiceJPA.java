@@ -39,6 +39,15 @@ public class BeerOrderServiceJPA implements BeerOrderService {
   private final CustomerRepository customerRepository;
   private final BeerRepository beerRepository;
 
+  @Override
+  public void deleteOrder(UUID beerOrderId) {
+    if (beerOrderRepository.existsById(beerOrderId)) {
+      beerOrderRepository.deleteById(beerOrderId);
+    } else {
+      throw new NotFoundException();
+    }
+  }
+
   @Transactional
   @Override
   public BeerOrderDTO updateOrder(UUID beerOrderId, BeerOrderUpdateDTO beerOrderUpdateDTO) {
