@@ -1,6 +1,6 @@
-drop table if exists restdb.beer_order_shipment;
+drop table if exists beer_order_shipment;
 
-CREATE TABLE restdb.beer_order_shipment
+CREATE TABLE beer_order_shipment
 (
     id                 VARCHAR(36) NOT NULL PRIMARY KEY,
     beer_order_id      VARCHAR(36) UNIQUE,
@@ -8,12 +8,12 @@ CREATE TABLE restdb.beer_order_shipment
     created_date       TIMESTAMP,
     last_modified_date DATETIME(6) DEFAULT NULL,
     version            BIGINT      DEFAULT NULL,
-    CONSTRAINT bos_pk FOREIGN KEY (beer_order_id) REFERENCES restdb.beer_order (id)
+    CONSTRAINT bos_pk FOREIGN KEY (beer_order_id) REFERENCES beer_order (id)
 ) ENGINE = InnoDB;
 
-ALTER TABLE restdb.beer_order
+ALTER TABLE beer_order
     ADD COLUMN beer_order_shipment_id VARCHAR(36);
 
-ALTER TABLE restdb.beer_order
+ALTER TABLE beer_order
     ADD CONSTRAINT bos_shipment_fk
-        FOREIGN KEY (beer_order_shipment_id) REFERENCES restdb.beer_order_shipment (id);
+        FOREIGN KEY (beer_order_shipment_id) REFERENCES beer_order_shipment (id);
