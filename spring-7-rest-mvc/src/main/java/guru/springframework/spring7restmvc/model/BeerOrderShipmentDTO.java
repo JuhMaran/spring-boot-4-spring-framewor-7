@@ -1,5 +1,6 @@
 package guru.springframework.spring7restmvc.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class BeerOrderShipmentDTO {
 
   private UUID id;
   private Long version;
+
+  @NotBlank
   private String trackingNumber;
   private Timestamp createdDate;
   private Timestamp lastModifiedDate;
