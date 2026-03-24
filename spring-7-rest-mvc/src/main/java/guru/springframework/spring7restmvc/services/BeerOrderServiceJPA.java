@@ -3,17 +3,21 @@ package guru.springframework.spring7restmvc.services;
 import guru.springframework.spring7restmvc.controller.NotFoundException;
 import guru.springframework.spring7restmvc.entities.BeerOrder;
 import guru.springframework.spring7restmvc.entities.BeerOrderLine;
+import guru.springframework.spring7restmvc.entities.BeerOrderShipment;
 import guru.springframework.spring7restmvc.entities.Customer;
 import guru.springframework.spring7restmvc.mappers.BeerOrderMapper;
 import guru.springframework.spring7restmvc.model.BeerOrderCreateDTO;
 import guru.springframework.spring7restmvc.model.BeerOrderDTO;
+import guru.springframework.spring7restmvc.model.BeerOrderUpdateDTO;
 import guru.springframework.spring7restmvc.repositories.BeerOrderRepository;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import guru.springframework.spring7restmvc.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -35,6 +39,50 @@ public class BeerOrderServiceJPA implements BeerOrderService {
   private final CustomerRepository customerRepository;
   private final BeerRepository beerRepository;
 
+  @Transactional
+  @Override
+  public BeerOrderDTO updateOrder(UUID beerOrderId, BeerOrderUpdateDTO beerOrderUpdateDTO) {
+    val order = beerOrderRepository.findById(beerOrderId).orElseThrow(NotFoundException::new);
+
+    order.setCustomer(customerRepository.findById(beerOrderUpdateDTO.getCustomerId()).orElseThrow(NotFoundException::new));
+    order.setCustomerRef(beerOrderUpdateDTO.getCustomerRef());
+
+    beerOrderUpdateDTO.getBeerOrderLines().forEach(beerOrderLine -> {
+
+      if (beerOrderLine.getBeerId() != null) {
+        val foundLine = order.getBeerOrderLines().stream()
+          .filter(beerOrderLine1 -> beerOrderLine1.getId().equals(beerOrderLine.getId()))
+          .findFirst()
+          .orElseThrow(NotFoundException::new);
+        foundLine.setBeer(beerRepository.findById(beerOrderLine.getBeerId())
+          .orElseThrow(NotFoundException::new));
+        foundLine.setOrderQuantity(beerOrderLine.getOrderQuantity());
+        foundLine.setQuantityAllocated(beerOrderLine.getQuantityAllocated());
+      } else {
+        order.getBeerOrderLines().add(BeerOrderLine.builder()
+          .beer(beerRepository.findById(beerOrderLine.getBeerId())
+            .orElseThrow(NotFoundException::new))
+          .orderQuantity(beerOrderLine.getOrderQuantity())
+          .quantityAllocated(beerOrderLine.getQuantityAllocated())
+          .build());
+      }
+    });
+
+    if (beerOrderUpdateDTO.getBeerOrderShipment() != null &&
+      beerOrderUpdateDTO.getBeerOrderShipment().getTrackingNumber() != null) {
+      if (order.getBeerOrderShipment() == null) {
+        order.setBeerOrderShipment(BeerOrderShipment.builder()
+          .trackingNumber(beerOrderUpdateDTO.getBeerOrderShipment().getTrackingNumber())
+          .build());
+      } else {
+        order.getBeerOrderShipment()
+          .setTrackingNumber(beerOrderUpdateDTO.getBeerOrderShipment().getTrackingNumber());
+      }
+    }
+
+    return beerOrderMapper.beerOrderToBeerOrderDto(beerOrderRepository.save(order));
+  }
+
   @Override
   public BeerOrder createOrder(BeerOrderCreateDTO beerOrderCreateDTO) {
     Customer customer = customerRepository.findById(beerOrderCreateDTO.getCustomerId())
@@ -44,9 +92,10 @@ public class BeerOrderServiceJPA implements BeerOrderService {
 
     beerOrderCreateDTO.getBeerOrderLines().forEach(beerOrderLine -> beerOrderLines
       .add(BeerOrderLine.builder()
-      .beer(beerRepository.findById(beerOrderLine.getBeerId()).orElseThrow(NotFoundException::new))
-      .orderQuantity(beerOrderLine.getOrderQuantity())
-      .build()));
+        .beer(beerRepository.findById(beerOrderLine.getBeerId())
+          .orElseThrow(NotFoundException::new))
+        .orderQuantity(beerOrderLine.getOrderQuantity())
+        .build()));
 
     return beerOrderRepository.save(BeerOrder.builder()
       .customer(customer)

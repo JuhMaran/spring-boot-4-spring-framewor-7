@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import tools.jackson.databind.ObjectMapper;
 
@@ -51,19 +52,21 @@ class BeerOrderControllerTestIT {
       .build();
   }
 
+  @Transactional
   @Test
   void testUpdateOrder() throws Exception {
     val beerOrder = beerOrderRepository.findAll().get(0);
 
     Set<BeerOrderLineUpdateDTO> lines = new HashSet<>();
 
-    beerOrder.getBeerOrderLines().forEach(beerOrderLine -> lines
-      .add(BeerOrderLineUpdateDTO.builder()
+    beerOrder.getBeerOrderLines().forEach(beerOrderLine -> {
+      lines.add(BeerOrderLineUpdateDTO.builder()
         .id(beerOrderLine.getId())
         .beerId(beerOrderLine.getBeer().getId())
         .orderQuantity(beerOrderLine.getOrderQuantity())
         .quantityAllocated(beerOrderLine.getQuantityAllocated())
-        .build()));
+        .build());
+    });
 
     val beerOrderUpdateDTO = BeerOrderUpdateDTO.builder()
       .customerId(beerOrder.getCustomer().getId())
@@ -80,7 +83,6 @@ class BeerOrderControllerTestIT {
         .with(jwtRequestPostProcessor))
       .andExpect(status().isOk())
       .andExpect(jsonPath("$.customerRef", is("TestRef")));
-
   }
 
   @Test

@@ -3,6 +3,7 @@ package guru.springframework.spring7restmvc.controller;
 import guru.springframework.spring7restmvc.entities.BeerOrder;
 import guru.springframework.spring7restmvc.model.BeerOrderCreateDTO;
 import guru.springframework.spring7restmvc.model.BeerOrderDTO;
+import guru.springframework.spring7restmvc.model.BeerOrderUpdateDTO;
 import guru.springframework.spring7restmvc.services.BeerOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,11 @@ public class BeerOrderController {
   public static final String BEER_ORDER_PATH_ID = BEER_ORDER_PATH + "/{beerOrderId}";
 
   private final BeerOrderService beerOrderService;
+
+  @PutMapping(BEER_ORDER_PATH_ID)
+  public ResponseEntity<BeerOrderDTO> updateOrder(@PathVariable UUID beerOrderId, @RequestBody BeerOrderUpdateDTO beerOrderUpdateDTO) {
+    return ResponseEntity.ok(beerOrderService.updateOrder(beerOrderId, beerOrderUpdateDTO));
+  }
 
   @PostMapping(BEER_ORDER_PATH)
   public ResponseEntity<Void> createOrder(@RequestBody BeerOrderCreateDTO beerOrderCreateDTO) {
