@@ -8,6 +8,7 @@ import guru.springframework.spring7restmvc.events.BeerUpdatedEvent;
 import guru.springframework.spring7restmvc.mappers.BeerMapper;
 import guru.springframework.spring7restmvc.model.BeerDTO;
 import guru.springframework.spring7restmvc.model.BeerStyle;
+import guru.springframework.spring7restmvc.repositories.BeerOrderRepository;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import lombok.val;
 import org.hamcrest.core.IsNull;
@@ -70,6 +71,9 @@ class BeerControllerIT {
   WebApplicationContext wac;
 
   MockMvc mockMvc;
+
+  @Autowired
+  private BeerOrderRepository beerOrderRepository;
 
   @BeforeEach
   void setUp() {
@@ -144,7 +148,13 @@ class BeerControllerIT {
 
   @Test
   void deleteByIdFoundMVC() throws Exception {
-    Beer beer = beerRepository.findAll().get(0);
+
+    Beer beer = beerRepository.save(Beer.builder()
+      .beerName("New Beer")
+      .beerStyle(BeerStyle.IPA)
+      .upc("123123")
+      .price(BigDecimal.TEN)
+      .build());
 
     mockMvc.perform(delete(BeerController.BEER_PATH_ID, beer.getId())
         .with(BeerControllerTest.jwtRequestPostProcessor)
@@ -361,13 +371,16 @@ class BeerControllerIT {
   @Test
   void testGetById() {
     Beer beer = beerRepository.findAll().get(0);
+
     BeerDTO dto = beerController.getBeerById(beer.getId());
+
     assertThat(dto).isNotNull();
   }
 
   @Test
   void testListBeers() {
     Page<BeerDTO> dtos = beerController.listBeers(null, null, false, 1, 2413);
+
     assertThat(dtos.getContent().size()).isEqualTo(1000);
   }
 
@@ -375,8 +388,11 @@ class BeerControllerIT {
   @Transactional
   @Test
   void testEmptyList() {
+    beerOrderRepository.deleteAll();
+
     beerRepository.deleteAll();
     Page<BeerDTO> dtos = beerController.listBeers(null, null, false, 1, 25);
+
     assertThat(dtos.getContent().size()).isEqualTo(0);
   }
 

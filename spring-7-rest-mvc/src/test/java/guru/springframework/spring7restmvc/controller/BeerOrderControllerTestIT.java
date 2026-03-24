@@ -103,18 +103,15 @@ class BeerOrderControllerTestIT {
 
   @Test
   void testCreateBeerOrder() throws Exception {
-
     val customer = customerRepository.findAll().get(0);
     val beer = beerRepository.findAll().get(0);
 
     val beerOrderCreateDTO = BeerOrderCreateDTO.builder()
       .customerId(customer.getId())
-      .beerOrderLines(Set.of(
-        BeerOrderLineCreateDTO.builder()
-          .beerId(beer.getId())
-          .orderQuantity(1)
-          .build()
-      ))
+      .beerOrderLines(Set.of(BeerOrderLineCreateDTO.builder()
+        .beerId(beer.getId())
+        .orderQuantity(1)
+        .build()))
       .build();
 
     mockMvc.perform(post(BeerOrderController.BEER_ORDER_PATH)
@@ -123,7 +120,6 @@ class BeerOrderControllerTestIT {
         .with(jwtRequestPostProcessor))
       .andExpect(status().isCreated())
       .andExpect(header().exists("Location"));
-
   }
 
   @Test
@@ -137,6 +133,7 @@ class BeerOrderControllerTestIT {
   @Test
   void testGetBeerOrderById() throws Exception {
     val beerOrder = beerOrderRepository.findAll().get(0);
+
     mockMvc.perform(get(BeerOrderController.BEER_ORDER_PATH_ID, beerOrder.getId())
         .with(jwtRequestPostProcessor))
       .andExpect(status().isOk())
