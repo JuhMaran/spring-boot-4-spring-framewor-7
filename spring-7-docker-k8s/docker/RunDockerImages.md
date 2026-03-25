@@ -141,8 +141,7 @@ docker run -d --name mongo -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_RO
 Run Reactive Mongo
 
 ```shell
-docker run --name reactive-mongo -d  -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 \
- -e SFG_MONGOHOST=mongo -e SERVER_PORT=8080 --link auth-server:auth-server --link mongo:mongo spring-7-reactive-mongo:0.0.1-SNAPSHOT
+docker run --name reactive-mongo -d  -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 -e SFG_MONGOHOST=mongo -e SERVER_PORT=8080 --link auth-server:auth-server --link mongo:mongo spring-7-reactive-mongo:0.0.1-SNAPSHOT
 ```
 
 Rerun gateway with link to auth-server and rest-mvc and reactive and reactive-mongo
@@ -150,8 +149,33 @@ Rerun gateway with link to auth-server and rest-mvc and reactive and reactive-mo
 ```shell
 docker stop gateway 
 docker rm gateway
-docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc \
---link reactive:reactive --link reactive-mongo:reactive-mongo spring-7-gateway:0.0.1-SNAPSHOT
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc --link reactive:reactive --link reactive-mongo:reactive-mongo spring-7-gateway:0.0.1-SNAPSHOT
+```
+
+---
+
+```shell
+docker run --name auth-server -h auth-server -d -p 9000:9000 spring-7-auth-server:0.0.1-SNAPSHOT
+
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server spring-7-gateway:0.0.1-SNAPSHOT
+
+docker stop gateway
+
+docker rm gateway
+
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc spring-7-gateway:0.0.1-SNAPSHOT
+
+docker run --name rest-mvc -d -p 8081:8081 -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER=http://auth-server:9000 --link auth-server:auth-server spring-7-rest-mvc:0.0.1-SNAPSHOT
+
+docker ps
+
+docker logs rest-mvc
+
+docker stop gateway
+
+docker rm gateway
+
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc spring-7-gateway:0.0.1-SNAPSHOT
 ```
 
 

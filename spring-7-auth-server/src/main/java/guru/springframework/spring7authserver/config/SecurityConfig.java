@@ -55,7 +55,8 @@ public class SecurityConfig {
   public SecurityFilterChain actuatorSecurityFilterChain(HttpSecurity http) throws Exception {
     return http
       .securityMatcher(EndpointRequest.toAnyEndpoint())
-      .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+      .authorizeHttpRequests(authorize -> authorize
+        .anyRequest().permitAll())
       .build();
   }
 
@@ -110,10 +111,10 @@ public class SecurityConfig {
    * Users
    */
   @Bean
-  public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+  public UserDetailsService userDetailsService() {
     UserDetails user = User.builder()
       .username("user")
-      .password(encoder.encode("password"))
+      .password("password")
       .roles("USER")
       .build();
     return new InMemoryUserDetailsManager(user);
@@ -123,10 +124,10 @@ public class SecurityConfig {
    * OAuth Client
    */
   @Bean
-  public RegisteredClientRepository registeredClientRepository(PasswordEncoder encoder) {
+  public RegisteredClientRepository registeredClientRepository() {
     RegisteredClient client = RegisteredClient.withId(UUID.randomUUID().toString())
       .clientId("oidc-client")
-      .clientSecret(encoder.encode("secret"))
+      .clientSecret("{noop}secret")
       .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
       .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
       .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -188,6 +189,7 @@ public class SecurityConfig {
   public AuthorizationServerSettings authorizationServerSettings() {
     return AuthorizationServerSettings
       .builder()
+      .issuer("http://auth-server:9000")
       .build();
   }
 

@@ -64,6 +64,7 @@ docker start gateway
 
 # Images
 
+* `docker.io/library/...`
 * `spring-7-gateway:0.0.1-SNAPSHOT`
 * `spring-7-auth-server:0.0.1-SNAPSHOT`
 * `spring-7-rest-mvc:0.0.1-SNAPSHOT`
