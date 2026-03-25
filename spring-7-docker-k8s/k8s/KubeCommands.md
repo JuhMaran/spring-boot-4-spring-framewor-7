@@ -63,7 +63,7 @@ kubectl logs mongo-<pod-id>
 Create Deployment for Auth-server
 
 ```bash
-kubectl create deployment auth-server --image=spring-6-auth-server:0.0.1-SNAPSHOT --dry-run=client -o yaml > auth-server-deployment.yaml
+kubectl create deployment auth-server --image=spring-7-auth-server:0.0.1-SNAPSHOT --dry-run=client -o yaml > auth-server-deployment.yaml
 ```
 
 Apply Deployment for Auth-server
