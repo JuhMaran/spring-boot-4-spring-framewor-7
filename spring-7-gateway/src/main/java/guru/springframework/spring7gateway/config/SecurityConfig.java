@@ -21,12 +21,11 @@ public class SecurityConfig {
 
   @Bean
   @Order(1)
-  public SecurityWebFilterChain actuatorSecurityFilterChain(ServerHttpSecurity http)
-    throws Exception {
+  public SecurityWebFilterChain actuatorSecurityFilterChain(ServerHttpSecurity http) throws Exception {
     return http
       .securityMatcher(EndpointRequest.toAnyEndpoint())
-      .authorizeExchange(authorize ->
-        authorize.anyExchange().permitAll())
+      .authorizeExchange(authorize -> authorize
+        .anyExchange().permitAll())
       .build();
   }
 
@@ -34,10 +33,11 @@ public class SecurityConfig {
   @Order(2)
   public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
     return http
-      .authorizeExchange(authorizeExchangeSpec ->
-        authorizeExchangeSpec.anyExchange().authenticated())
-      .oauth2ResourceServer(oAuth2ResourceServerSpec ->
-        oAuth2ResourceServerSpec.jwt(Customizer.withDefaults()))
+      .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec
+        .pathMatchers("/oauth2/**", "/oauth2/token").permitAll()
+        .anyExchange().authenticated())
+      .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
+        .jwt(Customizer.withDefaults()))
       .csrf(ServerHttpSecurity.CsrfSpec::disable)
       .build();
   }
