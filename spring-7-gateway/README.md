@@ -80,3 +80,7 @@ curl --location 'http://localhost:8080/actuator'
   }
 }
 ```
+
+---
+
+Building image 'docker.io/library/spring-7-gateway:0.0.1-SNAPSHOT'
