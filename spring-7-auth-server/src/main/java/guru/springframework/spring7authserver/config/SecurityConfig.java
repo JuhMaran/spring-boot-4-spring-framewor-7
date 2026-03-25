@@ -95,8 +95,7 @@ public class SecurityConfig {
    */
   @Bean
   @Order(3)
-  public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-    throws Exception {
+  public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
     http
       .authorizeHttpRequests((authorize) -> authorize
         .anyRequest().authenticated()
@@ -111,10 +110,11 @@ public class SecurityConfig {
    * Users
    */
   @Bean
-  public UserDetailsService userDetailsService() {
+  public UserDetailsService userDetailsService(PasswordEncoder encoder) {
     UserDetails user = User.builder()
       .username("user")
-      .password("password")
+      // .password("password")
+      .password(encoder.encode("password"))
       .roles("USER")
       .build();
     return new InMemoryUserDetailsManager(user);
@@ -124,16 +124,19 @@ public class SecurityConfig {
    * OAuth Client
    */
   @Bean
-  public RegisteredClientRepository registeredClientRepository() {
+  public RegisteredClientRepository registeredClientRepository(PasswordEncoder encoder) {
     RegisteredClient client = RegisteredClient.withId(UUID.randomUUID().toString())
       .clientId("oidc-client")
-      .clientSecret("{noop}secret")
+//      .clientSecret("{noop}secret")
+      .clientSecret(encoder.encode("secret"))
       .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
       .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
       .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
       .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
       .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
       .redirectUri("http://127.0.0.1:8080/authorized")
+      .redirectUri("http://gateway:8080/login/oauth2/code/oidc-client")
+      .redirectUri("http://gateway:8080/authorized")
       .postLogoutRedirectUri("http://127.0.0.1:8080/")
       .scope(OidcScopes.OPENID)
       .scope(OidcScopes.PROFILE)
