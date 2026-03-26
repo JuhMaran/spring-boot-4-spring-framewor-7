@@ -1,3 +1,6 @@
+# application.yaml
+server:
+  port: 8080
 spring:
   application:
     name: spring-7-gateway
@@ -11,6 +14,10 @@ spring:
       server:
         webflux:
           routes:
+            - id: spring-7-auth-server
+              uri: http://localhost:9000
+              predicates:
+                - Path=/oauth2/**
             - id: spring-7-rest-mvc
               uri: http://localhost:8081
               predicates:
