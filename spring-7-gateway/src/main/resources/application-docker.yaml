@@ -16,7 +16,18 @@ spring:
       server:
         webflux:
           routes:
-
+            - id: spring-7-rest-mvc
+              uri: http://rest-mvc:8080
+              predicates:
+                - Path=/api/v1/**
+            - id: spring-7-reactive
+              uri: http://reactive:8080
+              predicates:
+                - Path=/api/v2/**
+            - id: spring-7-reactive-mongo
+              uri: http://reactive-mongo:8080
+              predicates:
+                - Path=/api/v3/**
             - id: spring-7-auth-server
               uri: http://auth-server:9000
               predicates:
@@ -25,21 +36,6 @@ spring:
                 - name: SetRequestHostHeader
                   args:
                     host: auth-server
-
-            - id: spring-7-rest-mvc
-              uri: http://rest-mvc:8080
-              predicates:
-                - Path=/api/v1/**
-
-            - id: spring-7-reactive
-              uri: http://reactive:8080
-              predicates:
-                - Path=/api/v2/**
-
-            - id: spring-7-reactive-mongo
-              uri: http://reactive-mongo:8080
-              predicates:
-                - Path=/api/v3/**
 
 management:
   endpoint:

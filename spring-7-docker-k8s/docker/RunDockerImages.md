@@ -1,10 +1,10 @@
 # Images
 
-* `spring-7-gateway:0.0.1-SNAPSHOT`
+* `spring-7-gateway:0.0.1-SNAPSHOT'`
 * `spring-7-auth-server:0.0.1-SNAPSHOT`
 * `spring-7-rest-mvc:0.0.1-SNAPSHOT`
-* `spring-7-reactive-mongo:0.0.1-SNAPSHOT`
 * `spring-7-reactive:0.0.1-SNAPSHOT`
+* `spring-7-reactive-mongo:0.0.1-SNAPSHOT`
 
 Run Gateway
 
@@ -51,16 +51,13 @@ docker logs rest-mvc
 Run Rest MVC
 
 ```shell
-docker run --name rest-mvc -d -p 8081:8080 
-spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8080 spring-7-rest-mvc:0.0.1-SNAPSHOT
 ```
 
 Run Rest MVC on port 8081
 
 ```shell
-docker run --name rest-mvc -d -p 8081:8081 
--e SERVER_PORT=8081 
-spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8081 -e SERVER_PORT=8081 spring-7-rest-mvc:0.0.1-SNAPSHOT
 ```
 
 Run Rest MVC on port 8081, Apple Silicon
@@ -72,22 +69,15 @@ docker run --name rest-mvc -d -p 8081:8081 -e SERVER_PORT=8081 --platform linux/
 Run Rest MVC with profile localmysql
 
 ```shell
-docker run --name rest-mvc -d -p 8081:8081 
--e SPRING_PROFILES_ACTIVE=localmysql 
-spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8081 -e SPRING_PROFILES_ACTIVE=localmysql spring-7-rest-mvc:0.0.1-SNAPSHOT
 ```
 
 Run Gateway with active profile docker
 
 ```shell
-docker run --name gateway -d -p 8080:8080 
--e SPRING_PROFILES_ACTIVE=docker 
-spring-7-gateway:0.0.1-SNAPSHOT
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker spring-7-gateway:0.0.1-SNAPSHOT
 
-docker run --name gateway -d -p 8080:8080 
--e SPRING_PROFILES_ACTIVE=docker 
---link auth-server:auth-server 
-spring-7-gateway:0.0.1-SNAPSHOT
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server spring-7-gateway:0.0.1-SNAPSHOT
 ```
 
 Run Auth Server with host name set to auth-server
@@ -99,33 +89,21 @@ docker run --name auth-server -h auth-server -d -p 9000:9000 spring-7-auth-serve
 Run rest-mvc with jwt issuer host set and link
 
 ```shell
-docker run --name rest-mvc -d -p 8081:8080 
--e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 
---link auth-server:auth-server 
-spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8080 -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 --link auth-server:auth-server spring-7-rest-mvc:0.0.1-SNAPSHOT
 ```
 
 Rerun gateway with link to auth-server and rest-mvc
 
 ```shell
 docker stop gateway 
-docker rm gateway
-docker run --name gateway -d -p 8080:8080 
--e SPRING_PROFILES_ACTIVE=docker 
---link auth-server:auth-server 
---link rest-mvc:rest-mvc 
-spring-7-gateway:0.0.1-SNAPSHOT
+docker rm gateway 
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc spring-7-gateway:0.0.1-SNAPSHOT
 ```
 
 Run MySQL
 
 ```shell
-docker run --name mysql -d 
--e MYSQL_USER=restadmin 
--e MYSQL_PASSWORD=password 
--e MYSQL_DATABASE=restdb 
--e MYSQL_ROOT_PASSWORD=password 
-mysql:8
+docker run --name mysql -d -e MYSQL_USER=restadmin -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=restdb -e MYSQL_ROOT_PASSWORD=password mysql:8
 ```
 
 Run rest-mvc with link to mysql
@@ -135,22 +113,13 @@ docker stop rest-mvc
 
 docker rm rest-mvc
 
-docker run --name rest-mvc -d -p 8081:8080 
--e SPRING_PROFILES_ACTIVE=localmysql 
--e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 
--e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/restdb 
--e SERVER_PORT=8080 
---link auth-server:auth-server 
---link mysql:mysql spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8080 -e SPRING_PROFILES_ACTIVE=localmysql -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/restdb -e SERVER_PORT=8080 --link auth-server:auth-server --link mysql:mysql spring-7-rest-mvc:0.0.1-SNAPSHOT
 ```
 
 Run Reactive Container
 
 ```shell    
-docker run --name reactive -d -p 8082:8082 
--e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 
---link auth-server:auth-server 
-spring-7-reactive:0.0.1-SNAPSHOT
+docker run --name reactive -d -p 8082:8082 -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 --link auth-server:auth-server spring-7-reactive:0.0.1-SNAPSHOT
 ```
 
 Rerun gateway with link to auth-server and rest-mvc and reactive
@@ -160,15 +129,7 @@ docker stop gateway
 
 docker rm gateway
 
-docker run 
---name gateway 
--d 
--p 8080:8080 
--e SPRING_PROFILES_ACTIVE=docker 
---link auth-server:auth-server 
---link rest-mvc:rest-mvc
---link reactive:reactive 
-spring-7-gateway:0.0.1-SNAPSHOT
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc --link reactive:reactive spring-7-gateway:0.0.1-SNAPSHOT
 ```
 
 Run MongoDB
@@ -197,54 +158,25 @@ _Comandos que utilizei para executar as minhas aplicações_
 
 ```shell
 # Auth Server
-docker run --name auth-server 
--h auth-server 
--d -p 9000:9000 
-spring-7-auth-server:0.0.1-SNAPSHOT
+docker run --name auth-server -h auth-server -d -p 9000:9000 spring-7-auth-server:0.0.1-SNAPSHOT
 
 # Rest MVC + Auth Server
-docker run --name rest-mvc 
--d -p 8081:8080 
--e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 
---link auth-server:auth-server 
-spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8080 -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 --link auth-server:auth-server spring-7-rest-mvc:0.0.1-SNAPSHOT
 
 # Gateway + Auth Server + Rest MVC
-docker run --name gateway -d -p 8080:8080 
--e SPRING_PROFILES_ACTIVE=docker 
---link auth-server:auth-server 
---link rest-mvc:rest-mvc 
-spring-7-gateway:0.0.1-SNAPSHOT
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc spring-7-gateway:0.0.1-SNAPSHOT
 
 # MySQL
-docker run --name mysql -d -p 3306:3306 
--e MYSQL_ROOT_PASSWORD=root 
--e MYSQL_DATABASE=restdb mysql:latest
+docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=restdb mysql:latest
 
 # Rest MVC + Auth Server + MySQL
-docker run --name rest-mvc -d -p 8081:8080 
--e SPRING_PROFILES_ACTIVE=localmysql 
--e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 
--e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/restdb 
--e SERVER_PORT=8080 
---link auth-server:auth-server 
---link mysql:mysql 
-spring-7-rest-mvc:0.0.1-SNAPSHOT
+docker run --name rest-mvc -d -p 8081:8080 -e SPRING_PROFILES_ACTIVE=localmysql -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/restdb -e SERVER_PORT=8080 --link auth-server:auth-server --link mysql:mysql spring-7-rest-mvc:0.0.1-SNAPSHOT
 
 # Reactive + Auth Server
-docker run --name reactive -d -p 8082:8082 
--e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 
--e SERVER_PORT=8080 
---link auth-server:auth-server 
-spring-7-reactive:0.0.1-SNAPSHOT
+docker run --name reactive -d -p 8082:8082 -e SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://auth-server:9000 -e SERVER_PORT=8080 --link auth-server:auth-server spring-7-reactive:0.0.1-SNAPSHOT
 
 # Gateway + Auth Server + Rest MVC + Reactive
-docker run --name gateway -d -p 8080:8080 
--e SPRING_PROFILES_ACTIVE=docker 
---link auth-server:auth-server 
---link rest-mvc:rest-mvc 
---link reactive:reactive 
-spring-7-gateway:0.0.1-SNAPSHOT
+docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker --link auth-server:auth-server --link rest-mvc:rest-mvc --link reactive:reactive spring-7-gateway:0.0.1-SNAPSHOT
 
 # MongoDB
 docker run --name mongo -d -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root -p 27017:27017 mongo

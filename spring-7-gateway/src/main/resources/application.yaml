@@ -14,10 +14,6 @@ spring:
       server:
         webflux:
           routes:
-            - id: spring-7-auth-server
-              uri: http://localhost:9000
-              predicates:
-                - Path=/oauth2/**
             - id: spring-7-rest-mvc
               uri: http://localhost:8081
               predicates:
@@ -30,6 +26,10 @@ spring:
               uri: http://localhost:8083
               predicates:
                 - Path=/api/v3/**
+            - id: spring-7-auth-server
+              uri: http://localhost:9000
+              predicates:
+                - Path=/oauth2/**
 
 # Actuator Kubernetes Integration
 management:

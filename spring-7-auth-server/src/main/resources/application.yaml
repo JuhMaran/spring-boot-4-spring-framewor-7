@@ -5,7 +5,6 @@ spring:
   application:
     name: spring-7-auth-server
 
-# Actuator Kubernetes Integration
 management:
   endpoint:
     health:
@@ -16,8 +15,3 @@ management:
       enabled: true
     livenessstate:
       enabled: true
-
-#logging:
-#  level:
-#    org.springframework.security: trace
-#    org.springframework.security.oauth2: trace
