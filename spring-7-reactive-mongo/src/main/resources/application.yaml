@@ -3,8 +3,11 @@ server:
 spring:
   application:
     name: spring-7-reactive-mongo
+  docker:
+    compose:
+      enabled: false
   mongodb:
-    host: localhost
+    host: mongo
     port: 27017
     username: root
     password: root
