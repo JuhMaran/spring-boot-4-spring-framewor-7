@@ -5,8 +5,8 @@ spring:
   datasource:
     # 127.0.0.1 or localhost
     url: "jdbc:mysql://127.0.0.1:3306/restdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
-    username: root
-    password: root
+    username: restadmin # root
+    password: password # root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       pool-name: RestDB-Pool

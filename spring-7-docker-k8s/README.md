@@ -67,4 +67,15 @@ docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker -e SP
 
 - [Mastering Thymeleaf with Spring Boot](https://www.udemy.com/course/mastering-thymeleaf-with-spring)
 
+---
+
+## Comandos
+
+* Linux/MacOS: `ls -ltra`
+* Inicializa: `docker compose up -d`
+* Pausa: `docker compose stop`
+* `docker compose ls -a`
+* `docker ps`
+* Remove: `docker compose down`
+* `docker container ls`
 

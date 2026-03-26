@@ -22,24 +22,24 @@ public class SecurityConfig {
   @Bean
   @Order(1)
   public SecurityWebFilterChain actuatorSecurityFilterChain(ServerHttpSecurity http) throws Exception {
-    return http
-      .securityMatcher(EndpointRequest.toAnyEndpoint())
+    http.securityMatcher(EndpointRequest.toAnyEndpoint())
       .authorizeExchange(authorize -> authorize
-        .anyExchange().permitAll())
-      .build();
+        .anyExchange().permitAll());
+    return http.build();
   }
 
   @Bean
   @Order(2)
   public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
-    return http
-      .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec
+
+    http.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec
         .pathMatchers("/oauth2/**", "/oauth2/token").permitAll()
         .anyExchange().authenticated())
       .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
         .jwt(Customizer.withDefaults()))
-      .csrf(ServerHttpSecurity.CsrfSpec::disable)
-      .build();
+      .csrf(ServerHttpSecurity.CsrfSpec::disable);
+
+    return http.build();
   }
 
 }
