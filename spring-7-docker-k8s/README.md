@@ -77,4 +77,5 @@ docker run --name gateway -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=docker -e SP
 * `docker compose ls -a`
 * `docker ps`
 * Remove: `docker compose down`
+* `docker container ls`
 
