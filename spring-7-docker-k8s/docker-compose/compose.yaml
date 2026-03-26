@@ -1,0 +1,29 @@
+services:
+  # DATABASE
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: restdb
+      MYSQL_USER: restadmin
+      MYSQL_PASSWORD: password
+    expose:
+      - "3306"
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    platform: linux/amd64
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    expose:
+      - "27017"
+
+  # Authentication
+
+  # Services
+
+  # Gateway
