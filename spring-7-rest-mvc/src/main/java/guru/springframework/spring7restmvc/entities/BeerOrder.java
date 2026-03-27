@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
@@ -29,12 +30,14 @@ import java.util.UUID;
 public class BeerOrder {
 
   public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerRef,
-                   Customer customer, Set<BeerOrderLine> beerOrderLines, BeerOrderShipment beerOrderShipment) {
+                   BigDecimal paymentAmount, Customer customer, Set<BeerOrderLine> beerOrderLines,
+                   BeerOrderShipment beerOrderShipment) {
     this.id = id;
     this.version = version;
     this.createdDate = createdDate;
     this.lastModifiedDate = lastModifiedDate;
     this.customerRef = customerRef;
+    this.setPaymentAmount(paymentAmount);
     this.setCustomer(customer);
     this.setBeerOrderLines(beerOrderLines);
     this.setBeerOrderShipment(beerOrderShipment);
@@ -44,7 +47,7 @@ public class BeerOrder {
   @GeneratedValue(generator = "UUID")
   @UuidGenerator
   @JdbcTypeCode(SqlTypes.CHAR)
-  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
+  @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
   private UUID id;
 
   @Version
@@ -62,6 +65,8 @@ public class BeerOrder {
   }
 
   private String customerRef;
+
+  private BigDecimal paymentAmount;
 
   @ManyToOne
   private Customer customer;
