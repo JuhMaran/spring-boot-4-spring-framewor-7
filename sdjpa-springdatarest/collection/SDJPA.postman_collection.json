@@ -1,0 +1,1057 @@
+{
+  "info": {
+    "_postman_id": "166d4232-7640-4c65-8b8d-b7d6ab55257b",
+    "name": "SDJPA",
+    "description": "```\nSDJPA - Spring Data REST com JPA\n\n ```",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13771815",
+    "_collection_link": "https://go.postman.co/collection/13771815-166d4232-7640-4c65-8b8d-b7d6ab55257b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "beer",
+              "item": [
+                {
+                  "name": "beerId",
+                  "item": [
+                    {
+                      "name": "Get Beer by ID",
+                      "request": {
+                        "auth": {
+                          "type": "noauth"
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer",
+                            "ce5289f4-78ef-4b59-b8c7-0f569f199204"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "200 OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204",
+                              "protocol": "http",
+                              "host": [
+                                "localhost"
+                              ],
+                              "port": "8080",
+                              "path": [
+                                "api",
+                                "v1",
+                                "beer",
+                                "ce5289f4-78ef-4b59-b8c7-0f569f199204"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "ETag",
+                              "value": "\"0\""
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": "",
+                              "type": "text"
+                            },
+                            {
+                              "key": "Transfer-Encoding",
+                              "value": "chunked"
+                            },
+                            {
+                              "key": "Date",
+                              "value": "Mon, 02 Mar 2026 19:32:35 GMT"
+                            },
+                            {
+                              "key": "Keep-Alive",
+                              "value": "timeout=60"
+                            },
+                            {
+                              "key": "Connection",
+                              "value": "keep-alive"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204\"\n        },\n        \"beer\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204\"\n        }\n    },\n    \"beerName\": \"Mango Bobs\",\n    \"beerStyle\": \"ALE\",\n    \"upc\": \"0631234200036\",\n    \"quantityOnHand\": 2351,\n    \"price\": 97.53,\n    \"createdDate\": \"2026-03-02T18:18:32.685Z\",\n    \"lastModifiedDate\": \"2026-03-02T18:18:32.685Z\"\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Update Beer by Id",
+                      "request": {
+                        "auth": {
+                          "type": "noauth"
+                        },
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"beerName\": \"Mango Bobs - JTs 3\",\r\n    \"beerStyle\": \"ALE\",\r\n    \"upc\": \"0631234200036\",\r\n    \"quantityOnHand\": 2351,\r\n    \"price\": 97.53\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer",
+                            "d4646e86-37eb-4f1b-a5bf-a8c032190363"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "200 OK",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"beerName\": \"Mango Bobs - JTs 3\",\r\n    \"beerStyle\": \"ALE\",\r\n    \"upc\": \"0631234200036\",\r\n    \"quantityOnHand\": 2351,\r\n    \"price\": 97.53\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363",
+                              "protocol": "http",
+                              "host": [
+                                "localhost"
+                              ],
+                              "port": "8080",
+                              "path": [
+                                "api",
+                                "v1",
+                                "beer",
+                                "d4646e86-37eb-4f1b-a5bf-a8c032190363"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "ETag",
+                              "value": "\"1\""
+                            },
+                            {
+                              "key": "Location",
+                              "value": "http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363"
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": "",
+                              "type": "text"
+                            },
+                            {
+                              "key": "Transfer-Encoding",
+                              "value": "chunked"
+                            },
+                            {
+                              "key": "Date",
+                              "value": "Mon, 02 Mar 2026 19:27:00 GMT"
+                            },
+                            {
+                              "key": "Keep-Alive",
+                              "value": "timeout=60"
+                            },
+                            {
+                              "key": "Connection",
+                              "value": "keep-alive"
+                            }
+                          ],
+                          "cookie": [
+                            {
+                              "expires": "Invalid Date",
+                              "domain": "",
+                              "path": ""
+                            }
+                          ],
+                          "body": "{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363\"\n        },\n        \"beer\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363\"\n        }\n    },\n    \"beerName\": \"Mango Bobs - JTs 3\",\n    \"beerStyle\": \"ALE\",\n    \"upc\": \"0631234200036\",\n    \"quantityOnHand\": 2351,\n    \"price\": 97.53,\n    \"createdDate\": \"2026-03-02T19:16:25.728Z\",\n    \"lastModifiedDate\": \"2026-03-02T19:27:00.580Z\"\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Delete Beer",
+                      "request": {
+                        "auth": {
+                          "type": "noauth"
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer/df4cecc9-6461-4cc4-8454-7b122a59d6ea",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer",
+                            "df4cecc9-6461-4cc4-8454-7b122a59d6ea"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "200 OK",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "http://localhost:8080/api/v1/beer/df4cecc9-6461-4cc4-8454-7b122a59d6ea",
+                              "protocol": "http",
+                              "host": [
+                                "localhost"
+                              ],
+                              "port": "8080",
+                              "path": [
+                                "api",
+                                "v1",
+                                "beer",
+                                "df4cecc9-6461-4cc4-8454-7b122a59d6ea"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/vnd.hal+json"
+                            },
+                            {
+                              "key": "Transfer-Encoding",
+                              "value": "chunked"
+                            },
+                            {
+                              "key": "Date",
+                              "value": "Mon, 02 Mar 2026 19:36:18 GMT"
+                            },
+                            {
+                              "key": "Keep-Alive",
+                              "value": "timeout=60"
+                            },
+                            {
+                              "key": "Connection",
+                              "value": "keep-alive"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/df4cecc9-6461-4cc4-8454-7b122a59d6ea\"\n        },\n        \"beer\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/df4cecc9-6461-4cc4-8454-7b122a59d6ea\"\n        }\n    },\n    \"beerName\": \"Mango Bobs - JTs\",\n    \"beerStyle\": \"ALE\",\n    \"upc\": \"0631234200036\",\n    \"quantityOnHand\": 2351,\n    \"price\": 97.53,\n    \"createdDate\": \"2026-03-02T19:36:07.472Z\",\n    \"lastModifiedDate\": \"2026-03-02T19:36:07.472Z\"\n}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "search",
+                  "item": [
+                    {
+                      "name": "Search",
+                      "request": {
+                        "auth": {
+                          "type": "noauth"
+                        },
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer/search",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer",
+                            "search"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "200 OK - Search",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "http://localhost:8080/api/v1/beer/search",
+                              "protocol": "http",
+                              "host": [
+                                "localhost"
+                              ],
+                              "port": "8080",
+                              "path": [
+                                "api",
+                                "v1",
+                                "beer",
+                                "search"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": "",
+                              "type": "text"
+                            },
+                            {
+                              "key": "Transfer-Encoding",
+                              "value": "chunked"
+                            },
+                            {
+                              "key": "Date",
+                              "value": "Mon, 02 Mar 2026 19:06:05 GMT"
+                            },
+                            {
+                              "key": "Keep-Alive",
+                              "value": "timeout=60"
+                            },
+                            {
+                              "key": "Connection",
+                              "value": "keep-alive"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n    \"_links\": {\n        \"findAllByBeerStyle\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/search/findAllByBeerStyle{?beerStyle,page,size,sort*}\",\n            \"templated\": true\n        },\n        \"findAllByBeerName\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/search/findAllByBeerName{?beerName,page,size,sort*}\",\n            \"templated\": true\n        },\n        \"findAllByBeerNameAndBeerStyle\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/search/findAllByBeerNameAndBeerStyle{?beerName,beerStyle,page,size,sort*}\",\n            \"templated\": true\n        },\n        \"findByUpc\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/search/findByUpc{?upc}\",\n            \"templated\": true\n        },\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/search\"\n        }\n    }\n}"
+                        },
+                        {
+                          "name": "findByUpc",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "http://localhost:8080/api/v1/beer/search/findByUpc?upc=0631234200036",
+                              "protocol": "http",
+                              "host": [
+                                "localhost"
+                              ],
+                              "port": "8080",
+                              "path": [
+                                "api",
+                                "v1",
+                                "beer",
+                                "search",
+                                "findByUpc"
+                              ],
+                              "query": [
+                                {
+                                  "key": "upc",
+                                  "value": "0631234200036"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "ETag",
+                              "value": "\"0\""
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": "",
+                              "type": "text"
+                            },
+                            {
+                              "key": "Transfer-Encoding",
+                              "value": "chunked"
+                            },
+                            {
+                              "key": "Date",
+                              "value": "Mon, 02 Mar 2026 20:16:13 GMT"
+                            },
+                            {
+                              "key": "Keep-Alive",
+                              "value": "timeout=60"
+                            },
+                            {
+                              "key": "Connection",
+                              "value": "keep-alive"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204\"\n        },\n        \"beer\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204\"\n        }\n    },\n    \"beerName\": \"Mango Bobs\",\n    \"beerStyle\": \"ALE\",\n    \"upc\": \"0631234200036\",\n    \"quantityOnHand\": 2351,\n    \"price\": 97.53,\n    \"createdDate\": \"2026-03-02T18:18:32.685Z\",\n    \"lastModifiedDate\": \"2026-03-02T18:18:32.685Z\"\n}"
+                        },
+                        {
+                          "name": "findAllByBeerStyle",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "http://localhost:8080/api/v1/beer/search/findAllByBeerStyle?beerStyle=ALE",
+                              "protocol": "http",
+                              "host": [
+                                "localhost"
+                              ],
+                              "port": "8080",
+                              "path": [
+                                "api",
+                                "v1",
+                                "beer",
+                                "search",
+                                "findAllByBeerStyle"
+                              ],
+                              "query": [
+                                {
+                                  "key": "beerStyle",
+                                  "value": "ALE"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": "",
+                              "type": "text"
+                            },
+                            {
+                              "key": "Transfer-Encoding",
+                              "value": "chunked"
+                            },
+                            {
+                              "key": "Date",
+                              "value": "Mon, 02 Mar 2026 20:18:28 GMT"
+                            },
+                            {
+                              "key": "Keep-Alive",
+                              "value": "timeout=60"
+                            },
+                            {
+                              "key": "Connection",
+                              "value": "keep-alive"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n    \"_embedded\": {\n        \"beer\": [\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/api/v1/beer/ce5289f4-78ef-4b59-b8c7-0f569f199204\"\n                    }\n                },\n                \"beerName\": \"Mango Bobs\",\n                \"beerStyle\": \"ALE\",\n                \"upc\": \"0631234200036\",\n                \"quantityOnHand\": 2351,\n                \"price\": 97.53,\n                \"createdDate\": \"2026-03-02T18:18:32.685Z\",\n                \"lastModifiedDate\": \"2026-03-02T18:18:32.685Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/api/v1/beer/34745b35-f3ba-445b-9b49-1356890742ef\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/api/v1/beer/34745b35-f3ba-445b-9b49-1356890742ef\"\n                    }\n                },\n                \"beerName\": \"Beach Blond Ale\",\n                \"beerStyle\": \"ALE\",\n                \"upc\": \"7245173761003\",\n                \"quantityOnHand\": 4042,\n                \"price\": 64.38,\n                \"createdDate\": \"2026-03-02T18:18:32.781Z\",\n                \"lastModifiedDate\": \"2026-03-02T18:18:32.781Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/api/v1/beer/4d87b48e-82f2-4f64-bda1-a8440c2fcec6\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/api/v1/beer/4d87b48e-82f2-4f64-bda1-a8440c2fcec6\"\n                    }\n                },\n                \"beerName\": \"Rod Bender Red Ale\",\n                \"beerStyle\": \"ALE\",\n                \"upc\": \"1350188843012\",\n                \"quantityOnHand\": 1886,\n                \"price\": 8.13,\n                \"createdDate\": \"2026-03-02T18:18:32.784Z\",\n                \"lastModifiedDate\": \"2026-03-02T18:18:32.784Z\"\n            }\n        ]\n    },\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/search/findAllByBeerStyle?beerStyle=ALE&page=0&size=20\"\n        }\n    },\n    \"page\": {\n        \"number\": 0,\n        \"size\": 20,\n        \"totalElements\": 3,\n        \"totalPages\": 1\n    }\n}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "List Beers",
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "tokenName",
+                          "value": "new-token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "http://localhost:9000/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "scope",
+                          "value": "message.read message.write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "clientSecret",
+                          "value": "secret",
+                          "type": "string"
+                        },
+                        {
+                          "key": "clientId",
+                          "value": "oidc-client",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        },
+                        {
+                          "key": "addTokenTo",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "http://localhost:8080/api/v1/beer",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "8080",
+                      "path": [
+                        "api",
+                        "v1",
+                        "beer"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "404 Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/beers",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "beers"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Mon, 02 Mar 2026 16:27:49 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"timestamp\": \"2026-03-02T16:27:49.039Z\",\n    \"status\": 404,\n    \"error\": \"Not Found\",\n    \"path\": \"/beer\"\n}"
+                    },
+                    {
+                      "name": "200 OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/beers",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "beers"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Mon, 02 Mar 2026 16:28:27 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"_embedded\": {\n        \"beers\": [\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/152b42e4-f06f-435b-9675-b0ec70ba8b20\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/152b42e4-f06f-435b-9675-b0ec70ba8b20\"\n                    }\n                },\n                \"beerName\": \"Mango Bobs\",\n                \"beerStyle\": \"ALE\",\n                \"upc\": \"0631234200036\",\n                \"quantityOnHand\": 4587,\n                \"price\": 48.8,\n                \"createdDate\": \"2026-03-02T16:17:33.093Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.093Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/e000a748-7a81-458d-8a23-0cf8956332e0\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/e000a748-7a81-458d-8a23-0cf8956332e0\"\n                    }\n                },\n                \"beerName\": \"Galaxy Cat\",\n                \"beerStyle\": \"PALE_ALE\",\n                \"upc\": \"9122089364369\",\n                \"quantityOnHand\": 1929,\n                \"price\": 4.98,\n                \"createdDate\": \"2026-03-02T16:17:33.106Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.106Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/43f216e2-8435-41a9-9f5a-32b7135a21d1\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/43f216e2-8435-41a9-9f5a-32b7135a21d1\"\n                    }\n                },\n                \"beerName\": \"No Hammers On The Bar\",\n                \"beerStyle\": \"WHEAT\",\n                \"upc\": \"0083783375213\",\n                \"quantityOnHand\": 1612,\n                \"price\": 21.61,\n                \"createdDate\": \"2026-03-02T16:17:33.108Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.108Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/ba0669e1-e5e5-4d08-b9a4-b47e828874e0\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/ba0669e1-e5e5-4d08-b9a4-b47e828874e0\"\n                    }\n                },\n                \"beerName\": \"Blessed\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"4666337557578\",\n                \"quantityOnHand\": 695,\n                \"price\": 92.9,\n                \"createdDate\": \"2026-03-02T16:17:33.110Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.110Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/28b81c6d-2fb3-4209-a7b2-3722667f22cd\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/28b81c6d-2fb3-4209-a7b2-3722667f22cd\"\n                    }\n                },\n                \"beerName\": \"Adjunct Trail\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"8380495518610\",\n                \"quantityOnHand\": 4810,\n                \"price\": 67.13,\n                \"createdDate\": \"2026-03-02T16:17:33.111Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.111Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/2ada6054-4cc0-4964-908a-e4def91378d5\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/2ada6054-4cc0-4964-908a-e4def91378d5\"\n                    }\n                },\n                \"beerName\": \"Very GGGreenn\",\n                \"beerStyle\": \"IPA\",\n                \"upc\": \"5677465691934\",\n                \"quantityOnHand\": 4653,\n                \"price\": 11.68,\n                \"createdDate\": \"2026-03-02T16:17:33.112Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.112Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/38938e28-bc87-4bb7-93e8-b5fdfe8daf49\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/38938e28-bc87-4bb7-93e8-b5fdfe8daf49\"\n                    }\n                },\n                \"beerName\": \"Double Barrel Hunahpu's\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"5463533082885\",\n                \"quantityOnHand\": 2576,\n                \"price\": 30.65,\n                \"createdDate\": \"2026-03-02T16:17:33.113Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.113Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/85543c1f-56d6-4c50-b30b-85d986cc4781\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/85543c1f-56d6-4c50-b30b-85d986cc4781\"\n                    }\n                },\n                \"beerName\": \"Very Hazy\",\n                \"beerStyle\": \"IPA\",\n                \"upc\": \"5339741428398\",\n                \"quantityOnHand\": 453,\n                \"price\": 89.88,\n                \"createdDate\": \"2026-03-02T16:17:33.114Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.114Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/31ffa186-eb22-4145-93f2-d07bbab74d27\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/31ffa186-eb22-4145-93f2-d07bbab74d27\"\n                    }\n                },\n                \"beerName\": \"SR-71\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"1726923962766\",\n                \"quantityOnHand\": 133,\n                \"price\": 71.25,\n                \"createdDate\": \"2026-03-02T16:17:33.116Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.116Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/e176eefd-f26c-4906-967a-58c3d15b9b05\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/e176eefd-f26c-4906-967a-58c3d15b9b05\"\n                    }\n                },\n                \"beerName\": \"Pliny the Younger\",\n                \"beerStyle\": \"IPA\",\n                \"upc\": \"8484957731774\",\n                \"quantityOnHand\": 2325,\n                \"price\": 61.97,\n                \"createdDate\": \"2026-03-02T16:17:33.117Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.117Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/6c417a89-56f1-4978-aaa5-22d52aaf1b63\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/6c417a89-56f1-4978-aaa5-22d52aaf1b63\"\n                    }\n                },\n                \"beerName\": \"Blessed\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"6266328524787\",\n                \"quantityOnHand\": 1255,\n                \"price\": 13.79,\n                \"createdDate\": \"2026-03-02T16:17:33.118Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.118Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/74a1d12d-50e8-4d5d-97f1-2774304913cc\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/74a1d12d-50e8-4d5d-97f1-2774304913cc\"\n                    }\n                },\n                \"beerName\": \"King Krush\",\n                \"beerStyle\": \"IPA\",\n                \"upc\": \"7490217802727\",\n                \"quantityOnHand\": 1307,\n                \"price\": 6.92,\n                \"createdDate\": \"2026-03-02T16:17:33.120Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.120Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/8c31fa79-c9e5-499a-8f73-08c0ab408daf\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/8c31fa79-c9e5-499a-8f73-08c0ab408daf\"\n                    }\n                },\n                \"beerName\": \"PBS Porter\",\n                \"beerStyle\": \"PORTER\",\n                \"upc\": \"8579613295827\",\n                \"quantityOnHand\": 622,\n                \"price\": 69.14,\n                \"createdDate\": \"2026-03-02T16:17:33.121Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.121Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/ba956605-1e83-4f54-8183-4ec0bac179b5\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/ba956605-1e83-4f54-8183-4ec0bac179b5\"\n                    }\n                },\n                \"beerName\": \"Pinball Porter\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"2318301340601\",\n                \"quantityOnHand\": 1643,\n                \"price\": 0.36,\n                \"createdDate\": \"2026-03-02T16:17:33.123Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.123Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/4e22b79b-83c3-4f39-9857-ebfa6ac7b8f1\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/4e22b79b-83c3-4f39-9857-ebfa6ac7b8f1\"\n                    }\n                },\n                \"beerName\": \"Golden Budda\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"9401790633828\",\n                \"quantityOnHand\": 2524,\n                \"price\": 91.75,\n                \"createdDate\": \"2026-03-02T16:17:33.124Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.124Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/2c0d2941-cd3c-42d8-b936-792b3164288f\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/2c0d2941-cd3c-42d8-b936-792b3164288f\"\n                    }\n                },\n                \"beerName\": \"Grand Central Red\",\n                \"beerStyle\": \"LAGER\",\n                \"upc\": \"4813896316225\",\n                \"quantityOnHand\": 62,\n                \"price\": 0.21,\n                \"createdDate\": \"2026-03-02T16:17:33.126Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.126Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/112a5c76-c9a7-4493-8b72-086c9b0d3631\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/112a5c76-c9a7-4493-8b72-086c9b0d3631\"\n                    }\n                },\n                \"beerName\": \"Pac-Man\",\n                \"beerStyle\": \"STOUT\",\n                \"upc\": \"3431272499891\",\n                \"quantityOnHand\": 2599,\n                \"price\": 28.98,\n                \"createdDate\": \"2026-03-02T16:17:33.127Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.127Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/411cbe33-4f31-4f80-874b-3805015043e4\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/411cbe33-4f31-4f80-874b-3805015043e4\"\n                    }\n                },\n                \"beerName\": \"Ro Sham Bo\",\n                \"beerStyle\": \"IPA\",\n                \"upc\": \"2380867498485\",\n                \"quantityOnHand\": 680,\n                \"price\": 73.27,\n                \"createdDate\": \"2026-03-02T16:17:33.128Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.128Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/022e1b1b-802e-4f93-bde1-f25ed2c0e1e5\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/022e1b1b-802e-4f93-bde1-f25ed2c0e1e5\"\n                    }\n                },\n                \"beerName\": \"Summer Wheatly\",\n                \"beerStyle\": \"WHEAT\",\n                \"upc\": \"4323950503848\",\n                \"quantityOnHand\": 3401,\n                \"price\": 26.87,\n                \"createdDate\": \"2026-03-02T16:17:33.130Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.130Z\"\n            },\n            {\n                \"_links\": {\n                    \"self\": {\n                        \"href\": \"http://localhost:8080/beers/960b39ac-8173-49ac-9649-da4c0d818986\"\n                    },\n                    \"beer\": {\n                        \"href\": \"http://localhost:8080/beers/960b39ac-8173-49ac-9649-da4c0d818986\"\n                    }\n                },\n                \"beerName\": \"Java Jill\",\n                \"beerStyle\": \"LAGER\",\n                \"upc\": \"4006016803570\",\n                \"quantityOnHand\": 4695,\n                \"price\": 86.44,\n                \"createdDate\": \"2026-03-02T16:17:33.131Z\",\n                \"lastModifiedDate\": \"2026-03-02T16:17:33.131Z\"\n            }\n        ]\n    },\n    \"_links\": {\n        \"first\": {\n            \"href\": \"http://localhost:8080/beers?page=0&size=20\"\n        },\n        \"self\": {\n            \"href\": \"http://localhost:8080/beers?page=0&size=20\"\n        },\n        \"next\": {\n            \"href\": \"http://localhost:8080/beers?page=1&size=20\"\n        },\n        \"last\": {\n            \"href\": \"http://localhost:8080/beers?page=1&size=20\"\n        },\n        \"profile\": {\n            \"href\": \"http://localhost:8080/profile/beers\"\n        },\n        \"search\": {\n            \"href\": \"http://localhost:8080/beers/search\"\n        }\n    },\n    \"page\": {\n        \"number\": 0,\n        \"size\": 20,\n        \"totalElements\": 30,\n        \"totalPages\": 2\n    }\n}"
+                    },
+                    {
+                      "name": "401 Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": null,
+                      "header": [
+                        {
+                          "key": "Set-Cookie",
+                          "value": "JSESSIONID=04471451B47423CD3799F0C62CEFE2F8; Path=/; HttpOnly"
+                        },
+                        {
+                          "key": "WWW-Authenticate",
+                          "value": "Basic realm=\"Realm\""
+                        },
+                        {
+                          "key": "X-Content-Type-Options",
+                          "value": "nosniff"
+                        },
+                        {
+                          "key": "X-XSS-Protection",
+                          "value": "0"
+                        },
+                        {
+                          "key": "Cache-Control",
+                          "value": "no-cache, no-store, max-age=0, must-revalidate"
+                        },
+                        {
+                          "key": "Pragma",
+                          "value": "no-cache"
+                        },
+                        {
+                          "key": "Expires",
+                          "value": "0"
+                        },
+                        {
+                          "key": "X-Frame-Options",
+                          "value": "DENY"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "0"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Thu, 05 Mar 2026 17:41:24 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": null
+                    },
+                    {
+                      "name": "200 OK with Auth Basic",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Content-Type-Options",
+                          "value": "nosniff"
+                        },
+                        {
+                          "key": "X-XSS-Protection",
+                          "value": "0"
+                        },
+                        {
+                          "key": "Cache-Control",
+                          "value": "no-cache, no-store, max-age=0, must-revalidate"
+                        },
+                        {
+                          "key": "Pragma",
+                          "value": "no-cache"
+                        },
+                        {
+                          "key": "Expires",
+                          "value": "0"
+                        },
+                        {
+                          "key": "X-Frame-Options",
+                          "value": "DENY"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Thu, 05 Mar 2026 17:45:45 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"content\": [\n        {\n            \"beerName\": \"#001 Golden Amber Lager\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:58.233731\",\n            \"id\": \"685f10a4-9a3a-44a6-8522-b0ea5b588a4f\",\n            \"price\": 10,\n            \"quantityOnHand\": 2382,\n            \"upc\": \"2382\",\n            \"updateDate\": \"2026-02-26T21:23:58.233731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#002 American I.P.A.\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:58.233731\",\n            \"id\": \"69a0b8f2-e227-4312-8f05-9249297441b6\",\n            \"price\": 10,\n            \"quantityOnHand\": 2383,\n            \"upc\": \"2383\",\n            \"updateDate\": \"2026-02-26T21:23:58.233731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#003 Brown & Robust Porter\",\n            \"beerStyle\": \"PORTER\",\n            \"createdDate\": \"2026-02-26T21:23:58.234731\",\n            \"id\": \"b1c76fdf-7adf-48a4-9b6a-c5a682eac6b4\",\n            \"price\": 10,\n            \"quantityOnHand\": 2384,\n            \"upc\": \"2384\",\n            \"updateDate\": \"2026-02-26T21:23:58.234731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#004 Session I.P.A.\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:58.234731\",\n            \"id\": \"a6cf46eb-2b35-45b8-9a3e-547de5590172\",\n            \"price\": 10,\n            \"quantityOnHand\": 2385,\n            \"upc\": \"2385\",\n            \"updateDate\": \"2026-02-26T21:23:58.234731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#9\",\n            \"beerStyle\": \"WHEAT\",\n            \"createdDate\": \"2026-02-26T21:23:57.060248\",\n            \"id\": \"19874e5d-61cf-455d-8bbf-9daca821eac1\",\n            \"price\": 10,\n            \"quantityOnHand\": 1253,\n            \"upc\": \"1253\",\n            \"updateDate\": \"2026-02-26T21:23:57.060248\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#9\",\n            \"beerStyle\": \"WHEAT\",\n            \"createdDate\": \"2026-02-26T21:23:57.063247\",\n            \"id\": \"e375db17-0f0f-4990-bc80-b902327fa12f\",\n            \"price\": 10,\n            \"quantityOnHand\": 1255,\n            \"upc\": \"1255\",\n            \"updateDate\": \"2026-02-26T21:23:57.063247\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"077XX\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:55.989059\",\n            \"id\": \"92c51ace-cf79-420b-afb8-7ca7b77ca894\",\n            \"price\": 10,\n            \"quantityOnHand\": 551,\n            \"upc\": \"551\",\n            \"updateDate\": \"2026-02-26T21:23:55.989059\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"10 Degrees of Separation\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:56.968013\",\n            \"id\": \"c0329e6c-3044-499f-9006-151a29217693\",\n            \"price\": 10,\n            \"quantityOnHand\": 1195,\n            \"upc\": \"1195\",\n            \"updateDate\": \"2026-02-26T21:23:56.968013\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"10 Ton\",\n            \"beerStyle\": \"STOUT\",\n            \"createdDate\": \"2026-02-26T21:23:58.193651\",\n            \"id\": \"c8e2efd2-223d-425f-b553-8b206d4ecf16\",\n            \"price\": 10,\n            \"quantityOnHand\": 2333,\n            \"upc\": \"2333\",\n            \"updateDate\": \"2026-02-26T21:23:58.193651\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"113 IPA\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:57.852837\",\n            \"id\": \"1355592b-298d-4362-bfef-d6555e30b692\",\n            \"price\": 10,\n            \"quantityOnHand\": 1907,\n            \"upc\": \"1907\",\n            \"updateDate\": \"2026-02-26T21:23:57.852837\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"11th Hour IPA\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:56.263523\",\n            \"id\": \"d76caa88-963c-41a7-b95c-68f23146e092\",\n            \"price\": 10,\n            \"quantityOnHand\": 672,\n            \"upc\": \"672\",\n            \"updateDate\": \"2026-02-26T21:23:56.263523\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"12 Man Pale Ale\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:56.347199\",\n            \"id\": \"5cafc080-950b-4bef-a076-76e8d89e7af8\",\n            \"price\": 10,\n            \"quantityOnHand\": 727,\n            \"upc\": \"727\",\n            \"updateDate\": \"2026-02-26T21:23:56.347199\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"12th Round\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:57.730533\",\n            \"id\": \"bb2086ce-ad11-47cb-b240-e2f6ddcb766d\",\n            \"price\": 10,\n            \"quantityOnHand\": 1768,\n            \"upc\": \"1768\",\n            \"updateDate\": \"2026-02-26T21:23:57.730533\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"13 Rebels ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:56.573841\",\n            \"id\": \"23ec8b42-7b80-4053-86ad-e55fece3fd4f\",\n            \"price\": 10,\n            \"quantityOnHand\": 884,\n            \"upc\": \"884\",\n            \"updateDate\": \"2026-02-26T21:23:56.573841\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1327 Pod's ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.588252\",\n            \"id\": \"16491bc6-a9f6-4852-8dbf-f91a9eb880a8\",\n            \"price\": 10,\n            \"quantityOnHand\": 304,\n            \"upc\": \"304\",\n            \"updateDate\": \"2026-02-26T21:23:55.588252\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1327 Pod's ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.591262\",\n            \"id\": \"9fb20cf1-7d10-405b-b93a-89022f108107\",\n            \"price\": 10,\n            \"quantityOnHand\": 306,\n            \"upc\": \"306\",\n            \"updateDate\": \"2026-02-26T21:23:55.591262\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1327 Pod's ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.589267\",\n            \"id\": \"44749cc0-2c7a-4e97-91d4-07e91004b56f\",\n            \"price\": 10,\n            \"quantityOnHand\": 305,\n            \"upc\": \"305\",\n            \"updateDate\": \"2026-02-26T21:23:55.589267\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1335 Wicked Snout\",\n            \"beerStyle\": \"SAISON\",\n            \"createdDate\": \"2026-02-26T21:23:55.585728\",\n            \"id\": \"c1d4cab2-ed17-4ff5-a021-d9222d96921f\",\n            \"price\": 10,\n            \"quantityOnHand\": 302,\n            \"upc\": \"302\",\n            \"updateDate\": \"2026-02-26T21:23:55.585728\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1492\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:55.679493\",\n            \"id\": \"caab4330-b5ad-4b3a-b89c-c44fe2c9adc7\",\n            \"price\": 10,\n            \"quantityOnHand\": 369,\n            \"upc\": \"369\",\n            \"updateDate\": \"2026-02-26T21:23:55.679493\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"14Â° ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.435592\",\n            \"id\": \"411895d0-4315-4ed3-8581-10b9856940b1\",\n            \"price\": 10,\n            \"quantityOnHand\": 229,\n            \"upc\": \"229\",\n            \"updateDate\": \"2026-02-26T21:23:55.435592\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1554 Black Lager\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:57.346364\",\n            \"id\": \"38b7ffc7-94d4-4a57-94a3-3588af69f06e\",\n            \"price\": 10,\n            \"quantityOnHand\": 1447,\n            \"upc\": \"1447\",\n            \"updateDate\": \"2026-02-26T21:23:57.346364\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"15th Anniversary Abbey Ale (2012)\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:57.506145\",\n            \"id\": \"eef52bb4-82d9-47b2-ad9b-5f2ecd43c075\",\n            \"price\": 10,\n            \"quantityOnHand\": 1573,\n            \"upc\": \"1573\",\n            \"updateDate\": \"2026-02-26T21:23:57.506145\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1800 Big Log Wheat (2012)\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.574566\",\n            \"id\": \"967f4dd8-76f7-4af4-b673-c055cc656199\",\n            \"price\": 10,\n            \"quantityOnHand\": 294,\n            \"upc\": \"294\",\n            \"updateDate\": \"2026-02-26T21:23:55.574566\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1811 Lager\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:56.496587\",\n            \"id\": \"874b8284-39a9-4bda-91c8-71ca1a53acb1\",\n            \"price\": 10,\n            \"quantityOnHand\": 835,\n            \"upc\": \"835\",\n            \"updateDate\": \"2026-02-26T21:23:56.496587\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1836\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:55.843577\",\n            \"id\": \"2fc5c4e7-22b7-422b-91e6-a27e5957bc46\",\n            \"price\": 10,\n            \"quantityOnHand\": 473,\n            \"upc\": \"473\",\n            \"updateDate\": \"2026-02-26T21:23:55.843577\",\n            \"version\": 0\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": false,\n    \"number\": 0,\n    \"numberOfElements\": 25,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 25,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 25,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 2425,\n    \"totalPages\": 97\n}"
+                    },
+                    {
+                      "name": "200 OK with Token JWT",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Content-Type-Options",
+                          "value": "nosniff"
+                        },
+                        {
+                          "key": "X-XSS-Protection",
+                          "value": "0"
+                        },
+                        {
+                          "key": "Cache-Control",
+                          "value": "no-cache, no-store, max-age=0, must-revalidate"
+                        },
+                        {
+                          "key": "Pragma",
+                          "value": "no-cache"
+                        },
+                        {
+                          "key": "Expires",
+                          "value": "0"
+                        },
+                        {
+                          "key": "X-Frame-Options",
+                          "value": "DENY"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 07 Mar 2026 01:33:27 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"content\": [\n        {\n            \"beerName\": \"#001 Golden Amber Lager\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:58.233731\",\n            \"id\": \"685f10a4-9a3a-44a6-8522-b0ea5b588a4f\",\n            \"price\": 10,\n            \"quantityOnHand\": 2382,\n            \"upc\": \"2382\",\n            \"updateDate\": \"2026-02-26T21:23:58.233731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#002 American I.P.A.\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:58.233731\",\n            \"id\": \"69a0b8f2-e227-4312-8f05-9249297441b6\",\n            \"price\": 10,\n            \"quantityOnHand\": 2383,\n            \"upc\": \"2383\",\n            \"updateDate\": \"2026-02-26T21:23:58.233731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#003 Brown & Robust Porter\",\n            \"beerStyle\": \"PORTER\",\n            \"createdDate\": \"2026-02-26T21:23:58.234731\",\n            \"id\": \"b1c76fdf-7adf-48a4-9b6a-c5a682eac6b4\",\n            \"price\": 10,\n            \"quantityOnHand\": 2384,\n            \"upc\": \"2384\",\n            \"updateDate\": \"2026-02-26T21:23:58.234731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#004 Session I.P.A.\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:58.234731\",\n            \"id\": \"a6cf46eb-2b35-45b8-9a3e-547de5590172\",\n            \"price\": 10,\n            \"quantityOnHand\": 2385,\n            \"upc\": \"2385\",\n            \"updateDate\": \"2026-02-26T21:23:58.234731\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#9\",\n            \"beerStyle\": \"WHEAT\",\n            \"createdDate\": \"2026-02-26T21:23:57.060248\",\n            \"id\": \"19874e5d-61cf-455d-8bbf-9daca821eac1\",\n            \"price\": 10,\n            \"quantityOnHand\": 1253,\n            \"upc\": \"1253\",\n            \"updateDate\": \"2026-02-26T21:23:57.060248\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"#9\",\n            \"beerStyle\": \"WHEAT\",\n            \"createdDate\": \"2026-02-26T21:23:57.063247\",\n            \"id\": \"e375db17-0f0f-4990-bc80-b902327fa12f\",\n            \"price\": 10,\n            \"quantityOnHand\": 1255,\n            \"upc\": \"1255\",\n            \"updateDate\": \"2026-02-26T21:23:57.063247\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"077XX\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:55.989059\",\n            \"id\": \"92c51ace-cf79-420b-afb8-7ca7b77ca894\",\n            \"price\": 10,\n            \"quantityOnHand\": 551,\n            \"upc\": \"551\",\n            \"updateDate\": \"2026-02-26T21:23:55.989059\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"10 Degrees of Separation\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:56.968013\",\n            \"id\": \"c0329e6c-3044-499f-9006-151a29217693\",\n            \"price\": 10,\n            \"quantityOnHand\": 1195,\n            \"upc\": \"1195\",\n            \"updateDate\": \"2026-02-26T21:23:56.968013\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"10 Ton\",\n            \"beerStyle\": \"STOUT\",\n            \"createdDate\": \"2026-02-26T21:23:58.193651\",\n            \"id\": \"c8e2efd2-223d-425f-b553-8b206d4ecf16\",\n            \"price\": 10,\n            \"quantityOnHand\": 2333,\n            \"upc\": \"2333\",\n            \"updateDate\": \"2026-02-26T21:23:58.193651\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"113 IPA\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:57.852837\",\n            \"id\": \"1355592b-298d-4362-bfef-d6555e30b692\",\n            \"price\": 10,\n            \"quantityOnHand\": 1907,\n            \"upc\": \"1907\",\n            \"updateDate\": \"2026-02-26T21:23:57.852837\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"11th Hour IPA\",\n            \"beerStyle\": \"IPA\",\n            \"createdDate\": \"2026-02-26T21:23:56.263523\",\n            \"id\": \"d76caa88-963c-41a7-b95c-68f23146e092\",\n            \"price\": 10,\n            \"quantityOnHand\": 672,\n            \"upc\": \"672\",\n            \"updateDate\": \"2026-02-26T21:23:56.263523\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"12 Man Pale Ale\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:56.347199\",\n            \"id\": \"5cafc080-950b-4bef-a076-76e8d89e7af8\",\n            \"price\": 10,\n            \"quantityOnHand\": 727,\n            \"upc\": \"727\",\n            \"updateDate\": \"2026-02-26T21:23:56.347199\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"12th Round\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:57.730533\",\n            \"id\": \"bb2086ce-ad11-47cb-b240-e2f6ddcb766d\",\n            \"price\": 10,\n            \"quantityOnHand\": 1768,\n            \"upc\": \"1768\",\n            \"updateDate\": \"2026-02-26T21:23:57.730533\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"13 Rebels ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:56.573841\",\n            \"id\": \"23ec8b42-7b80-4053-86ad-e55fece3fd4f\",\n            \"price\": 10,\n            \"quantityOnHand\": 884,\n            \"upc\": \"884\",\n            \"updateDate\": \"2026-02-26T21:23:56.573841\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1327 Pod's ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.588252\",\n            \"id\": \"16491bc6-a9f6-4852-8dbf-f91a9eb880a8\",\n            \"price\": 10,\n            \"quantityOnHand\": 304,\n            \"upc\": \"304\",\n            \"updateDate\": \"2026-02-26T21:23:55.588252\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1327 Pod's ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.591262\",\n            \"id\": \"9fb20cf1-7d10-405b-b93a-89022f108107\",\n            \"price\": 10,\n            \"quantityOnHand\": 306,\n            \"upc\": \"306\",\n            \"updateDate\": \"2026-02-26T21:23:55.591262\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1327 Pod's ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.589267\",\n            \"id\": \"44749cc0-2c7a-4e97-91d4-07e91004b56f\",\n            \"price\": 10,\n            \"quantityOnHand\": 305,\n            \"upc\": \"305\",\n            \"updateDate\": \"2026-02-26T21:23:55.589267\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1335 Wicked Snout\",\n            \"beerStyle\": \"SAISON\",\n            \"createdDate\": \"2026-02-26T21:23:55.585728\",\n            \"id\": \"c1d4cab2-ed17-4ff5-a021-d9222d96921f\",\n            \"price\": 10,\n            \"quantityOnHand\": 302,\n            \"upc\": \"302\",\n            \"updateDate\": \"2026-02-26T21:23:55.585728\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1492\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:55.679493\",\n            \"id\": \"caab4330-b5ad-4b3a-b89c-c44fe2c9adc7\",\n            \"price\": 10,\n            \"quantityOnHand\": 369,\n            \"upc\": \"369\",\n            \"updateDate\": \"2026-02-26T21:23:55.679493\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"14Â° ESB\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.435592\",\n            \"id\": \"411895d0-4315-4ed3-8581-10b9856940b1\",\n            \"price\": 10,\n            \"quantityOnHand\": 229,\n            \"upc\": \"229\",\n            \"updateDate\": \"2026-02-26T21:23:55.435592\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1554 Black Lager\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:57.346364\",\n            \"id\": \"38b7ffc7-94d4-4a57-94a3-3588af69f06e\",\n            \"price\": 10,\n            \"quantityOnHand\": 1447,\n            \"upc\": \"1447\",\n            \"updateDate\": \"2026-02-26T21:23:57.346364\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"15th Anniversary Abbey Ale (2012)\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:57.506145\",\n            \"id\": \"eef52bb4-82d9-47b2-ad9b-5f2ecd43c075\",\n            \"price\": 10,\n            \"quantityOnHand\": 1573,\n            \"upc\": \"1573\",\n            \"updateDate\": \"2026-02-26T21:23:57.506145\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1800 Big Log Wheat (2012)\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:55.574566\",\n            \"id\": \"967f4dd8-76f7-4af4-b673-c055cc656199\",\n            \"price\": 10,\n            \"quantityOnHand\": 294,\n            \"upc\": \"294\",\n            \"updateDate\": \"2026-02-26T21:23:55.574566\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1811 Lager\",\n            \"beerStyle\": \"PILSNER\",\n            \"createdDate\": \"2026-02-26T21:23:56.496587\",\n            \"id\": \"874b8284-39a9-4bda-91c8-71ca1a53acb1\",\n            \"price\": 10,\n            \"quantityOnHand\": 835,\n            \"upc\": \"835\",\n            \"updateDate\": \"2026-02-26T21:23:56.496587\",\n            \"version\": 0\n        },\n        {\n            \"beerName\": \"1836\",\n            \"beerStyle\": \"ALE\",\n            \"createdDate\": \"2026-02-26T21:23:55.843577\",\n            \"id\": \"2fc5c4e7-22b7-422b-91e6-a27e5957bc46\",\n            \"price\": 10,\n            \"quantityOnHand\": 473,\n            \"upc\": \"473\",\n            \"updateDate\": \"2026-02-26T21:23:55.843577\",\n            \"version\": 0\n        }\n    ],\n    \"empty\": false,\n    \"first\": true,\n    \"last\": false,\n    \"number\": 0,\n    \"numberOfElements\": 25,\n    \"pageable\": {\n        \"offset\": 0,\n        \"pageNumber\": 0,\n        \"pageSize\": 25,\n        \"paged\": true,\n        \"sort\": {\n            \"empty\": false,\n            \"sorted\": true,\n            \"unsorted\": false\n        },\n        \"unpaged\": false\n    },\n    \"size\": 25,\n    \"sort\": {\n        \"empty\": false,\n        \"sorted\": true,\n        \"unsorted\": false\n    },\n    \"totalElements\": 2433,\n    \"totalPages\": 98\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Create New Beer",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"beerName\": \"Mango Bobs - JTs\",\r\n    \"beerStyle\": \"ALE\",\r\n    \"upc\": \"0631234200036\",\r\n    \"quantityOnHand\": 2351,\r\n    \"price\": 97.53\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "http://localhost:8080/api/v1/beer",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "8080",
+                      "path": [
+                        "api",
+                        "v1",
+                        "beer"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "Create New Beer",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"beerName\": \"Mango Bobs - JTs\",\r\n    \"beerStyle\": \"ALE\",\r\n    \"upc\": \"0631234200036\",\r\n    \"quantityOnHand\": 2351,\r\n    \"price\": 97.53\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/beer",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "beer"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "ETag",
+                          "value": "\"0\""
+                        },
+                        {
+                          "key": "Location",
+                          "value": "http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Mon, 02 Mar 2026 19:16:25 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [
+                        {
+                          "expires": "Invalid Date",
+                          "domain": "",
+                          "path": ""
+                        }
+                      ],
+                      "body": "{\n    \"_links\": {\n        \"self\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363\"\n        },\n        \"beer\": {\n            \"href\": \"http://localhost:8080/api/v1/beer/d4646e86-37eb-4f1b-a5bf-a8c032190363\"\n        }\n    },\n    \"beerName\": \"Mango Bobs - JTs\",\n    \"beerStyle\": \"ALE\",\n    \"upc\": \"0631234200036\",\n    \"quantityOnHand\": 2351,\n    \"price\": 97.53,\n    \"createdDate\": \"2026-03-02T19:16:25.728Z\",\n    \"lastModifiedDate\": \"2026-03-02T19:16:25.728Z\"\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "profile",
+              "item": [
+                {
+                  "name": "API Profile",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "http://localhost:8080/api/v1/profile/beer",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "8080",
+                      "path": [
+                        "api",
+                        "v1",
+                        "profile",
+                        "beer"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "200 OK - API Profile",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "http://localhost:8080/api/v1/profile/beer",
+                          "protocol": "http",
+                          "host": [
+                            "localhost"
+                          ],
+                          "port": "8080",
+                          "path": [
+                            "api",
+                            "v1",
+                            "profile",
+                            "beer"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": "",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Transfer-Encoding",
+                          "value": "chunked"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Mon, 02 Mar 2026 19:04:46 GMT"
+                        },
+                        {
+                          "key": "Keep-Alive",
+                          "value": "timeout=60"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"alps\": {\n        \"version\": \"1.0\",\n        \"descriptor\": [\n            {\n                \"id\": \"beer-representation\",\n                \"href\": \"http://localhost:8080/api/v1/profile/beer\",\n                \"descriptor\": [\n                    {\n                        \"name\": \"version\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"beerName\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"beerStyle\",\n                        \"type\": \"SEMANTIC\",\n                        \"doc\": {\n                            \"format\": \"TEXT\",\n                            \"value\": \"LAGER, PILSNER, STOUT, GOSE, PORTER, ALE, WHEAT, IPA, PALE_ALE, SAISON\"\n                        }\n                    },\n                    {\n                        \"name\": \"upc\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"quantityOnHand\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"price\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"createdDate\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"lastModifiedDate\",\n                        \"type\": \"SEMANTIC\"\n                    }\n                ]\n            },\n            {\n                \"id\": \"create-beer\",\n                \"name\": \"beer\",\n                \"type\": \"UNSAFE\",\n                \"descriptor\": [],\n                \"rt\": \"#beer-representation\"\n            },\n            {\n                \"id\": \"get-beer\",\n                \"name\": \"beer\",\n                \"type\": \"SAFE\",\n                \"descriptor\": [\n                    {\n                        \"name\": \"page\",\n                        \"type\": \"SEMANTIC\",\n                        \"doc\": {\n                            \"format\": \"TEXT\",\n                            \"value\": \"The page to return.\"\n                        }\n                    },\n                    {\n                        \"name\": \"size\",\n                        \"type\": \"SEMANTIC\",\n                        \"doc\": {\n                            \"format\": \"TEXT\",\n                            \"value\": \"The size of the page to return.\"\n                        }\n                    },\n                    {\n                        \"name\": \"sort\",\n                        \"type\": \"SEMANTIC\",\n                        \"doc\": {\n                            \"format\": \"TEXT\",\n                            \"value\": \"The sorting criteria to use to calculate the content of the page.\"\n                        }\n                    }\n                ],\n                \"rt\": \"#beer-representation\"\n            },\n            {\n                \"id\": \"delete-beer\",\n                \"name\": \"beer\",\n                \"type\": \"IDEMPOTENT\",\n                \"descriptor\": [],\n                \"rt\": \"#beer-representation\"\n            },\n            {\n                \"id\": \"get-beer\",\n                \"name\": \"beer\",\n                \"type\": \"SAFE\",\n                \"descriptor\": [],\n                \"rt\": \"#beer-representation\"\n            },\n            {\n                \"id\": \"update-beer\",\n                \"name\": \"beer\",\n                \"type\": \"IDEMPOTENT\",\n                \"descriptor\": [],\n                \"rt\": \"#beer-representation\"\n            },\n            {\n                \"id\": \"patch-beer\",\n                \"name\": \"beer\",\n                \"type\": \"UNSAFE\",\n                \"descriptor\": [],\n                \"rt\": \"#beer-representation\"\n            },\n            {\n                \"name\": \"findAllByBeerStyle\",\n                \"type\": \"SAFE\",\n                \"descriptor\": [\n                    {\n                        \"name\": \"beerStyle\",\n                        \"type\": \"SEMANTIC\",\n                        \"doc\": {\n                            \"format\": \"TEXT\",\n                            \"value\": \"LAGER, PILSNER, STOUT, GOSE, PORTER, ALE, WHEAT, IPA, PALE_ALE, SAISON\"\n                        }\n                    }\n                ]\n            },\n            {\n                \"name\": \"findAllByBeerName\",\n                \"type\": \"SAFE\",\n                \"descriptor\": [\n                    {\n                        \"name\": \"beerName\",\n                        \"type\": \"SEMANTIC\"\n                    }\n                ]\n            },\n            {\n                \"name\": \"findAllByBeerNameAndBeerStyle\",\n                \"type\": \"SAFE\",\n                \"descriptor\": [\n                    {\n                        \"name\": \"beerName\",\n                        \"type\": \"SEMANTIC\"\n                    },\n                    {\n                        \"name\": \"beerStyle\",\n                        \"type\": \"SEMANTIC\",\n                        \"doc\": {\n                            \"format\": \"TEXT\",\n                            \"value\": \"LAGER, PILSNER, STOUT, GOSE, PORTER, ALE, WHEAT, IPA, PALE_ALE, SAISON\"\n                        }\n                    }\n                ]\n            },\n            {\n                \"name\": \"findByUpc\",\n                \"type\": \"SAFE\",\n                \"descriptor\": [\n                    {\n                        \"name\": \"upc\",\n                        \"type\": \"SEMANTIC\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
