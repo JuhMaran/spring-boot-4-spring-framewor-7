@@ -51,6 +51,17 @@ http://localhost:
 
 ## 🧪 Como Usar
 
+Adicionar a dependência no projeto:
+
+```xml
+
+<dependency>
+    <groupId>guru.springframework</groupId>
+    <artifactId>spring-7-rest-mvc-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
+
 ## 🧭 Fluxo
 
 ## 🏗️ Arquitetura

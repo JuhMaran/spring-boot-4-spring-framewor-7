@@ -14,8 +14,8 @@ import java.util.UUID;
  * @author Juliane Maran
  * @since 21/02/2026
  */
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerDTO {
