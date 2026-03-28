@@ -2,11 +2,14 @@
 spring:
   application:
     name: spring-7-rest-mvc
+
   flyway:
     enabled: false
+
   docker:
     compose:
       enabled: false
+
   security:
     oauth2:
       resourceserver:
@@ -15,17 +18,28 @@ spring:
     user:
       name: user1
       password: password
-  # Java Virtual Threads
-#  threads:
-#    virtual:
-#      enabled: true
-  # caching
+
   cache:
     cache-names:
       - beerCache
       - beerListCache
       - customerCache
       - customerListCache
+
+  kafka:
+    consumer:
+      group-id: sfg
+      auto-offset-reset: earliest
+      key-deserialize: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: *
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 #  jpa:
 #    properties:
@@ -38,7 +52,6 @@ spring:
 #              drop-target: drop-and-create.sql
 #              create-target: drop-and-create.sql
 
-# Actuator Kubernetes Integration
 management:
   endpoint:
     health:
@@ -52,8 +65,6 @@ management:
 
 logging:
   level:
-    root: info # em produção
-    sql: warn # em produção
-    org.zalando.logbook: trace  # em produção trocar para INFO
+    org.zalando.logbook: trace
     org.springframework: debug
 #    org.springframework.security: trace
