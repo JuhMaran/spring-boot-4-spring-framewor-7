@@ -1,4 +1,4 @@
-# Spring 7 - Ice Cold Service
+# Spring 7 - Cold Service
 
 ![Java](https://img.shields.io/badge/Java-25-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.4-green)
@@ -28,7 +28,7 @@ Antes de iniciar, você precisa ter instalado:
 git clone https://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git
 
 # Acesse a pasta do projeto
-cd spring-boot-4-spring-framewor-7/spring-7-icecold-service
+cd spring-boot-4-spring-framewor-7/spring-7-cold-service
 
 # Compile o projeto
 mvn clean install
@@ -81,8 +81,8 @@ Esta seção centraliza links e materiais complementares do projeto.
 
 ### Repositório
 
-- GitHub: 
-[spring-7-icecold-service](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/tree/main/spring-7-icecold-service)
+- GitHub:
+  [spring-7-cold-service](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/tree/main/spring-7-cold-service)
 
 ### Collections (Postman / Insomnia)
 
