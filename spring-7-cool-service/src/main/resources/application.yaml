@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-7-icecold-service
+    name: spring-7-cool-service
 
   kafka:
     consumer:
