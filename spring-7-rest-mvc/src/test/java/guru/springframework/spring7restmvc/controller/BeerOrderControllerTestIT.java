@@ -1,9 +1,9 @@
 package guru.springframework.spring7restmvc.controller;
 
-import guru.springframework.spring7restmvc.model.*;
 import guru.springframework.spring7restmvc.repositories.BeerOrderRepository;
 import guru.springframework.spring7restmvc.repositories.BeerRepository;
 import guru.springframework.spring7restmvc.repositories.CustomerRepository;
+import guru.springframework.spring7restmvcapi.model.*;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

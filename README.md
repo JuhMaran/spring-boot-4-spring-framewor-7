@@ -11,8 +11,6 @@ Atualmente, o progresso acompanha todo o roadmap do curso, com módulos sendo im
 Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abrangendo aplicações tradicionais, reativas,
 segurança, integração e API Gateway.
 
----
-
 ## Conteúdo do Curso
 
 ### Fundamentos
@@ -20,8 +18,6 @@ segurança, integração e API Gateway.
 1. Introduction
 2. Building a Spring Boot Web App
 3. Performing Dependency Injection with Spring
-
----
 
 ### Web e APIs REST (Spring MVC)
 
@@ -41,15 +37,11 @@ segurança, integração e API Gateway.
 17. JPA Database Relationship Mapping
 18. Database Transactions, Locking and Spring
 
----
-
 ### Integração e Clientes HTTP
 
 19. Introduction to Spring Data REST
 20. Spring RestTemplate
 21. Testing Spring RestTemplate
-
----
 
 ### Segurança
 
@@ -57,8 +49,6 @@ segurança, integração e API Gateway.
 23. Spring Authorization Server
 24. Spring MVC OAuth2 Resource Server
 25. Spring RestTemplate with OAuth2
-
----
 
 ### Programação Reativa (WebFlux)
 
@@ -74,13 +64,9 @@ segurança, integração e API Gateway.
 35. Spring WebFlux.fn Resource Server
 36. Using OAuth 2.0 with Spring WebClient
 
----
-
 ### Cloud e Gateway
 
 37. Spring Cloud Gateway
-
----
 
 ### Build e Documentação
 
@@ -88,8 +74,6 @@ segurança, integração e API Gateway.
 39. Spring Boot Gradle Plugin
 40. OpenAPI with Spring Boot
 41. OpenAPI Validation with RestAssured
-
----
 
 ### Tópicos Avançados
 
@@ -101,30 +85,22 @@ segurança, integração e API Gateway.
 47. Spring Application Events for Auditing
 48. Using your Spring Boot Skills
 
----
-
 ### Containers e Orquestração
 
 49. Docker with Spring Boot
 50. Docker Compose with Spring Boot
 51. Kubernetes with Spring Boot
 
----
-
 ### Microservices
 
 52. Introduction to Spring Boot Microservices
 53. Spring Boot Microservices with Apache Kafka
-
----
 
 ### Certificação e Boas Práticas
 
 54. Spring Professional Certification Practice Test
 55. New Spring Boot 3.4.0 Features
 56. Spring Boot Engineering Best Practices
-
----
 
 ### Extras
 
@@ -134,8 +110,6 @@ segurança, integração e API Gateway.
 60. Extra - Kube by Example - Building Spring Boot Docker Images
 61. Extra - Kube by Example - Spring Boot on Kubernetes
 62. Extra - Kube by Example - Spring Boot Microservices on Kubernetes
-
----
 
 ## Projetos
 
@@ -155,8 +129,7 @@ segurança, integração e API Gateway.
 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2 |
 | [spring-7-ai-intro](./spring-7-ai-intro)                  | Spring AI                                                    | Spring AI, Spring Web MVC                     |
 | [spring-7-docker-k8s](./spring-7-docker-k8s)              | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes            |
-
----
+| [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)          |                                                              | Lombok, Validation                            |
 
 ## Tecnologias Utilizadas
 
@@ -166,15 +139,11 @@ segurança, integração e API Gateway.
 * Spring Framework 7
 * Spring Boot 4
 
----
-
 ### Web
 
 * Spring MVC (modelo tradicional baseado em servlet)
 * Spring WebFlux (programação reativa não-bloqueante)
 * Thymeleaf (renderização server-side)
-
----
 
 ### Segurança
 
@@ -182,8 +151,6 @@ segurança, integração e API Gateway.
 * OAuth2 Client
 * OAuth2 Resource Server
 * OAuth2 Authorization Server
-
----
 
 ### Persistência
 
@@ -200,34 +167,24 @@ segurança, integração e API Gateway.
 
 * MongoDB Reactive (Spring Data MongoDB)
 
----
-
 ### Integração e Comunicação
 
 * RestTemplate (legado)
 * RestClient (abordagem moderna)
 * WebClient (cliente reativo)
 
----
-
 ### Cloud & Gateway
 
 * Spring Cloud Gateway
 * Spring Cloud Dependencies
 
----
-
 ### Observabilidade
 
 * Spring Boot Actuator
 
----
-
 ### Documentação de APIs
 
 * Springdoc OpenAPI (Swagger)
-
----
 
 ### Testes
 
@@ -240,15 +197,11 @@ segurança, integração e API Gateway.
 * Rest Assured
 * Swagger Request Validator
 
----
-
 ### Ferramentas e Produtividade
 
 * Lombok
 * MapStruct
 * Docker Compose Support
-
----
 
 ## Padrões e Abordagens
 
@@ -261,8 +214,6 @@ Este repositório explora diferentes estilos arquiteturais e práticas comuns no
 * Segurança baseada em OAuth2 e JWT
 * API Gateway e roteamento
 * Consumo de APIs síncrono vs reativo
-
----
 
 ## Como executar os projetos
 
@@ -279,8 +230,6 @@ Ou:
 mvn spring-boot:run
 ```
 
----
-
 ## Suporte a Docker
 
 Alguns projetos incluem suporte a:
@@ -288,11 +237,7 @@ Alguns projetos incluem suporte a:
 * Docker Compose
 * Testcontainers (para testes de integração)
 
----
-
 ## Diagrama de Classe
-
-![Descrição](docs/Diagrams/restdb.png)
 
 ```mermaid
 classDiagram
@@ -509,8 +454,6 @@ sequenceDiagram
 * 🧾 **BeerAudit**: Registra alterações (importante para rastreabilidade)
 * 🚚 **BeerOrderShipment**: Responsável pelo envio/logística
 
----
-
 ## Observações
 
 * Este repositório possui caráter **educacional e evolutivo**
@@ -518,18 +461,22 @@ sequenceDiagram
 * Algumas implementações apresentam **diferentes abordagens para o mesmo problema** (ex: WebMVC vs WebFlux)
 * Inclui tanto **tecnologias modernas** quanto **abordagens ainda utilizadas no mercado**
 
----
+## ♿ Acessibilidade
 
-## Autora
-
-**Juh Maran**  
-
-🔗 https://github.com/JuhMaran
-
----
+* Diagramas feitos com **Mermaid** (compatível com GitHub)
+* Estrutura organizada com títulos claros
+* Uso moderado de emojis para melhor leitura visual
 
 ## 📄 Licença
 
+Este projeto é destinado para **fins educacionais**.
+
 Este projeto está licenciado sob a **Apache License 2.0**.
 
-Este projeto é destinado para **fins educacionais**.
+Veja o arquivo [LICENSE](https://www.apache.org/licenses/LICENSE-2.0.txt) para mais detalhes.
+
+## Autora
+
+Desenvolvido por **Juh Maran**
+
+🔗 [https://github.com/JuhMaran](https://github.com/JuhMaran)

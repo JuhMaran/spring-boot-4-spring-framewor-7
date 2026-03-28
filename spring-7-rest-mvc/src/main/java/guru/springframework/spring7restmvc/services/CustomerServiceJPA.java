@@ -1,14 +1,12 @@
 package guru.springframework.spring7restmvc.services;
 
 import guru.springframework.spring7restmvc.mappers.CustomerMapper;
-import guru.springframework.spring7restmvc.model.CustomerDTO;
 import guru.springframework.spring7restmvc.repositories.CustomerRepository;
+import guru.springframework.spring7restmvcapi.model.CustomerDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -56,7 +54,7 @@ public class CustomerServiceJPA implements CustomerService {
 
   @Override
   public CustomerDTO saveNewCustomer(CustomerDTO customer) {
-    if (cacheManager.getCache("customerListCache") != null){
+    if (cacheManager.getCache("customerListCache") != null) {
       cacheManager.getCache("customerListCache").clear();
     }
 
@@ -80,10 +78,10 @@ public class CustomerServiceJPA implements CustomerService {
   }
 
   private void clearCache(UUID customerId) {
-    if (cacheManager.getCache("customerListCache") != null){
+    if (cacheManager.getCache("customerListCache") != null) {
       cacheManager.getCache("customerListCache").clear();
     }
-    if (cacheManager.getCache("customerCache") != null){
+    if (cacheManager.getCache("customerCache") != null) {
       cacheManager.getCache("customerCache").evict(customerId);
     }
   }
@@ -93,7 +91,7 @@ public class CustomerServiceJPA implements CustomerService {
 
     clearCache(customerId);
 
-    if(customerRepository.existsById(customerId)){
+    if (customerRepository.existsById(customerId)) {
       customerRepository.deleteById(customerId);
       return true;
     }
@@ -108,7 +106,7 @@ public class CustomerServiceJPA implements CustomerService {
     AtomicReference<Optional<CustomerDTO>> atomicReference = new AtomicReference<>();
 
     customerRepository.findById(customerId).ifPresentOrElse(foundCustomer -> {
-      if (StringUtils.hasText(customer.getName())){
+      if (StringUtils.hasText(customer.getName())) {
         foundCustomer.setName(customer.getName());
       }
       atomicReference.set(Optional.of(customerMapper
