@@ -29,9 +29,6 @@ cd spring-boot-4-spring-framewor-7/spring-7-rest-mvc-api
 
 # Compile o projeto
 mvn clean install
-
-# Execute a aplicação
-mvn spring-boot:run
 ````
 
 A aplicação será iniciada em:
@@ -101,7 +98,6 @@ Esta seção centraliza links e materiais complementares do projeto.
 ### 📂 Outros Arquivos Importantes
 
 - `pom.xml` → Gerenciamento de dependências Maven
-- `application.yaml` → Configurações da aplicação
 
 ## 📌 Status do Projeto
 

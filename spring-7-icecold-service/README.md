@@ -1,4 +1,4 @@
-# Spring 7 - REST MVC
+# Spring 7 - Ice Cold Service
 
 ![Java](https://img.shields.io/badge/Java-25-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.4-green)
@@ -15,21 +15,11 @@ Antes de iniciar, você precisa ter instalado:
 
 - Java 25
 - Maven 3.9+
-- Docker Desktop
-- Postman
 - Conhecimento básico em:
     - Spring Boot
-    - Banco de Dados SQL: JPA, H2, Flyway
-    - REST APIs
-    - Spring Security e OAuth2
-    - Docker Compose
-    - Kubernetes
     - Testes
     - Apache Kafka
     - Microsserviços
-    - Auditoria e Logging
-    - Observabilidade
-    - Async
 
 ## Instalação
 
@@ -38,7 +28,7 @@ Antes de iniciar, você precisa ter instalado:
 git clone https://github.com/JuhMaran/spring-boot-4-spring-framewor-7.git
 
 # Acesse a pasta do projeto
-cd spring-boot-4-spring-framewor-7/spring-7-rest-mvc
+cd spring-boot-4-spring-framewor-7/spring-7-icecold-service
 
 # Compile o projeto
 mvn clean install
@@ -50,26 +40,23 @@ mvn spring-boot:run
 A aplicação será iniciada em:
 
 ```
-http://localhost:8081
+http://localhost:
 ```
 
 Base path da API:
 
 ```
-http://localhost:8081/api/v1
+http://localhost:
 ```
 
 ## Tecnologias Utilizadas
 
 * Java 25
 * Spring Boot 4
-* Spring Data JPA
 * Spring Data REST
-* H2 Database
-* Hibernate
 * Lombok
-* MapStruct
 * Spring Actuator
+* Apache Kafka
 
 ## Como Usar
 
@@ -78,17 +65,6 @@ http://localhost:8081/api/v1
 ## Arquitetura
 
 ## Endpoints
-
-| Endpoint                                            | Descrição                  |
-|-----------------------------------------------------|----------------------------|
-| `/api/v1/beer`                                      | Lista todas as cervejas    |
-| `/api/v1/beer/{id}`                                 | Busca cerveja por ID       |
-| `/api/v1/beer/search`                               | Lista queries disponíveis  |
-| `/api/v1/beer/search/findByUpc`                     | Busca por UPC              |
-| `/api/v1/beer/search/findAllByBeerName`             | Busca por nome             |
-| `/api/v1/beer/search/findAllByBeerStyle`            | Busca por estilo           |
-| `/api/v1/beer/search/findAllByBeerNameAndBeerStyle` | Busca combinada            |
-| `/actuator`                                         | Monitoramento da aplicação |
 
 ## Documentação e Recursos
 
@@ -100,11 +76,14 @@ Esta seção centraliza links e materiais complementares do projeto.
 
 ### Documentação Externa
 
-- Curso: *Spring Boot 4, Spring Framework 7: Beginner to Guru*
+- Curso: _Spring Boot 4, Spring Framework 7: Beginner to Guru_
+- Seção: _Spring Boot Microservices with Apache Kafka_
 
 ### Repositório
 
-- GitHub: [spring-7-rest-mvc](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/tree/main/spring-7-rest-mvc)
+-
+
+GitHub: [spring-7-icecold-service](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/tree/main/spring-7-icecold-service)
 
 ### Collections (Postman / Insomnia)
 
@@ -116,7 +95,7 @@ Esta seção centraliza links e materiais complementares do projeto.
 
 ### Testes
 
-Testes Unitários e de Integração implementados
+❌ Não implementado.
 
 ### Outros Arquivos Importantes
 
