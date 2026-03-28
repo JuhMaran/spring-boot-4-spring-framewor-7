@@ -113,23 +113,26 @@ segurança, integração e API Gateway.
 
 ## Projetos
 
-| Projeto                                                   | Descrição                                                    | Tecnologias Principais                        |
-|-----------------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------|
-| [spring-7-webapp](./spring-7-webapp)                      | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                |
-| [spring-7-di](./spring-7-di)                              | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                   |
-| [spring-7-rest-mvc](./spring-7-rest-mvc)                  | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI    |
-| [sdjpa-spring-data-rest](./sdjpa-springdatarest)          | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                     |
-| [spring-7-resttemplate](./spring-7-resttemplate)          | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client       |
-| [spring-7-auth-server](./spring-7-auth-server)            | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC   |
-| [spring-7-reactive-examples](./spring-7-reactive-example) | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                      |
-| [spring-7-reactive](./spring-7-reactive)                  | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                            |
-| [spring-7-reactive-mongo](./spring-7-reactive-mongo)      | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                     |
-| [spring-7-webclient](./spring-7-webclient)                | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                      |
-| [spring-7-gateway](./spring-7-gateway)                    | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server  |
-| [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2 |
-| [spring-7-ai-intro](./spring-7-ai-intro)                  | Spring AI                                                    | Spring AI, Spring Web MVC                     |
-| [spring-7-docker-k8s](./spring-7-docker-k8s)              | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes            |
-| [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)          |                                                              | Lombok, Validation                            |
+| #  | Projeto                                                   | Descrição                                                    | Tecnologias Principais                                                       |
+|----|-----------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1  | [spring-7-webapp](./spring-7-webapp)                      | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                                               |
+| 2  | [spring-7-di](./spring-7-di)                              | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                                                  |
+| 3  | [spring-7-rest-mvc](./spring-7-rest-mvc)                  | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI                                   |
+| 4  | [sdjpa-spring-data-rest](./sdjpa-springdatarest)          | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                                                    |
+| 5  | [spring-7-resttemplate](./spring-7-resttemplate)          | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client                                      |
+| 6  | [spring-7-auth-server](./spring-7-auth-server)            | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC                                  |
+| 7  | [spring-7-reactive-examples](./spring-7-reactive-example) | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                                                     |
+| 8  | [spring-7-reactive](./spring-7-reactive)                  | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                                                           |
+| 9  | [spring-7-reactive-mongo](./spring-7-reactive-mongo)      | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                                                    |
+| 10 | [spring-7-webclient](./spring-7-webclient)                | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                                                     |
+| 11 | [spring-7-gateway](./spring-7-gateway)                    | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server                                 |
+| 12 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2                                |
+| 13 | [spring-7-ai-intro](./spring-7-ai-intro)                  | Spring AI                                                    | Spring AI, Spring Web MVC                                                    |
+| 14 | [spring-7-restclient](./spring-7-restclient)              | Rest Client                                                  | OAuth2 Client, Spring Web, Lombok, HTTP Client, Spring Data Commons, Logging |
+| 15 | [spring-7-docker-k8s](./spring-7-docker-k8s)              | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes                                           |
+| 16 | [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)          | Library                                                      | Lombok, Validation                                                           |
+| 17 | [spring-7-ice-cold-service](./spring-7-ice-cold-service)  | Microservice                                                 | Spring Web, Actuator, Lombok, Apache Kafka                                   |
+| 18 | [spring-7-cold-service](./spring-7-cold-service)          | Microservice                                                 | Spring Web, Actuator, Lombok, Apache Kafka                                   |
 
 ## Tecnologias Utilizadas
 
@@ -446,13 +449,13 @@ sequenceDiagram
 
 ### Descrição do Fluxo
 
-* 👤 **Cliente**: Inicia o fluxo
-* 🌐 **API (Controller/Service)**: Orquestra tudo (camada de serviço no Spring)
-* 📦 **BeerOrder**: Representa o pedido principal
-* 📄 **BeerOrderLine**: Itens do pedido (cada cerveja)
-* 🍺 **Beer**: Fonte de verdade do estoque
-* 🧾 **BeerAudit**: Registra alterações (importante para rastreabilidade)
-* 🚚 **BeerOrderShipment**: Responsável pelo envio/logística
+* **Cliente**: Inicia o fluxo
+* **API (Controller/Service)**: Orquestra tudo (camada de serviço no Spring)
+* **BeerOrder**: Representa o pedido principal
+* **BeerOrderLine**: Itens do pedido (cada cerveja)
+* **Beer**: Fonte de verdade do estoque
+* **BeerAudit**: Registra alterações (importante para rastreabilidade)
+* **BeerOrderShipment**: Responsável pelo envio/logística
 
 ## Observações
 
@@ -461,13 +464,13 @@ sequenceDiagram
 * Algumas implementações apresentam **diferentes abordagens para o mesmo problema** (ex: WebMVC vs WebFlux)
 * Inclui tanto **tecnologias modernas** quanto **abordagens ainda utilizadas no mercado**
 
-## ♿ Acessibilidade
+## Acessibilidade
 
 * Diagramas feitos com **Mermaid** (compatível com GitHub)
 * Estrutura organizada com títulos claros
 * Uso moderado de emojis para melhor leitura visual
 
-## 📄 Licença
+## Licença
 
 Este projeto é destinado para **fins educacionais**.
 

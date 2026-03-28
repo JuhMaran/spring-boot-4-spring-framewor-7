@@ -41,7 +41,7 @@ http://localhost:
 
 * Java 25
 * Spring Boot 4
-* Spring Security 7
+* Spring Framework 7
 * Lombok
 * Validation
 * Maven
