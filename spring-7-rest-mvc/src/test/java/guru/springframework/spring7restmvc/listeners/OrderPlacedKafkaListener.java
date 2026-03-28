@@ -1,0 +1,27 @@
+package guru.springframework.spring7restmvc.listeners;
+
+import guru.springframework.spring7restmvc.config.KafkaConfig;
+import guru.springframework.spring7restmvcapi.events.OrderPlacedEvent;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * spring-7-rest-mvc
+ *
+ * @author Juliane Maran
+ * @since 28/03/2026
+ */
+@Component
+public class OrderPlacedKafkaListener {
+
+  AtomicInteger messageCounter = new AtomicInteger(0);
+
+  @KafkaListener(groupId = "KafkaIntegrationTest", topics = KafkaConfig.ORDER_PLACED_TOPIC)
+  public void receive(OrderPlacedEvent orderPlacedEvent) {
+    System.out.println("Received Message: " + orderPlacedEvent);
+    messageCounter.incrementAndGet();
+  }
+
+}
