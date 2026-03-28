@@ -162,7 +162,7 @@ Esta seção centraliza links e materiais complementares do projeto.
 
 ### 📖 Wiki
 
-Atualmente o projeto não possui Wiki.
+- Wiki: [Introduction to Spring Data REST](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/wiki/Section-19-Introduction-to-Spring-Data-REST)
 
 ### 🌐 Documentação Externa
 
@@ -171,12 +171,11 @@ Atualmente o projeto não possui Wiki.
 
 ### 🔗 Repositório
 
-- GitHub:  
-  https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/tree/main/sdjpa-springdatarest
+- GitHub: [sdjpa-springdatarest](https://github.com/JuhMaran/spring-boot-4-spring-framewor-7/tree/main/sdjpa-springdatarest)
 
 ### 📦 Collections (Postman / Insomnia)
 
-[Collections](collection/SDJPA.postman_collection.json)
+- Postman: [Collections](collection/SDJPA.postman_collection.json)
 
 ### 📑 OpenAPI / Swagger
 
