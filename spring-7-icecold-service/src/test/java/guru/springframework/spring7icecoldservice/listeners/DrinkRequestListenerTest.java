@@ -39,7 +39,6 @@ class DrinkRequestListenerTest {
       .untilAsserted(() -> assertEquals(1, drinkPreparedListener.iceColdMessageCounter.get()));
   }
 
-
   public BeerOrderLineDTO createDto() {
     return BeerOrderLineDTO.builder()
       .beer(BeerDTO.builder()

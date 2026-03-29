@@ -27,12 +27,12 @@ spring:
     database: mysql
     hibernate:
       ddl-auto: validate
-    properties:
-      hibernate:
-        # Show SQL
-        show-sql: true
-        # Format SQL
-        format_sql: true
+  #    properties:
+  #      hibernate:
+  #        # Show SQL
+  #        show-sql: true
+  #        # Format SQL
+  #        format_sql: true
   flyway:
     enabled: true
     locations: classpath:db/migration
@@ -40,8 +40,8 @@ spring:
     compose:
       enabled: false
 
-logging:
-  level:
-    sql: TRACE
-    #Show bind values
-    org.hibernate.orm.jdbc.bind: TRACE
+#logging:
+#  level:
+#    sql: TRACE
+#    #Show bind values
+#    org.hibernate.orm.jdbc.bind: TRACE

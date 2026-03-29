@@ -96,7 +96,8 @@ public class BeerOrderServiceJPA implements BeerOrderService {
 
     if (beerOrderUpdateDTO.getBeerOrderShipment() != null) {
       applicationEventPublisher.publishEvent(OrderPlacedEvent.builder()
-        .beerOrderDTO(dto));
+        .beerOrderDTO(dto)
+        .build());
     }
 
     return dto;

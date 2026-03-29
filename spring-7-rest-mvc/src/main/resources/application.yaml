@@ -65,6 +65,5 @@ management:
 
 logging:
   level:
-    org.zalando.logbook: trace
-    org.springframework: debug
-#    org.springframework.security: trace
+    org.zalando.logbook: info
+    guru.springframework: debug
