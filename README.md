@@ -1,15 +1,12 @@
 # Spring 7 Playground - Arquiteturas e Tecnologias
 
-Este repositório reúne diversos projetos independentes com o objetivo de explorar, demonstrar e consolidar conhecimentos
-no ecossistema **Spring 7 + Spring Boot 4**, utilizando **Java 25 (LTS)**.
+Este repositório reúne diversos projetos independentes com o objetivo de explorar, demonstrar e consolidar conhecimentos no ecossistema **Spring 7 + Spring Boot 4**, utilizando **Java 25 (LTS)**.
 
-Os projetos fazem parte do curso **"Spring Boot 4, Spring Framework 7: Beginner to Guru" (Udemy)** e evoluem
-progressivamente conforme o avanço no conteúdo.
+Os projetos fazem parte do curso **"Spring Boot 4, Spring Framework 7: Beginner to Guru" (Udemy)** e evoluem progressivamente conforme o avanço no conteúdo.
 
 Atualmente, o progresso acompanha todo o roadmap do curso, com módulos sendo implementados gradualmente.
 
-Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abrangendo aplicações tradicionais, reativas,
-segurança, integração e API Gateway.
+Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abrangendo aplicações tradicionais, reativas, segurança, integração e API Gateway.
 
 ## Conteúdo do Curso
 
@@ -113,26 +110,29 @@ segurança, integração e API Gateway.
 
 ## Projetos
 
-| #  | Projeto                                                   | Descrição                                                    | Tecnologias Principais                                                       |
-|----|-----------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------|
-| 1  | [spring-7-webapp](./spring-7-webapp)                      | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                                               |
-| 2  | [spring-7-di](./spring-7-di)                              | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                                                  |
-| 3  | [spring-7-rest-mvc](./spring-7-rest-mvc)                  | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI                                   |
-| 4  | [sdjpa-spring-data-rest](./sdjpa-springdatarest)          | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                                                    |
-| 5  | [spring-7-resttemplate](./spring-7-resttemplate)          | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client                                      |
-| 6  | [spring-7-auth-server](./spring-7-auth-server)            | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC                                  |
-| 7  | [spring-7-reactive-examples](./spring-7-reactive-example) | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                                                     |
-| 8  | [spring-7-reactive](./spring-7-reactive)                  | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                                                           |
-| 9  | [spring-7-reactive-mongo](./spring-7-reactive-mongo)      | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                                                    |
-| 10 | [spring-7-webclient](./spring-7-webclient)                | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                                                     |
-| 11 | [spring-7-gateway](./spring-7-gateway)                    | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server                                 |
-| 12 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)      | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2                                |
-| 13 | [spring-7-ai-intro](./spring-7-ai-intro)                  | Spring AI                                                    | Spring AI, Spring Web MVC                                                    |
-| 14 | [spring-7-restclient](./spring-7-restclient)              | Rest Client                                                  | OAuth2 Client, Spring Web, Lombok, HTTP Client, Spring Data Commons, Logging |
-| 15 | [spring-7-docker-k8s](./spring-7-docker-k8s)              | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes                                           |
-| 16 | [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)          | Library                                                      | Lombok, Validation                                                           |
-| 17 | [spring-7-ice-cold-service](./spring-7-ice-cold-service)  | Microservice                                                 | Spring Web, Actuator, Lombok, Apache Kafka                                   |
-| 18 | [spring-7-cold-service](./spring-7-cold-service)          | Microservice                                                 | Spring Web, Actuator, Lombok, Apache Kafka                                   |
+| #  | Projeto                                                          | Descrição                                                    | Tecnologias Principais                                                       |
+|----|------------------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1  | [spring-7-webapp](./spring-7-webapp)                             | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                                               |
+| 2  | [spring-7-di](./spring-7-di)                                     | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                                                  |
+| 3  | [spring-7-rest-mvc](./spring-7-rest-mvc)                         | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI                                   |
+| 4  | [sdjpa-spring-data-rest](./sdjpa-springdatarest)                 | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                                                    |
+| 5  | [spring-7-resttemplate](./spring-7-resttemplate)                 | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client                                      |
+| 6  | [spring-7-auth-server](./spring-7-auth-server)                   | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC                                  |
+| 7  | [spring-7-reactive-examples](./spring-7-reactive-example)        | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                                                     |
+| 8  | [spring-7-reactive](./spring-7-reactive)                         | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                                                           |
+| 9  | [spring-7-reactive-mongo](./spring-7-reactive-mongo)             | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                                                    |
+| 10 | [spring-7-webclient](./spring-7-webclient)                       | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                                                     |
+| 11 | [spring-7-gateway](./spring-7-gateway)                           | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server                                 |
+| 12 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)             | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2                                |
+| 13 | [spring-7-ai-intro](./spring-7-ai-intro)                         | Spring AI                                                    | Spring AI, Spring Web MVC                                                    |
+| 14 | [spring-7-restclient](./spring-7-restclient)                     | Rest Client                                                  | OAuth2 Client, Spring Web, Lombok, HTTP Client, Spring Data Commons, Logging |
+| 15 | [spring-7-docker-k8s](./spring-7-docker-k8s)                     | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes                                           |
+| 16 | [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)                 | Library                                                      | Lombok, Validation                                                           |
+| 17 | [spring-7-icecold-service](./spring-7-ice-cold-service)          | Microservice Ice Cold                                        | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
+| 18 | [spring-7-cold-service](./spring-7-cold-service)                 | Microservice Cold                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
+| 19 | [spring-7-cool-service](./spring-7-cold-service)                 | Microservice Cool                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
+| 20 | [spring7-rest-api](https://github.com/JuhMaran/spring7-rest-api) | API Documentation as Code                                    | API Docs, GitHub Actions, Redocly, Workflow                                  |
+| 21 | [lombok-best-practices](./lombok-best-practices)                 | Boas Práticas usando Lombok                                  | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
 
 ## Tecnologias Utilizadas
 
@@ -242,220 +242,16 @@ Alguns projetos incluem suporte a:
 
 ## Diagrama de Classe
 
-```mermaid
-classDiagram
-    class Beer {
-        String id
-        String beer_name
-        int beer_style
-        datetime created_date
-        decimal price
-        int quantity_on_hand
-        String upc
-        datetime update_date
-        int version
-    }
+Em Construção
 
-    class Category {
-        String id
-        String description
-        datetime created_date
-        datetime last_modified_date
-        long version
-    }
+## Diagrama de Sequência
 
-    class BeerCategory {
-        String beer_id
-        String category_id
-    }
-
-    class Customer {
-        String id
-        String name
-        String email
-        datetime created_date
-        datetime update_date
-        int version
-    }
-
-    class BeerOrder {
-        String id
-        datetime created_date
-        String customer_ref
-        datetime last_modified_date
-        long version
-        String customer_id
-        String beer_order_shipment_id
-    }
-
-    class BeerOrderLine {
-        String id
-        String beer_id
-        datetime created_date
-        datetime last_modified_date
-        int order_quantity
-        int quantity_allocated
-        long version
-        String beer_order_id
-    }
-
-    class BeerOrderShipment {
-        String id
-        String beer_order_id
-        String tracking_number
-        datetime created_date
-        datetime last_modified_date
-        long version
-    }
-
-    class BeerAudit {
-        String audit_id
-        String id
-        String beer_name
-        int beer_style
-        datetime created_date
-        decimal price
-        int quantity_on_hand
-        String upc
-        datetime update_date
-        int version
-        datetime created_date_audit
-        String principal_name
-        String audit_event_type
-    }
-
-%% Relacionamentos
-    Beer "1" --> "0..*" BeerOrderLine: appears in
-    BeerOrder "1" --> "1..*" BeerOrderLine: contains
-    Customer "1" --> "0..*" BeerOrder: places
-    BeerOrder "1" --> "0..1" BeerOrderShipment: shipment
-    Beer "1" --> "0..*" BeerAudit: audited
-    Beer "1" --> "0..*" BeerCategory
-    Category "1" --> "0..*" BeerCategory
-```
-
-## Descrição do Fluxo
-
-### Fluxo do Sistema
-
-Esse modelo representa um sistema de pedidos de cerveja com auditoria e controle de estoque.
-
-**Fluxo Principal**
-
-1. Cadastro de Cerveja (`beer`)
-    * Uma cerveja é criada com nome, estilo, preço, estoque, etc.
-    * Pode estar associada a categorias
-2. Classificação (`category` + `beer_category`)
-    * Uma cerveja pode ter várias categorias (ex: Lager, IPA).
-    * Relação muitos-para-muitos via `beer_category`.
-3. Cliente (`customer`)
-    * Cliente é cadastrado com nome e email.
-4. Pedido (`beer_order`)
-    * Um cliente cria um pedido.
-    * O pedido pode ter vários itens (`beer_order_line`).
-5. Itens do Pedido (`beer_order_line`)
-    * Cada item representa uma cerveja no pedido.
-    * Contém quantidade pedida e alocada.
-6. Envio (`beer_order_shipment`)
-    * Pedido pode ter envio com tracking number.
-7. Auditoria (`beer_audit`)
-    * Toda mudança em `beer` gera um registro de auditoria.
-8. Controle de versão
-    * Quase todas as entidades têm `version` (controle otimista).
-
-### Relacionamentos
-
-**Principais Relações**
-
-* Beer ↔ Category
-    * Muitos para muitos (`beer_category`)
-* Beer ↔ BeerOrderLine
-    * 1:N → uma cerveja pode aparecer em vários itens do pedido
-* BeerOrder ↔ BeerOrderLine
-    * 1:N → um pedido tem vários itens
-* BeerOrder ↔ Customer
-    * N:1 → vários pedidos para um cliente
-* BeerOrder ↔ BeerOrderShipment
-    * 1:1 → um para um, mas pode ser 1:N, um para muitos.
-    * Cada pedido gera um ou mais pagamentos
-* Beer ↔ BeerAudit
-    * 1:N → cada alteração gera um audit log
-
-### Observação Importante
-
-* O uso de `version` indica **controle de concorrência otimista (JPA `@Version`)**.
-* `beer_audit` sugere uso de:
-    * **Hibernate Envers** ou
-    * Auditoria manual/event-driven
-* `beer_order_line.quantity_allocated` indica suporte a:
-    * separação de estoque (reserva antes do envio)
+Em Construção
 
 ## Documentações
 
 * [Diagramas](docs/Diagrams)
 * [Postman Collections](docs/postman_collection)
-
-## Diagrama de Sequência
-
-### Fluxo considerado
-
-1. Cliente cria pedido
-2. Sistema cria `BeerOrder`
-3. Adiciona itens (`BeerOrderLine`)
-4. Valida estoque (`Beer`)
-5. Aloca quantidade
-6. Atualiza estoque
-7. Gera auditoria (`BeerAudit`)
-8. Cria envio (`BeerOrderShipment`)
-
-```mermaid
-sequenceDiagram
-    actor Cliente
-    participant API
-    participant BeerOrder
-    participant BeerOrderLine
-    participant Beer
-    participant BeerAudit
-    participant Shipment as BeerOrderShipment
-    participant Customer
-    Cliente ->> API: Criar Pedido
-    API ->> Customer: Buscar cliente
-    Customer -->> API: Dados do cliente
-    API ->> BeerOrder: Criar novo pedido
-    BeerOrder -->> API: Pedido criado
-
-    loop Para cada item do pedido
-        API ->> Beer: Buscar cerveja
-        Beer -->> API: Dados da cerveja
-        API ->> Beer: Verificar estoque
-        Beer -->> API: Quantidade disponível
-
-        alt Estoque disponível
-            API ->> BeerOrderLine: Criar item do pedido
-            BeerOrderLine -->> API: Item criado
-            API ->> Beer: Atualizar quantity_on_hand
-            Beer -->> API: Estoque atualizado
-            API ->> BeerAudit: Registrar UPDATE
-            BeerAudit -->> API: Auditoria registrada
-        else Sem estoque
-            API -->> Cliente: Erro de estoque insuficiente
-        end
-    end
-
-    API ->> Shipment: Criar envio
-    Shipment -->> API: Tracking gerado
-    API -->> Cliente: Pedido confirmado
-```
-
-### Descrição do Fluxo
-
-* **Cliente**: Inicia o fluxo
-* **API (Controller/Service)**: Orquestra tudo (camada de serviço no Spring)
-* **BeerOrder**: Representa o pedido principal
-* **BeerOrderLine**: Itens do pedido (cada cerveja)
-* **Beer**: Fonte de verdade do estoque
-* **BeerAudit**: Registra alterações (importante para rastreabilidade)
-* **BeerOrderShipment**: Responsável pelo envio/logística
 
 ## Observações
 
