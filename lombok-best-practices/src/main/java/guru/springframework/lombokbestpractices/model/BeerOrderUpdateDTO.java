@@ -1,9 +1,9 @@
 package guru.springframework.lombokbestpractices.model;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
 
@@ -15,13 +15,13 @@ import java.util.UUID;
  */
 @Data
 @Builder
-public class BeerOrderDTO {
+public class BeerOrderUpdateDTO {
 
-  private UUID id;
-  private Long version;
-  private Timestamp createdDate;
-  private Timestamp lastModifiedDate;
   private String customerRef;
-  private Set<BeerOrderLineDTO> beerOrderLines;
+
+  @NotNull
+  private UUID customerId;
+
+  private Set<BeerOrderLineUpdateDTO> beerOrderLines;
 
 }

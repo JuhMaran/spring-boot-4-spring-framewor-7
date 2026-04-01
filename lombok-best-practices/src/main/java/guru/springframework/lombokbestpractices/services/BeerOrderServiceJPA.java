@@ -9,6 +9,8 @@ import guru.springframework.lombokbestpractices.model.BeerOrderDTO;
 import guru.springframework.lombokbestpractices.model.BeerOrderUpdateDTO;
 import guru.springframework.lombokbestpractices.repositories.BeerOrderRepository;
 import guru.springframework.lombokbestpractices.repositories.BeerRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,18 +27,14 @@ import java.util.UUID;
  * @author Juliane Maran
  * @since 01/04/2026
  */
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class BeerOrderServiceJPA implements BeerOrderService {
 
   private final BeerOrderRepository beerOrderRepository;
   private final BeerOrderMapper beerOrderMapper;
   private final BeerRepository beerRepository;
-
-  public BeerOrderServiceJPA(BeerOrderRepository beerOrderRepository, BeerOrderMapper beerOrderMapper, BeerRepository beerRepository) {
-    this.beerOrderRepository = beerOrderRepository;
-    this.beerOrderMapper = beerOrderMapper;
-    this.beerRepository = beerRepository;
-  }
 
   @Override
   public Optional<BeerOrderDTO> getById(UUID beerOrderId) {

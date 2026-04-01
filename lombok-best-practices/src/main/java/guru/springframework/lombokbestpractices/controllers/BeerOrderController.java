@@ -20,17 +20,15 @@ import java.util.UUID;
  * @author Juliane Maran
  * @since 01/04/2026
  */
+@Slf4j
 @RestController
+@RequiredArgsConstructor
 public class BeerOrderController {
 
   public static final String BEER_ORDER_PATH = "/api/v1/beerorder";
   public static final String BEER_ORDER_PATH_ID = BEER_ORDER_PATH + "/{beerOrderId}";
 
   private final BeerOrderService beerOrderService;
-
-  public BeerOrderController(BeerOrderService beerOrderService) {
-    this.beerOrderService = beerOrderService;
-  }
 
   @DeleteMapping(BEER_ORDER_PATH_ID)
   public ResponseEntity<Void> deleteOrder(@PathVariable UUID beerOrderId) {

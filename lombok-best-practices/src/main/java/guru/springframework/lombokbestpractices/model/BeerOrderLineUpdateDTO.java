@@ -19,12 +19,16 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BeerOrderLineCreateDTO {
+public class BeerOrderLineUpdateDTO {
+
+  private UUID id;
 
   @NotNull
   private UUID beerId;
 
   @Min(value = 1, message = "Quantity On Hand must be greater than 0")
   private Integer orderQuantity;
+
+  private Integer quantityAllocated;
 
 }

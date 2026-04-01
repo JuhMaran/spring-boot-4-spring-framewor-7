@@ -5,10 +5,13 @@ import guru.springframework.lombokbestpractices.entities.BeerStyle;
 import guru.springframework.lombokbestpractices.mappers.BeerMapper;
 import guru.springframework.lombokbestpractices.model.BeerDTO;
 import guru.springframework.lombokbestpractices.repositories.BeerRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,21 +29,17 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author Juliane Maran
  * @since 01/04/2026
  */
+@Slf4j
 @Service
+@Primary
+@RequiredArgsConstructor
 public class BeerServiceJPA implements BeerService {
-
-  private static final Logger log = LoggerFactory.getLogger(BeerServiceJPA.class);
 
   private final BeerRepository beerRepository;
   private final BeerMapper beerMapper;
 
   private static final int DEFAULT_PAGE = 0;
   private static final int DEFAULT_PAGE_SIZE = 25;
-
-  public BeerServiceJPA(BeerRepository beerRepository, BeerMapper beerMapper) {
-    this.beerRepository = beerRepository;
-    this.beerMapper = beerMapper;
-  }
 
   @Override
   public Page<BeerDTO> listBeers(String beerName, BeerStyle beerStyle, Boolean showInventory, Integer pageNumber, Integer pageSize) {

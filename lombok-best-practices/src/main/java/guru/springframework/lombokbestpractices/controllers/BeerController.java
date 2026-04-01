@@ -3,6 +3,8 @@ package guru.springframework.lombokbestpractices.controllers;
 import guru.springframework.lombokbestpractices.entities.BeerStyle;
 import guru.springframework.lombokbestpractices.model.BeerDTO;
 import guru.springframework.lombokbestpractices.services.BeerService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,19 +22,15 @@ import java.util.UUID;
  * @author Juliane Maran
  * @since 01/04/2026
  */
+@Slf4j
 @RestController
+@RequiredArgsConstructor
 public class BeerController {
-
-  private static final Logger log = LoggerFactory.getLogger(BeerController.class);
 
   public static final String BEER_PATH = "/api/v1/beer";
   public static final String BEER_PATH_ID = BEER_PATH + "/{beerId}";
 
   private final BeerService beerService;
-
-  public BeerController(BeerService beerService) {
-    this.beerService = beerService;
-  }
 
   @PatchMapping(BEER_PATH_ID)
   public ResponseEntity<Void> updateBeerPatchById(@PathVariable("beerId") UUID beerId, @RequestBody BeerDTO beer) {
