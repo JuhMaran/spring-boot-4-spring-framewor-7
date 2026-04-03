@@ -12,4 +12,8 @@ public interface BeerService {
     Optional<Beer> findBeerById(Integer beerId);
 
     List<Beer> findAllBeers();
+
+    Optional<Beer> updateBeerById(Integer beerId, Beer beer);
+
+    boolean deleteBeerById(Integer beerId);
 }

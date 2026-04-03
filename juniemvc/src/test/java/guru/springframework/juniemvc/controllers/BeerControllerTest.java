@@ -15,8 +15,10 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -79,6 +81,62 @@ class BeerControllerTest {
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[1].id").value(2));
+    }
+
+    @Test
+    void givenExistingBeerId_whenUpdateBeer_thenReturnUpdatedBeer() throws Exception {
+        Beer updatedBeer = buildBeer(1);
+        updatedBeer.setBeerName("Updated Galaxy Cat");
+        given(beerService.updateBeerById(any(Integer.class), any(Beer.class))).willReturn(Optional.of(updatedBeer));
+
+        mockMvc.perform(put("/api/v1/beers/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "beerName": "Updated Galaxy Cat",
+                                  "beerStyle": "IPA",
+                                  "upc": "123456789012",
+                                  "quantityOnHand": 24,
+                                  "price": 21.99
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.beerName").value("Updated Galaxy Cat"));
+    }
+
+    @Test
+    void givenMissingBeerId_whenUpdateBeer_thenReturnNotFound() throws Exception {
+        given(beerService.updateBeerById(any(Integer.class), any(Beer.class))).willReturn(Optional.empty());
+
+        mockMvc.perform(put("/api/v1/beers/99")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "beerName": "Updated Galaxy Cat",
+                                  "beerStyle": "IPA",
+                                  "upc": "123456789012",
+                                  "quantityOnHand": 24,
+                                  "price": 21.99
+                                }
+                                """))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void givenExistingBeerId_whenDeleteBeer_thenReturnNoContent() throws Exception {
+        given(beerService.deleteBeerById(1)).willReturn(true);
+
+        mockMvc.perform(delete("/api/v1/beers/1"))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void givenMissingBeerId_whenDeleteBeer_thenReturnNotFound() throws Exception {
+        given(beerService.deleteBeerById(99)).willReturn(false);
+
+        mockMvc.perform(delete("/api/v1/beers/99"))
+                .andExpect(status().isNotFound());
     }
 
     private Beer buildBeer(Integer id) {
