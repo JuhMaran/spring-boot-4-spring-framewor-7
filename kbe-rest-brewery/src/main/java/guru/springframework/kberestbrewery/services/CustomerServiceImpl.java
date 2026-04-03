@@ -2,7 +2,6 @@ package guru.springframework.kberestbrewery.services;
 
 import guru.springframework.kberestbrewery.mappers.CustomerMapper;
 import guru.springframework.kberestbrewery.model.CustomerDto;
-import guru.springframework.kberestbrewery.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-  private final CustomerRepository customerRepository;
   private final CustomerMapper customerMapper;
 
   @Override

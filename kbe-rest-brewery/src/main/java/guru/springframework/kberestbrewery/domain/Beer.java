@@ -49,6 +49,6 @@ public class Beer {
   private LocalDateTime createdDate;
 
   @UpdateTimestamp
-  private LocalDateTime updateDate;
+  private LocalDateTime lastUpdatedDate;
 
 }

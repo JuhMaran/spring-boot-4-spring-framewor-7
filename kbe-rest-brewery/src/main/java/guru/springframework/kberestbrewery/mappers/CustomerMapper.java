@@ -10,7 +10,7 @@ import org.mapstruct.Mapper;
  * @author Juliane Maran
  * @since 03/04/2026
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CustomerMapper {
 
   Customer customerDtoToCustomer(CustomerDto dto);
