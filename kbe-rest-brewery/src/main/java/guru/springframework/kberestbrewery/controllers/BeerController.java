@@ -30,7 +30,7 @@ public class BeerController {
 
   private final BeerService beerService;
 
-  @GetMapping(produces = {"application/json"}, path = "beer")
+  @GetMapping(produces = {"application/json"}, path = "/{beerId}")
   public ResponseEntity<BeerPagedList> listBeers(
     @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
     @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -51,7 +51,7 @@ public class BeerController {
     return new ResponseEntity<>(beerList, HttpStatus.OK);
   }
 
-  @GetMapping("beer/{beerId}")
+  @GetMapping("/beer/{beerId}")
   public ResponseEntity<BeerDto> getBeerById(
     @PathVariable("beerId") UUID beerId,
     @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
@@ -60,12 +60,12 @@ public class BeerController {
     return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
   }
 
-  @GetMapping("beerUpc/{upc}")
+  @GetMapping("/beerUpc/{upc}")
   public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
     return new ResponseEntity<>(beerService.getByUpc(upc), HttpStatus.OK);
   }
 
-  @PostMapping(path = "beer")
+  @PostMapping(path = "/beer")
   public ResponseEntity saveNewBeer(@RequestBody @Validated BeerDto beerDto) {
     BeerDto savedBeer = beerService.saveNewBeer(beerDto);
 
@@ -76,13 +76,13 @@ public class BeerController {
       .build();
   }
 
-  @PutMapping("beer/{beerId}")
+  @PutMapping("/beer/{beerId}")
   public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId,
                                        @RequestBody @Validated BeerDto beerDto) {
     return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
   }
 
-  @DeleteMapping("beer/{beerId}")
+  @DeleteMapping("/beer/{beerId}")
   public ResponseEntity<Void> deleteBeerById(@PathVariable("beerId") UUID beerId) {
     beerService.deleteBeerById(beerId);
 

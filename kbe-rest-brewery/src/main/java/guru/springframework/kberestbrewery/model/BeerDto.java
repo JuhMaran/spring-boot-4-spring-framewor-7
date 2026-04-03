@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Null;
 import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
  * @author Juliane Maran
  * @since 03/04/2026
  */
-@Builder
+@Builder(toBuilder = true)
 public record BeerDto(
 
   @Null
@@ -29,8 +30,8 @@ public record BeerDto(
   String upc,
   BigDecimal price,
   Integer quantityOnHand,
-  OffsetDateTime createdDate,
-  OffsetDateTime lastUpdatedDate
+  LocalDateTime createdDate,
+  LocalDateTime lastUpdatedDate
 
 ) {
 }
