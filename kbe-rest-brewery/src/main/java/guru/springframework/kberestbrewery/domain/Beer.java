@@ -1,5 +1,6 @@
 package guru.springframework.kberestbrewery.domain;
 
+import guru.springframework.kberestbrewery.model.BeerStyleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
