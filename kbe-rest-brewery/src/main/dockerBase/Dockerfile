@@ -1,4 +1,4 @@
-FROM openjdk:25-jre-slim
+FROM eclipse-temurin:25-jre-jammy
 LABEL authors="Juliane Maran"
 
 ENV JAVA_OPTS=" -Xms512m -Xmx512m -Djava.security.egd=file:/dev/./urandom"
