@@ -1,12 +1,15 @@
 # Spring 7 Playground - Arquiteturas e Tecnologias
 
-Este repositório reúne diversos projetos independentes com o objetivo de explorar, demonstrar e consolidar conhecimentos no ecossistema **Spring 7 + Spring Boot 4**, utilizando **Java 25 (LTS)**.
+Este repositório reúne diversos projetos independentes com o objetivo de explorar, demonstrar e consolidar conhecimentos
+no ecossistema **Spring 7 + Spring Boot 4**, utilizando **Java 25 (LTS)**.
 
-Os projetos fazem parte do curso **"Spring Boot 4, Spring Framework 7: Beginner to Guru" (Udemy)** e evoluem progressivamente conforme o avanço no conteúdo.
+Os projetos fazem parte do curso **"Spring Boot 4, Spring Framework 7: Beginner to Guru" (Udemy)** e evoluem
+progressivamente conforme o avanço no conteúdo.
 
 Atualmente, o progresso acompanha todo o roadmap do curso, com módulos sendo implementados gradualmente.
 
-Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abrangendo aplicações tradicionais, reativas, segurança, integração e API Gateway.
+Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abrangendo aplicações tradicionais, reativas,
+segurança, integração e API Gateway.
 
 ## Conteúdo do Curso
 
@@ -133,6 +136,8 @@ Cada módulo explora uma **tecnologia ou estilo arquitetural específico**, abra
 | 19 | [spring-7-cool-service](./spring-7-cold-service)                 | Microservice Cool                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
 | 20 | [spring7-rest-api](https://github.com/JuhMaran/spring7-rest-api) | API Documentation as Code                                    | API Docs, GitHub Actions, Redocly, Workflow                                  |
 | 21 | [lombok-best-practices](./lombok-best-practices)                 | Boas Práticas usando Lombok                                  | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
+| 22 | [juniemvc](./juniemvc)                                           | Junie and JetBrains AI                                       | Junie, Spring Web, Lombok, Spring Data JPA, H2, Validation                   |
+| 23 | [kbe-rest-brewery](./kbe-rest-brewery)                           | Building Spring Boot Docker Images                           | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
 
 ## Tecnologias Utilizadas
 

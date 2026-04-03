@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: kbe-rest-brewery
+
+logging:
+  level:
+    io.netty: error
+    reactor.netty.http: trace
+    guru.springframework.kberestbrewery: debug

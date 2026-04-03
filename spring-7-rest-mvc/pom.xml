@@ -24,8 +24,14 @@
     <developers>
         <developer>
             <id>JuhMaran</id>
-            <name>Juh Maran</name>
+            <name>Juliane Maran</name>
+            <email>julianemaran@gmail.com</email>
             <url>https://github.com/JuhMaran</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>America/Sao_Paulo</timezone>
         </developer>
     </developers>
     <scm>
@@ -282,18 +288,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
-<!--                    <execution>-->
-<!--                        <id>pre-integration-test</id>-->
-<!--                        <goals>-->
-<!--                            <goal>start</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                    <execution>-->
-<!--                        <id>post-integration-test</id>-->
-<!--                        <goals>-->
-<!--                            <goal>stop</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
+                    <!--                    <execution>-->
+                    <!--                        <id>pre-integration-test</id>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>start</goal>-->
+                    <!--                        </goals>-->
+                    <!--                    </execution>-->
+                    <!--                    <execution>-->
+                    <!--                        <id>post-integration-test</id>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>stop</goal>-->
+                    <!--                        </goals>-->
+                    <!--                    </execution>-->
                     <execution>
                         <id>build-info</id>
                         <goals>
