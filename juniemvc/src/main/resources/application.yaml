@@ -1,3 +1,15 @@
 spring:
   application:
     name: juniemvc
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  h2:
+    console:
+      enabled: true
+
+  flyway:
+    enabled: false
