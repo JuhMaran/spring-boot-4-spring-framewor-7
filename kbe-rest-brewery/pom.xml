@@ -10,7 +10,7 @@
     </parent>
     <groupId>guru.springframework</groupId>
     <artifactId>kbe-rest-brewery</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-snapshot</version>
     <name>kbe-rest-brewery</name>
     <description>SFG REST Brewery</description>
     <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
@@ -123,7 +123,9 @@
                     <verbose>true</verbose>
                     <images>
                         <image>
-                            <name>kbe-rest</name>
+                            <!--                            <name>kbe-rest</name>-->
+                            <!--                            <name>springframeworkguru/${project.build.finalName}</name>-->
+                            <name>springframeworkguru/kbe-rest-brewery</name>
                             <build>
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
@@ -131,6 +133,7 @@
                                 <dockerFile>Dockerfile</dockerFile>
                                 <tags>
                                     <tag>latest</tag>
+                                    <tag>${project.version}</tag>
                                 </tags>
                             </build>
                         </image>

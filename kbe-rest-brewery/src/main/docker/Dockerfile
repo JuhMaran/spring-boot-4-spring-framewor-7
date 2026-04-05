@@ -1,9 +1,8 @@
 FROM eclipse-temurin:25-jre-jammy AS builder
 
 WORKDIR /application
-# Replace this ADD instruction with a COPY instruction.
-ADD target/kbe-rest-brewery-0.0.1-SNAPSHOT.jar app.jar
-RUN java -Djarmode=layertools -jar app.jar extract
+ADD maven/${project.build.finalName}.jar ./
+RUN java -Djarmode=layertools -jar ${project.build.finalName}.jar extract
 
 FROM eclipse-temurin:25-jre-jammy
 
@@ -13,4 +12,4 @@ COPY --from=builder /application/spring-boot-loader/ ./
 COPY --from=builder /application/snapshot-dependencies/ ./
 COPY --from=builder /application/application/ ./
 
-ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","org.springframework.boot.loader.JarLauncher"]
