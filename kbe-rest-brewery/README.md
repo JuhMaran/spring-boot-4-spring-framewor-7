@@ -2,10 +2,10 @@
 
 ## Tecnologias
 
-- Spring Framework 7
-- Spring Boot 4.0.5
-- Java version "25" 2025-09-16 LTS
-- Docker
+- Spring Framework 7 (Nov/2025)
+- Spring Boot 4.0.5 
+- Java version "25" 2025-09-16 LTS 
+- Docker Desktop 4.66.0
 - Apache Maven 3.9.11
 
 ## Dependências
