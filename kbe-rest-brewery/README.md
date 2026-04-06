@@ -44,6 +44,12 @@ docker run -p 8080:8080 -d kbe-rest
 docker build -f .\src\main\docker\Dockerfile -t kbe-rest .
 ```
 
+**Docker Build and Push**
+
+```bash
+mvn clean package docker:build docker:push
+```
+
 ## Exemplo
 
 ### cURL - GET `/beer/{beerId}`

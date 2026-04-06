@@ -124,8 +124,8 @@
                     <images>
                         <image>
                             <!--                            <name>kbe-rest</name>-->
-                            <!--                            <name>springframeworkguru/${project.build.finalName}</name>-->
-                            <name>springframeworkguru/kbe-rest-brewery</name>
+                            <!--                            <name>juliane123/${project.build.finalName}</name>-->
+                            <name>juliane123/kbe-rest-brewery</name>
                             <build>
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
