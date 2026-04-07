@@ -1,0 +1,57 @@
+1. Is the `@Entity` annotation required?
+2. On the service implementation, why use the `@Override` annotation?
+3. Can you use Java 11 with Spring Framework 6?
+4. If you do not specify a profile to be active, is there a profile active?
+5. If you're using Project Lombok, how do you override a getter implementation?
+6. What does the HTTP status 201 mean?
+7. What is special about the @PutMapping annotation?
+8. Should you return a content body in a delete operation?
+9. How is a HTTP Patch operation different from an update operation?
+10. Why use Spring MockMVC?
+11. What HTTP method is used to create a new resource?
+12. What HTTP Method is used to update an existing resource?
+13. Could you implement a delete operation by passing the Id to delete in the request body?
+14. How do you verify the proper value is sent to the service method?
+15. Why should not NOT set the Id and version properties?
+16. Why use Java `Optional`?
+17. If the requested resource of a delete operation is not found, what HTTP status should be returned?
+18. In a web application where should validation be performed? In the web tier or server tier?
+19. When implementing a query method on a Spring Data Repository interface, do you need to provide the implementation?
+20. What does ERD stand for?
+21. In the database, how are relationships defined?
+22. Should you provide overloaded methods for optional query parameters?
+23. What does the `@Mock` annotation do?
+24. Why should you create constants for username and password?
+25. Why write a test for invalid authentication?
+26. What is the difference between a Flux and a Mono?
+27. Why are we using MapStruct?
+28. Why use HTTP Patch?
+29. Were you able to complete the assignment on your own?
+30. Is it okay to use .block() in your tests?
+31. Should you return a 404 on a Patch operation if the entity is not found?
+32. If you are doing server side validation, should the client also do validation?
+33. Were you able to complete the assignment without help? Yes.
+34. Why won't `subscribe` work?
+35. X
+36. X
+37. X
+38. X
+39. X
+40. X
+41. X
+42. X
+43. X
+44. X
+45. X
+46. X
+47. X
+48. X
+49. X
+50. X
+51. X
+52. X
+53. X
+54. X
+55. X
+56. X
+57. X
