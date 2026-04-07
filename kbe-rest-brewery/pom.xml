@@ -107,6 +107,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <layers enabled="true"/>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -121,11 +122,15 @@
                 <version>0.48.1</version>
                 <configuration>
                     <verbose>true</verbose>
+                    <!-- Configuração de autenticação -->
+                    <authConfig>
+                        <push>
+                            <serverId>docker-hub</serverId>
+                        </push>
+                    </authConfig>
                     <images>
                         <image>
-                            <!--                            <name>kbe-rest</name>-->
-                            <!--                            <name>juliane123/${project.build.finalName}</name>-->
-                            <name>juliane123/kbe-rest-brewery</name>
+                            <name>juliane123/${project.build.finalName}</name>
                             <build>
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>

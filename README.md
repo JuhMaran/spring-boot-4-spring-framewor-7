@@ -113,52 +113,63 @@ segurança, integração e API Gateway.
 
 ## Projetos
 
-| #  | Projeto                                                          | Descrição                                                    | Tecnologias Principais                                                       |
-|----|------------------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------|
-| 1  | [spring-7-webapp](./spring-7-webapp)                             | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                                               |
-| 2  | [spring-7-di](./spring-7-di)                                     | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                                                  |
-| 3  | [spring-7-rest-mvc](./spring-7-rest-mvc)                         | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI                                   |
-| 4  | [sdjpa-spring-data-rest](./sdjpa-springdatarest)                 | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                                                    |
-| 5  | [spring-7-resttemplate](./spring-7-resttemplate)                 | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client                                      |
-| 6  | [spring-7-auth-server](./spring-7-auth-server)                   | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC                                  |
-| 7  | [spring-7-reactive-examples](./spring-7-reactive-example)        | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                                                     |
-| 8  | [spring-7-reactive](./spring-7-reactive)                         | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                                                           |
-| 9  | [spring-7-reactive-mongo](./spring-7-reactive-mongo)             | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                                                    |
-| 10 | [spring-7-webclient](./spring-7-webclient)                       | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                                                     |
-| 11 | [spring-7-gateway](./spring-7-gateway)                           | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server                                 |
-| 12 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)             | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2                                |
-| 13 | [spring-7-ai-intro](./spring-7-ai-intro)                         | Spring AI                                                    | Spring AI, Spring Web MVC                                                    |
-| 14 | [spring-7-restclient](./spring-7-restclient)                     | Rest Client                                                  | OAuth2 Client, Spring Web, Lombok, HTTP Client, Spring Data Commons, Logging |
-| 15 | [spring-7-docker-k8s](./spring-7-docker-k8s)                     | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes                                           |
-| 16 | [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)                 | Library                                                      | Lombok, Validation                                                           |
-| 17 | [spring-7-icecold-service](./spring-7-ice-cold-service)          | Microservice Ice Cold                                        | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
-| 18 | [spring-7-cold-service](./spring-7-cold-service)                 | Microservice Cold                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
-| 19 | [spring-7-cool-service](./spring-7-cold-service)                 | Microservice Cool                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
-| 20 | [spring7-rest-api](https://github.com/JuhMaran/spring7-rest-api) | API Documentation as Code                                    | API Docs, GitHub Actions, Redocly, Workflow                                  |
-| 21 | [lombok-best-practices](./lombok-best-practices)                 | Boas Práticas usando Lombok                                  | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
-| 22 | [juniemvc](./juniemvc)                                           | Junie and JetBrains AI                                       | Junie, Spring Web, Lombok, Spring Data JPA, H2, Validation                   |
-| 23 | [kbe-rest-brewery](./kbe-rest-brewery)                           | Building Spring Boot Docker Images                           | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
+| #  | Projeto                                                                    | Descrição                                                    | Tecnologias Principais                                                       |
+|----|----------------------------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1  | [spring-7-webapp](./spring-7-webapp)                                       | Aplicação Web tradicional com MVC e renderização server-side | Spring MVC, Thymeleaf, JPA, H2                                               |
+| 2  | [spring-7-di](./spring-7-di)                                               | Demonstração de Injeção de Dependência (IoC)                 | Spring Core, Mockito, JUnit                                                  |
+| 3  | [spring-7-rest-mvc](./spring-7-rest-mvc)                                   | API REST completa com arquitetura em camadas                 | Spring MVC, JPA, Flyway, Security, OpenAPI                                   |
+| 4  | [sdjpa-spring-data-rest](./sdjpa-springdatarest)                           | Exposição automática de repositórios como APIs REST          | Spring Data REST, JPA, H2                                                    |
+| 5  | [spring-7-resttemplate](./spring-7-resttemplate)                           | Consumo de APIs com cliente HTTP síncrono                    | RestTemplate, RestClient, OAuth2 Client                                      |
+| 6  | [spring-7-auth-server](./spring-7-auth-server)                             | Servidor de autenticação e autorização OAuth2                | Spring Authorization Server, Security, JDBC                                  |
+| 7  | [spring-7-reactive-examples](./spring-7-reactive-example)                  | Exemplos práticos de programação reativa                     | WebFlux, Reactor, Lombok                                                     |
+| 8  | [spring-7-reactive](./spring-7-reactive)                                   | Aplicação reativa com persistência relacional                | WebFlux, R2DBC, H2                                                           |
+| 9  | [spring-7-reactive-mongo](./spring-7-reactive-mongo)                       | Aplicação reativa com persistência NoSQL                     | WebFlux, MongoDB Reactive                                                    |
+| 10 | [spring-7-webclient](./spring-7-webclient)                                 | Consumo de APIs com cliente HTTP reativo                     | WebClient, OAuth2 Client                                                     |
+| 11 | [spring-7-gateway](./spring-7-gateway)                                     | API Gateway reativo para roteamento e segurança              | Spring Cloud Gateway, OAuth2 Resource Server                                 |
+| 12 | [spring-7-gateway-gradle](./spring-7-gateway-gradle)                       | API Gateway reativo utilizando build com Gradle              | Spring Cloud Gateway, WebFlux, Gradle, OAuth2                                |
+| 13 | [spring-7-ai-intro](./spring-7-ai-intro)                                   | Spring AI                                                    | Spring AI, Spring Web MVC                                                    |
+| 14 | [spring-7-restclient](./spring-7-restclient)                               | Rest Client                                                  | OAuth2 Client, Spring Web, Lombok, HTTP Client, Spring Data Commons, Logging |
+| 15 | [spring-7-docker-k8s](./spring-7-docker-k8s)                               | Arquivos para Containers e Orquestração                      | Docker, Docker Compose, Kubernetes                                           |
+| 16 | [spring-7-rest-mvc-api](./spring-7-rest-mvc-api)                           | Library                                                      | Lombok, Validation                                                           |
+| 17 | [spring-7-icecold-service](./spring-7-ice-cold-service)                    | Microservice Ice Cold                                        | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
+| 18 | [spring-7-cold-service](./spring-7-cold-service)                           | Microservice Cold                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
+| 19 | [spring-7-cool-service](./spring-7-cold-service)                           | Microservice Cool                                            | Spring Web, Actuator, Lombok, Apache Kafka, Jackson                          |
+| 20 | [spring7-rest-api](https://github.com/JuhMaran/spring7-rest-api)           | API Documentation as Code                                    | API Docs, GitHub Actions, Redocly, Workflow                                  |
+| 21 | [lombok-best-practices](https://github.com/JuhMaran/lombok-best-practices) | Boas Práticas usando Lombok                                  | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
+| 22 | [juniemvc](./juniemvc)                                                     | Junie and JetBrains AI                                       | Junie, Spring Web, Lombok, Spring Data JPA, H2, Validation                   |
+| 23 | [kbe-rest-brewery](./kbe-rest-brewery)                                     | Building Spring Boot Docker Images                           | Spring Web, Lombok, Spring Data JPA, H2, Validation, MapStruct               |
+| 24 | [kbe-sb-on-k8s](./kbe-sb-on-k8s)                                           | Spring Boot on Kubernetes                                    |
 
 ## Tecnologias Utilizadas
 
 ### Core
 
-* Java 25 (LTS)
-* Spring Framework 7
-* Spring Boot 4
+- Spring Framework 7 (Nov/2025)
+- Spring Boot 4.0.5
+- Java version "25" 2025-09-16 LTS
+- Apache Maven 3.9.11
+- Docker Desktop 4.66.0
+- Docker Compose
+- Dockerfile
+- Kubernetes
+- Apache Kafka
+- Git
+- GitHub
+- GitHub Actions
+- Junie and JetBrains AI
 
 ### Web
 
-* Spring MVC (modelo tradicional baseado em servlet)
-* Spring WebFlux (programação reativa não-bloqueante)
-* Thymeleaf (renderização server-side)
+- Spring MVC (modelo tradicional baseado em servlet)
+- Spring WebFlux (programação reativa não-bloqueante)
+- Thymeleaf (renderização server-side)
 
 ### Segurança
 
-* Spring Security
-* OAuth2 Client
-* OAuth2 Resource Server
-* OAuth2 Authorization Server
+- Spring Security
+- OAuth2 Client
+- OAuth2 Resource Server
+- OAuth2 Authorization Server
 
 ### Persistência
 

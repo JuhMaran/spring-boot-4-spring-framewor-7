@@ -1,0 +1,30 @@
+# --- Compilação e Build ---
+#target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# --- Logs e Dados ---
+*.log
+logs/
+.tmp/
+
+# --- IDEs e Configurações ---
+.idea/
+.settings/
+.project
+.classpath
+*.iml
+.vscode/
+.DS_Store
+
+# --- Docker e Git ---
+.git/
+.gitignore
+Dockerfile
+.dockerignore
+
+# --- Variáveis de ambiente locais ---
+.env
