@@ -28,7 +28,7 @@
         <swagger-request-validator.version>2.15.1</swagger-request-validator.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <logstash.logback.version>6.3</logstash.logback.version>
-        <docker.image.prefix>springframeworkguru</docker.image.prefix>
+        <docker.image.prefix>juliane123</docker.image.prefix>
         <docker.image.name>${project.artifactId}</docker.image.name>
         <docker.skip>true</docker.skip>
     </properties>
@@ -202,16 +202,11 @@
         </profile>
     </profiles>
     <scm>
-        <connection>scm:git:git@github.com:sfg-beer-works/sfg-beer-works-bom.git</connection>
-        <developerConnection>scm:git:git@github.com:sfg-beer-works/sfg-beer-works-bom.git</developerConnection>
-        <url>https://github.com/sfg-beer-works/sfg-beer-works-bom</url>
+        <connection>scm:git:git@github.com:JuhMaran/spring-boot-4-spring-framewor-7.git</connection>
+        <developerConnection>scm:git:git@github.com:JuhMaran/spring-boot-4-spring-framewor-7.git</developerConnection>
+        <url>https://github.com/JuhMaran/spring-boot-4-spring-framewor-7</url>
         <tag>HEAD</tag>
     </scm>
-
-    <issueManagement>
-        <url>https://github.com/sfg-beer-works/sfg-beer-works/issues</url>
-        <system>GitHub</system>
-    </issueManagement>
 
     <distributionManagement>
         <snapshotRepository>

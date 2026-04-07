@@ -61,10 +61,4 @@
         </dependency>
     </dependencies>
 
-    <scm>
-        <connection>scm:git:git@github.com:sfg-beer-works/sfg-brewery-beer-service.git</connection>
-        <developerConnection>scm:git:git@github.com:sfg-beer-works/sfg-brewery-beer-service.git</developerConnection>
-        <url>https://github.com/sfg-beer-works/sfg-brewery-beer-service</url>
-        <tag>sfg-brewery-beer-service-1.0.0</tag>
-    </scm>
 </project>
